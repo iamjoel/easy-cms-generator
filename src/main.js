@@ -1,7 +1,6 @@
 {
   var defaultForm = {
-    // pageKey: null,
-    pageKey: 'song',
+    pageKey: null, // 测试 'song'
     limitKey: null,
     isPageAndLimitSame: true,
     pagePathPrfix: '', // 页面前缀
@@ -42,8 +41,8 @@
             // 下拉框之类的其他类型，要编辑的就多了，还不如代码写
             // type: 'text' 
           },
-          // content: [{label: '用户名',key: 'name'}],
-          content: [{label: '歌曲',key: 'name'},{label: '歌手',key: 'singer'}],
+          content: [],
+          // content: [{label: '歌曲',key: 'name'},{label: '歌手',key: 'singer'}], // 测试
         },
         list: {
           isDialogVisible: false,
@@ -52,8 +51,8 @@
             key: null,
             isCustomer: false
           },
-          // content: [],
-          content: [{label: '歌曲',key: 'name', isCustomer: true},{label: '歌手',key: 'singer'}],
+          content: [],
+          // content: [{label: '歌曲',key: 'name', isCustomer: true},{label: '歌手',key: 'singer'}], // 测试
         },
         // 新增，编辑，页相关的属性开始
         detail: {
@@ -63,8 +62,8 @@
             key: null,
             isRequired: true
           },
-          // content: [{label: '用户名',key: 'name', isRequired: true }],
-          content: [{label: '歌曲',key: 'name', isRequired: true},{label: '歌手',key: 'singer'}],
+          content: [],
+          // content: [{label: '歌曲',key: 'name', isRequired: true},{label: '歌手',key: 'singer'}], // 测试
         },
       }
 
