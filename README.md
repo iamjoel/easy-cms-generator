@@ -1,5 +1,6 @@
-# 管理后台前端代码生成工具
-该工具是为项目 [admin-template](https://github.com/iamjoel/admin-template) 做的。能生成，列表，新增，编辑，详情页。 演示见[这里](https://iamjoel.github.io/admin-fe-generator/src/)。
+# 后台管理系统的前端代码生成工具
+该工具能生成项目 [admin-template](https://github.com/iamjoel/admin-template) 的列表，新增，编辑，详情页。  
+演示点[这里](https://iamjoel.github.io/admin-fe-generator/src/)。
 
 ## 内容截图
 ### 生成列表页
