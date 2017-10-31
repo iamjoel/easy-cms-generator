@@ -3,29 +3,29 @@
 
 ## 内容截图
 ### 生成列表页
-<div align="center">
+<p align="center">
 ![](screenshot/list.png)
-</div>
+</p>
 
 ### 下载
-<div align="center">
+<p align="center">
 ![](screenshot/list-with-download.png)  
-</div>
+</p>
 
 ### 添加搜索条件
-<div align="center">
+<p align="center">
 ![](screenshot/search.png)  
-</div>
+</p>
 
 ### 添加列
-<div align="center">
+<p align="center">
 ![](screenshot/col.png)  
-</div>
+</p>
 
 ### 生成新增，编辑，详情页
-<div align="center">
+<p align="center">
 ![](screenshot/update.png)  
-</div>
+</p>
 
 
 
