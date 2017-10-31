@@ -1,7 +1,7 @@
 {
-  var textFile
   var defaultForm = {
-    pageKey: null,
+    // pageKey: null,
+    pageKey: 'song',
     limitKey: null,
     isPageAndLimitSame: true,
     pagePathPrfix: '', // 页面前缀
@@ -15,12 +15,12 @@
             js: null,
             vue: null
           },
-          detail:{
+          update:{
             js: null,
             vue: null
           }
         },
-        currType: 'detail',// list,detail
+        currType: 'list',// list,update
         form: Object.assign({}, defaultForm),
         rules: {
             pageKey: [
@@ -42,7 +42,8 @@
             // 下拉框之类的其他类型，要编辑的就多了，还不如代码写
             // type: 'text' 
           },
-          content: [{label: '用户名',key: 'name'}],
+          // content: [{label: '用户名',key: 'name'}],
+          content: [{label: '歌曲',key: 'name'},{label: '歌手',key: 'singer'}],
         },
         list: {
           isDialogVisible: false,
@@ -51,7 +52,8 @@
             key: null,
             isCustomer: false
           },
-          content: [{label: '用户名',key: 'name', isCustomer: false }],
+          // content: [],
+          content: [{label: '歌曲',key: 'name', isCustomer: true},{label: '歌手',key: 'singer'}],
         },
         // 新增，编辑，页相关的属性开始
         detail: {
@@ -61,7 +63,8 @@
             key: null,
             isRequired: true
           },
-          content: [{label: '用户名',key: 'name', isRequired: true }],
+          // content: [{label: '用户名',key: 'name', isRequired: true }],
+          content: [{label: '歌曲',key: 'name', isRequired: true},{label: '歌手',key: 'singer'}],
         },
       }
 
@@ -70,12 +73,7 @@
       toDownloadFormat(text) {
         console.info(text)
         var data = new Blob([text], {type: 'text/plain'})
-        if (textFile !== null) {
-          window.URL.revokeObjectURL(textFile)
-        }
-
-        textFile = window.URL.createObjectURL(data)
-        return textFile
+        return window.URL.createObjectURL(data)
       },
       addItem(type) {
         this[type].content.push(Object.assign({}, this[type].editTemp))
@@ -194,7 +192,7 @@ export default {
   data () {
     return {
       KEY: '${this.form.pageKey}',${this.form.isPageAndLimitSame ? '' : (`\n      limitKey:'` + this.form.limitKey + '\',')}
-      pagePathPrfix: '${this.form.pagePathPrfix.charAt(0) === '/' ? this.form.pagePathPrfix : ('/' + this.form.pagePathPrfix)}', 
+      PAGE_PATH_PREFIX: '${this.form.pagePathPrfix.charAt(0) === '/' ? this.form.pagePathPrfix : ('/' + this.form.pagePathPrfix)}', 
       searchConditions: ${this.generatorModel(this.search.content)},
     }
   },
@@ -213,7 +211,6 @@ export default {
       },
       generatorDetails() {
          return `
-    <j-search-condition @search="search">
       ${this.detail.content.map(item => {
         var res = `
       <j-edit-item
@@ -221,14 +218,13 @@ export default {
         <el-input v-model="model.${item.key}"></el-input>
       </j-edit-item>`
         return res
-      }).join('')}
-    </j-search-condition>`
+      }).join('')}`
       },
       generatorRules() {
          return this.detail.content.filter(item => item.isRequired).map(item => {
             return `
           ${item.key}: [
-            { required: true, message: 请输入${item.label}名称, trigger: 'blur' }
+            { required: true, message: '请输入${item.label}名称', trigger: 'blur' }
           ],`
           }).join('')
       },
