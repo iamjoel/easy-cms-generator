@@ -87,13 +87,42 @@
                     </el-card>
                 </el-tab-pane>
                 <el-tab-pane label="新增，编辑，详情页" name="detail">
-                  
+                   <el-card class="box-card">
+                        <div slot="header" class="clearfix">
+                            <span>新增，编辑，详情内容</span>
+                            <el-button style="float: right; padding: 3px 0" type="text" type="success" @click="detail.isDialogVisible = true">添加</el-button>
+                        </div>
+                        <el-table :data="detail.content" border stripe>
+                            <el-table-column type="index" label="序列" align="center" width="80">
+                            </el-table-column>
+                            <el-table-column prop="label" label="字段名">
+                                <template scope="scope">
+                                    <el-input v-model="scope.row.label"></el-input>
+                                </template>
+                            </el-table-column>
+                            <el-table-column prop="key" label="字段键">
+                                <template scope="scope">
+                                    <el-input v-model="scope.row.key"></el-input>
+                                </template>
+                            </el-table-column>
+                            <el-table-column prop="op" label="必填">
+                                <template scope="scope">
+                                    {{scope.row.isRequired ? '是' : '否'}}
+                                </template>
+                            </el-table-column>
+                            <el-table-column prop="op" label="操作">
+                                <template scope="scope">
+                                    <el-button type="danger" size="small" @click="list.content.splice(scope.$index, 1)">删除</el-button>
+                                </template>
+                            </el-table-column>
+                        </el-table>
+                    </el-card>
                 </el-tab-pane>
             </el-tabs>
             <el-form-item style="margin-top: 10px;">
                 <el-button type="primary" @click="generatorDownload()">生成下载内容</el-button>
-                <a :href="download.list.vue" v-if="download.list.vue" :download="currType + '.vue'" class="el-button el-button--primary">Vue文件<i class="el-icon-download"></i></a>
-                <a :href="download.list.js" v-if="download.list.js" :download="currType + '.js'" class="el-button el-button--primary">JS文件<i class="el-icon-download"></i></a>
+                <a :href="download[currType].vue" v-if="download[currType].vue" :download="currType + '.vue'" class="el-button el-button--primary">Vue文件<i class="el-icon-download"></i></a>
+                <a :href="download[currType].js" v-if="download[currType].js" :download="currType + '.js'" class="el-button el-button--primary">JS文件<i class="el-icon-download"></i></a>
                 <el-button @click="reset()">重置</el-button>
             </el-form-item>
         </el-form>
@@ -128,6 +157,24 @@
             <span slot="footer" class="dialog-footer">
           <el-button @click="list.isDialogVisible = false">取 消</el-button>
           <el-button type="primary" @click="addItem('list')">确 定</el-button>
+        </span>
+        </el-dialog>
+        <el-dialog title="添加详情字段" :visible.sync="detail.isDialogVisible" width="30%">
+            <el-form type="inline" label-width="80px">
+                <el-form-item label="字段名">
+                    <el-input v-model="detail.editTemp.label"></el-input>
+                </el-form-item>
+                <el-form-item label="字段键">
+                    <!-- 后台定义的 -->
+                    <el-input v-model="detail.editTemp.key"></el-input>
+                </el-form-item>
+                <el-form-item label="必填">
+                    <el-checkbox v-model="detail.editTemp.isRequired"></el-checkbox>
+                </el-form-item>
+            </el-form>
+            <span slot="footer" class="dialog-footer">
+          <el-button @click="detail.isDialogVisible = false">取 消</el-button>
+          <el-button type="primary" @click="addItem('detail')">确 定</el-button>
         </span>
         </el-dialog>
     </div>

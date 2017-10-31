@@ -14,9 +14,13 @@
           list:{
             js: null,
             vue: null
+          },
+          detail:{
+            js: null,
+            vue: null
           }
         },
-        currType: 'list',
+        currType: 'detail',// list,detail
         form: Object.assign({}, defaultForm),
         rules: {
             pageKey: [
@@ -47,9 +51,18 @@
             key: null,
             isCustomer: false
           },
-          content: [{label: '用户名',key: 'name', isCustomer: true }],
+          content: [{label: '用户名',key: 'name', isCustomer: false }],
         },
         // 新增，编辑，页相关的属性开始
+        detail: {
+          isDialogVisible: false,
+          editTemp: {
+            label: null,
+            key: null,
+            isRequired: true
+          },
+          content: [{label: '用户名',key: 'name', isRequired: true }],
+        },
       }
 
     },
@@ -72,8 +85,8 @@
       generatorDownload() {
         var currType = this.currType
         this.valid().then(()=> {
-          var vueContent
-          var jsContent
+          let vueContent
+          let jsContent
           if(currType === 'list') {
             var searchContent = this.generatorSearch()
             var listContent = this.generatorList()
@@ -88,6 +101,28 @@
 </template>
 <script src="./list.js"></script>`
             jsContent = this.generatorListJs()
+          } else {
+            let details = this.generatorDetails()
+            vueContent = 
+            `
+<template>
+<div class="main">
+  <el-form :inline="true" :model="model" :rules="rules" ref="form" label-position="right" >
+    <el-row type="flex" justify="start" class="multi-line">
+      ${details}
+    </el-row>
+  </el-form>
+  
+  <el-row type="flex" justify="center">
+    <el-button @click="$router.go(-1)">返回</el-button>
+    <el-button type="success" @click="save">保存</el-button>
+  </el-row>
+</div>
+</template>
+
+<script src="./update.js"></script>`
+
+            jsContent = this.generatorDetailJs()
           }
 
           this.download[currType].vue = this.toDownloadFormat(vueContent)
@@ -160,7 +195,7 @@ export default {
     return {
       KEY: '${this.form.pageKey}',${this.form.isPageAndLimitSame ? '' : (`\n      limitKey:'` + this.form.limitKey + '\',')}
       pagePathPrfix: '${this.form.pagePathPrfix.charAt(0) === '/' ? this.form.pagePathPrfix : ('/' + this.form.pagePathPrfix)}', 
-      searchConditions: ${this.generatorSearchJS()},
+      searchConditions: ${this.generatorModel(this.search.content)},
     }
   },
   methods: {
@@ -168,13 +203,56 @@ export default {
   }
 }`
       },
-      generatorSearchJS() {
+      generatorModel(data) {
         var res = {}
         this.search.content.forEach(item => {
           res[item.key] = null
         })
         // \t 是用来调缩进的格式的
         return JSON.stringify(res, null, '\t\t')
+      },
+      generatorDetails() {
+         return `
+    <j-search-condition @search="search">
+      ${this.detail.content.map(item => {
+        var res = `
+      <j-edit-item
+        label="${item.label}" prop="${item.key}" :is-view="isView" :view-value="model.${item.key}">
+        <el-input v-model="model.${item.key}"></el-input>
+      </j-edit-item>`
+        return res
+      }).join('')}
+    </j-search-condition>`
+      },
+      generatorRules() {
+         return this.detail.content.filter(item => item.isRequired).map(item => {
+            return `
+          ${item.key}: [
+            { required: true, message: 请输入${item.label}名称, trigger: 'blur' }
+          ],`
+          }).join('')
+      },
+      generatorDetailJs() {
+        return `
+import updateMixin from '@/mixin/update'
+
+//require('./api/mock.js')
+
+export default {
+  mixins: [updateMixin],
+  data () {
+    return {
+      KEY: '${this.form.pageKey}',
+      model: ${this.generatorModel(this.detail.content)},
+      rules: {
+        ${this.generatorRules()}
+      }
+    }
+  },
+  methods: {
+    
+  }
+}`
       },
       reset() {
         this.form = Object.assign({}, defaultForm)
