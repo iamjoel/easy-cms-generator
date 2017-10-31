@@ -259,6 +259,8 @@ export default {
         if(this.currType === 'list') {
           this.search.content = []
           this.list.content = []
+        } else {
+          this.detail.content = []
         }
       },
       valid() {
