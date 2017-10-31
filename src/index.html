@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1 class="title">后台管理系统前端代码生成工具</h1>
+    <div id="app" v-cloak>
+        <el-form ref="form" label-width="80px" :rules="rules" :model="form">
+            <el-card class="box-card">
+                <div slot="header" class="clearfix">
+                    <span>通用设置</span>
+                </div>
+                <el-form-item label="页面Key" prop="pageKey">
+                    <el-input v-model="form.pageKey" placeholder="用该值获得 ajax 地址"></el-input>
+                    <el-checkbox v-model="form.isPageAndLimitSame">页面Key和权限Key一致</el-checkbox>
+                </el-form-item>
+                <el-form-item label="权限Key" v-if="!form.isPageAndLimitSame" required prop="limitKey">
+                    <el-input v-model="form.limitKey" placeholder="用该值控制数据权限"></el-input>
+                </el-form-item>
+            </el-card>
+            <el-tabs v-model="currType">
+                <el-tab-pane label="列表页" name="list">
+                    <el-form-item label="页面前缀" required prop="PAGE_PATH_PREFIX">
+                        <el-input v-model="form.PAGE_PATH_PREFIX" placeholder="新增，编辑，详情页的前缀，如: music/song"></el-input>
+                    </el-form-item>
+                    <el-card class="box-card">
+                        <div slot="header" class="clearfix">
+                            <span>搜索条件</span>
+                            <el-button style="float: right; padding: 3px 0" type="text" type="success" @click="search.isDialogVisible = true">添加</el-button>
+                        </div>
+                        <el-table :data="search.content" border stripe>
+                            <el-table-column type="index" label="序列" align="center" width="80">
+                            </el-table-column>
+                            <el-table-column prop="label" label="搜索名">
+                                <template scope="scope">
+                                    <el-input v-model="scope.row.label"></el-input>
+                                </template>
+                            </el-table-column>
+                            <el-table-column prop="key" label="搜索键">
+                                <template scope="scope">
+                                    <el-input v-model="scope.row.key"></el-input>
+                                </template>
+                            </el-table-column>
+                            <el-table-column prop="op" label="操作">
+                                <template scope="scope">
+                                    <el-button type="danger" size="small" @click="search.content.splice(scope.$index, 1)">删除</el-button>
+                                </template>
+                            </el-table-column>
+                        </el-table>
+                    </el-card>
+                    <el-card class="box-card">
+                        <div slot="header" class="clearfix">
+                            <span>列表内容</span>
+                            <el-button style="float: right; padding: 3px 0" type="text" type="success" @click="list.isDialogVisible = true">添加</el-button>
+                        </div>
+                        <el-table :data="list.content" border stripe>
+                            <el-table-column type="index" label="序列" align="center" width="80">
+                            </el-table-column>
+                            <el-table-column prop="label" label="列名">
+                                <template scope="scope">
+                                    <el-input v-model="scope.row.label"></el-input>
+                                </template>
+                            </el-table-column>
+                            <el-table-column prop="key" label="列键">
+                                <template scope="scope">
+                                    <el-input v-model="scope.row.key"></el-input>
+                                </template>
+                            </el-table-column>
+                            <el-table-column prop="op" label="自定义格式">
+                                <template scope="scope">
+                                    {{scope.row.isCustomer ? '是' : '否'}}
+                                </template>
+                            </el-table-column>
+                            <el-table-column prop="op" label="操作">
+                                <template scope="scope">
+                                    <el-button type="danger" size="small" @click="list.content.splice(scope.$index, 1)">删除</el-button>
+                                </template>
+                            </el-table-column>
+                        </el-table>
+                    </el-card>
+                </el-tab-pane>
+                <el-tab-pane label="新增，编辑，详情页" name="detail"></el-tab-pane>
+            </el-tabs>
+            <el-form-item style="margin-top: 10px;">
+                <el-button type="primary" @click="generatorDownload()">生成下载内容</el-button>
+                <a :href="download.list.vue" v-if="download.list.vue" download="list.vue" class="el-button el-button--primary">Vue文件<i class="el-icon-download"></i></a>
+                <a :href="download.list.js" v-if="download.list.js" download="list.vue" class="el-button el-button--primary">JS文件<i class="el-icon-download"></i></a>
+                <el-button @click="reset()">重置</el-button>
+            </el-form-item>
+        </el-form>
+        <el-dialog title="添加搜索条件" :visible.sync="search.isDialogVisible" width="30%">
+            <el-form type="inline" label-width="80px">
+                <el-form-item label="搜索名">
+                    <el-input v-model="search.editTemp.label"></el-input>
+                </el-form-item>
+                <el-form-item label="搜索键">
+                    <!-- 后台定义的 -->
+                    <el-input v-model="search.editTemp.key"></el-input>
+                </el-form-item>
+            </el-form>
+            <span slot="footer" class="dialog-footer">
+          <el-button @click="search.isDialogVisible = false">取 消</el-button>
+          <el-button type="primary" @click="addItem('search')">确 定</el-button>
+        </span>
+        </el-dialog>
+        <el-dialog title="添加列" :visible.sync="list.isDialogVisible" width="30%">
+            <el-form type="inline" label-width="80px">
+                <el-form-item label="列名">
+                    <el-input v-model="list.editTemp.label"></el-input>
+                </el-form-item>
+                <el-form-item label="列键">
+                    <!-- 后台定义的 -->
+                    <el-input v-model="list.editTemp.key"></el-input>
+                </el-form-item>
+                <el-form-item label="自定义格式">
+                    <el-checkbox v-model="list.editTemp.isCustomer"></el-checkbox>
+                </el-form-item>
+            </el-form>
+            <span slot="footer" class="dialog-footer">
+          <el-button @click="list.isDialogVisible = false">取 消</el-button>
+          <el-button type="primary" @click="addItem('list')">确 定</el-button>
+        </span>
+        </el-dialog>
+    </div>
+    <script src="https://unpkg.com/vue@2.5.2/dist/vue.js"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,12 @@
+[v-cloak] {
+  display: none;
+}
+a {
+    text-decoration: none;
+}
+.title {
+    text-align: center;
+}
+.box-card {
+    margin: 10px 0;
+}
