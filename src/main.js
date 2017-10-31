@@ -4,52 +4,53 @@
     pageKey: null,
     limitKey: null,
     isPageAndLimitSame: true,
-    PAGE_PATH_PREFIX: '', // 页面前缀
+    pagePathPrfix: '', // 页面前缀
   }
-  new Vue({
+  var vm = new Vue({
     el: '#app',
-    data: {
-      download: {
-        list:{
-          js: null,
-          vue: null
-        }
-      },
-      currType: 'list',
-      form: Object.assign({}, defaultForm),
-      rules: {
-        pageKey: [
-          { required: true, message: '请输入页面Key', trigger: 'blur' },
-        ],
-        limitKey: [
-          { validator: this.validLimitKey, trigger: 'blur' },
-        ],
-        PAGE_PATH_PREFIX: [
-          { validator: this.validPathPrefix, trigger: 'blur' },
-        ],
-      },
-      // 列表页相关的属性开始
-      search: {
-        isDialogVisible: false,
-        editTemp: {
-          label: null,
-          key: null,
-          // 下拉框之类的其他类型，要编辑的就多了，还不如代码写
-          // type: 'text' 
+    data() {
+      return {
+        download: {
+          list:{
+            js: null,
+            vue: null
+          }
         },
-        content: [{label: '用户名',key: 'name'}],
-      },
-      list: {
-        isDialogVisible: false,
-        editTemp: {
-          label: null,
-          key: null,
-          isCustomer: false
+        currType: 'list',
+        form: Object.assign({}, defaultForm),
+        rules: {
+            pageKey: [
+              { required: true, message: '请输入页面Key', trigger: 'blur' },
+            ],
+            limitKey: [
+              { validator: this.validLimitKey, trigger: 'blur' },
+            ],
+            pagePathPrfix: [
+              { validator: this.validPathPrefix, trigger: 'blur' },
+            ],
         },
-        content: [{label: '用户名',key: 'name', isCustomer: true }],
-      },
-      
-      // 新增，编辑，页相关的属性开始
+        // 列表页相关的属性开始
+        search: {
+          isDialogVisible: false,
+          editTemp: {
+            label: null,
+            key: null,
+            // 下拉框之类的其他类型，要编辑的就多了，还不如代码写
+            // type: 'text' 
+          },
+          content: [{label: '用户名',key: 'name'}],
+        },
+        list: {
+          isDialogVisible: false,
+          editTemp: {
+            label: null,
+            key: null,
+            isCustomer: false
+          },
+          content: [{label: '用户名',key: 'name', isCustomer: true }],
+        },
+        // 新增，编辑，页相关的属性开始
+      }
 
     },
     methods: {
@@ -158,7 +159,7 @@ export default {
   data () {
     return {
       KEY: '${this.form.pageKey}',${this.form.isPageAndLimitSame ? '' : (`\n      limitKey:'` + this.form.limitKey + '\',')}
-      PAGE_PATH_PREFIX: '${this.form.PAGE_PATH_PREFIX.charAt(0) === '/' ? this.form.PAGE_PATH_PREFIX : ('/' + this.form.PAGE_PATH_PREFIX)}', 
+      pagePathPrfix: '${this.form.pagePathPrfix.charAt(0) === '/' ? this.form.pagePathPrfix : ('/' + this.form.pagePathPrfix)}', 
       searchConditions: ${this.generatorSearchJS()},
     }
   },
