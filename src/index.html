@@ -110,12 +110,9 @@
                         <div class="clearfix">
                             <el-button type="primary" @click="syncList()" style="float: right;margin-bottom: 10px">同步列表</el-button>
                         </div>
-                        <el-row style="margin-bottom: 10px;">
-                            <el-col :span="24">
-                                快速添加：
-                                <el-button type="success" v-for="item in itemTemplates" @click="addTo('detail', item)">{{item.label}}</el-button>
-                            </el-col>
-                        </el-row>
+                        
+                        快速添加：
+                        <el-button type="success" v-for="item in itemTemplates" @click="addTo('detail', item)">{{item.label}}</el-button>
                         <el-table :data="detail.content" border stripe>
                             <el-table-column type="index" label="序列" align="center" width="80">
                             </el-table-column>
