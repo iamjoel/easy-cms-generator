@@ -282,6 +282,14 @@ export default {
         } else {
           callback()
         }
+      },
+      cloneTo(destination, item) {
+        var cloneItem = Object.assign({}, item)
+        if(destination === 'search') {
+          this.search.content.push(cloneItem)
+        } else {
+          this.list.content.push(Object.assign(cloneItem, {isCustomer: false}))
+        }
       }
     }
   })
