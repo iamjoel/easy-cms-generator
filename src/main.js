@@ -31,6 +31,11 @@
           key: 'type',
           isRequired: true,
           isCustomer: false
+        },{
+          label: '备注',
+          key: 'detail',
+          isRequired: false,
+          isCustomer: false
         }], 
         form: Object.assign({}, defaultForm),
         rules: {
