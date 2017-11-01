@@ -5,6 +5,7 @@
     isPageAndLimitSame: true,
     pagePathPrfix: '', // 页面前缀
   }
+
   var vm = new Vue({
     el: '#app',
     data() {
@@ -20,6 +21,17 @@
           }
         },
         currType: 'list',// list,update
+        itemTemplates: [{
+          label: '名称',
+          key: 'name',
+          isRequired: true,
+          isCustomer: false
+        },{
+          label: '类型',
+          key: 'type',
+          isRequired: true,
+          isCustomer: false
+        }], 
         form: Object.assign({}, defaultForm),
         rules: {
             pageKey: [
@@ -290,6 +302,18 @@ export default {
         } else {
           this.list.content.push(Object.assign(cloneItem, {isCustomer: false}))
         }
+      },
+      syncList() {
+        this.detail.content = this.list.content.map(item => {
+          return {
+            label: item.label,
+            key: item.key,
+            isRequired: true
+          }
+        })
+      },
+      addTo(destination, item) {
+        this[destination].content.push(Object.assign({}, item))
       }
     }
   })
