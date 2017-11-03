@@ -139,8 +139,33 @@
                         </el-table>
                     </el-card>
                 </el-tab-pane>
+
+                <el-tab-pane label="Mock数据" name="mock">
+                    <el-card class="box-card">
+                        <div slot="header" class="clearfix">
+                            接口
+                        </div>
+                        <el-form-item label="标签">
+                            <el-input v-model="mock.tag.name" placeholder=""></el-input>
+                        </el-form-item>
+                        <el-form-item label="标签描述">
+                            <el-input v-model="mock.tag.description" placeholder=""></el-input>
+                        </el-form-item>
+                        <el-form-item label="资源 Key">
+                            <el-input v-model="mock.cruds.key" placeholder=""></el-input>
+                        </el-form-item>
+                        <div>
+                            <el-button type="primary" @click="generatorCrud">生成</el-button>
+                            <h2>生成Tag内容</h2>
+                            <pre>{{mock.tag.output}}</pre>
+
+                            <h2>生成资源内容</h2>
+                            <pre>{{mock.cruds.output}}</pre>
+                        </div>
+                    </el-card>
+                </el-tab-pane>
             </el-tabs>
-            <el-form-item style="margin-top: 10px;">
+            <el-form-item style="margin-top: 10px;" v-if="currType === 'list' || currType === 'update'">
                 <el-button type="primary" @click="generatorDownload()">生成下载内容</el-button>
                 <a :href="download[currType].vue" v-if="download[currType].vue" :download="currType + '.vue'" class="el-button el-button--primary">Vue文件<i class="el-icon-download"></i></a>
                 <a :href="download[currType].js" v-if="download[currType].js" :download="currType + '.js'" class="el-button el-button--primary">JS文件<i class="el-icon-download"></i></a>

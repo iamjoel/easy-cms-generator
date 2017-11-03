@@ -20,7 +20,7 @@
             vue: null
           }
         },
-        currType: 'list',// list,update
+        currType: 'mock',// list,update,mock
         itemTemplates: [{
           label: '名称',
           key: 'name',
@@ -82,6 +82,17 @@
           content: [],
           // content: [{label: '歌曲',key: 'name', isRequired: true},{label: '歌手',key: 'singer'}], // 测试
         },
+        mock: {
+          tag: {
+            name: null,
+            description: null,
+            output: null
+          },
+          cruds: {
+            key: null,
+            output: null,
+          }
+        }
       }
 
     },
@@ -319,6 +330,134 @@ export default {
       },
       addTo(destination, item) {
         this[destination].content.push(Object.assign({}, item))
+      },
+      generatorCrud() {
+        var mock = this.mock
+        var tag = mock.tag
+        tag.output = `
+tags:
+- name: "${tag.name}"
+  description: "${tag.description}"`
+        var resouceModelName = mock.cruds.key.charAt(0).toUpperCase() + mock.cruds.key.substring(1)
+        mock.cruds.output = `
+/${mock.cruds.key}/list:
+    x-swagger-router-controller: swagger_raw
+    get:
+      tags:
+      - "${tag.name}"
+      parameters:
+        - name: name
+          in: query
+          description: 名称
+          required: false
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            properties:
+              data:
+                $ref: "#/definitions/${resouceModelName}List"
+              pager:
+                $ref: "#/definitions/Pager"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /${mock.cruds.key}/detail/{id}:
+    x-swagger-router-controller: swagger_raw
+    get:
+      tags:
+      - "${tag.name}"
+      parameters:
+        - name: id
+          in: path
+          description: ${tag.name}id
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            properties:
+              data:
+                $ref: "#/definitions/${resouceModelName}"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /${mock.cruds.key}/add:
+    x-swagger-router-controller: swagger_raw
+    post:
+      tags:
+      - "${tag.name}"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/${resouceModelName}"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/SuccessResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /${mock.cruds.key}/edit/{id}:
+    x-swagger-router-controller: swagger_raw
+    post:
+      tags:
+      - "${tag.name}"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      parameters:
+      - name: id
+        in: path
+        description: ${tag.name}id
+        required: true
+        type: string
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/${resouceModelName}"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/SuccessResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /${mock.cruds.key}/del/{id}:
+    x-swagger-router-controller: swagger_raw
+    post:
+      tags:
+      - "${tag.name}"
+      consumes:
+      - "application/x-www-form-urlencoded"
+      parameters:
+      - name: id
+        in: path
+        description: ${tag.name}id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/SuccessResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        `
       }
     }
   })
