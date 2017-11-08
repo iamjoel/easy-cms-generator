@@ -20,7 +20,7 @@
             vue: null
           }
         },
-        currType: 'mock',// list,update,mock
+        currType: 'list',// list,update,mock
         itemTemplates: [{
           label: '名称',
           key: 'name',
@@ -51,35 +51,32 @@
         },
         // 列表页相关的属性开始
         search: {
-          isDialogVisible: false,
           editTemp: {
             label: null,
             key: null,
             // 下拉框之类的其他类型，要编辑的就多了，还不如代码写
             // type: 'text' 
           },
-          content: [],
+          content: [{label: '', key: ''}],
           // content: [{label: '歌曲',key: 'name'},{label: '歌手',key: 'singer'}], // 测试
         },
         list: {
-          isDialogVisible: false,
           editTemp: {
             label: null,
             key: null,
             isCustomer: false
           },
-          content: [],
+          content: [{label: '名称',key: 'name', isCustomer: false}, ...repeat({label: '',key: '', isCustomer: false}, 5)],
           // content: [{label: '歌曲',key: 'name', isCustomer: true},{label: '歌手',key: 'singer'}], // 测试
         },
         // 新增，编辑，页相关的属性开始
         detail: {
-          isDialogVisible: false,
           editTemp: {
             label: null,
             key: null,
             isRequired: true
           },
-          content: [],
+          content: [...repeat({label: '',key: '', isRequired: true}, 4), {label: '',key: '', isRequired: false}],
           // content: [{label: '歌曲',key: 'name', isRequired: true},{label: '歌手',key: 'singer'}], // 测试
         },
         mock: {
@@ -104,8 +101,9 @@
       },
       addItem(type) {
         this[type].content.push(Object.assign({}, this[type].editTemp))
-        this[type].editTemp = {}
-        this[type].isDialogVisible = false
+      },
+      removeEmptyItem() {
+        this[this.currType].content = removeEmptyItem(this[this.currType].content)
       },
       generatorDownload() {
         var currType = this.currType
@@ -463,4 +461,18 @@ tags:
   })
 
   
+}
+
+function repeat(item, num = 5) {
+  var res = []
+  for(var i = 0; i < num; i++) {
+    res.push(Object.assign({}, item))
+  }
+  return res
+}
+
+function removeEmptyItem(list) {
+  return list.filter(item => {
+    return [null, ''].indexOf(item.key) === -1 || [null, ''].indexOf(item.label) === -1
+  })
 }

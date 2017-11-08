@@ -33,7 +33,7 @@
                     <el-card class="box-card">
                         <div slot="header" class="clearfix">
                             <span>搜索条件</span>
-                            <el-button style="float: right; padding: 3px 0" type="text" type="success" @click="search.isDialogVisible = true">添加</el-button>
+                            <el-button style="float: right; padding: 3px 0" type="text" type="success" @click="addItem('search')">添加</el-button>
                         </div>
                         <el-row style="margin-bottom: 10px;">
                             <el-col :span="24">
@@ -65,7 +65,7 @@
                     <el-card class="box-card">
                         <div slot="header" class="clearfix">
                             <span>列表内容</span>
-                            <el-button style="float: right; padding: 3px 0" type="text" type="success" @click="list.isDialogVisible = true">添加</el-button>
+                            <el-button style="float: right; padding: 3px 0" type="text" type="success" @click="addItem('list')">添加</el-button>
                         </div>
                         <el-row style="margin-bottom: 10px;">
                             <el-col :span="24">
@@ -105,7 +105,7 @@
                    <el-card class="box-card">
                         <div slot="header" class="clearfix">
                             <span>新增，编辑，详情内容</span>
-                            <el-button style="float: right; padding: 3px 0" type="text" type="success" @click="detail.isDialogVisible = true">添加</el-button>
+                            <el-button style="float: right; padding: 3px 0" type="text" type="success" @click="addItem('detail')">添加</el-button>
                         </div>
                         <div class="clearfix">
                             <el-button type="primary" @click="syncList()" style="float: right;margin-bottom: 10px">同步列表</el-button>
@@ -166,63 +166,14 @@
                 </el-tab-pane>
             </el-tabs>
             <el-form-item style="margin-top: 10px;" v-if="currType === 'list' || currType === 'update'">
+                <el-button type="primary" @click="removeEmptyItem()">删除空项</el-button>
                 <el-button type="primary" @click="generatorDownload()">生成下载内容</el-button>
                 <a :href="download[currType].vue" v-if="download[currType].vue" :download="currType + '.vue'" class="el-button el-button--primary">Vue文件<i class="el-icon-download"></i></a>
                 <a :href="download[currType].js" v-if="download[currType].js" :download="currType + '.js'" class="el-button el-button--primary">JS文件<i class="el-icon-download"></i></a>
                 <el-button @click="reset()">重置</el-button>
             </el-form-item>
         </el-form>
-        <el-dialog title="添加搜索条件" :visible.sync="search.isDialogVisible" width="30%">
-            <el-form type="inline" label-width="80px">
-                <el-form-item label="搜索名">
-                    <el-input v-model="search.editTemp.label"></el-input>
-                </el-form-item>
-                <el-form-item label="搜索键">
-                    <!-- 后台定义的 -->
-                    <el-input v-model="search.editTemp.key"></el-input>
-                </el-form-item>
-            </el-form>
-            <span slot="footer" class="dialog-footer">
-          <el-button @click="search.isDialogVisible = false">取 消</el-button>
-          <el-button type="primary" @click="addItem('search')">确 定</el-button>
-        </span>
-        </el-dialog>
-        <el-dialog title="添加列" :visible.sync="list.isDialogVisible" width="30%">
-            <el-form type="inline" label-width="80px">
-                <el-form-item label="列名">
-                    <el-input v-model="list.editTemp.label"></el-input>
-                </el-form-item>
-                <el-form-item label="列键">
-                    <!-- 后台定义的 -->
-                    <el-input v-model="list.editTemp.key"></el-input>
-                </el-form-item>
-                <el-form-item label="自定义格式">
-                    <el-checkbox v-model="list.editTemp.isCustomer"></el-checkbox>
-                </el-form-item>
-            </el-form>
-            <span slot="footer" class="dialog-footer">
-          <el-button @click="list.isDialogVisible = false">取 消</el-button>
-          <el-button type="primary" @click="addItem('list')">确 定</el-button>
-        </span>
-        </el-dialog>
-        <el-dialog title="添加详情字段" :visible.sync="detail.isDialogVisible" width="30%">
-            <el-form type="inline" label-width="80px">
-                <el-form-item label="字段名">
-                    <el-input v-model="detail.editTemp.label"></el-input>
-                </el-form-item>
-                <el-form-item label="字段键">
-                    <!-- 后台定义的 -->
-                    <el-input v-model="detail.editTemp.key"></el-input>
-                </el-form-item>
-                <el-form-item label="必填">
-                    <el-checkbox v-model="detail.editTemp.isRequired"></el-checkbox>
-                </el-form-item>
-            </el-form>
-            <span slot="footer" class="dialog-footer">
-          <el-button @click="detail.isDialogVisible = false">取 消</el-button>
-          <el-button type="primary" @click="addItem('detail')">确 定</el-button>
-        </span>
-        </el-dialog>
+        
     </div>
     <script src="https://unpkg.com/vue@2.3.3/dist/vue.js"></script>
     <script src="https://unpkg.com/element-ui@1.3.7/lib/index.js"></script>
