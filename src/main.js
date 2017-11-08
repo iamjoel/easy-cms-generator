@@ -36,7 +36,7 @@
           key: 'detail',
           isRequired: false,
           isCustomer: false
-        }], 
+        }],
         form: Object.assign({}, defaultForm),
         rules: {
             pageKey: [
@@ -55,7 +55,7 @@
             label: null,
             key: null,
             // 下拉框之类的其他类型，要编辑的就多了，还不如代码写
-            // type: 'text' 
+            // type: 'text'
           },
           content: [{label: '', key: ''}],
           // content: [{label: '歌曲',key: 'name'},{label: '歌手',key: 'singer'}], // 测试
@@ -114,7 +114,7 @@
             var searchContent = this.generatorSearch()
             var listContent = this.generatorList()
             // 生成代码的美观。固定的注意缩进。
-            vueContent = 
+            vueContent =
             `
 <template>
   <div class="main">
@@ -126,7 +126,7 @@
             jsContent = this.generatorListJs()
           } else {
             let details = this.generatorDetails()
-            vueContent = 
+            vueContent =
             `
 <template>
 <div class="main">
@@ -135,7 +135,7 @@
       ${details}
     </el-row>
   </el-form>
-  
+
   <el-row type="flex" justify="center">
     <el-button @click="$router.go(-1)">返回</el-button>
     <el-button type="success" @click="save">保存</el-button>
@@ -166,6 +166,7 @@
     </j-search-condition>`
       },
       generatorList() {
+        this.form.pagePathPrfix = this.form.pagePathPrfix.trim()
         var customerContent = `
           <template scope="scope">
             {{scope.row}}
@@ -216,13 +217,13 @@ export default {
   mixins: [listMixin],
   data () {
     return {
-      KEY: '${this.form.pageKey}',${this.form.isPageAndLimitSame ? '' : (`\n      limitKey:'` + this.form.limitKey + '\',')}
-      PAGE_PATH_PREFIX: '${this.form.pagePathPrfix.charAt(0) === '/' ? this.form.pagePathPrfix : ('/' + this.form.pagePathPrfix)}', 
+      KEY: '${this.form.pageKey.trim()}',${this.form.isPageAndLimitSame ? '' : (`\n      limitKey:'` + this.form.limitKey + '\',')}
+      PAGE_PATH_PREFIX: '${this.form.pagePathPrfix.charAt(0) === '/' ? this.form.pagePathPrfix : ('/' + this.form.pagePathPrfix)}',
       searchConditions: ${this.generatorModel(this.search.content)},
     }
   },
   methods: {
-    
+
   }
 }`
       },
@@ -263,7 +264,7 @@ export default {
   mixins: [updateMixin],
   data () {
     return {
-      KEY: '${this.form.pageKey}',
+      KEY: '${this.form.pageKey.trim()}',
       model: ${this.generatorModel(this.detail.content)},
       rules: {
         ${this.generatorRules()}
@@ -271,7 +272,7 @@ export default {
     }
   },
   methods: {
-    
+
   }
 }`
       },
@@ -460,7 +461,7 @@ tags:
     }
   })
 
-  
+
 }
 
 function repeat(item, num = 5) {
