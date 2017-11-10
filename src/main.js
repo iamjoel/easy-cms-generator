@@ -284,6 +284,7 @@ export default {
         } else {
           this.detail.content = []
         }
+        this.clearDownload()
       },
       valid() {
         return new Promise((resolve, reject) => {
@@ -329,6 +330,18 @@ export default {
       },
       addTo(destination, item) {
         this[destination].content.push(Object.assign({}, item))
+      },
+      clearDownload() {
+        this.download = {
+          list:{
+            js: null,
+            vue: null
+          },
+          update:{
+            js: null,
+            vue: null
+          }
+        }
       },
       generatorCrud() {
         var mock = this.mock

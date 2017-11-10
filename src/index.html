@@ -25,7 +25,7 @@
                     <el-input v-model="form.limitKey" placeholder="用该值控制数据权限"></el-input>
                 </el-form-item>
             </el-card>
-            <el-tabs v-model="currType">
+            <el-tabs v-model="currType" @tab-click="clearDownload()">
                 <el-tab-pane label="列表页" name="list">
                     <el-form-item label="页面前缀" required prop="pagePathPrfix">
                         <el-input v-model="form.pagePathPrfix" placeholder="新增，编辑，详情页的前缀，如: music/song"></el-input>
