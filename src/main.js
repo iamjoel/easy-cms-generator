@@ -168,7 +168,7 @@
       generatorList() {
         this.form.pagePathPrfix = this.form.pagePathPrfix.trim()
         var customerContent = `
-          <template scope="scope">
+          <template slot-scope="scope">
             {{scope.row}}
           </template>`
         return `
@@ -199,7 +199,7 @@
           label="操作"
           width="350"
           >
-          <template scope="scope">
+          <template slot-scope="scope">
             <el-button type="success" size="small" @click="$router.push(viewPagePath(scope.row.id))" v-if="isShow('view')">详情</el-button>
             <el-button type="info" size="small" @click="$router.push(editPagePath(scope.row.id))" v-if="isShow('edit')">编辑</el-button>
             <el-button type="danger" size="small" @click="remove(scope.row.id)" v-if="isShow('delete')">删除</el-button>
@@ -229,15 +229,14 @@ export default {
       },
       generatorModel(data) {
         var res = {}
-        this.search.content.forEach(item => {
+        data.forEach(item => {
           res[item.key] = null
         })
         // \t 是用来调缩进的格式的
         return JSON.stringify(res, null, '\t\t')
       },
       generatorDetails() {
-         return `
-      ${this.detail.content.map(item => {
+         return `${this.detail.content.map(item => {
         var res = `
       <j-edit-item
         label="${item.label}" prop="${item.key}" :is-view="isView" :view-value="model.${item.key}">
