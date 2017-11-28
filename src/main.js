@@ -6,6 +6,9 @@
     pagePathPrfix: '', // 页面前缀
   }
 
+  // const useStaticData = true
+  const useStaticData = false
+
   var vm = new Vue({
     el: '#app',
     data() {
@@ -174,7 +177,7 @@
         return `
     <j-grid-box :is-show-add-btn="isShow('add')" :add-url="addPagePath" :pager="pager" @pageChange="handleCurrentChange">
       <el-table
-        :data="tableData"
+        :data="${useStaticData ? '[{id:1},{id:2},{id:3}]' : 'tableData'}"
         border
         stripe>
         <el-table-column
@@ -189,9 +192,19 @@
           prop="${item.key}"
           label="${item.label}"
           >
-          ${item.isCustomer? customerContent : ''}
+          ${function(){
+              if(useStaticData) {
+                return `
+            <template slot-scope="scope">
+              ${item.label}{{scope.$index + 1}}
+            </template>`
+              } else {
+                return item.isCustomer ? customerContent : ''
+              }
+            }()}
         </el-table-column>
         `
+          
           return res
         }).join('')}
         <el-table-column
@@ -233,7 +246,7 @@ export default {
           res[item.key] = null
         })
         // \t 是用来调缩进的格式的
-        return JSON.stringify(res, null, '\t\t')
+        return JSON.stringify(res, null, '        ')
       },
       generatorDetails() {
          return `${this.detail.content.map(item => {
@@ -248,8 +261,8 @@ export default {
       generatorRules() {
          return this.detail.content.filter(item => item.isRequired).map(item => {
             return `
-          ${item.key}: [
-            { required: true, message: '请输入${item.label}名称', trigger: 'blur' }
+          '${item.key}': [
+            { required: true, message: '请输入${item.label}', trigger: 'blur' }
           ],`
           }).join('')
       },
