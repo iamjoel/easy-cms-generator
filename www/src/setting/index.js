@@ -31,8 +31,10 @@ import navMenu from './base/nav-menu.js'
 export var navMenuConfig = navMenu
 import uitlFns from './base/util-fns.js'
 export var uitlFnsConfig = uitlFns
-import pages from './base/pages.js'
-export var pagesConfig = pages
+import listPages from './base/list-pages.js'
+export var listPagesConfig = listPages
+import updatePages from './base/update-pages.js'
+export var updatePagesConfig = updatePages
 
 // 页面
 var _menuConfig = [

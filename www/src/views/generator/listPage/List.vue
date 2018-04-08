@@ -11,7 +11,7 @@
         width="80">
       </el-table-column>
       <el-table-column
-        prop="basic.label"
+        prop="name"
         label="实体"
         >
       </el-table-column>

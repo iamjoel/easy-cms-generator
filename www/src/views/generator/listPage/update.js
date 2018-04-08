@@ -103,8 +103,8 @@ export default {
 
   },
   mounted() {
-    const pagesConfig = this.$store.state.pagesConfig
-    var model = deepClone(pagesConfig[this.$route.params.id].list)
+    const pagesConfig = this.$store.state.listPagesConfig.filter(item => item.basic.entity === this.$route.params.id)[0]
+    var model = deepClone(pagesConfig)
     // 操作列表
     this.opList = Object.keys(model.operate).map(opKey => {
       const item = model.operate[opKey]

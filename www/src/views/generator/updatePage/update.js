@@ -154,8 +154,9 @@ export default {
     }
   },
   mounted() {
-    const pagesConfig = this.$store.state.pagesConfig
-    var model = deepClone(pagesConfig[this.$route.params.id].detail)
+    const pagesConfig = this.$store.state.updatePagesConfig.filter(item => item.basic.entity === this.$route.params.id)[0]
+    var model = deepClone(pagesConfig)
+    model.cols = model.cols || []
     model.cols = model.cols.map(col => {
       return {
         ...deepClone(this.colItemTemplate),
