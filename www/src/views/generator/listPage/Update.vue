@@ -17,6 +17,14 @@
               </el-option>
             </el-select>
           </j-edit-item>
+          <j-edit-item label="编辑页是配置页">
+             <el-switch
+              v-model="model.basic.isUpdatePageCommon"
+
+              >
+            </el-switch>
+          </j-edit-item>
+
         </el-row>
       </el-form>
       </el-tab-pane>

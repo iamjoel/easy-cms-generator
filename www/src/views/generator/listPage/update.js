@@ -116,6 +116,7 @@ export default {
         showRoles
       }
     })
+    model.basic.isUpdatePageCommon = model.basic.isUpdatePageCommon == undefined && true
     // 标准化cols数据
     model.cols = model.cols || []
     model.cols = model.cols.map(item => {
