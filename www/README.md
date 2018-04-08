@@ -19,4 +19,3 @@
 webpack 构建优化
 1. `npm run `
 1. 删除生成的 `states.json` 文件中头部乱七把糟的东西。将该文件放到 [webpack analyze](https://webpack.github.io/analyse/) 上分析。
-

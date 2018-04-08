@@ -171,6 +171,13 @@ export default {
         args: item.args.map(arg => {return {name: arg}})
       }
     })
+    // 添加内置函数
+    model.fn = model.fn.concat(this.$store.state.utilFns.map(item => {
+      return {
+        ...item,
+        args: item.args.map(arg => {return {name: arg}})
+      }
+    }))
 
     this.model = model
     // this.save()
