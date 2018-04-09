@@ -42,6 +42,14 @@ function generatorJS(config) {
       }).filter(item => item)
     }
   })
+  var dictModelCols = config.cols.filter(col => {
+    return col.dataType === 'select' && col.dataSource.type === 'dict'
+  }).map(col => {
+    return {
+      key: col.key,
+      dictKey: col.dataSource.key
+    }
+  })
   var js = `
 import updateMixin from '@/mixin/update'
 import JRemoteSelect from '@/components/remote-select'
@@ -72,6 +80,11 @@ export default {
       // 下拉框赋值
       if(!this.isView) {
         ${initRemoteSelectCode}
+      } else {
+        var dictModelCols = ${JSON.stringify(dictModelCols)} || []
+        dictModelCols.length > 0 && dictModelCols.forEach(col => {
+          model[key] = this.getDictName(col.dictKey, model[col.key])
+        })
       }
       return model
     },
