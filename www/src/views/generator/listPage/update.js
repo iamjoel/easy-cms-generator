@@ -87,14 +87,16 @@ export default {
     },
     save() {
       var model = deepClone(this.model)
-      model.fn = model.fn.map(item => {
+      model.fn = model.fn.filter(item => {
+        return item.name.indexOf('sys') === -1
+      }).map(item => {
         return {
           ...item,
           args: item.args.map(arg => arg.name)
         }
       })
       // TODO 保存到服务器
-      console.log(JSON.stringify(model))
+      console.log(JSON.stringify(model, null, '\t'))
     },
     generateExpend() {
       generatorListCode(this.model)

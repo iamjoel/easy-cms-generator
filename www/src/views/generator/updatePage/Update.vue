@@ -258,6 +258,10 @@
         <el-form-item label="提示">
           <el-input v-model="currRow.imgConfig.tip"></el-input>
         </el-form-item>
+        <el-form-item label="宽高">
+          <el-input v-model="currRow.imgConfig.size"></el-input>
+          <div class="form-tip">在后台管理界面的宽高。值是一样的。</div>
+        </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button type="primary" @click="isShowImgDialog = false">关 闭</el-button>

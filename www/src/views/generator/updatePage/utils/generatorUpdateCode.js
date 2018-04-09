@@ -133,8 +133,20 @@ function generatorVue(config) {
           >
           </el-date-picker>`
         } else if(dataType === 'img') {
-          // TODO
-          inner = `<div>单图 图片上传</div>`
+          inner = `
+          <div class="${col.key}-upload" style="text-align:left" v-if="!isView">
+            <el-upload class="image-uploader" name="file"
+                     :action="addPicUrl" :show-file-list="false"
+                     :on-success="imgLoaded">
+              <img v-if="model.${col.key}" :src="model.${col.key} | img" class="image-show">
+                <i v-else class="el-icon-plus image-uploader-icon"></i>
+            </el-upload>
+            <div class="form-tip">${col.imgConfig.tip}</div>
+          </div>
+          <div class="${col.key}-upload" v-else>
+            <img :src="model.${col.key} | img" class="image-show">
+          </div>
+          `
         } else if(dataType === 'imgs') {
           // TODO
           inner = `<div>多图 图片上传</div>`
@@ -149,8 +161,13 @@ function generatorVue(config) {
           </el-switch>
           `
         }
+        var isView = 'isView'
+        // 图片类型，自定义显示类型
+        if(dataType === 'img' || dataType === 'imgs') {
+          isView = false
+        }
         return `
-        <j-edit-item ${col.dataType === 'strings' ? 'fill' : ''} label="${col.label}" prop="${col.key}" :is-view="isView" :view-value="model.${col.key}">
+        <j-edit-item ${col.dataType === 'strings' ? 'fill' : ''} label="${col.label}" prop="${col.key}" :is-view="${isView}" :view-value="model.${col.key}">
         ${inner}
         </j-edit-item>
         `
@@ -167,13 +184,32 @@ function generatorVue(config) {
 
 <script src="./update.js"></script>
 <style scoped>
-
+${getStyle(config.cols)}
 </style>`
   return vue
 
 }
 
 
+function getStyle(cols) {
+  var res = cols.filter(col => {
+    return col.dataType === 'img' || col.dataType === 'imgs'
+  }).map(col => {
+    if(col.dataType === 'img') {
+      var size = col.imgConfig.size || 105
+      return `
+.${col.key}-upload .image-uploader .image-uploader-icon,
+.${col.key}-upload .image-uploader .image-show {
+    min-width: ${size}px;
+    height: ${size}px;
+    line-height: ${size}px;
+}`
+    } else {
+      return ''
+    }
+  })
+  return res.join('\n')
+}
 
 function generateVueMethods(fns) {
   return fns.map(fn => {
