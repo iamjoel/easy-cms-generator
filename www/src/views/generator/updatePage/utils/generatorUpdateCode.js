@@ -91,7 +91,7 @@ export default {
     formatSaveData() {
       var model = deepClone(this.model)
       ${saveFormatFnCode}
-      return this.model
+      return model
     },
     ${generateVueMethods(config.fn)}
   },
