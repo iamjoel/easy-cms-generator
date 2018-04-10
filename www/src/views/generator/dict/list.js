@@ -1,12 +1,13 @@
 import { addModel,editModel } from '@/service/api'
 import * as types from '@/store/mutation-types'
+import deepClone from 'clone'
 
 export default {
   data() {
     return {
       isShowDetailDialog: false,
       currData: [],
-      list: [...this.$store.state.dict]
+      list: deepClone(this.$store.state.dict)
     }  
   },
   methods: {
