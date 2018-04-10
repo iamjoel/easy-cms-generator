@@ -22,7 +22,7 @@
       </el-tab-pane>
       <el-tab-pane label="详情字段" name="cols">
         <div class="ly ly-r mb-10">
-          <el-button type="primary" @click="model.cols.push(colItemTemplate)">添加字段</el-button>
+          <el-button type="primary" @click="model.cols.push(deepClone(colItemTemplate))">添加字段</el-button>
         </div>
         <el-table
           :data="model.cols"

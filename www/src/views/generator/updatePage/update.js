@@ -153,7 +153,8 @@ export default {
           action = '输入'
       }
       return `请${action}${item.label}`
-    }
+    },
+    deepClone,
   },
   mounted() {
     const pagesConfig = this.$store.state.updatePagesConfig.filter(item => item.basic.entity === this.$route.params.id)[0]
