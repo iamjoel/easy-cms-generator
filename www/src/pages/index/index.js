@@ -9,14 +9,6 @@ import ElementUI from 'element-ui'
 Vue.use(ElementUI)
 Vue.config.productionTip = false
 
-Vue.prototype.developing = function(type = 'backend') {
-  var msg = type === 'backend' ? '后端接口' : '前端' 
-  ElementUI.Message({
-    showClose: true,
-    message: `${msg}开发中`,
-    type: 'info'
-  })
-}
 
 import axios from 'axios'
 require('@/service/interceptor') // axios 拦截器，做通用报错等

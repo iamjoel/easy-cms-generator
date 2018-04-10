@@ -1,5 +1,5 @@
 import * as types from './mutation-types'
-import { urls } from '@/setting'
+import { fetchList } from '@/service/api'
 import axios from 'axios'
 
 export const setUser = ({ commit }, user) => {
@@ -90,10 +90,13 @@ import {
 
 export const fetchBasicData = ({ commit, state, getters }) => {
   // const loadDataNum = 5
-  // var loadedNum = 0
+  var loadedNum = 0
   
   commit(types.ROLES, rolesConfig)
-  commit(types.DICT, dictConfig)
+  fetchList('dict').then(({data}) => {
+    commit(types.DICT, data.data)
+    loadedNum++
+  })
   commit(types.ENTITIES, entitiesConfig)
   commit(types.NAV_MENU, navMenuConfig)
   commit(types.UTIL_FN, uitlFnsConfig)

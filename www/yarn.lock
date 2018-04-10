@@ -2757,10 +2757,6 @@ function-bind@^1.0.2:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/function-bind/-/function-bind-1.1.1.tgz#a56899d3ea3c9bab874bb9773b7c5ede92f4895d"
 
-fundebug-javascript@^0.3.3:
-  version "0.3.6"
-  resolved "https://registry.yarnpkg.com/fundebug-javascript/-/fundebug-javascript-0.3.6.tgz#08540ae5a3a630f06bfc6be4f78ce90067c50be5"
-
 gauge@~2.7.3:
   version "2.7.4"
   resolved "https://registry.yarnpkg.com/gauge/-/gauge-2.7.4.tgz#2c03405c7538c39d7eb37b317022e325fb018bf7"

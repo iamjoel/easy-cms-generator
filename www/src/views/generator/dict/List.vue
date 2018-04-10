@@ -1,7 +1,11 @@
 <template>
   <div class="main">
+    <div class="ly ly-r mb-10">
+      <el-button type="primary" @click="add">新增</el-button>
+    </div>
+    <!-- {{$store.state.dict.value}} -->
     <el-table
-      :data="$store.state.dict"
+      :data="list"
       border
       stripe>
       <el-table-column
@@ -14,18 +18,33 @@
         prop="label"
         label="名称"
         >
+        <template slot-scope="scope">
+          <el-input v-model="scope.row.label"></el-input>
+        </template>
       </el-table-column>
       <el-table-column
         prop="key"
         label="值"
         >
+        <template slot-scope="scope">
+          <el-input v-model="scope.row.key"></el-input>
+        </template>
+      </el-table-column>
+      <el-table-column
+        prop="value"
+        label="子项目"
+        >
+        <template slot-scope="scope">
+          <el-input v-model="scope.row.value"></el-input>
+        </template>
       </el-table-column>
       <el-table-column
         prop="key"
         label="操作"
         >
         <template slot-scope="scope">
-          <el-button type="success" size="small" @click="showItems(scope.row)">查看包含项目</el-button>
+          <!-- <el-button type="success" size="small" @click="showItems(scope.row)">查看包含项目</el-button> -->
+          <el-button type="info" size="small" @click="save(scope.row)">保存</el-button>
         </template>
       </el-table-column>
     </el-table>
