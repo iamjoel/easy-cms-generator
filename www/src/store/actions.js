@@ -112,7 +112,11 @@ export const fetchBasicData = ({ commit, state, getters }) => {
     commit(types.LIST_PAGES_CONFIG, data.data)
     loadedNum++
   })
-  commit(types.UPDATE_PAGES_CONFIG, updatePagesConfig)
+
+  fetchList('updatePage').then(({data}) => {
+    commit(types.UPDATE_PAGES_CONFIG, data.data)
+    loadedNum++
+  })
   // 所有数据加载完成
   commit(types.BASIC_DATA_LOADED)
   

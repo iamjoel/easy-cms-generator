@@ -79,6 +79,7 @@
             <template  slot-scope="scope">
               {{scope.row.validRules.map(item=>item.name).join()}}
              <el-button @click="showDialog(scope.row, 'Rule')">编辑</el-button>
+
             </template>
           </el-table-column>
           <el-table-column
@@ -120,6 +121,8 @@
             <template slot-scope="scope">
               <el-button v-if="scope.$index > 0" size="small" type="info" @click="move('cols', scope.$index, 'up')">上移</el-button>
               <el-button v-if="scope.$index < model.cols.length - 1" size="small" type="info" @click="move('cols', scope.$index, 'down')">下移</el-button>
+              <el-button size="small" type="danger" @click="model.cols.splice(scope.$index, 1)">删除</el-button>
+
             </template>
           </el-table-column>
         </el-table>
@@ -170,6 +173,14 @@
               <el-input v-model="scope.row.body"
               type="textarea"
               :rows="2" placeholder="请输入内容" ></el-input>
+            </template>
+          </el-table-column>
+          <el-table-column
+            prop="op"
+            label="操作"
+            >
+            <template slot-scope="scope">
+              <el-button size="small" type="danger" v-if="scope.row.name.indexOf('sys') === -1" @click="model.fn.splice(scope.$index, 1)">删除</el-button>
             </template>
           </el-table-column>
         </el-table>

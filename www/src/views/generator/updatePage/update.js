@@ -1,6 +1,7 @@
 import JEditItem from '@/components/edit-item'
 import deepClone from 'clone'
 import generatorUpdateCode from './utils/generatorUpdateCode'
+import {fetchModel, addModel, editModel} from '@/service/api' 
 
 export default {
   components: {
@@ -8,11 +9,17 @@ export default {
   },
   data() {
     return {
-      activeTab: 'cols',
+      KEY: 'updatePage',
+      activeTab: this.$route.params.id == -1 ? 'basic' : 'cols',
       model: {
         basic: {},
         cols: [],
-        fn: [],
+        fn: this.$store.state.utilFns.map(item => {
+          return {
+            ...item,
+            args: item.args.map(arg => {return {name: arg}})
+          }
+        }),
       },
       colItemTemplate: {
         label: '',
@@ -132,8 +139,18 @@ export default {
           args: item.args.map(arg => arg.name)
         }
       })
-      // TODO 保存到服务器
-      console.log(JSON.stringify(model, null, '\t'))
+      model.basic = JSON.stringify(model.basic)
+      model.cols = JSON.stringify(model.cols || [])
+      model.fn = JSON.stringify(model.fn || [])
+      var method = this.$route.params.id == -1 ? addModel : editModel
+      method(this.KEY, model).then(()=> {
+        this.$message({
+          showClose: true,
+          message: '保存成功',
+          type: 'success'
+        })
+        this.$router.go(-1)
+      })
     },
     generateExpend() {
       generatorUpdateCode(this.model)
@@ -155,36 +172,50 @@ export default {
       return `请${action}${item.label}`
     },
     deepClone,
+    fetchDetail() {
+      fetchModel(this.KEY, this.$route.params.id).then(({data}) => {
+        const pagesConfig = data.data[0]
+
+        var model = deepClone(pagesConfig)
+        model.basic = JSON.parse(model.basic)
+        model.cols = JSON.parse(model.cols)
+        model.fn = JSON.parse(model.fn)
+
+        model.cols = model.cols || []
+        model.cols = model.cols.map(col => {
+          return {
+            ...deepClone(this.colItemTemplate),
+            ...col
+          }
+        })
+        model.basic = model.basic || {}
+        model.fn = model.fn || []
+        // 标准化函数数据
+        model.fn = model.fn.map(item => {
+          return {
+            ...item,
+            args: item.args.map(arg => {return {name: arg}})
+          }
+        })
+        // 添加内置函数
+        model.fn = model.fn.concat(this.$store.state.utilFns.map(item => {
+          return {
+            ...item,
+            args: item.args.map(arg => {return {name: arg}})
+          }
+        }))
+
+        this.model = model
+        this.generateExpend()
+      })
+    }
   },
   mounted() {
-    const pagesConfig = this.$store.state.updatePagesConfig.filter(item => item.basic.entity === this.$route.params.id)[0]
-    var model = deepClone(pagesConfig)
-    model.cols = model.cols || []
-    model.cols = model.cols.map(col => {
-      return {
-        ...deepClone(this.colItemTemplate),
-        ...col
-      }
-    })
-    model.basic = model.basic || {}
-    model.fn = model.fn || []
-    // 标准化函数数据
-    model.fn = model.fn.map(item => {
-      return {
-        ...item,
-        args: item.args.map(arg => {return {name: arg}})
-      }
-    })
-    // 添加内置函数
-    model.fn = model.fn.concat(this.$store.state.utilFns.map(item => {
-      return {
-        ...item,
-        args: item.args.map(arg => {return {name: arg}})
-      }
-    }))
+    if(this.$route.params.id == -1) { // 新增
+      return
+    }
+    this.fetchDetail()
 
-    this.model = model
-    // this.save()
-    this.generateExpend()
+   
   }
 }
