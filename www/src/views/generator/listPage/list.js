@@ -1,22 +1,41 @@
+import deepClone from 'clone'
+import { fetchList, deleteModel } from '@/service/api'
+
 export default {
   data() {
     return {
-      pages: []
+      KEY: 'listPage',
+      list: [],
+      entities: []
     }
   },
   methods: {
     getName(entityId) {
-      return this.$store.state.entities.filter(item => item.key === entityId)[0].label
+      var res = this.entities.filter(item => item.key === entityId)[0]
+      return res ? res.label : '未知实体'
+    },
+    remove(id, index) {
+      deleteModel(this.KEY, id).then(({data})=> {
+        this.list.splice(index, 1)
+        this.$message({
+          showClose: true,
+          message: '删除成功',
+          type: 'success'
+        })
+      })
     }
   },
   mounted() {
-    const pagesConfig = this.$store.state.listPagesConfig
-    this.pages = pagesConfig.map(item => {
-      return {
-        id: item.basic.entity,
-        name: this.getName(item.basic.entity),
-        ...item
-      }
+    fetchList('entity').then(({data}) => {
+      this.entities = data.data
+      const pagesConfig = deepClone(this.$store.state.listPagesConfig)
+      this.list = pagesConfig.map(item => {
+        return {
+          id: item.id,
+          name: this.getName(JSON.parse(item.basic).entity),
+        }
+      })
     })
+    
   }
 }

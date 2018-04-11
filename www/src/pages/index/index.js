@@ -5,10 +5,22 @@ import App from './App'
 import router from '@/router'
 import 'element-ui/lib/theme-default/index.css'
 import ElementUI from 'element-ui'
+import deepClone from 'clone'
 
 Vue.use(ElementUI)
 Vue.config.productionTip = false
 
+Vue.prototype.toArray = (data) => {
+  var value = deepClone(data)
+  if(typeof value === 'string') {
+    try {
+      value = JSON.parse(value)
+    } catch (e) {
+      value = []
+    }
+  }
+  return value
+}
 
 import axios from 'axios'
 require('@/service/interceptor') // axios 拦截器，做通用报错等

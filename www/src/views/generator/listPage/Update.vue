@@ -19,8 +19,9 @@
           </j-edit-item>
           <j-edit-item label="编辑页是配置页">
              <el-switch
+              on-text="是"
+              off-text="否"
               v-model="model.basic.isUpdatePageCommon"
-
               >
             </el-switch>
           </j-edit-item>
@@ -102,6 +103,8 @@
             <template slot-scope="scope">
               <el-button v-if="scope.$index > 0" size="small" type="info" @click="move('cols', scope.$index, 'up')">上移</el-button>
               <el-button v-if="scope.$index < model.cols.length - 1" size="small" type="info" @click="move('table', scope.$index, 'down')">下移</el-button>
+              <el-button size="small" type="danger" @click="model.cols.splice(scope.$index, 1)">删除</el-button>
+
             </template>
           </el-table-column>
         </el-table>
@@ -124,8 +127,8 @@
             >
           </el-table-column>
           <el-table-column
-            prop="是否显示"
-            label="op"
+            prop="op"
+            label="是否显示"
             >
             <template slot-scope="scope">
               <el-select v-model="scope.row.showType" placeholder="无" filterable clearable>
@@ -256,6 +259,8 @@
             <template slot-scope="scope">
               <el-button v-if="scope.$index > 0" size="small" type="info" @click="move('searchCondition', scope.$index, 'up')">上移</el-button>
               <el-button v-if="scope.$index < model.searchCondition.length - 1" size="small" type="info" @click="move('searchCondition', scope.$index, 'down')">下移</el-button>
+              <el-button size="small" type="danger" @click="model.searchCondition.splice(scope.$index, 1)">删除</el-button>
+
             </template>
           </el-table-column>
         </el-table>
@@ -305,6 +310,14 @@
               <el-input v-model="scope.row.body"
               type="textarea"
               :rows="2" placeholder="请输入内容" ></el-input>
+            </template>
+          </el-table-column>
+          <el-table-column
+            prop="op"
+            label="操作"
+            >
+            <template slot-scope="scope">
+              <el-button size="small" type="danger" v-if="scope.row.name.indexOf('sys') === -1" @click="model.fn.splice(scope.$index, 1)">删除</el-button>
             </template>
           </el-table-column>
         </el-table>

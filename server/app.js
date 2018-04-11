@@ -27,6 +27,7 @@ var apis = {
   dict: require('./api/dict'),
   role: require('./api/role'),
   entity: require('./api/entity'),
+  listPage: require('./api/list-page'),
 }
 
 generateAPI(Object.keys(apis))
