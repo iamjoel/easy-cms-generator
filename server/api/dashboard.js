@@ -1,7 +1,7 @@
 var config = require('../config')
 const apiFormat = require('../utils/apiFormat')
 var fs = require('fs-extra')
-const settingFileFoldPath = config.feCodeRootPath // 其实不是这个
+const settingFileFoldPath = `${config.feCodeRootPath}/src/setting/base` 
 
 module.exports = {
   detail(req, res, pool) {

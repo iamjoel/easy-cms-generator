@@ -7,7 +7,5 @@ module.exports = {
     password : '',
     database : 'amusement_admin_config'
   },
-  // feCodeRootPath: '/Users/jinweiqiang/front-end/template/admin'
-  // feCodeRootPath: '~/project/testConfig'
-  feCodeRootPath: '/Users/jinweiqiang/project/testConfig'
+  feCodeRootPath: '/Users/jinweiqiang/front-end/template/admin'
 }

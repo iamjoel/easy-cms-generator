@@ -10,7 +10,7 @@
       <div class="label">前端项目根路径:</div>
       <div>{{config.feCodeRootPath}}</div>
     </div>
-    <el-button type="warning" @click="syncConfig" class="config-btn">同步配置</el-button>
+    <el-button type="warning" @click="syncConfig" class="config-btn">同步配置到文件</el-button>
   </div>
 </template>
 
@@ -25,7 +25,11 @@ export default {
   methods: {
     syncConfig() {
       this.$http.post(`${SERVER_PREFIX}/config/sync`).then(({data}) => {
-        console.log(data.data)
+        this.$message({
+          showClose: true,
+          message: '同步成功',
+          type: 'success'
+        })
       })
     }
   },
@@ -33,7 +37,6 @@ export default {
     this.$http.get(`${SERVER_PREFIX}/config/detail`).then(({data}) => {
       this.$set(this, 'config', data.data)
     })
-    this.syncConfig()
   }
 }
 </script>

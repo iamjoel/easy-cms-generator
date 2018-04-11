@@ -141,7 +141,7 @@ export default {
       })
       model.basic = JSON.stringify(model.basic)
       model.cols = JSON.stringify(model.cols || [])
-      model.fn = JSON.stringify(model.fn || [])
+      model.fn = JSON.stringify(model.fn || []).replace(/\"/g, '\'')
       var method = this.$route.params.id == -1 ? addModel : editModel
       method(this.KEY, model).then(()=> {
         this.$message({

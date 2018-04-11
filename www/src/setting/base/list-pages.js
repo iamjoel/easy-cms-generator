@@ -51,7 +51,7 @@ export default [{
     fn: [{
       name: 'formatType',
       args: ['row'],
-      body: 'return this.getDictName("musicType", row.type)'
+      body: "return this.getDictName('musicType', row.type)"
     }]
   },
   {
