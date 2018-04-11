@@ -94,12 +94,17 @@ export const fetchBasicData = ({ commit, state, getters }) => {
     commit(types.ROLES, data.data)
     loadedNum++
   })
+
   fetchList('dict').then(({data}) => {
     commit(types.DICT, data.data)
     loadedNum++
   })
 
-  commit(types.ENTITIES, entitiesConfig)
+  fetchList('entity').then(({data}) => {
+    commit(types.ENTITIES, data.data)
+    loadedNum++
+  })
+
   commit(types.NAV_MENU, navMenuConfig)
   commit(types.UTIL_FN, uitlFnsConfig)
   commit(types.LIST_PAGES_CONFIG, listPagesConfig)

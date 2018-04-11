@@ -26,6 +26,7 @@ app.all('*', function(req, res, next) {
 var apis = {
   dict: require('./api/dict'),
   role: require('./api/role'),
+  entity: require('./api/entity'),
 }
 
 generateAPI(Object.keys(apis))
