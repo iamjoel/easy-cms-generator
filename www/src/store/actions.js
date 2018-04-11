@@ -79,8 +79,6 @@ export const fetchMenuAndLimit = ({ commit, state, getters }) => {
 
 // 这些配置以后放在服务器
 import {
-  rolesConfig,
-  dictConfig,
   entitiesConfig,
   navMenuConfig,
   uitlFnsConfig,
@@ -92,11 +90,15 @@ export const fetchBasicData = ({ commit, state, getters }) => {
   // const loadDataNum = 5
   var loadedNum = 0
   
-  commit(types.ROLES, rolesConfig)
+  fetchList('role').then(({data}) => {
+    commit(types.ROLES, data.data)
+    loadedNum++
+  })
   fetchList('dict').then(({data}) => {
     commit(types.DICT, data.data)
     loadedNum++
   })
+
   commit(types.ENTITIES, entitiesConfig)
   commit(types.NAV_MENU, navMenuConfig)
   commit(types.UTIL_FN, uitlFnsConfig)

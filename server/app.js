@@ -25,6 +25,7 @@ app.all('*', function(req, res, next) {
 // 所有的api
 var apis = {
   dict: require('./api/dict'),
+  role: require('./api/role'),
 }
 
 generateAPI(Object.keys(apis))
