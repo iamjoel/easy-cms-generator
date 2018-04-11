@@ -19,7 +19,7 @@ var _menuConfig = [{
     pages: [{
       type: 'dashboard',
       filePath: 'dashboard',
-      routePath: 'dashboard'
+      routePath: '/'
     }]
   },
   {
