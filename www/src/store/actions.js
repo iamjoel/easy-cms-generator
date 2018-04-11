@@ -77,13 +77,10 @@ export const fetchMenuAndLimit = ({ commit, state, getters }) => {
   })
 }
 
-// 这些配置以后放在服务器
+// 菜单，工具函数
 import {
-  entitiesConfig,
   navMenuConfig,
   uitlFnsConfig,
-  listPagesConfig,
-  updatePagesConfig
 } from '@/setting'
 
 export const fetchBasicData = ({ commit, state, getters }) => {

@@ -1,11 +1,7 @@
 <template>
 <div id="topbar">
   <el-menu theme="dark" :default-active="'2'" mode="horizontal" id="sc-menu">
-    <el-menu-item index="1">代码生成器</el-menu-item>
-    <!-- <el-menu-item index="2" class="menu__ops">
-      <router-link :to="'/system/inform/list'">link</router-link>
-    </el-menu-item> -->
-    <el-menu-item index="2" @click="logout()" style="float:right;">登出</el-menu-item>
+    <el-menu-item index="1">管理后台代码生成工具</el-menu-item>
   </el-menu>
 </div>
 
