@@ -23,10 +23,10 @@ export const addModel = (key, data) => {
 }
 
 export const editModel = (key, data) => {
-  return axios.post(`${SERVER_PREFIX}/${key}/${data.id || data.key}`, Object.assign({}, data))
+  return axios.post(`${SERVER_PREFIX}/${key}/${data.id}`, Object.assign({}, data))
 }
 
 export const deleteModel = (key, id) => {
-  return axios.delete(`${SERVER_PREFIX}/${key}/${data.id || data.key}`)
+  return axios.delete(`${SERVER_PREFIX}/${key}/${id}`)
 }
 

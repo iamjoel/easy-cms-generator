@@ -20,7 +20,7 @@ module.exports = {
   add(req, res, pool) {
     var guid = guidFn()
     var body = req.body
-    var sql = `INSERT INTO ${tableName} (\`key\`, label, \`value\`) VALUES ( '${body.key}', '${body.label}', '${body.value}')`
+    var sql = `INSERT INTO ${tableName} (id, \`key\`, label, \`value\`) VALUES ('${guid}', '${body.key}', '${body.label}', '${body.value}')`
     pool.query(sql, function (error, results, fields) {
       if (error) {
         res.send(apiFormat.error(error))
@@ -31,7 +31,7 @@ module.exports = {
   },
   edit(req, res, pool) {
     var updateSql = getUpdateSql(req.body)
-    var sql = `UPDATE ${tableName} SET ${updateSql} WHERE \`key\` = '${req.body.key}'`
+    var sql = `UPDATE ${tableName} SET ${updateSql} WHERE id = '${req.params.id}'`
     pool.query(sql, function (error, results, fields) {
       if (error) {
         res.send(apiFormat.error(error))
@@ -41,7 +41,7 @@ module.exports = {
     })
   },
   remove(req, res, pool) {
-    pool.query(`DELETE from ${tableName} where key = '${req.body.key}'`, function (error, results, fields) {
+    pool.query(`DELETE from ${tableName} where id = '${req.params.id}'`, function (error, results, fields) {
       if (error) {
         res.send(apiFormat.error(error));
         return

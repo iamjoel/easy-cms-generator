@@ -5,14 +5,11 @@ import {Message} from 'element-ui'
 axios.interceptors.response.use(function (response) {
   var data = response.data
   var config = response.config
-  var errorCode = data.errorCode
-  if(errorCode) {
-    if(errorCode == 1) {
-      location.href = 'login.html'
-      return 
-    }
+  var errorCode = data.errCode
+  if(errorCode !== 0) {
+    
     Message({
-      message: data.errorMessage || '未知错误',
+      message: data.error || '未知错误',
       type: 'error'
     })
     return Promise.reject()
