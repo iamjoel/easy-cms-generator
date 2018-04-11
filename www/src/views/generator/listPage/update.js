@@ -9,7 +9,7 @@ export default {
   data() {
     return {
       KEY: 'listPage',
-      activeTab: 'basic',
+      activeTab: this.$route.params.id == -1 ? 'basic' : 'cols',
       model: {
         basic: {},
         cols: [],
@@ -28,7 +28,12 @@ export default {
           }
         },
         searchCondition: [],
-        fn: [],
+        fn: this.$store.state.utilFns.map(item => {
+          return {
+            ...item,
+            args: item.args.map(arg => {return {name: arg}})
+          }
+        }),
       },
       opList: [],
       opDict: {

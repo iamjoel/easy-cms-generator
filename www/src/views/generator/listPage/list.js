@@ -1,4 +1,3 @@
-import deepClone from 'clone'
 import { fetchList, deleteModel } from '@/service/api'
 
 export default {
@@ -28,12 +27,13 @@ export default {
   mounted() {
     fetchList('entity').then(({data}) => {
       this.entities = data.data
-      const pagesConfig = deepClone(this.$store.state.listPagesConfig)
-      this.list = pagesConfig.map(item => {
-        return {
-          id: item.id,
-          name: this.getName(JSON.parse(item.basic).entity),
-        }
+      fetchList(this.KEY).then(({data}) => {
+        this.list = data.data.map(item => {
+          return {
+            id: item.id,
+            name: this.getName(JSON.parse(item.basic).entity),
+          }
+        })
       })
     })
     
