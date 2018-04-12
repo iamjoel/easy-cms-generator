@@ -49,7 +49,7 @@ function fetchList(pool, tableName) {
 function writeConfigFile(name, content) {
   return new Promise((resolve, reject) => {
     var filePath = `${settingFileFoldPath}/${name}.js`
-    fs.outputFile(filePath, 'export default ' + JSON.stringify(content, null, '\t'), err => {
+    fs.outputFile(filePath, 'export default ' + formatContent(content), err => {
         if(err) {
           reject(err)
           return
@@ -57,4 +57,12 @@ function writeConfigFile(name, content) {
         resolve()
       })
   })
+}
+
+/*
+* 将从数据库里拿出来的东西，一些没必要的移除
+*/
+function formatContent(content) {
+  return JSON.stringify(content, null, '\t')
+             // .replace(/\\"/g, '\'')
 }
