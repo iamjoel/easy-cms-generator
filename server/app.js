@@ -61,7 +61,6 @@ app.post('/update-page/updateFreeze/:id', (req, res)=> {
 
 function generateAPI(names) {
   names.forEach(name => {
-    console.log(`generated ${name}`)
     // 列表
     app.get(`/${name}/list`, (req,res) => {
       apis[name].list(req, res, pool)

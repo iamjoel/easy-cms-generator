@@ -125,7 +125,7 @@
           <el-table-column
             prop="key"
             label="操作"
-            width="140"
+            width="200"
             >
             <template slot-scope="scope">
               <el-button v-if="scope.$index > 0" size="small" type="info" @click="move('cols', scope.$index, 'up')">上移</el-button>

@@ -1,0 +1,24 @@
+{
+  "name": "admin-fe-generator",
+  "version": "1.0.0",
+  "description": "generator admin code",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm-run-all --parallel startFE startServer",
+    "startFE": "cd www && npm start",
+    "startServer": "cd server && npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iamjoel/admin-fe-generator.git"
+  },
+  "author": "Joel",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/iamjoel/admin-fe-generator/issues"
+  },
+  "homepage": "https://github.com/iamjoel/admin-fe-generator#readme",
+  "devDependencies": {
+    "npm-run-all": "^4.1.2"
+  }
+}
