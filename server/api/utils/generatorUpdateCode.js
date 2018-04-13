@@ -18,7 +18,7 @@ function generatorJS(config) {
 
   config.cols.forEach(col => {
     if(col.dataType === 'imgs') {
-      model[col.key] = []
+      model[col.key] = ''
     } else {
       model[col.key] = null
     }
