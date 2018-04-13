@@ -1,6 +1,5 @@
 import JEditItem from '@/components/edit-item'
 import deepClone from 'clone'
-import generatorListCode from './utils/generatorListCode'
 import {fetchModel, addModel, editModel} from '@/service/api' 
 export default {
   components: {
@@ -138,10 +137,6 @@ export default {
         this.$router.go(-1)
       })
     },
-    generateExpend() {
-      generatorListCode(this.model)
-    },
-
     fetchDetail() {
       fetchModel(this.KEY, this.$route.params.id).then(({data}) => {
         const pagesConfig = data.data[0]
@@ -200,7 +195,6 @@ export default {
         }))
 
         this.model = model
-        this.generateExpend()
       })
     }
   },

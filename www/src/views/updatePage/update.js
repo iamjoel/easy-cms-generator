@@ -1,6 +1,5 @@
 import JEditItem from '@/components/edit-item'
 import deepClone from 'clone'
-import generatorUpdateCode from './utils/generatorUpdateCode'
 import {fetchModel, addModel, editModel} from '@/service/api' 
 
 export default {
@@ -151,9 +150,6 @@ export default {
         })
         this.$router.go(-1)
       })
-    },
-    generateExpend() {
-      generatorUpdateCode(this.model)
     },
     generatorErrmsg(item) {
       var action

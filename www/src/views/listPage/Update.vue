@@ -1,7 +1,5 @@
 <template>
   <div class="main">
-    <!-- {{model}}
-    <br> -->
     <el-tabs v-model="activeTab" >
       <el-tab-pane label="基本设置" name="basic">
         <el-form :inline="true" :model="model.basic"  label-position="right" >
@@ -334,7 +332,6 @@
       </el-tab-pane>
     </el-tabs>
     <div class="ly ly-c mt-10">
-     <!--  <el-button type="info" @click="generateExpend">下载展开代码</el-button> -->
       <el-button type="primary" @click="save">保存</el-button>
     </div>
     <el-dialog title="详情" :visible.sync="isShowEditArgsDialog">
