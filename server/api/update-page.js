@@ -2,8 +2,12 @@ const guidFn = require('../utils/guid')
 const apiFormat = require('../utils/apiFormat')
 const getUpdateSql = require('../utils/getUpdateSql')
 const generatorCode = require('./utils/generatorUpdateCode')
-
 const tableName = 'update_page'
+
+var config = require('../config')
+const codePathPrefix = `${config.feCodeRootPath}/src/views`
+const fs = require('fs-extra')
+
 module.exports = {
   list(req, res, pool) {
     pool.query(`SELECT * from ${tableName}`, function (error, results, fields) {
@@ -63,8 +67,16 @@ module.exports = {
       }
       config = parseKey(config, ['basic', 'cols', 'fn'])
 
-      generatorCode(config)
-      res.send(apiFormat.success())
+      var {vue, js} = generatorCode(config)
+      var codePath = `${codePathPrefix}/${config.basic.codePath ? config.basic.codePath : config.basic.entity}`
+      Promise.all([
+        writeFile(`${codePath}/Update.vue`, vue),
+        writeFile(`${codePath}/update.js`, js),
+      ]).then(()=> {
+        res.send(apiFormat.success())
+      }, error => {
+        res.send(apiFormat.error(error))
+      })
     })  
   },
   updateFreeze(req, res, pool) {
@@ -77,6 +89,22 @@ module.exports = {
       res.send(apiFormat.success())
     })
   }
+}
+
+function writeFile(filePath, content) {
+  return new Promise((resolve, reject) => {
+    fs.outputFile(filePath, content, err => {
+      if(err) {
+        reject(err)
+        return
+      }
+      resolve()
+    })
+  })
+}
+
+function formatCodePath(codePath) {
+  return codePath.charAt(0) === '/' ? codePath.substr(1) : codePath
 }
 
 function parseKey(obj, parseKeyArr) {

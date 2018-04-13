@@ -17,7 +17,11 @@ function generatorJS(config) {
   var initRemoteSelectCode = []
 
   config.cols.forEach(col => {
-    model[col.key] = null
+    if(col.dataType === 'imgs') {
+      model[col.key] = []
+    } else {
+      model[col.key] = null
+    }
     if(col.formatFn) {
       formatFnCode.push(`model.${col.key} = this.${col.formatFn}(model)`)
     }
@@ -93,7 +97,7 @@ export default {
       } else {
         var dictModelCols = ${JSON.stringify(dictModelCols)} || []
         dictModelCols.length > 0 && dictModelCols.forEach(col => {
-          model[key] = this.getDictName(col.dictKey, model[col.key])
+          model[col.key] = this.getDictName(col.dictKey, model[col.key])
         })
       }
       return model
@@ -166,7 +170,7 @@ function generatorVue(config) {
               <img v-if="model.${col.key}" :src="model.${col.key} | img" class="image-show">
                 <i v-else class="el-icon-plus image-uploader-icon"></i>
             </el-upload>
-            <div class="form-tip">${col.imgConfig && col.imgConfig.tip}</div>
+            <div class="form-tip" v-if="${col.imgConfig && col.imgConfig.tip}">${col.imgConfig && col.imgConfig.tip}</div>
           </div>
           <div class="${col.key}-upload" v-else>
             <img :src="model.${col.key} | img" class="image-show">
@@ -183,14 +187,14 @@ function generatorVue(config) {
             </div>
             <div>
               <el-upload 
-                v-if="model.${col.key}.split(',').length < ${col.imgConfig.max}"
+                v-if="model.${col.key}.split(',').length < ${(col.imgConfig && col.imgConfig.max) || 5}"
                 class="image-uploader" name="file"
                  :action="addPicUrl" :show-file-list="false"
                  :on-success="${col.key}Loaded"
                  >
                   <i class="el-icon-plus image-uploader-icon"></i>
                </el-upload>
-              <div class="form-tip">${col.imgConfig && col.imgConfig.tip}</div>
+              <div class="form-tip" v-if="${col.imgConfig && col.imgConfig.tip}">${col.imgConfig && col.imgConfig.tip}</div>
             </div>
           </div>
             
@@ -218,8 +222,9 @@ function generatorVue(config) {
         if(dataType === 'select' && col.dataSource.type === 'entity') {
           viewValue = `model.moreInfo.${col.key.substr(0, col.key.length - 2)}.name`
         }
+        
         return `
-        <j-edit-item ${col.dataType === 'strings' ? 'fill' : ''} label="${col.label}" prop="${col.key}" :is-view="${isView}" :view-value="${viewValue}">
+        <j-edit-item ${['strings', 'img', 'imgs'].indexOf(col.dataType) !== -1 ? 'fill' : ''} label="${col.label}" prop="${col.key}" :is-view="${isView}" :view-value="${viewValue}">
         ${inner}
         </j-edit-item>
         `
@@ -291,5 +296,5 @@ function imgLoadedMehtods(cols) {
   }`)
     }
   })
-  return res.join('\n') + `${res.length > 0 ? ',\n' : ''}`
+  return res.join(',\n') + `${res.length > 0 ? ',\n' : ''}`
 }
