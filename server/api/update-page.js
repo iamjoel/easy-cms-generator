@@ -1,6 +1,7 @@
 const guidFn = require('../utils/guid')
 const apiFormat = require('../utils/apiFormat')
 const getUpdateSql = require('../utils/getUpdateSql')
+const generatorCode = require('./utils/generatorUpdateCode')
 
 const tableName = 'update_page'
 module.exports = {
@@ -49,5 +50,45 @@ module.exports = {
       }
       res.send(apiFormat.success(results))
     })
+  },
+  // 根据配置，展开代码，保存到文件
+  expendCofigToFile(req, res, pool) {
+    var sql = `SELECT * from ${tableName} WHERE id = '${req.params.id}'`
+    pool.query(sql, function (error, results, fields) {
+      if (error) res.send(apiFormat.error(error));
+      var config = results[0]
+      if(!config) {
+        res.send(apiFormat.error({errMsg: '找不到配置'}))
+        return
+      }
+      config = parseKey(config, ['basic', 'cols', 'fn'])
+
+      generatorCode(config)
+      res.send(apiFormat.success())
+    })  
+  },
+  updateFreeze(req, res, pool) {
+    var sql = `UPDATE ${tableName} SET isFreeze = '${req.body.isFreeze}' WHERE id = '${req.params.id}'`
+    pool.query(sql, function (error, results, fields) {
+      if (error) {
+        res.send(apiFormat.error(error));
+        return
+      }
+      res.send(apiFormat.success())
+    })
   }
+}
+
+function parseKey(obj, parseKeyArr) {
+  console.log(obj)
+  var res = {}
+  for(var key in obj) {
+    if(parseKeyArr.indexOf(key) !== -1 && obj[key]) {
+      res[key] = JSON.parse(obj[key])
+    } else {
+      res[key] = obj[key]
+    }
+  }
+  
+  return res
 }

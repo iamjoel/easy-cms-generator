@@ -22,12 +22,14 @@ app.all('*', function(req, res, next) {
     next();
 })
 
+var listPageApi = require('./api/list-page')
+var updatePageApi = require('./api/update-page')
 // 所有的api
 var apis = {
   dict: require('./api/dict'),
   role: require('./api/role'),
   entity: require('./api/entity'),
-  listPage: require('./api/list-page'),
+  listPage: listPageApi,
   updatePage: require('./api/update-page'),
 }
 
@@ -38,6 +40,24 @@ app.get('/config/detail', dashboard.detail)
 app.post('/config/sync', (req, res)=> {
   dashboard.syncConfig(req, res, pool)
 })
+
+app.post('/list-page/expendCofigToFile/:id', (req, res)=> {
+  listPageApi.expendCofigToFile(req, res, pool)
+})
+
+app.post('/list-page/updateFreeze/:id', (req, res)=> {
+  listPageApi.updateFreeze(req, res, pool)
+})
+
+app.post('/update-page/expendCofigToFile/:id', (req, res)=> {
+  updatePageApi.expendCofigToFile(req, res, pool)
+})
+
+app.post('/update-page/updateFreeze/:id', (req, res)=> {
+  updatePageApi.updateFreeze(req, res, pool)
+})
+
+
 
 function generateAPI(names) {
   names.forEach(name => {

@@ -1,4 +1,5 @@
 import { fetchList, deleteModel } from '@/service/api'
+import {SERVER_PREFIX} from '@/setting'
 
 export default {
   data() {
@@ -22,6 +23,27 @@ export default {
           type: 'success'
         })
       })
+    },
+    expendCofigToFile(id) {
+      this.$http.post(`${SERVER_PREFIX}/update-page/expendCofigToFile/${id}`).then(({data})=> {
+        this.$message({
+          showClose: true,
+          message: '操作成功',
+          type: 'success'
+        })
+      })
+    },
+    toggleFreeze(row) {
+      this.$http.post(`${SERVER_PREFIX}/update-page/updateFreeze/${row.id}`, {
+        isFreeze: row.isFreeze == 1 ? 0 : 1
+      }).then(()=> {
+        row.isFreeze = row.isFreeze == 1 ? 0 : 1
+        this.$message({
+          showClose: true,
+          message: '操作成功',
+          type: 'success'
+        })
+      })
     }
   },
   mounted() {
@@ -31,6 +53,8 @@ export default {
         this.list = data.data.map(item => {
           return {
             id: item.id,
+            isFreeze: item.isFreeze,
+            basic: JSON.parse(item.basic),
             name: this.getName(JSON.parse(item.basic).entity),
           }
         })

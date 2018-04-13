@@ -1,5 +1,5 @@
 module.exports = {
-  success(data) {
+  success(data={}) {
     return {
       errCode: 0,
       data

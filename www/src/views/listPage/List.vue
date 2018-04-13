@@ -19,11 +19,22 @@
         >
       </el-table-column>
       <el-table-column
-        prop="key"
-        label="操作"
+        prop="name"
+        label="已冻结"
         >
         <template slot-scope="scope">
-          <el-button type="success" size="small" @click="$router.push('/listPage/update/' + scope.row.id)">编辑</el-button>
+          {{scope.row.isFreeze != 1 ? '否' : '是'}}
+        </template>
+      </el-table-column>
+      <el-table-column
+        prop="key"
+        label="操作"
+        width="400"
+        >
+        <template slot-scope="scope">
+          <el-button type="success" size="small" @click="$router.push('/listPage/update/' + scope.row.id)" v-if="scope.row.isFreeze != 1">编辑</el-button>
+          <el-button type="warning" size="small" @click="expendCofigToFile(scope.row.id)" v-if="scope.row.isFreeze != 1 && !scope.row.basic.isUpdatePageCommon">展开代码到文件</el-button>
+          <el-button type="warning" size="small" @click="toggleFreeze(scope.row)">{{scope.row.isFreeze != 1 ? '冻结' : '解冻'}}</el-button>
           <el-button type="danger" size="small" @click="remove(scope.row.id, scope.$index)">删除</el-button>
         </template>
       </el-table-column>

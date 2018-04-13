@@ -17,6 +17,17 @@
               </el-option>
             </el-select>
           </j-edit-item>
+          <j-edit-item label="是配置页">
+             <el-switch
+              on-text="是"
+              off-text="否"
+              v-model="model.basic.isCommon"
+              >
+            </el-switch>
+          </j-edit-item>
+          <j-edit-item fill label="代码展开地址" v-if="!model.basic.isCommon">
+             <el-input v-model="model.basic.codePath" :placeholder="'默认值为:前端项目根路径/src/views/' + model.basic.entity"></el-input>
+          </j-edit-item>
         </el-row>
       </el-form>
       </el-tab-pane>
@@ -187,7 +198,7 @@
       </el-tab-pane>
     </el-tabs>
     <div class="ly ly-c mt-10">
-      <el-button type="info" @click="generateExpend">下载展开代码</el-button>
+      <!-- <el-button type="info" @click="generateExpend">下载展开代码</el-button> -->
       <el-button type="primary" @click="save">保存</el-button>
     </div>
     <el-dialog title="详情" :visible.sync="isShowEditArgsDialog">
