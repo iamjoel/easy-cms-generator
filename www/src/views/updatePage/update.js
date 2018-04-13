@@ -125,7 +125,7 @@ export default {
         if(item.dataType !== 'select') {
           delete item.dataSource
         }
-        if(item.dataType !== 'img' || item.dataType !== 'imgs') {
+        if(item.dataType !== 'img' && item.dataType !== 'imgs') {
           delete item.imgConfig
         }
         return item
@@ -202,7 +202,6 @@ export default {
         }))
 
         this.model = model
-        this.generateExpend()
       })
     }
   },

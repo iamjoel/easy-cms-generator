@@ -170,7 +170,7 @@ function generatorVue(config) {
               <img v-if="model.${col.key}" :src="model.${col.key} | img" class="image-show">
                 <i v-else class="el-icon-plus image-uploader-icon"></i>
             </el-upload>
-            <div class="form-tip" v-if="${col.imgConfig && col.imgConfig.tip}">${col.imgConfig && col.imgConfig.tip}</div>
+            <div class="form-tip">${col.imgConfig && col.imgConfig.tip}</div>
           </div>
           <div class="${col.key}-upload" v-else>
             <img :src="model.${col.key} | img" class="image-show">
@@ -194,7 +194,7 @@ function generatorVue(config) {
                  >
                   <i class="el-icon-plus image-uploader-icon"></i>
                </el-upload>
-              <div class="form-tip" v-if="${col.imgConfig && col.imgConfig.tip}">${col.imgConfig && col.imgConfig.tip}</div>
+              <div class="form-tip">${col.imgConfig && col.imgConfig.tip}</div>
             </div>
           </div>
             
