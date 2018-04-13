@@ -84,38 +84,7 @@ import {
 } from '@/setting'
 
 export const fetchBasicData = ({ commit, state, getters }) => {
-  // const loadDataNum = 5
-  var loadedNum = 0
-  
-  fetchList('role').then(({data}) => {
-    commit(types.ROLES, data.data)
-    loadedNum++
-  })
-
-  fetchList('dict').then(({data}) => {
-    commit(types.DICT, data.data)
-    loadedNum++
-  })
-
-  fetchList('entity').then(({data}) => {
-    commit(types.ENTITIES, data.data)
-    loadedNum++
-  })
-
   commit(types.NAV_MENU, navMenuConfig)
   commit(types.UTIL_FN, uitlFnsConfig)
-
-  fetchList('listPage').then(({data}) => {
-    commit(types.LIST_PAGES_CONFIG, data.data)
-    loadedNum++
-  })
-
-  fetchList('updatePage').then(({data}) => {
-    commit(types.UPDATE_PAGES_CONFIG, data.data)
-    loadedNum++
-  })
-  // 所有数据加载完成
-  commit(types.BASIC_DATA_LOADED)
-  
 }
 

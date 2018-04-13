@@ -7,14 +7,22 @@ module.exports = {
   list(req, res, pool) {
     pool.query(`SELECT * from ${tableName}`, function (error, results, fields) {
       if (error) res.send(apiFormat.error(error));
-      res.send(apiFormat.success(results))
+      res.send(apiFormat.success(results.map(item => {
+        return Object.assign(item, {
+          value: JSON.parse(item.value)
+        })
+      })))
     })
   },
   detail(req, res, pool) {
     var sql = `SELECT * from ${tableName} WHERE id = '${req.params.id}'`
     pool.query(sql, function (error, results, fields) {
       if (error) res.send(apiFormat.error(error));
-      res.send(apiFormat.success(results))
+      res.send(apiFormat.success(results.map(item => {
+        return Object.assign(item, {
+          value: JSON.parse(item.value)
+        })
+      })))
     })
   },
   add(req, res, pool) {

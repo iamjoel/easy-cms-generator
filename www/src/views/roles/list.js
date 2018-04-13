@@ -1,13 +1,11 @@
-import { addModel,editModel,deleteModel } from '@/service/api'
-import * as types from '@/store/mutation-types'
-import deepClone from 'clone'
+import { fetchList, addModel,editModel,deleteModel } from '@/service/api'
 
 export default {
   data() {
     return {
       KEY: 'role',
       isShowDetailDialog: false,
-      list: deepClone(this.$store.state.roles)
+      list: []
     }  
   },
   methods: {
@@ -43,5 +41,10 @@ export default {
         })
       })
     }
+  },
+  mounted() {
+    fetchList(this.KEY).then(({data}) => {
+      this.list = data.data
+    })
   }
 }
