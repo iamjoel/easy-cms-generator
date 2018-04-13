@@ -47,6 +47,18 @@ function fetchList(pool, tableName) {
 }
 
 function writeConfigFile(name, content) {
+  // 将配置对象中一些字符串对象转化成对象。
+  switch(name) {
+    case 'dict':
+      content = parseKey(content, ['value'])
+      break;
+    case 'list-pages':
+      content = parseKey(content, ['basic', 'cols', 'operate', 'searchCondition', 'fn'])
+      break;
+    case 'update-pages':
+      content = parseKey(content, ['basic', 'cols', 'fn'])
+      break;
+  }
   return new Promise((resolve, reject) => {
     var filePath = `${settingFileFoldPath}/${name}.js`
     fs.outputFile(filePath, 'export default ' + formatContent(content), err => {
@@ -59,6 +71,20 @@ function writeConfigFile(name, content) {
   })
 }
 
+function parseKey(arr, parseKeyArr) {
+  var res = arr.map(item => {
+    var itemRes = {}
+    for(var key in item) {
+      if(parseKeyArr.indexOf(key) !== -1 && item[key]) {
+        itemRes[key] = JSON.parse(item[key])
+      } else {
+        itemRes[key] = item[key]
+      }
+    }
+    return itemRes
+  })
+  return res
+}
 /*
 * 将从数据库里拿出来的东西，一些没必要的移除
 */
