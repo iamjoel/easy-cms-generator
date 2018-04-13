@@ -33,8 +33,9 @@
         >
         <template slot-scope="scope">
           <el-button type="success" size="small" @click="$router.push('/listPage/update/' + scope.row.id)" v-if="scope.row.isFreeze != 1">编辑</el-button>
-          <el-button type="warning" size="small" @click="expendCofigToFile(scope.row.id)" v-if="scope.row.isFreeze != 1 && !scope.row.basic.isUpdatePageCommon">展开代码到文件</el-button>
-          <el-button type="warning" size="small" @click="toggleFreeze(scope.row)">{{scope.row.isFreeze != 1 ? '冻结' : '解冻'}}</el-button>
+          <el-button type="warning" size="small" v-if="scope.row.basic.isCommon" @click="syncConfig">同步配置</el-button>
+          <el-button type="warning" size="small" @click="expendCofigToFile(scope.row.id)" v-if="scope.row.isFreeze != 1 && !scope.row.basic.isCommon">展开代码到文件</el-button>
+          <el-button type="warning"  v-if="!scope.row.basic.isCommon" size="small" @click="toggleFreeze(scope.row)">{{scope.row.isFreeze != 1 ? '冻结' : '解冻'}}</el-button>
           <el-button type="danger" size="small" @click="remove(scope.row.id, scope.$index)">删除</el-button>
         </template>
       </el-table-column>

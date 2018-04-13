@@ -1,7 +1,10 @@
 module.exports = function(config) {
   var js = generatorJS(config)
   var vue = generatorVue(config)
-  console.log(vue, js)
+  return {
+    js,
+    vue,
+  }
 }
 
 function generatorJS(config) {

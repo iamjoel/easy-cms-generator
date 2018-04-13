@@ -1,7 +1,10 @@
 module.exports = function(config) {
   var js = generatorJS(config)
   var vue = generatorVue(config)
-  console.log(vue, js)
+  return {
+    js,
+    vue,
+  }
 }
 
 function generatorJS(config) {
@@ -146,8 +149,11 @@ function generateSearchCondition(searchCondition) {
 }
 
 function generateVueMethods(fns) {
+  if(!fns) {
+    return ''
+  }
   return fns.map(fn => {
-    var args = fn.args.length > 0 ? fn.args.map(item => item.name).join(', ') : ''
+    var args = fn.args.length > 0 ? fn.args.join(', ') : ''
     return `
   ${fn.name}(${args}) {
     ${fn.body}

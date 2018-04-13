@@ -119,7 +119,14 @@ export default {
       model.cols = JSON.stringify(model.cols || [])
       model.operate = JSON.stringify(model.operate || {})
       model.searchCondition = JSON.stringify(model.searchCondition || [])
-      model.fn = JSON.stringify(model.fn || []).replace(/\"/g, '\'')
+      model.fn = model.fn || []
+      model.fn = model.fn.map(item => {
+        return {
+          ...item,
+          body: item.body ? item.body.replace(/\"/g, '\'') : '' 
+        }
+      })
+      model.fn = JSON.stringify(model.fn || [])
 
       var method = this.$route.params.id == -1 ? addModel : editModel
       method(this.KEY, model).then(()=> {

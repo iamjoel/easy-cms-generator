@@ -23,15 +23,6 @@ export default {
     }  
   },
   methods: {
-    syncConfig() {
-      this.$http.post(`${SERVER_PREFIX}/config/sync`).then(({data}) => {
-        this.$message({
-          showClose: true,
-          message: '同步成功',
-          type: 'success'
-        })
-      })
-    }
   },
   mounted() {
     this.$http.get(`${SERVER_PREFIX}/config/detail`).then(({data}) => {
