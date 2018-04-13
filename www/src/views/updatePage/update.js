@@ -25,7 +25,7 @@ export default {
         key: '',
         dataType: 'string',
         dataSource: {
-          type: 'entity',
+          type: 'entities',
           key: ''
         },
         imgConfig: {
