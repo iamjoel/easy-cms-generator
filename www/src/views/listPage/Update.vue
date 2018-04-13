@@ -8,7 +8,7 @@
             label="实体" prop="name">
             <el-select v-model="model.basic.entity" placeholder="请选择" filterable clearable>
               <el-option
-                v-for="item in $store.state.entities"
+                v-for="item in entityList"
                 :key="item.key"
                 :label="item.label"
                 :value="item.key">
@@ -157,7 +157,7 @@
               <div v-if="scope.row.showType === 'roles'" >
                 <el-select v-model="scope.row.showRoles" placeholder="所有角色" multiple filterable clearable>
                   <el-option
-                    v-for="item in $store.state.roles"
+                    v-for="item in roleList"
                     :key="item.key"
                     :label="item.label"
                     :value="item.key">

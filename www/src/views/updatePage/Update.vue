@@ -8,7 +8,7 @@
             label="实体" prop="name">
             <el-select v-model="model.basic.entity" placeholder="请选择" filterable clearable>
               <el-option
-                v-for="item in $store.state.entities"
+                v-for="item in entityList"
                 :key="item.key"
                 :label="item.label"
                 :value="item.key">

@@ -1,6 +1,6 @@
 import JEditItem from '@/components/edit-item'
 import deepClone from 'clone'
-import {fetchModel, addModel, editModel} from '@/service/api' 
+import {fetchList, fetchModel, addModel, editModel} from '@/service/api' 
 
 export default {
   components: {
@@ -86,7 +86,9 @@ export default {
           max: 5,
           tip: '建议尺寸 750 * 300'
         }
-      }
+      },
+      dictList: [],
+      entityList: [],
     }
   },
   methods: {
@@ -96,8 +98,8 @@ export default {
     },
     getDataResource(type) {
       return type === 'dict' 
-        ? [...this.$store.state.dict]
-        : [...this.$store.state.entities]
+        ? [...this.dictList]
+        : [...this.entityList]
     },
     move(key, index, action) {
       var changeIndex = action === 'up' ? index - 1 : index + 1
@@ -210,6 +212,13 @@ export default {
       return
     }
     this.fetchDetail()
+    fetchList('dict').then(({data}) => {
+      this.dictList = data.data
+    })
+
+    fetchList('entity').then(({data}) => {
+      this.entityList = data.data
+    })
 
    
   }
