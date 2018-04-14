@@ -8,7 +8,7 @@
 npm start
 ```
 
-本项目依赖 MySQL。数据库配置文件地址: `server/config.js`
+本项目需要 MySQL。数据库 Schema 文件地址 : `server/schema.sql`。数据库配置文件地址: `server/config/database.js`。
 
 ## 功能
 ### 配置角色
