@@ -208,10 +208,6 @@ export default {
     }
   },
   mounted() {
-    if(this.$route.params.id == -1) { // 新增
-      return
-    }
-    this.fetchDetail()
     fetchList('dict').then(({data}) => {
       this.dictList = data.data
     })
@@ -219,7 +215,9 @@ export default {
     fetchList('entity').then(({data}) => {
       this.entityList = data.data
     })
-
-   
+    if(this.$route.params.id == -1) { // 新增
+      return
+    }
+    this.fetchDetail()
   }
 }

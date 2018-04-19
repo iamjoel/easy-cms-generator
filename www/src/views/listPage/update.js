@@ -202,6 +202,17 @@ export default {
     }
   },
   mounted() {
+    fetchList('dict').then(({data}) => {
+      this.dictList = data.data
+    })
+
+    fetchList('entity').then(({data}) => {
+      this.entityList = data.data
+    })
+
+    fetchList('role').then(({data}) => {
+      this.roleList = data.data
+    })
     if(this.$route.params.id == -1) { // 新增
       let model = this.model
       this.opList = Object.keys(model.operate).map(opKey => {
@@ -217,16 +228,6 @@ export default {
       return
     }
     this.fetchDetail()
-    fetchList('dict').then(({data}) => {
-      this.dictList = data.data
-    })
 
-    fetchList('entity').then(({data}) => {
-      this.entityList = data.data
-    })
-
-    fetchList('role').then(({data}) => {
-      this.roleList = data.data
-    })
   }
 }
