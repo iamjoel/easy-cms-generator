@@ -30,7 +30,8 @@ var apis = {
   role: require('./api/role'),
   entity: require('./api/entity'),
   listPage: listPageApi,
-  updatePage: require('./api/update-page'),
+  updatePage: updatePageApi,
+  router: require('./api/router'),
 }
 
 generateAPI(Object.keys(apis))

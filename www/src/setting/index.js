@@ -40,7 +40,15 @@ var _menuConfig = [{
   }, {
     id: 'updatePage',
     name: '生成编辑页',
-  }
+  },
+  {
+    id: 'router',
+    name: '路由',
+  },
+  {
+    id: 'menu',
+    name: '菜单',
+  },
 ]
 
 export const urls = {}
