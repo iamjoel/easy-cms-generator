@@ -32,6 +32,7 @@ var apis = {
   listPage: listPageApi,
   updatePage: updatePageApi,
   router: require('./api/router'),
+  menu: require('./api/menu'),
 }
 
 generateAPI(Object.keys(apis))
