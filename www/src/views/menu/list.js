@@ -39,7 +39,7 @@ export default {
         ...row,
         roleIds: row.roleIds ? row.roleIds.join(',') : ''
       }
-      if(data.roleIds === 'undefined') {
+      if(data.showType === 'show' || data.roleIds === 'undefined') {
         data.roleIds = ''
       }
       delete data.isNew
