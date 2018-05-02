@@ -29,6 +29,7 @@ var apis = {
   dict: require('./api/dict'),
   role: require('./api/role'),
   entity: require('./api/entity'),
+  entityType: require('./api/entityType'),
   listPage: listPageApi,
   updatePage: updatePageApi,
   router: require('./api/router'),

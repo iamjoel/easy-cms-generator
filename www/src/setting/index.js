@@ -31,6 +31,10 @@ var _menuConfig = [{
     name: '字典',
   },
   {
+    id: 'entityType',
+    name: '实体类型',
+  },
+  {
     id: 'entities',
     name: '实体',
   },

@@ -2,7 +2,7 @@ const guidFn = require('../utils/guid')
 const apiFormat = require('../utils/apiFormat')
 const getUpdateSql = require('../utils/getUpdateSql')
 
-const tableName = 'entity'
+const tableName = 'entity_type'
 module.exports = {
   list(req, res, pool) {
     pool.query(`SELECT * from ${tableName}`, function (error, results, fields) {
@@ -20,7 +20,7 @@ module.exports = {
   add(req, res, pool) {
     var guid = guidFn()
     var body = req.body
-    var sql = `INSERT INTO ${tableName} (id, \`key\`, label, parentId) VALUES ('${guid}', '${body.key}', '${body.parentId}')`
+    var sql = `INSERT INTO ${tableName} (id, \`key\`, label) VALUES ('${guid}', '${body.key}', '${body.label}')`
     pool.query(sql, function (error, results, fields) {
       if (error) {
         res.send(apiFormat.error(error))

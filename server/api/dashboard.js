@@ -17,16 +17,22 @@ module.exports = {
       fetchList(pool, 'entity'),
       fetchList(pool, 'list_page'),
       fetchList(pool, 'update_page'),
-    ]).then(([role, dict, entity, listPage, updatePage]) => {
+      fetchList(pool, 'router'),
+    ]).then(([role, dict, entity, listPage, updatePage, router]) => {
       Promise.all([
         writeConfigFile('roles', role),
         writeConfigFile('dict', dict),
         writeConfigFile('entities', entity),
         writeConfigFile('list-pages', listPage),
         writeConfigFile('update-pages', updatePage),
+        writeConfigFile('router', router),
       ]).then(() => {
         res.send(apiFormat.success({}))
+      }, (e) => {
+        res.send(apiFormat.error(e))
       })
+    },  (e) => {
+      res.send(apiFormat.error(e))
     })
   },
   
@@ -58,6 +64,16 @@ function writeConfigFile(name, content) {
     case 'update-pages':
       content = parseKey(content, ['basic', 'cols', 'fn'])
       break;
+    case 'router':
+      content = content.map(item => {
+        return {
+          entityId: item.entityId,
+          type: item.type,
+          routePath: item.routePath,
+          filePath: item.filePath
+        }
+      })
+      break;
   }
   return new Promise((resolve, reject) => {
     var filePath = `${settingFileFoldPath}/${name}.js`
@@ -72,11 +88,18 @@ function writeConfigFile(name, content) {
 }
 
 function parseKey(arr, parseKeyArr) {
+  if(!parseKey) {
+    return arr
+  }
   var res = arr.map(item => {
     var itemRes = {}
     for(var key in item) {
       if(parseKeyArr.indexOf(key) !== -1 && item[key]) {
-        itemRes[key] = JSON.parse(item[key])
+        try {
+          itemRes[key] = JSON.parse(item[key])
+        } catch(e) {
+          itemRes[key] = item[key]
+        }
       } else {
         itemRes[key] = item[key]
       }

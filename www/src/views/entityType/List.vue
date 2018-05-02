@@ -15,21 +15,6 @@
         
       </el-table-column>
       <el-table-column
-        prop="parentId"
-        label="所属分类"
-        >
-        <template slot-scope="scope">
-          <el-select v-model="scope.row.parentId" palceholder="无" filterable clearable>
-            <el-option
-              v-for="item in parentList"
-              :key="item.id"
-              :label="item.label"
-              :value="item.id">
-            </el-option>
-          </el-select>
-        </template>
-      </el-table-column>
-      <el-table-column
         prop="label"
         label="名称"
         >

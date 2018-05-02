@@ -3,9 +3,8 @@ import { fetchList, addModel,editModel,deleteModel } from '@/service/api'
 export default {
   data() {
     return {
-      KEY: 'entity',
-      list: [],
-      parentList: [],
+      KEY: 'entityType',
+      list: []
     }  
   },
   methods: {
@@ -13,8 +12,7 @@ export default {
       this.list.push({
         isNew:true,
         key: '',
-        label: '',
-        parentId: null
+        label: ''
       })
     },
     save(row) {
@@ -44,12 +42,8 @@ export default {
     }
   },
   mounted() {
-     fetchList('entityType').then(({data}) => {
-      this.parentList = data.data
-        fetchList(this.KEY).then(({data}) => {
-          this.list = data.data
-        })
+    fetchList(this.KEY).then(({data}) => {
+      this.list = data.data
     })
-    
   }
 }
