@@ -58,8 +58,8 @@
         width="200"
         >
         <template slot-scope="scope">
-          <el-input v-model="scope.row.routePath"
-          :placeholder="scope.row.routePathPlaceholder"></el-input>
+          <el-input  v-if="scope.row.type === 'other'" v-model="scope.row.routePath"></el-input>
+          <div v-else>{{scope.row.routePathPlaceholder}}</div>
         </template>
       </el-table-column>
       <el-table-column
@@ -68,12 +68,12 @@
         width="280"
         >
         <template slot-scope="scope">
-          <div class="ly ly-m">
+          <div v-if="scope.row.type === 'other'" class="ly ly-m">
             <span>@/views/</span>
-            <div>
-              <el-input v-model="scope.row.filePath"
-          :placeholder="scope.row.filePathPlaceholder"></el-input>
-            </div>
+            <el-input v-model="scope.row.filePath"></el-input>
+          </div>
+          <div v-else>
+            @/views/{{scope.row.filePathPlaceholder}}
           </div>
         </template>
       </el-table-column>

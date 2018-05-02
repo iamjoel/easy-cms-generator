@@ -65,10 +65,14 @@ function writeConfigFile(name, content) {
       content = parseKey(content, ['basic', 'cols', 'fn'])
       break;
     case 'router':
-      content = content.map(item => {
+      content = content.filter(item => {
+        // 通用配置页不需要加到路由中
+        if(item.type && item.type.indexOf('common') !== -1) {
+          return false
+        }
+        return true
+      }).map(item => {
         return {
-          entityId: item.entityId,
-          type: item.type,
           routePath: item.routePath,
           filePath: item.filePath
         }
