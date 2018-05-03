@@ -4,38 +4,54 @@
       <el-button type="primary" @click="add">新增</el-button>
     </div>
     <el-table
-    <el-table
       :data="list"
       border
-      stripe>
+      stripe
+      default-expand-all
+    >
       <el-table-column
-        type="index"
-        label="序列"
-        align="center"
-        width="80">
-      </el-table-column>
-      <el-table-column
-        prop="parentId"
-        label="父级"
+        prop="isPage"
+        label="是页面"
+        width="90"
         >
         <template slot-scope="scope">
-          <el-select v-model="scope.row.parentId" palceholder="顶级" filterable clearable>
-            <el-option
-              v-for="item in parentList"
-              :key="item.id"
-              :label="item.name"
-              :value="item.id">
-            </el-option>
-          </el-select>
+          <el-switch
+            v-model="scope.row.isPage"
+            :on-value="1"
+            :off-value="0"
+            on-text="是"
+            off-text="否"
+          >
+          </el-switch>
         </template>
       </el-table-column>
       <el-table-column
-        prop="routerId"
-        label="路由"
+        prop="parentId"
+        label="分类名称"
+        width="150"
         >
         <template slot-scope="scope">
+          <el-select v-model="scope.row.entityTypeId" palceholder="" filterable clearable v-if="scope.row.isPage == 0">
+            <el-option
+              v-for="item in entityTypeList"
+              :key="item.id"
+              :label="item.label"
+              :value="item.id">
+            </el-option>
+          </el-select>
+          <div v-else>
+            -
+          </div>
+        </template>
+      </el-table-column>
+      <el-table-column
+        prop="name"
+        label="路由"
+        width="150"
 
-          <el-select v-model="scope.row.routerId" filterable clearable v-if="scope.row.parentId">
+        >
+        <template slot-scope="scope">
+          <el-select v-model="scope.row.routerId" filterable clearable  v-if="scope.row.isPage == 1">
             <el-option
               v-for="item in routerList"
               :key="item.key"
@@ -48,9 +64,11 @@
           </div>
         </template>
       </el-table-column>
+      
       <el-table-column
         prop="name"
-        label="名称"
+        label="显示名称"
+        width="120"
         >
         <template slot-scope="scope">
           <el-input v-model="scope.row.name"></el-input>
@@ -102,11 +120,79 @@
       <el-table-column
         prop="key"
         label="操作"
-        width="180"
+        width="280"
         >
         <template slot-scope="scope">
           <el-button type="info" size="small" @click="save(scope.row)">保存</el-button>
+          <el-button type="success" size="small" @click="addSub(scope.row)" v-if="scope.row.isPage == 0">添加子菜单</el-button>
           <el-button type="danger" size="small" @click="remove(scope.row.id, scope.$index)">删除</el-button>
+        </template>
+      </el-table-column>
+      <el-table-column type="expand">
+        <template slot-scope="scope">
+          <el-table
+          v-if="scope.row.isPage == 0"
+          :data="scope.row.children"
+            border
+            stripe
+            >
+            <el-table-column
+              prop="name"
+              label="路由"
+              >
+              <template slot-scope="subScope">
+                <el-select v-model="subScope.row.entityTypeId" filterable clearable>
+                  <el-option
+                    v-for="item in filterRouteListByType(scope.row.entityTypeId)"
+                    :key="item.key"
+                    :label="item.label"
+                    :value="item.key">
+                  </el-option>
+                </el-select>
+              </template>
+            </el-table-column>
+            <el-table-column
+              prop="name"
+              label="显示名称"
+              >
+              <template slot-scope="scope">
+                <el-input v-model="scope.row.name"></el-input>
+              </template>
+            </el-table-column>
+            <el-table-column
+              prop="op"
+              label="显示类型"
+              >
+              <template slot-scope="scope">
+                <el-select v-model="scope.row.showType" placeholder="无" filterable clearable>
+                <el-option
+                  v-for="item in opShowType"
+                  :key="item.key"
+                  :label="item.label"
+                  :value="item.key">
+                </el-option>
+              </el-select>
+              </template>
+            </el-table-column>
+            <el-table-column
+              prop="key"
+              label="显示角色"
+              >
+              <template slot-scope="scope">
+                <div v-if="scope.row.showType === 'roles'" >
+                  <el-select v-model="scope.row.roleIds" placeholder="所有角色" multiple filterable clearable>
+                    <el-option
+                      v-for="item in roleList"
+                      :key="item.key"
+                      :label="item.label"
+                      :value="item.key">
+                    </el-option>
+                  </el-select>
+                </div>
+                <div v-else>所有角色</div>
+              </template>
+            </el-table-column>
+          </el-table>
         </template>
       </el-table-column>
     </el-table>

@@ -7,10 +7,8 @@ export default {
       isShowDetailDialog: false,
       routerList: [],
       list: [],
-      parentList: [{
-                    key: '',
-                    label: '顶级'
-                  }],
+      entityList: [],
+      entityTypeList: [],
       roleList: [],
       opShowType: [{
         label: '总是显示',
@@ -25,12 +23,22 @@ export default {
     add() {
       this.list.push({
         isNew:true,
-        routerId: '',
+        isPage: 1,
+        entityTypeId: null,
+        routerId: null,
         name: '',
-        parentId: '',
         showType: 'show',
         roleIds: [],
-        order: null
+        order: null,
+        children: []
+      })
+    },
+    addSub(row) {
+      row.children.push({
+        routerId: null,
+        name: '',
+        showType: 'show',
+        roleIds: [],
       })
     },
     save(row) {
@@ -75,33 +83,47 @@ export default {
           return {
             ...item,
             showType: item.roleIds ? 'roles' : 'show',
-            roleIds: item.roleIds ? item.roleIds.split(',') : []
+            roleIds: item.roleIds ? item.roleIds.split(',') : [],
+            children: item.children || []
           }
         })
-        // 菜单只支持两级
-        this.parentList = [{
-                    id: '',
-                    name: '顶级'
-                  }].concat(this.list.filter(item => !item.parentId))
+        this.add()
       })
+    },
+    filterRouteListByType(entityTypeId) {
+      if(!entityTypeId) {
+        return []
+      }
+      // 筛选所有 parentId 是 xxx 的entity
+      var subEntityKeys = this.entityList
+        .filter(item => item.parentId === entityTypeId)
+        .map(item => item.key)
+      // 筛选手 entity 
+      var res = this.routerList.filter(router => {
+        return subEntityKeys.indexOf(router.entityId) !== -1
+      })
+      return res
     }
   },
   mounted() {
     Promise.all([
       fetchList('role'),
-      fetchList('router')
+      fetchList('router'),
+      fetchList('entity'),
+      fetchList('entityType'),
     ]).then( datas=> {
       this.roleList = datas[0].data.data
       this.routerList = datas[1].data.data.map(item => {
         var defaultRouterPath = `/${item.entityId}/${item.type === 'list' ? 'list' : 'update/:id'}`
         return {
+          entityId: item.entityId,
           key: item.id,
           label: item.routerPath || defaultRouterPath
         } 
       })
-      
+      this.entityList = datas[2].data.data
+      this.entityTypeList = datas[3].data.data
       this.fetchList()
-      
     })
   }
 }
