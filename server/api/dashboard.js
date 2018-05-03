@@ -1,8 +1,9 @@
 var config = require('../config')
 const apiFormat = require('../utils/apiFormat')
 var fs = require('fs-extra')
-const settingFileFoldPath = `${config.feCodeRootPath}/src/setting/base` 
+const deepClone = require('clone')
 
+const settingFileFoldPath = `${config.feCodeRootPath}/src/setting/base` 
 module.exports = {
   detail(req, res, pool) {
     res.send(apiFormat.success({
@@ -20,10 +21,11 @@ module.exports = {
       fetchList(pool, 'update_page'),
       fetchList(pool, 'router'),
       fetchList(pool, 'menu'),
-    ]).then(([role, dict, entityType, entity, listPage, updatePage, router, menu]) => {
+    ]).then(([role, dict, entity, entityType , listPage, updatePage, router, menu]) => {
       Promise.all([
         writeConfigFile('roles', role),
         writeConfigFile('dict', dict),
+        writeConfigFile('entities', entityType),
         writeConfigFile('entities', entity),
         writeConfigFile('list-pages', listPage),
         writeConfigFile('update-pages', updatePage),
@@ -56,9 +58,7 @@ function fetchList(pool, tableName) {
   })
 }
 
-function writeConfigFile(name, content, [entityList, entityTypeList, router]) {
-            console.log(entityList, entityTypeList)
-  
+function writeConfigFile(name, content, [entityList, entityTypeList, router]=[]) {
   // 将配置对象中一些字符串对象转化成对象。
   switch(name) {
     case 'dict':
@@ -85,41 +85,48 @@ function writeConfigFile(name, content, [entityList, entityTypeList, router]) {
       })
       break;
     case 'menu': 
+      // 获取默认路由
+      var routerList = deepClone(router).map(item => {
+        var entity = entityList.filter(entity => item.entityId === entity.key)[0]
+        var entityType = entity.parentId ? entityTypeList.filter(item => item.id === entity.parentId)[0] : false
+
+        var defaultRouterPath
+        if(!item.type || item.type.indexOf('common') === -1) {
+          defaultRouterPath = `${entityType ? `/${entityType.key}` : ''}/${item.entityId}/${item.type === 'list' ? 'list' : 'update/:id'}`
+        } else {
+          defaultRouterPath = `/common
+          ${entityType ? `/${entityType.key}` : ''}
+          /${item.entityId}
+          /${item.type.replace('common-', '') === 'list' ? 'list' : ':actionName/:id'}`.replace(/\s/g, '')
+        }
+        return {
+          id: item.id,
+          routePath: defaultRouterPath
+        }
+      })
       content = parseKey(content, ['children']).map(item => {
         var res = {
           id: item.id,
           name: item.name,
-          role: item.roleIds
+          role: item.roleIds,
+          routerId: item.routerId
         }
         if(item.isPage == 1) {
-          res.path = router.filter(each => {
+          res.path = routerList.filter(each => {
             return each.id === item.routerId
           })[0].routePath
+         
         } else {
           res.children = item.children.map(page => {
-
-            return []
-
-            var entity = entityList.filter(entity => item.entityId === entity.key)[0]
-            var entityType = entity.parentId ? entityTypeList.filter(item => item.id === entity.parentId)[0] : false
-            var defaultRouterPath
-            if(!item.type || item.type.indexOf('common') === -1) {
-              defaultRouterPath = `${entityType ? `/${entityType.key}` : ''}/${item.entityId}/${item.type === 'list' ? 'list' : 'update/:id'}`
-            } else {
-              defaultRouterPath = `/common
-              ${entityType ? `/${entityType.key}` : ''}
-              /${item.entityId}
-              /${item.type.replace('common-', '') === 'list' ? 'list' : ':actionName/:id'}`.replace(/\s/g, '')
-            }
-            console.log(defaultRouterPath)
             return {
               id: page.id,
               name: page.name,
-              path: router.filter(each => each.id === page.routerId)[0].routePath || defalutRoutePath,
+              path: routerList.filter(each => each.id === page.routerId)[0].routePath,
               role: item.roleIds
             }
           })
         }
+        delete res.routerId
         return res
       })
 
