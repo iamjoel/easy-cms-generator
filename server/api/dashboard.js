@@ -15,10 +15,12 @@ module.exports = {
       fetchList(pool, 'role'),
       fetchList(pool, 'dict'),
       fetchList(pool, 'entity'),
+      fetchList(pool, 'entity_type'),
       fetchList(pool, 'list_page'),
       fetchList(pool, 'update_page'),
       fetchList(pool, 'router'),
-    ]).then(([role, dict, entity, listPage, updatePage, router]) => {
+      fetchList(pool, 'menu'),
+    ]).then(([role, dict, entityType, entity, listPage, updatePage, router, menu]) => {
       Promise.all([
         writeConfigFile('roles', role),
         writeConfigFile('dict', dict),
@@ -26,6 +28,7 @@ module.exports = {
         writeConfigFile('list-pages', listPage),
         writeConfigFile('update-pages', updatePage),
         writeConfigFile('router', router),
+        writeConfigFile('menu', menu, [entity, entityType, router]),
       ]).then(() => {
         res.send(apiFormat.success({}))
       }, (e) => {
@@ -39,7 +42,8 @@ module.exports = {
 }
 
 function fetchList(pool, tableName) {
-  var sql = `SELECT * from ${tableName}`
+  var sql = `SELECT * from ${tableName} ${tableName === 'menu' ?  'order by \`order\`': ''}`
+
   return new Promise((resolve, reject) => {
     pool.query(sql, function (error, results, fields) {
       if(error) {
@@ -52,7 +56,9 @@ function fetchList(pool, tableName) {
   })
 }
 
-function writeConfigFile(name, content) {
+function writeConfigFile(name, content, [entityList, entityTypeList, router]) {
+            console.log(entityList, entityTypeList)
+  
   // 将配置对象中一些字符串对象转化成对象。
   switch(name) {
     case 'dict':
@@ -78,6 +84,45 @@ function writeConfigFile(name, content) {
         }
       })
       break;
+    case 'menu': 
+      content = parseKey(content, ['children']).map(item => {
+        var res = {
+          id: item.id,
+          name: item.name,
+          role: item.roleIds
+        }
+        if(item.isPage == 1) {
+          res.path = router.filter(each => {
+            return each.id === item.routerId
+          })[0].routePath
+        } else {
+          res.children = item.children.map(page => {
+
+            return []
+
+            var entity = entityList.filter(entity => item.entityId === entity.key)[0]
+            var entityType = entity.parentId ? entityTypeList.filter(item => item.id === entity.parentId)[0] : false
+            var defaultRouterPath
+            if(!item.type || item.type.indexOf('common') === -1) {
+              defaultRouterPath = `${entityType ? `/${entityType.key}` : ''}/${item.entityId}/${item.type === 'list' ? 'list' : 'update/:id'}`
+            } else {
+              defaultRouterPath = `/common
+              ${entityType ? `/${entityType.key}` : ''}
+              /${item.entityId}
+              /${item.type.replace('common-', '') === 'list' ? 'list' : ':actionName/:id'}`.replace(/\s/g, '')
+            }
+            console.log(defaultRouterPath)
+            return {
+              id: page.id,
+              name: page.name,
+              path: router.filter(each => each.id === page.routerId)[0].routePath || defalutRoutePath,
+              role: item.roleIds
+            }
+          })
+        }
+        return res
+      })
+
   }
   return new Promise((resolve, reject) => {
     var filePath = `${settingFileFoldPath}/${name}.js`
@@ -92,7 +137,7 @@ function writeConfigFile(name, content) {
 }
 
 function parseKey(arr, parseKeyArr) {
-  if(!parseKey) {
+  if(!parseKeyArr) {
     return arr
   }
   var res = arr.map(item => {
