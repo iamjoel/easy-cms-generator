@@ -52,6 +52,9 @@ export default {
       }
       delete data.isNew
       delete data.showType
+
+      data.children = JSON.stringify(data.children)
+
       action(this.KEY, data).then(({data})=> {
         if(row.isNew) {
           delete row.isNew
@@ -84,10 +87,9 @@ export default {
             ...item,
             showType: item.roleIds ? 'roles' : 'show',
             roleIds: item.roleIds ? item.roleIds.split(',') : [],
-            children: item.children || []
+            children: item.children ? JSON.parse(item.children) : []
           }
         })
-        this.add()
       })
     },
     filterRouteListByType(entityTypeId) {
@@ -103,7 +105,20 @@ export default {
         return subEntityKeys.indexOf(router.entityId) !== -1
       })
       return res
-    }
+    },
+    move(row, index, action) {
+      var changeIndex = action === 'up' ? index - 1 : index + 1
+      var data = row.children
+      row.children = data.map((item, currIndex) => {
+        if(currIndex === index) {
+          return data[changeIndex]
+        } else if(currIndex === changeIndex) {
+          return data[index]
+        } else {
+          return item
+        }
+      })
+    },
   },
   mounted() {
     Promise.all([
@@ -113,16 +128,30 @@ export default {
       fetchList('entityType'),
     ]).then( datas=> {
       this.roleList = datas[0].data.data
+      this.entityList = datas[2].data.data
+      this.entityTypeList = datas[3].data.data
+
       this.routerList = datas[1].data.data.map(item => {
-        var defaultRouterPath = `/${item.entityId}/${item.type === 'list' ? 'list' : 'update/:id'}`
+        var entity = this.entityList.filter(entity => item.entityId === entity.key)[0]
+        var entityType = entity.parentId ? this.entityTypeList.filter(item => item.id === entity.parentId)[0] : false
+
+        var defaultRouterPath
+        if(!item.type || item.type.indexOf('common') === -1) {
+          defaultRouterPath = `${entityType ? `/${entityType.key}` : ''}/${item.entityId}/${item.type === 'list' ? 'list' : 'update/:id'}`
+        } else {
+          defaultRouterPath = `/common
+          ${entityType ? `/${entityType.key}` : ''}
+          /${item.entityId}
+          /${item.type.replace('common-', '') === 'list' ? 'list' : ':actionName/:id'}`.replace(/\s/g, '')
+        }
+        // consol
         return {
           entityId: item.entityId,
           key: item.id,
           label: item.routerPath || defaultRouterPath
         } 
       })
-      this.entityList = datas[2].data.data
-      this.entityTypeList = datas[3].data.data
+      
       this.fetchList()
     })
   }

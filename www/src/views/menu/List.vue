@@ -141,7 +141,7 @@
               label="路由"
               >
               <template slot-scope="subScope">
-                <el-select v-model="subScope.row.entityTypeId" filterable clearable>
+                <el-select v-model="subScope.row.routerId" filterable clearable>
                   <el-option
                     v-for="item in filterRouteListByType(scope.row.entityTypeId)"
                     :key="item.key"
@@ -192,6 +192,16 @@
                 <div v-else>所有角色</div>
               </template>
             </el-table-column>
+            <el-table-column
+              prop="key"
+              label="操作"
+              >
+              <template slot-scope="childScope">
+                <el-button v-if="childScope.$index > 0" size="small" type="info" @click="move(scope.row, childScope.$index, 'up')">上移</el-button>
+                <el-button v-if="childScope.$index < scope.row.children.length - 1" size="small" type="info" @click="move(scope.row, childScope.$index, 'down')">下移</el-button>
+              </template>
+            </el-table-column>
+            
           </el-table>
         </template>
       </el-table-column>
