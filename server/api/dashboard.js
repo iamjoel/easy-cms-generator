@@ -25,7 +25,6 @@ module.exports = {
       Promise.all([
         writeConfigFile('roles', role),
         writeConfigFile('dict', dict),
-        writeConfigFile('entities', entityType),
         writeConfigFile('entities', entity),
         writeConfigFile('list-pages', listPage),
         writeConfigFile('update-pages', updatePage),
