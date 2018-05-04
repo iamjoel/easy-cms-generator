@@ -69,10 +69,10 @@ npm start
 ![](screenshot/update-cols.jpg)
 
 ### 配置路由
-![](screenshot/router.jpg)
+![](screenshot/router.jpeg)
 
 ### 配置菜单
-![](screenshot/menu.jpg)
+![](screenshot/menu.jpeg)
 
 ## 基本配置
 ![](screenshot/basic.jpg)
