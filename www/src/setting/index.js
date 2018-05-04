@@ -23,35 +23,47 @@ var _menuConfig = [{
     }]
   },
   {
-    id: 'roles',
-    name: '角色',
+    id: 'basic',
+    name: '基础数据',
+    children: [{
+      id: 'roles',
+      name: '角色',
+    },
+    {
+      id: 'dict',
+      name: '字典',
+    },
+    {
+      id: 'entityType',
+      name: '实体类型',
+    },
+    {
+      id: 'entities',
+      name: '实体',
+    },]
   },
   {
-    id: 'dict',
-    name: '字典',
-  },
-  {
-    id: 'entityType',
-    name: '实体类型',
-  },
-  {
-    id: 'entities',
-    name: '实体',
-  },
-  {
+    id: 'page',
+    name: '页面',
+    children: [{
     id: 'listPage',
     name: '生成列表页',
-  }, {
-    id: 'updatePage',
-    name: '生成编辑页',
+    }, {
+      id: 'updatePage',
+      name: '生成编辑页',
+    },]
   },
   {
-    id: 'router',
-    name: '路由',
-  },
-  {
-    id: 'menu',
-    name: '菜单',
+    id: 'router-menu',
+    name: '路由和菜单',
+    children: [{
+      id: 'router',
+      name: '路由',
+    },
+    {
+      id: 'menu',
+      name: '菜单',
+    },]
   },
 ]
 
