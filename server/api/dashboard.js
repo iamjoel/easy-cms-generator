@@ -118,7 +118,7 @@ function writeConfigFile(name, content, [entityList, entityTypeList, router]=[])
         } else {
           res.children = item.children.map(page => {
             return {
-              id: page.id,
+              id: page.routerId,
               name: page.name,
               path: routerList.filter(each => each.id === page.routerId)[0].routePath,
               role: item.roleIds
