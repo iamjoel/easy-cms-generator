@@ -68,13 +68,17 @@ npm start
 配置列表字段  
 ![](screenshot/update-cols.jpg)
 
+### 配置路由
+![](screenshot/router.jpg)
+
+### 配置菜单
+![](screenshot/menu.jpg)
 
 ## 基本配置
 ![](screenshot/basic.jpg)
 
 ## TODO
 * 将配置反向同步到数据库？是否需要该功能。
-* 路由和菜单同步到项目。项目也将路由和菜单分开。
 * 列表，详情使用 mock数据的配置。
 * mock 登录帐号。
 
