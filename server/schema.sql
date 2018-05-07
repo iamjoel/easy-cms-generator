@@ -54,6 +54,7 @@ CREATE TABLE `entity` (
   `key` varchar(20) NOT NULL,
   `label` varchar(45) NOT NULL,
   `id` varchar(36) NOT NULL,
+  `parentId` varchar(36) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `key_UNIQUE` (`key`),
   UNIQUE KEY `label_UNIQUE` (`label`)
@@ -66,8 +67,34 @@ CREATE TABLE `entity` (
 
 LOCK TABLES `entity` WRITE;
 /*!40000 ALTER TABLE `entity` DISABLE KEYS */;
-INSERT INTO `entity` VALUES ('singer','歌手','58bec585-cb7b-4b21-c121-6a93db8e2428'),('song','歌曲','e033884b-b52c-405a-6d58-c09fe3694c9e');
+INSERT INTO `entity` VALUES ('singer','歌手','58bec585-cb7b-4b21-c121-6a93db8e2428','b74b632e-b263-1bb3-11f7-0d62e295f254'),('song','歌曲','e033884b-b52c-405a-6d58-c09fe3694c9e','b74b632e-b263-1bb3-11f7-0d62e295f254');
 /*!40000 ALTER TABLE `entity` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `entity_type`
+--
+
+DROP TABLE IF EXISTS `entity_type`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `entity_type` (
+  `key` varchar(100) NOT NULL,
+  `label` varchar(45) DEFAULT NULL,
+  `id` varchar(36) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `key_UNIQUE` (`key`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `entity_type`
+--
+
+LOCK TABLES `entity_type` WRITE;
+/*!40000 ALTER TABLE `entity_type` DISABLE KEYS */;
+INSERT INTO `entity_type` VALUES ('music','音乐','b74b632e-b263-1bb3-11f7-0d62e295f254');
+/*!40000 ALTER TABLE `entity_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -100,6 +127,36 @@ INSERT INTO `list_page` VALUES ('0178437f-5ee7-36cd-bcb3-53711324adeb','{\"entit
 UNLOCK TABLES;
 
 --
+-- Table structure for table `menu`
+--
+
+DROP TABLE IF EXISTS `menu`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `menu` (
+  `id` varchar(36) NOT NULL,
+  `isPage` int(1) DEFAULT '0',
+  `entityTypeId` varchar(36) DEFAULT NULL,
+  `routerId` varchar(36) DEFAULT NULL,
+  `name` varchar(45) DEFAULT NULL,
+  `roleIds` varchar(45) DEFAULT NULL,
+  `children` varchar(9999) DEFAULT NULL,
+  `order` int(11) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `menu`
+--
+
+LOCK TABLES `menu` WRITE;
+/*!40000 ALTER TABLE `menu` DISABLE KEYS */;
+INSERT INTO `menu` VALUES ('3b02a433-63a1-0c74-d580-8a6e858ade9b',1,'null','ab237416-7ecc-a259-04af-e01926edc3f1','歌手列表测试','admin','[]',2),('9ab1785b-5fb7-1507-d912-9d5cd353654c',1,'null','c98deed1-e956-064b-325c-7b0af1e07dec','歌曲列表测试','shop','[]',1),('a05877f3-abc8-8036-334f-abf6d26ad044',0,'b74b632e-b263-1bb3-11f7-0d62e295f254','','音乐','','[{\"routerId\":\"ab237416-7ecc-a259-04af-e01926edc3f1\",\"name\":\"歌手列表\",\"showType\":\"show\",\"roleIds\":[]},{\"routerId\":\"c98deed1-e956-064b-325c-7b0af1e07dec\",\"name\":\"歌曲列表\",\"showType\":\"show\",\"roleIds\":[],\"entityTypeId\":\"c98deed1-e956-064b-325c-7b0af1e07dec\"}]',0);
+/*!40000 ALTER TABLE `menu` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `role`
 --
 
@@ -123,6 +180,34 @@ LOCK TABLES `role` WRITE;
 /*!40000 ALTER TABLE `role` DISABLE KEYS */;
 INSERT INTO `role` VALUES ('shop','店员','a6f6aa16-a16b-52d5-fd95-6303c278e4dc'),('admin','管理员','fbbd34d3-7b09-128c-8681-a86ccc934313');
 /*!40000 ALTER TABLE `role` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `router`
+--
+
+DROP TABLE IF EXISTS `router`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `router` (
+  `id` varchar(36) NOT NULL,
+  `name` varchar(45) DEFAULT NULL,
+  `entityId` varchar(45) NOT NULL,
+  `type` varchar(45) DEFAULT NULL,
+  `routePath` varchar(200) DEFAULT NULL,
+  `filePath` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `router`
+--
+
+LOCK TABLES `router` WRITE;
+/*!40000 ALTER TABLE `router` DISABLE KEYS */;
+INSERT INTO `router` VALUES ('5fdf11df-9e87-2865-3723-2680e65d31a9','','song','update','/music/song/update/:id','music/song/Update'),('ab237416-7ecc-a259-04af-e01926edc3f1','','singer','common-list','',''),('c98deed1-e956-064b-325c-7b0af1e07dec','','song','list','/music/song/list','music/song/List.vue'),('cfb0645f-935f-6f04-96f9-c73a7c4570b0','','singer','common-update','','');
+/*!40000 ALTER TABLE `router` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -162,4 +247,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-04-14 23:27:50
+-- Dump completed on 2018-05-07 17:11:31
