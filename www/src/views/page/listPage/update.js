@@ -69,6 +69,7 @@ export default {
       currFn: {},
       dictList: [],
       entityList: [],
+      entityTypeList: [],
       roleList: [],
     }
   },
@@ -202,32 +203,34 @@ export default {
     }
   },
   mounted() {
-    fetchList('dict').then(({data}) => {
-      this.dictList = data.data
+    Promise.all([
+      fetchList('dict'),
+      fetchList('role'),
+      fetchList('entityType'),
+      fetchList('entity')
+    ]).then( datas=> {
+      this.dict = datas[0].data.data
+      this.roleList = datas[1].data.data
+      this.entityTypeList = datas[2].data.data
+      this.entityList = datas[3].data.data
+      if(this.$route.params.id == -1) { // 新增
+        let model = this.model
+        this.opList = Object.keys(model.operate).map(opKey => {
+          const item = model.operate[opKey]
+          const showType = this.getShowType(item.isShow)
+          const showRoles = showType === 'roles' ? item.isShow : []
+          return {
+            label: this.opDict[opKey],
+            showType,
+            showRoles
+          }
+        })
+        return
+      }
+      this.fetchDetail()
     })
 
-    fetchList('entity').then(({data}) => {
-      this.entityList = data.data
-    })
-
-    fetchList('role').then(({data}) => {
-      this.roleList = data.data
-    })
-    if(this.$route.params.id == -1) { // 新增
-      let model = this.model
-      this.opList = Object.keys(model.operate).map(opKey => {
-        const item = model.operate[opKey]
-        const showType = this.getShowType(item.isShow)
-        const showRoles = showType === 'roles' ? item.isShow : []
-        return {
-          label: this.opDict[opKey],
-          showType,
-          showRoles
-        }
-      })
-      return
-    }
-    this.fetchDetail()
+    
 
   }
 }
