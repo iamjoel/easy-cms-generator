@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <div class="ly ly-r mb-10">
-      <el-button type="primary" @click="$router.push('/updatePage/update/-1')">新增</el-button>
+      <el-button type="primary" @click="$router.push('/page/updatePage/update/-1')">新增</el-button>
     </div>
     <el-table
       :data="list"
@@ -32,7 +32,7 @@
         width="400"
         >
         <template slot-scope="scope">
-          <el-button type="success" size="small" @click="$router.push('/updatePage/update/' + scope.row.id)" v-if="scope.row.isFreeze != 1">编辑</el-button>
+          <el-button type="success" size="small" @click="$router.push('/page/updatePage/update/' + scope.row.id)" v-if="scope.row.isFreeze != 1">编辑</el-button>
           <el-button type="warning" size="small" v-if="scope.row.basic.isCommon" @click="syncConfig">同步配置</el-button>
           <el-button type="warning" size="small" @click="expendCofigToFile(scope.row.id)" v-if="scope.row.isFreeze != 1 && !scope.row.basic.isCommon">展开代码到文件</el-button>
           <el-button type="warning" size="small" v-if="!scope.row.basic.isCommon" @click="toggleFreeze(scope.row)">{{scope.row.isFreeze != 1 ? '冻结' : '解冻'}}</el-button>
