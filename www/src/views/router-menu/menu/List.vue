@@ -199,6 +199,8 @@
               <template slot-scope="childScope">
                 <el-button v-if="childScope.$index > 0" size="small" type="info" @click="move(scope.row, childScope.$index, 'up')">上移</el-button>
                 <el-button v-if="childScope.$index < scope.row.children.length - 1" size="small" type="info" @click="move(scope.row, childScope.$index, 'down')">下移</el-button>
+                <el-button type="danger" size="small" @click="scope.row.children.splice(childScope.$index, 1)">删除</el-button>
+
               </template>
             </el-table-column>
             
