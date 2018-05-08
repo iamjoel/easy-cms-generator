@@ -11,15 +11,9 @@ export default {
         key: 'list',
         label: '列表页'
       }, {
-        key: 'common-list',
-        label: '配置的列表页'
-      }, {
         key: 'update',
         label: '更新页'
-      }, {
-        key: 'common-update',
-        label: '配置的更新页'
-      }, {
+      },{
         key: 'other',
         label: '其他'
       }, ]
@@ -33,24 +27,12 @@ export default {
       var typeName = this.typeList.filter(type => item.type === type.key)[0].label
       item.namePlaceholder = `${entityName}${typeName}`
 
-      var defalutRouterPath
-      if(!item.type || item.type.indexOf('common') === -1) {
-        defalutRouterPath = `${entityType ? `/${entityType.key}` : ''}/${item.entityId}/${item.type === 'list' ? 'list' : 'update/:id'}`
-      } else {
-        defalutRouterPath = `/common
-        ${entityType ? `/${entityType.key}` : ''}
-        /${item.entityId}
-        /${item.type.replace('common-', '') === 'list' ? 'list' : ':actionName/:id'}`.replace(/\s/g, '')
-      }
+      var defalutRouterPath = `${entityType ? `/${entityType.key}` : ''}/${item.entityId}/${item.type === 'list' ? 'list' : 'update/:id'}`
       item.routePathPlaceholder = defalutRouterPath
 
-      var defaultFilePath
-      if(!item.type || item.type.indexOf('common') === -1) {
-       defaultFilePath = `${entityType ? `${entityType.key}/` : ''}${item.entityId}/${item.type === 'list' ? 'List' : 'Update'}.vue`
-        item.filePathPlaceholder = defaultFilePath
-      } else {
-        item.filePathPlaceholder = `common/ ${item.type.replace('common-', '') === 'list' ? 'List' : 'Update'}.vue`.replace(/\s/g, '')
-      }
+      var defaultFilePath = `${entityType ? `${entityType.key}/` : ''}${item.entityId}/${item.type === 'list' ? 'List' : 'Update'}.vue`
+      item.filePathPlaceholder = defaultFilePath
+      
       return item
     },
     add() {
@@ -68,10 +50,7 @@ export default {
     save(row) {
       var action = row.isNew ? addModel : editModel
       var data = {...row}
-      if(data.type.indexOf('common') !== -1) {
-        data.routePath = ''
-        data.filePath = ''
-      } else if(data.type !== 'other') {
+      if(data.type !== 'other') {
         data.routePath = data.routePathPlaceholder
         data.filePath = data.filePathPlaceholder
       }
