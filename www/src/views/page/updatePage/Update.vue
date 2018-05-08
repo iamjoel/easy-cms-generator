@@ -15,17 +15,14 @@
               </el-option>
             </el-select>
           </j-edit-item>
-          <j-edit-item label="是配置页">
-             <el-switch
-              on-text="是"
-              off-text="否"
-              v-model="model.basic.isCommon"
-              >
-            </el-switch>
-          </j-edit-item>
-          <j-edit-item fill label="代码展开地址" v-if="!model.basic.isCommon">
-             <el-input v-model="model.basic.codePath" :placeholder="'默认值为:前端项目根路径/src/views/' + model.basic.entity"></el-input>
-          </j-edit-item>
+          <el-col :md="{span: 16}">
+            <el-row>
+              <el-col :md="{span:8}" class="j-edit-item__label" style="padding-top:11px;">代码展开地址:@/views/</el-col>
+              <el-col :md="{span:16}" class="j-edit-item__input" >
+                <el-input v-model="model.basic.codePath"></el-input>
+              </el-col>
+            </el-row>
+          </el-col>
         </el-row>
       </el-form>
       </el-tab-pane>
