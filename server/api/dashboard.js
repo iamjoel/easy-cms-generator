@@ -119,13 +119,7 @@ function writeConfigFile(name, content, [entityList, entityTypeList, router]=[])
       content = parseKey(content, ['basic', 'cols', 'fn'])
       break;
     case 'router':
-      content = content.filter(item => {
-        // 通用配置页不需要加到路由中
-        if(item.type && item.type.indexOf('common') !== -1) {
-          return false
-        }
-        return true
-      }).map(item => {
+      content = content.map(item => {
         return {
           routePath: item.routePath,
           filePath: item.filePath
@@ -138,18 +132,11 @@ function writeConfigFile(name, content, [entityList, entityTypeList, router]=[])
         var entity = entityList.filter(entity => item.entityId === entity.key)[0]
         var entityType = entity.parentId ? entityTypeList.filter(item => item.id === entity.parentId)[0] : false
 
-        var defaultRouterPath
-        if(!item.type || item.type.indexOf('common') === -1) {
-          defaultRouterPath = `${entityType ? `/${entityType.key}` : ''}/${item.entityId}/${item.type === 'list' ? 'list' : 'update/:id'}`
-        } else {
-          defaultRouterPath = `/common
-          ${entityType ? `/${entityType.key}` : ''}
-          /${item.entityId}
-          /${item.type.replace('common-', '') === 'list' ? 'list' : ':actionName/:id'}`.replace(/\s/g, '')
-        }
+        var defaultRouterPath = `${entityType ? `/${entityType.key}` : ''}/${item.entityId}/${item.type === 'list' ? 'list' : 'update/:id'}`
+        
         return {
           id: item.id,
-          routePath: defaultRouterPath
+          routePath: item.routePath || defaultRouterPath
         }
       })
       content = parseKey(content, ['children']).map(item => {

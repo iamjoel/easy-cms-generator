@@ -144,20 +144,11 @@ export default {
         var entity = this.entityList.filter(entity => item.entityId === entity.key)[0]
         var entityType = entity.parentId ? this.entityTypeList.filter(item => item.id === entity.parentId)[0] : false
 
-        var defaultRouterPath
-        if(!item.type || item.type.indexOf('common') === -1) {
-          defaultRouterPath = `${entityType ? `/${entityType.key}` : ''}/${item.entityId}/${item.type === 'list' ? 'list' : 'update/:id'}`
-        } else {
-          defaultRouterPath = `/common
-          ${entityType ? `/${entityType.key}` : ''}
-          /${item.entityId}
-          /${item.type.replace('common-', '') === 'list' ? 'list' : ':actionName/:id'}`.replace(/\s/g, '')
-        }
-        // consol
+        var defaultRouterPath= `${entityType ? `/${entityType.key}` : ''}/${item.entityId}/${item.type === 'list' ? 'list' : 'update/:id'}`
         return {
           entityId: item.entityId,
           key: item.id,
-          label: item.routerPath || defaultRouterPath
+          label: item.routePath || defaultRouterPath
         } 
       })
       
