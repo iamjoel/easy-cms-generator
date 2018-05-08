@@ -1,6 +1,7 @@
 <template>
   <div class="main">
     <div class="ly ly-r mb-10">
+      <el-button type="success" @click="sync">同步</el-button>
       <el-button type="primary" @click="add">新增</el-button>
     </div>
     <el-table

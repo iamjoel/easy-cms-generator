@@ -41,6 +41,9 @@ generateAPI(Object.keys(apis))
 var dashboard = require('./api/dashboard')
 app.get('/config/detail', dashboard.detail)
 app.post('/config/sync', (req, res)=> {
+  dashboard.syncAllConfig(req, res, pool)
+})
+app.post('/config/sync/:type', (req, res)=> {
   dashboard.syncConfig(req, res, pool)
 })
 

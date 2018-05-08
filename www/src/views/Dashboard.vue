@@ -10,7 +10,7 @@
       <div class="label">前端项目根路径:</div>
       <div>{{config.feCodeRootPath}}</div>
     </div>
-    <el-button type="warning" @click="syncConfig" class="config-btn">同步配置到文件</el-button>
+    <el-button type="danger" @click="syncConfig" class="config-btn">同步所有配置到文件</el-button>
   </div>
 </template>
 

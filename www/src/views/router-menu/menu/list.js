@@ -1,4 +1,4 @@
-import { fetchList, addModel,editModel,deleteModel } from '@/service/api'
+import { fetchList, addModel,editModel,deleteModel,syncModel } from '@/service/api'
 
 export default {
   data() {
@@ -39,6 +39,15 @@ export default {
         name: '',
         showType: 'show',
         roleIds: [],
+      })
+    },
+    sync() {
+      syncModel(this.KEY).then(({data})=> {
+        this.$message({
+          showClose: true,
+          message: '同步成功',
+          type: 'success'
+        })
       })
     },
     save(row) {

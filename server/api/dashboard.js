@@ -3,6 +3,7 @@ const apiFormat = require('../utils/apiFormat')
 var fs = require('fs-extra')
 const deepClone = require('clone')
 
+
 const settingFileFoldPath = `${config.feCodeRootPath}/src/setting/base` 
 module.exports = {
   detail(req, res, pool) {
@@ -11,23 +12,19 @@ module.exports = {
       feCodeRootPath: config.feCodeRootPath
     }))
   },
-  syncConfig(req, res, pool) {
+  syncAllConfig(req, res, pool) {
     Promise.all([
       fetchList(pool, 'role'),
       fetchList(pool, 'dict'),
       fetchList(pool, 'entity'),
       fetchList(pool, 'entity_type'),
-      fetchList(pool, 'list_page'),
-      fetchList(pool, 'update_page'),
       fetchList(pool, 'router'),
       fetchList(pool, 'menu'),
-    ]).then(([role, dict, entity, entityType , listPage, updatePage, router, menu]) => {
+    ]).then(([role, dict, entity, entityType , router, menu]) => {
       Promise.all([
         writeConfigFile('roles', role),
         writeConfigFile('dict', dict),
         writeConfigFile('entities', entity),
-        writeConfigFile('list-pages', listPage),
-        writeConfigFile('update-pages', updatePage),
         writeConfigFile('router', router),
         writeConfigFile('menu', menu, [entity, entityType, router]),
       ]).then(() => {
@@ -39,6 +36,55 @@ module.exports = {
       res.send(apiFormat.error(e))
     })
   },
+  syncConfig(req, res, pool) {
+    const type = req.params.type
+    switch(type) {
+      case 'dict':
+      case 'router':
+        fetchList(pool, type).then(data => {
+          return writeConfigFile(type, data)
+        }).then(() => {
+          res.send(apiFormat.success({}))
+        }, (e) => {
+          res.send(apiFormat.error(e))
+        })
+        break;
+      case 'role':
+        fetchList(pool, 'role').then(data => {
+          return writeConfigFile('roles', data)
+        }).then(() => {
+          res.send(apiFormat.success({}))
+        }, (e) => {
+          res.send(apiFormat.error(e))
+        })
+        break;
+      case 'entity':
+        fetchList(pool, 'entity').then(data => {
+          return writeConfigFile('entities', data)
+        }).then(() => {
+          res.send(apiFormat.success({}))
+        }, (e) => {
+          res.send(apiFormat.error(e))
+        })
+        break;
+      case 'menu':
+        Promise.all([
+          fetchList(pool, 'entity'),
+          fetchList(pool, 'entity_type'),
+          fetchList(pool, 'router'),
+          fetchList(pool, 'menu'),
+        ]).then(([entity, entityType, router, menu]) => {
+          writeConfigFile('menu', menu, [entity, entityType, router])
+        }, (e) => {
+          res.send(apiFormat.error(e))
+        })
+        break;
+      default: 
+        res.send(apiFormat.error('未知类型！'))
+
+    }
+    console.log('同步成功!!!')
+  }
   
 }
 

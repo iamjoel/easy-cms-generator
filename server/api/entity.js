@@ -20,7 +20,7 @@ module.exports = {
   add(req, res, pool) {
     var guid = guidFn()
     var body = req.body
-    var sql = `INSERT INTO ${tableName} (id, \`key\`, label, parentId) VALUES ('${guid}', '${body.key}', '${body.parentId}')`
+    var sql = `INSERT INTO ${tableName} (id, \`key\`, label, parentId) VALUES ('${guid}', '${body.key}', '${body.label}','${body.parentId}')`
     pool.query(sql, function (error, results, fields) {
       if (error) {
         res.send(apiFormat.error(error))
