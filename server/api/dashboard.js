@@ -74,7 +74,11 @@ module.exports = {
           fetchList(pool, 'router'),
           fetchList(pool, 'menu'),
         ]).then(([entity, entityType, router, menu]) => {
-          writeConfigFile('menu', menu, [entity, entityType, router])
+          writeConfigFile('menu', menu, [entity, entityType, router]).then(() => {
+            res.send(apiFormat.success({}))
+          }, (e) => {
+            res.send(apiFormat.error(e))
+          })
         }, (e) => {
           res.send(apiFormat.error(e))
         })
@@ -83,7 +87,6 @@ module.exports = {
         res.send(apiFormat.error('未知类型！'))
 
     }
-    console.log('同步成功!!!')
   }
   
 }
