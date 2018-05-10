@@ -69,10 +69,10 @@ import updateMixin from '@/mixin/update'
 import JRemoteSelect from '@/components/remote-select'
 import deepClone from 'clone'
 
-var model = ${JSON.stringify(model)}
-var rules = ${JSON.stringify(rules)
-              .replace(/(\[\"\{)/g, '[{')
-              .replace(/(\}\"\])/g, '}]')
+var model = ${JSON.stringify(model, null, '\t')}
+var rules = ${JSON.stringify(rules, null, '\t')
+              .replace(/(\"\{)/g, '{')
+              .replace(/(\}\")/g, '}')
             }
 
 export default {

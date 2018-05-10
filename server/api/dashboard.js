@@ -119,12 +119,29 @@ function writeConfigFile(name, content, [entityList, entityTypeList, router]=[])
       content = parseKey(content, ['basic', 'cols', 'fn'])
       break;
     case 'router':
+      var res = []
+      
+      content.forEach(item => {
+        res.push({
+          routePath: item.routePath,
+          filePath: item.filePath
+        })
+        // 根据更新页路由，添加详情页路由。
+        if(item.type === 'update') {
+          res.push({
+            routePath: item.routePath.replace('/update', '/view'),
+            filePath: item.filePath
+          })
+        }
+      })
       content = content.map(item => {
         return {
           routePath: item.routePath,
           filePath: item.filePath
         }
       })
+
+      content = res
       break;
     case 'menu': 
       // 获取默认路由
