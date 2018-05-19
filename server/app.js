@@ -32,7 +32,7 @@ var listPageApi = require('./api/list-page')
 var updatePageApi = require('./api/update-page')
 // 所有的api
 var apis = {
-  dict: require('./api/dict'),
+  dict: require('./api/utils/commonCRUD')('dict'),
   role: require('./api/role'),
   entity: require('./api/entity'),
   entityType: require('./api/entityType'),
