@@ -1,60 +1,60 @@
 const guidFn = require('../utils/guid')
 const apiFormat = require('../utils/apiFormat')
-const getUpdateSql = require('../utils/getUpdateSql')
 
 const tableName = 'dict'
+
 module.exports = {
   list(req, res, pool) {
-    pool.query(`SELECT * from ${tableName}`, function (error, results, fields) {
-      if (error) res.send(apiFormat.error(error));
-      res.send(apiFormat.success(results.map(item => {
-        return Object.assign(item, {
-          value: JSON.parse(item.value)
-        })
-      })))
-    })
+    var results = global.db.get(tableName).value()
+    res.send(apiFormat.success(results))
   },
   detail(req, res, pool) {
-    var sql = `SELECT * from ${tableName} WHERE id = '${req.params.id}'`
-    pool.query(sql, function (error, results, fields) {
-      if (error) res.send(apiFormat.error(error));
-      res.send(apiFormat.success(results.map(item => {
-        return Object.assign(item, {
-          value: JSON.parse(item.value)
-        })
-      })))
-    })
+    var results = global.db
+                        .get(tableName)
+                        .find({
+                          id: req.params.id
+                        })
+                        .value()
+    res.send(apiFormat.success(results))
   },
   add(req, res, pool) {
-    var guid = guidFn()
-    var body = req.body
-    var sql = `INSERT INTO ${tableName} (id, \`key\`, label, \`value\`) VALUES ('${guid}', '${body.key}', '${body.label}', '${body.value}')`
-    pool.query(sql, function (error, results, fields) {
-      if (error) {
-        res.send(apiFormat.error(error))
-        return
-      }
-      res.send(apiFormat.success(results))
-    })
+    try {
+      global.db
+          .get(tableName)
+          .push(Object.assign({
+            id: guidFn()
+          }, req.body))
+          .write()
+      res.send(apiFormat.success())
+    } catch(error) {
+      res.send(apiFormat.error(error))
+    }
   },
   edit(req, res, pool) {
-    var updateSql = getUpdateSql(req.body)
-    var sql = `UPDATE ${tableName} SET ${updateSql} WHERE id = '${req.params.id}'`
-    pool.query(sql, function (error, results, fields) {
-      if (error) {
-        res.send(apiFormat.error(error))
-        return
-      }
-      res.send(apiFormat.success(results))
-    })
+    try {
+      global.db
+          .get(tableName)
+          .find({
+            id: req.params.id,
+          })
+          .assign(req.body)
+          .write()
+      res.send(apiFormat.success())
+    } catch(error) {
+      res.send(apiFormat.error(error))
+    }
   },
   remove(req, res, pool) {
-    pool.query(`DELETE from ${tableName} where id = '${req.params.id}'`, function (error, results, fields) {
-      if (error) {
-        res.send(apiFormat.error(error));
-        return
-      }
-      res.send(apiFormat.success(results))
-    })
+    try {
+      global.db
+          .get(tableName)
+          .remove({
+            id: req.params.id,
+          })
+          .write()
+      res.send(apiFormat.success())
+    } catch(error) {
+      res.send(apiFormat.error(error))
+    }
   }
 }

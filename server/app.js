@@ -6,6 +6,12 @@ const app = express()
 var bodyParser = require('body-parser')
 app.use(bodyParser.json())
 
+// Lowdb https://github.com/typicode/lowdb
+const low = require('lowdb')
+const FileSync = require('lowdb/adapters/FileSync')
+const adapter = new FileSync('db.json')
+const db = low(adapter)
+global.db = db
 
 // 获取 Mysql 连接
 var mysql = require('mysql');
