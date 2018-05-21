@@ -140,9 +140,9 @@ export default {
           args: item.args.map(arg => arg.name)
         }
       })
-      model.basic = JSON.stringify(model.basic)
-      model.cols = JSON.stringify(model.cols || [])
-      model.fn = JSON.stringify(model.fn || []).replace(/\"/g, '\'')
+      model.basic = model.basic || {}
+      model.cols = model.cols || []
+      model.fn = model.fn || []
       var method = this.$route.params.id == -1 ? addModel : editModel
       method(this.KEY, model).then(()=> {
         this.$message({
@@ -172,12 +172,12 @@ export default {
     deepClone,
     fetchDetail() {
       fetchModel(this.KEY, this.$route.params.id).then(({data}) => {
-        const pagesConfig = data.data[0]
+        const pagesConfig = data.data
 
         var model = deepClone(pagesConfig)
-        model.basic = JSON.parse(model.basic)
-        model.cols = JSON.parse(model.cols)
-        model.fn = JSON.parse(model.fn)
+        model.basic = model.basic
+        model.cols = model.cols
+        model.fn = model.fn
 
         model.cols = model.cols || []
         model.cols = model.cols.map(col => {

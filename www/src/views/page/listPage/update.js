@@ -118,18 +118,11 @@ export default {
           args: item.args.map(arg => arg.name)
         }
       })
-      model.basic = JSON.stringify(model.basic)
-      model.cols = JSON.stringify(model.cols || [])
-      model.operate = JSON.stringify(model.operate || {})
-      model.searchCondition = JSON.stringify(model.searchCondition || [])
+      model.basic = model.basic || {}
+      model.cols = model.cols || []
+      model.operate = model.operate || {}
+      model.searchCondition = model.searchCondition || []
       model.fn = model.fn || []
-      model.fn = model.fn.map(item => {
-        return {
-          ...item,
-          body: item.body ? item.body.replace(/\"/g, '\'') : '' 
-        }
-      })
-      model.fn = JSON.stringify(model.fn || [])
 
       var method = this.$route.params.id == -1 ? addModel : editModel
       method(this.KEY, model).then(()=> {
@@ -143,13 +136,13 @@ export default {
     },
     fetchDetail() {
       fetchModel(this.KEY, this.$route.params.id).then(({data}) => {
-        const pagesConfig = data.data[0]
+        const pagesConfig = data.data
         var model = deepClone(pagesConfig)
-        model.basic = JSON.parse(model.basic)
-        model.cols = JSON.parse(model.cols)
-        model.operate = JSON.parse(model.operate)
-        model.searchCondition = JSON.parse(model.searchCondition)
-        model.fn = JSON.parse(model.fn)
+        model.basic = model.basic
+        model.cols = model.cols
+        model.operate = model.operate
+        model.searchCondition = model.searchCondition
+        model.fn = model.fn
         // 操作列表
         this.opList = Object.keys(model.operate).map(opKey => {
           const item = model.operate[opKey]

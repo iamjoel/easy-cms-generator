@@ -4,8 +4,13 @@ const apiFormat = require('../../utils/apiFormat')
 module.exports = function (tableName) {
   return {
     list(req, res, pool) {
-      var results = global.db.get(tableName).value()
-      res.send(apiFormat.success(results))
+      try {
+        var results = global.db.get(tableName).value()
+        res.send(apiFormat.success(results))
+      } catch(error) {
+        res.send(apiFormat.error(error))
+      }
+      
     },
     detail(req, res, pool) {
       var results = global.db

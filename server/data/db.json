@@ -113,6 +113,11 @@
           "label": "名称",
           "key": "name",
           "formatFn": null
+        },
+        {
+          "label": "测试",
+          "key": "x",
+          "formatFn": "toRandomnum"
         }
       ],
       "operate": {
@@ -140,7 +145,13 @@
           }
         }
       ],
-      "fn": [],
+      "fn": [
+        {
+          "name": "toRandomnum",
+          "args": [],
+          "body": "return Math.ceil(Math.random() * 100)"
+        }
+      ],
       "isFreeze": 0
     },
     {

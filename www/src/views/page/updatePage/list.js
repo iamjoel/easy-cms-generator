@@ -54,8 +54,8 @@ export default {
           return {
             id: item.id,
             isFreeze: item.isFreeze,
-            basic: JSON.parse(item.basic),
-            name: this.getName(JSON.parse(item.basic).entity),
+            basic: item.basic,
+            name: this.getName(item.basic.entity),
           }
         })
       })

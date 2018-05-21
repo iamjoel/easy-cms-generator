@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon app"
+    "start": "nodemon app --ignore 'data/*.json'"
   },
   "author": "Joel",
   "license": "MIT",
