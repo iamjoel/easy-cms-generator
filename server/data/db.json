@@ -335,28 +335,32 @@
       "entityId": "58bec585-cb7b-4b21-c121-6a93db8e2428",
       "type": "list",
       "routePath": "/music/singer/list",
-      "filePath": "music/singer/List"
+      "filePath": "music/singer/List",
+      "updateAt": 1526896232528
     },
     {
       "id": "ab237416-7ecc-a259-04af-e01926edc3f1",
       "entityId": "58bec585-cb7b-4b21-c121-6a93db8e2428",
       "type": "update",
       "routePath": "/music/singer/update/:id",
-      "filePath": "music/singer/Update"
+      "filePath": "music/singer/Update",
+      "updateAt": 1526896144168
     },
     {
       "id": "c98deed1-e956-064b-325c-7b0af1e07dec",
       "entityId": "e033884b-b52c-405a-6d58-c09fe3694c9e",
       "type": "list",
       "routePath": "/music/song/list",
-      "filePath": "music/song/List"
+      "filePath": "music/song/List",
+      "updateAt": 1526895788583
     },
     {
       "id": "cfb0645f-935f-6f04-96f9-c73a7c4570b0",
       "entityId": "e033884b-b52c-405a-6d58-c09fe3694c9e",
       "type": "update",
       "routePath": "/music/song/update/:id",
-      "filePath": "music/song/Update"
+      "filePath": "music/song/Update",
+      "updateAt": 1526896157505
     }
   ],
   "menu": [
