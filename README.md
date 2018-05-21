@@ -12,7 +12,8 @@ npm -g i nodemon
 ```
 
 2 创建表表文件  
-在 `server/data/` 下创建一个 `json` 文件，内容拷贝 `server/data/db.schema.json`。
+在 `server/data/` 下创建 `json` 文件，内容拷贝 `server/data/db.schema.json`。  
+修改文件 `server/config/index.js` 中的 `databaseFileName` 值为创建的文件名。
 
 3 安装客户端依赖  
 ```
@@ -20,7 +21,10 @@ cd www
 npm install
 ```
 
-4 启动  
+4 修改配置  
+修改文件 `server/config/index.js` 中的 `feCodeRootPath` 值为目标前端项目的根路径。生成的代码会修改该项目路径下的文件。
+
+5 启动  
 ```
 npm start
 ```
