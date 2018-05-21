@@ -104,12 +104,12 @@ export default {
         return []
       }
       // 筛选所有 parentId 是 xxx 的entity
-      var subEntityKeys = this.entityList
+      var subEntityIds = this.entityList
         .filter(item => item.parentId === entityTypeId)
-        .map(item => item.key)
+        .map(item => item.id)
       // 筛选手 entity 
       var res = this.routerList.filter(router => {
-        return subEntityKeys.indexOf(router.entityId) !== -1
+        return subEntityIds.indexOf(router.entityId) !== -1
       })
       return res
     },
@@ -139,7 +139,7 @@ export default {
       this.entityTypeList = datas[3].data.data
 
       this.routerList = datas[1].data.data.map(item => {
-        var entity = this.entityList.filter(entity => item.entityId === entity.key)[0]
+        var entity = this.entityList.filter(entity => item.entityId === entity.id)[0]
         var entityType = entity.parentId ? this.entityTypeList.filter(item => item.id === entity.parentId)[0] : false
 
         var defaultRouterPath= `${entityType ? `/${entityType.key}` : ''}/${item.entityId}/${item.type === 'list' ? 'list' : 'update/:id'}`

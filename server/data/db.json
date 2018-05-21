@@ -64,36 +64,6 @@
       "label": "歌曲"
     }
   ],
-  "router": [
-    {
-      "id": "5fdf11df-9e87-2865-3723-2680e65d31a9",
-      "entityId": "song",
-      "type": "update",
-      "routePath": "/music/song/update/:id",
-      "filePath": "music/song/Update"
-    },
-    {
-      "id": "ab237416-7ecc-a259-04af-e01926edc3f1",
-      "entityId": "singer",
-      "type": "list",
-      "routePath": "/music/singer/list",
-      "filePath": "music/singer/List"
-    },
-    {
-      "id": "c98deed1-e956-064b-325c-7b0af1e07dec",
-      "entityId": "song",
-      "type": "list",
-      "routePath": "/music/song/list",
-      "filePath": "music/song/List"
-    },
-    {
-      "id": "cfb0645f-935f-6f04-96f9-c73a7c4570b0",
-      "entityId": "singer",
-      "type": "update",
-      "routePath": "/music/singer/update/:id",
-      "filePath": "music/singer/Update"
-    }
-  ],
   "listPage": [
     {
       "id": "0178437f-5ee7-36cd-bcb3-53711324adeb",
@@ -359,29 +329,59 @@
       "isFreeze": 0
     }
   ],
+  "router": [
+    {
+      "id": "5fdf11df-9e87-2865-3723-2680e65d31a9",
+      "entityId": "58bec585-cb7b-4b21-c121-6a93db8e2428",
+      "type": "list",
+      "routePath": "/music/singer/list",
+      "filePath": "music/singer/List"
+    },
+    {
+      "id": "ab237416-7ecc-a259-04af-e01926edc3f1",
+      "entityId": "58bec585-cb7b-4b21-c121-6a93db8e2428",
+      "type": "update",
+      "routePath": "/music/singer/update/:id",
+      "filePath": "music/singer/Update"
+    },
+    {
+      "id": "c98deed1-e956-064b-325c-7b0af1e07dec",
+      "entityId": "e033884b-b52c-405a-6d58-c09fe3694c9e",
+      "type": "list",
+      "routePath": "/music/song/list",
+      "filePath": "music/song/List"
+    },
+    {
+      "id": "cfb0645f-935f-6f04-96f9-c73a7c4570b0",
+      "entityId": "e033884b-b52c-405a-6d58-c09fe3694c9e",
+      "type": "update",
+      "routePath": "/music/song/update/:id",
+      "filePath": "music/song/Update"
+    }
+  ],
   "menu": [
     {
-      "id": "a05877f3-abc8-8036-334f-abf6d26ad044",
-      "name": "音乐",
+      "id": "9f1a2d9d-6994-8116-55fa-a5c7eca65a60",
       "isPage": 0,
       "entityTypeId": "b74b632e-b263-1bb3-11f7-0d62e295f254",
+      "routerId": null,
+      "name": "音乐",
+      "roleIds": "",
+      "order": 0,
       "children": [
+        {
+          "routerId": "5fdf11df-9e87-2865-3723-2680e65d31a9",
+          "name": "歌手列表",
+          "showType": "show",
+          "roleIds": []
+        },
         {
           "routerId": "c98deed1-e956-064b-325c-7b0af1e07dec",
           "name": "歌曲列表",
           "showType": "show",
-          "roleIds": [],
-          "entityTypeId": "c98deed1-e956-064b-325c-7b0af1e07dec"
-        },
-        {
-          "routerId": "ab237416-7ecc-a259-04af-e01926edc3f1",
-          "name": "歌手列表",
-          "showType": "show",
           "roleIds": []
         }
-      ],
-      "order": 0,
-      "roleIds": ""
+      ]
     }
   ]
 }

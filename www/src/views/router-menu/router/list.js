@@ -21,16 +21,17 @@ export default {
   },
   methods: {
     defaultChange(item) {
-      var entity = this.entityList.filter(entity => item.entityId === entity.key)[0]
+      var entity = this.entityList.filter(entity => item.entityId === entity.id)[0] || {}
+      var entityKey = entity.key
       var entityName = entity.label
       var entityType = entity.parentId ? this.entityTypeList.filter(item => item.id === entity.parentId)[0] : false
       var typeName = this.typeList.filter(type => item.type === type.key)[0].label
       item.namePlaceholder = `${entityName}${typeName}`
 
-      var defalutRouterPath = `${entityType ? `/${entityType.key}` : ''}/${item.entityId}/${item.type === 'list' ? 'list' : 'update/:id'}`
+      var defalutRouterPath = `${entityType ? `/${entityType.key}` : ''}/${entityKey}/${item.type === 'list' ? 'list' : 'update/:id'}`
       item.routePathPlaceholder = defalutRouterPath
 
-      var defaultFilePath = `${entityType ? `${entityType.key}/` : ''}${item.entityId}/${item.type === 'list' ? 'List' : 'Update'}.vue`
+      var defaultFilePath = `${entityType ? `${entityType.key}/` : ''}${entityKey}/${item.type === 'list' ? 'List' : 'Update'}.vue`
       item.filePathPlaceholder = defaultFilePath
       
       return item

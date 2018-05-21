@@ -22,9 +22,9 @@
           <el-select v-model="scope.row.entityId" placeholder="请选择" filterable clearable @change="defaultChange(scope.row)">
             <el-option
               v-for="item in entityList"
-              :key="item.key"
+              :key="item.id"
               :label="item.label"
-              :value="item.key">
+              :value="item.id">
             </el-option>
           </el-select>
         </template>

@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <div class="main menu-list-page">
     <div class="ly ly-r mb-10">
       <el-button type="success" @click="sync">同步</el-button>
       <el-button type="primary" @click="add">新增</el-button>
@@ -49,7 +49,6 @@
         prop="name"
         label="路由"
         width="150"
-
         >
         <template slot-scope="scope">
           <el-select v-model="scope.row.routerId" filterable clearable  v-if="scope.row.isPage == 1">
@@ -212,8 +211,4 @@
   </div>
 </template>
 
-<script src="./list.js">
-
-</script>
-
-<style scoped></style>
+<script src="./list.js"></script>

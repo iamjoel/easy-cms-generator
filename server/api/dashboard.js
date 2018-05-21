@@ -96,7 +96,7 @@ function writeConfigFile(name, content, [entityList, entityTypeList, router]=[])
     case 'menu': 
       // 获取默认路由
       var routerList = deepClone(router).map(item => {
-        var entity = entityList.filter(entity => item.entityId === entity.key)[0]
+        var entity = entityList.filter(entity => item.entityId === entity.id)[0]
         var entityType = entity.parentId ? entityTypeList.filter(item => item.id === entity.parentId)[0] : false
 
         var defaultRouterPath = `${entityType ? `/${entityType.key}` : ''}/${item.entityId}/${item.type === 'list' ? 'list' : 'update/:id'}`
