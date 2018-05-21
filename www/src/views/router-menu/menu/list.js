@@ -62,8 +62,6 @@ export default {
       delete data.isNew
       delete data.showType
 
-      data.children = JSON.stringify(data.children)
-
       action(this.KEY, data).then(({data})=> {
         if(row.isNew) {
           delete row.isNew
@@ -96,7 +94,7 @@ export default {
             ...item,
             showType: item.roleIds ? 'roles' : 'show',
             roleIds: item.roleIds ? item.roleIds.split(',') : [],
-            children: item.children ? JSON.parse(item.children) : []
+            children: item.children || []
           }
         })
       })

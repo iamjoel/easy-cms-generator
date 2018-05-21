@@ -12,6 +12,30 @@ const FileSync = require('lowdb/adapters/FileSync')
 const adapter = new FileSync('db.json')
 const db = low(adapter)
 global.db = db
+/*
+* 数据库的 Scheme。 db.json 对应的字段是空的时候的默认值。
+* 设置 default 导致 db.json 被间歇性的reload。导致开发时，服务器不断重启。。。
+*/
+// db.defaults({
+//     role : [
+//     {
+//       id: 'fbbd34d3-7b09-128c-8681-a86ccc934313',
+//       label: '管理员',
+//       key: 'admin'
+//     },{
+//       id: 'a6f6aa16-a16b-52d5-fd95-6303c278e4dc',
+//       label: '店员',
+//       key: 'shop'
+//     }],
+//     dict: [],
+//     entity: [],
+//     entityType: [],
+//     router: [],
+//     listPage: [],
+//     updatePage: [],
+//     menu: [],
+//   })
+//   .write()
 
 // 获取 Mysql 连接
 var mysql = require('mysql');
@@ -33,13 +57,13 @@ var updatePageApi = require('./api/update-page')
 // 所有的api
 var apis = {
   dict: require('./api/utils/commonCRUD')('dict'),
-  role: require('./api/role'),
-  entity: require('./api/entity'),
-  entityType: require('./api/entityType'),
-  listPage: listPageApi,
-  updatePage: updatePageApi,
-  router: require('./api/router'),
-  menu: require('./api/menu'),
+  role: require('./api/utils/commonCRUD')('role'),
+  entityType: require('./api/utils/commonCRUD')('entityType'),
+  entity: require('./api/utils/commonCRUD')('entity'),
+  router: require('./api/utils/commonCRUD')('router'),
+  listPage: require('./api/utils/commonCRUD')('listPage'),
+  updatePage: require('./api/utils/commonCRUD')('updatePage'),
+  menu: require('./api/utils/commonCRUD')('menu'),
 }
 
 generateAPI(Object.keys(apis))
