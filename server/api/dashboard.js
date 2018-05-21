@@ -3,45 +3,21 @@ const apiFormat = require('../utils/apiFormat')
 var fs = require('fs-extra')
 const deepClone = require('clone')
 
+const settingFileFoldPath = `${config.feCodeRootPath}/src/setting/base`
 
-const settingFileFoldPath = `${config.feCodeRootPath}/src/setting/base` 
 module.exports = {
-  detail(req, res, pool) {
+  detail(req, res) {
     res.send(apiFormat.success({
-      database: config.mysql.database,
+      databaseFileName: config.databaseFileName,
       feCodeRootPath: config.feCodeRootPath
     }))
   },
-  syncAllConfig(req, res, pool) {
-    Promise.all([
-      fetchList(pool, 'role'),
-      fetchList(pool, 'dict'),
-      fetchList(pool, 'entity'),
-      fetchList(pool, 'entity_type'),
-      fetchList(pool, 'router'),
-      fetchList(pool, 'menu'),
-    ]).then(([role, dict, entity, entityType , router, menu]) => {
-      Promise.all([
-        writeConfigFile('roles', role),
-        writeConfigFile('dict', dict),
-        writeConfigFile('entities', entity),
-        writeConfigFile('router', router),
-        writeConfigFile('menu', menu, [entity, entityType, router]),
-      ]).then(() => {
-        res.send(apiFormat.success({}))
-      }, (e) => {
-        res.send(apiFormat.error(e))
-      })
-    },  (e) => {
-      res.send(apiFormat.error(e))
-    })
-  },
-  syncConfig(req, res, pool) {
+  syncConfig(req, res) {
     const type = req.params.type
     switch(type) {
       case 'dict':
       case 'router':
-        fetchList(pool, type).then(data => {
+        fetchList(type).then(data => {
           return writeConfigFile(type, data)
         }).then(() => {
           res.send(apiFormat.success({}))
@@ -50,7 +26,7 @@ module.exports = {
         })
         break;
       case 'role':
-        fetchList(pool, 'role').then(data => {
+        fetchList('role').then(data => {
           return writeConfigFile('roles', data)
         }).then(() => {
           res.send(apiFormat.success({}))
@@ -59,7 +35,7 @@ module.exports = {
         })
         break;
       case 'entity':
-        fetchList(pool, 'entity').then(data => {
+        fetchList('entity').then(data => {
           return writeConfigFile('entities', data)
         }).then(() => {
           res.send(apiFormat.success({}))
@@ -69,10 +45,10 @@ module.exports = {
         break;
       case 'menu':
         Promise.all([
-          fetchList(pool, 'entity'),
-          fetchList(pool, 'entity_type'),
-          fetchList(pool, 'router'),
-          fetchList(pool, 'menu'),
+          fetchList('entity'),
+          fetchList('entityType'),
+          fetchList('router'),
+          fetchList('menu'),
         ]).then(([entity, entityType, router, menu]) => {
           writeConfigFile('menu', menu, [entity, entityType, router]).then(() => {
             res.send(apiFormat.success({}))
@@ -85,42 +61,22 @@ module.exports = {
         break;
       default: 
         res.send(apiFormat.error('未知类型！'))
-
     }
   }
   
 }
 
-function fetchList(pool, tableName) {
-  var sql = `SELECT * from ${tableName} ${tableName === 'menu' ?  'order by \`order\`': ''}`
-
+function fetchList(tableName) {
   return new Promise((resolve, reject) => {
-    pool.query(sql, function (error, results, fields) {
-      if(error) {
-        reject(error)
-        return
-      } else {
-        resolve(results)
-      }
-    })
+    resolve(global.db.get(tableName).value())
   })
 }
 
 function writeConfigFile(name, content, [entityList, entityTypeList, router]=[]) {
   // 将配置对象中一些字符串对象转化成对象。
   switch(name) {
-    case 'dict':
-      content = parseKey(content, ['value'])
-      break;
-    case 'list-pages':
-      content = parseKey(content, ['basic', 'cols', 'operate', 'searchCondition', 'fn'])
-      break;
-    case 'update-pages':
-      content = parseKey(content, ['basic', 'cols', 'fn'])
-      break;
     case 'router':
       var res = []
-      
       content.forEach(item => {
         res.push({
           routePath: item.routePath,
@@ -132,12 +88,6 @@ function writeConfigFile(name, content, [entityList, entityTypeList, router]=[])
             routePath: item.routePath.replace('/update', '/view'),
             filePath: item.filePath
           })
-        }
-      })
-      content = content.map(item => {
-        return {
-          routePath: item.routePath,
-          filePath: item.filePath
         }
       })
 
@@ -156,7 +106,7 @@ function writeConfigFile(name, content, [entityList, entityTypeList, router]=[])
           routePath: item.routePath || defaultRouterPath
         }
       })
-      content = parseKey(content, ['children']).map(item => {
+      content = content.map(item => {
         var res = {
           id: item.id,
           name: item.name,
@@ -181,7 +131,6 @@ function writeConfigFile(name, content, [entityList, entityTypeList, router]=[])
         delete res.routerId
         return res
       })
-
   }
   return new Promise((resolve, reject) => {
     var filePath = `${settingFileFoldPath}/${name}.js`
@@ -195,27 +144,6 @@ function writeConfigFile(name, content, [entityList, entityTypeList, router]=[])
   })
 }
 
-function parseKey(arr, parseKeyArr) {
-  if(!parseKeyArr) {
-    return arr
-  }
-  var res = arr.map(item => {
-    var itemRes = {}
-    for(var key in item) {
-      if(parseKeyArr.indexOf(key) !== -1 && item[key]) {
-        try {
-          itemRes[key] = JSON.parse(item[key])
-        } catch(e) {
-          itemRes[key] = item[key]
-        }
-      } else {
-        itemRes[key] = item[key]
-      }
-    }
-    return itemRes
-  })
-  return res
-}
 /*
 * 将从数据库里拿出来的东西，一些没必要的移除
 */

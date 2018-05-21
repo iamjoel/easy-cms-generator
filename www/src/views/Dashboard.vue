@@ -3,14 +3,13 @@
 <template>
   <div class="main">
     <div class="row">
-      <div class="label">数据库:</div>
-      <div>{{config.database}}</div>
+      <div class="label">数据库文件地址:</div>
+      <div v-if="config.databaseFileName">项目目录/server/data/{{config.databaseFileName}}.json</div>
     </div>
     <div class="row">
       <div class="label">前端项目根路径:</div>
       <div>{{config.feCodeRootPath}}</div>
     </div>
-    <el-button type="danger" @click="syncConfig" class="config-btn">同步所有配置到文件</el-button>
   </div>
 </template>
 

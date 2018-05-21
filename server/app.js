@@ -14,10 +14,6 @@ const db = low(adapter)
 global.db = db
 // 不要设置db.defaults。设置 default 导致 db.json 被间歇性的reload。导致开发时，服务器不断重启。。。
 
-// 获取 Mysql 连接
-var mysql = require('mysql');
-var pool = mysql.createPool(config.mysql)
-
 app.get('/', (req, res) => res.send('It works!'))
 
 // 跨域头设置
@@ -47,25 +43,25 @@ var dashboard = require('./api/dashboard')
 app.get('/config/detail', dashboard.detail)
 
 app.post('/config/sync/:type', (req, res)=> {
-  dashboard.syncConfig(req, res, pool)
+  dashboard.syncConfig(req, res)
 })
 
 var listPageApi = require('./api/list-page')
 app.post('/list-page/expendCofigToFile/:id', (req, res)=> {
-  listPageApi.expendCofigToFile(req, res, pool)
+  listPageApi.expendCofigToFile(req, res)
 })
 
 app.post('/list-page/updateFreeze/:id', (req, res)=> {
-  listPageApi.updateFreeze(req, res, pool)
+  listPageApi.updateFreeze(req, res)
 })
 
 var updatePageApi = require('./api/update-page')
 app.post('/update-page/expendCofigToFile/:id', (req, res)=> {
-  updatePageApi.expendCofigToFile(req, res, pool)
+  updatePageApi.expendCofigToFile(req, res)
 })
 
 app.post('/update-page/updateFreeze/:id', (req, res)=> {
-  updatePageApi.updateFreeze(req, res, pool)
+  updatePageApi.updateFreeze(req, res)
 })
 
 
@@ -74,23 +70,23 @@ function generateAPI(names) {
   names.forEach(name => {
     // 列表
     app.get(`/${name}/list`, (req,res) => {
-      apis[name].list(req, res, pool)
+      apis[name].list(req, res)
     })
     // 详情
     app.get(`/${name}/:id`, (req,res) => {
-      apis[name].detail(req, res, pool)
+      apis[name].detail(req, res)
     })
     // 新增
     app.put(`/${name}`, (req,res) => {
-      apis[name].add(req, res, pool)
+      apis[name].add(req, res)
     })
     // 修改
     app.post(`/${name}/:id`, (req,res) => {
-      apis[name].edit(req, res, pool)
+      apis[name].edit(req, res)
     })
     // 删除
     app.delete(`/${name}/:id`, (req,res) => {
-      apis[name].remove(req, res, pool)
+      apis[name].remove(req, res)
     })
   })
 }
