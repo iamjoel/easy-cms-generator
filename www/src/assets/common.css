@@ -1,6 +1,9 @@
 .multi-line{
   flex-wrap: wrap;
 }
+.el-table__body {
+  width: auto !important; /* 解决 table 有横向滚动条的bug */
+}
 .el-menu {
   border-radius: 0;
 }
