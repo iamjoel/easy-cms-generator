@@ -4,5 +4,3 @@
 * `npm start` 运行
 
 调试接口可以用 [Postman](https://www.getpostman.com/)。
-
-数据库 [schema](schema.sql)

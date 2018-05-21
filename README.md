@@ -4,24 +4,23 @@
 该工具能生成项目 [admin-template](https://github.com/iamjoel/front-end-template/tree/master/admin) 的列表，新增，编辑，详情页。
 
 ## 启动
-1 安装服务器依赖
+1 安装服务器依赖  
 ```
 cd server
 npm install
+npm -g i nodemon
 ```
 
-2 创建表
-本项目需要 MySQL。数据库 Schema 文件地址 : `server/schema.sql`。
+2 创建表表文件  
+在 `server/data/` 下创建一个 `json` 文件，内容拷贝 `server/data/db.schema.json`。
 
-拷贝 `server` 目录下的 `/config-demo`，重命名为 `config`。数据库配置文件地址: `server/config/database.js`。
-
-3 安装客户端依赖
+3 安装客户端依赖  
 ```
 cd www
 npm install
 ```
 
-4 启动
+4 启动  
 ```
 npm start
 ```
