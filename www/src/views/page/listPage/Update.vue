@@ -99,7 +99,7 @@
             >
             <template slot-scope="scope">
               <el-button v-if="scope.$index > 0" size="small" type="info" @click="move('cols', scope.$index, 'up')">上移</el-button>
-              <el-button v-if="scope.$index < model.cols.length - 1" size="small" type="info" @click="move('table', scope.$index, 'down')">下移</el-button>
+              <el-button v-if="scope.$index < model.cols.length - 1" size="small" type="info" @click="move('cols', scope.$index, 'down')">下移</el-button>
               <el-button size="small" type="danger" @click="model.cols.splice(scope.$index, 1)">删除</el-button>
 
             </template>
