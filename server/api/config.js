@@ -73,7 +73,11 @@ function fetchList(tableName) {
 }
 
 function writeConfigFile(name, content, [entityList, entityTypeList, router]=[]) {
-  // 将配置对象中一些字符串对象转化成对象。
+  // 删除 对前端来说，不必要的字段
+  content = content.map(item => {
+    delete item.updateAt
+    return item
+  })
   switch(name) {
     case 'router':
       var res = []

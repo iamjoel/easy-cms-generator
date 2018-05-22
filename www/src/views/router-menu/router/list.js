@@ -80,6 +80,9 @@ export default {
         if(row.isNew) {
           delete row.isNew
         }
+        fetchList(this.KEY).then(({data}) => {
+          this.list = data.data.map(item => this.defaultChange(item))
+        })
         this.$message({
           showClose: true,
           message: '保存成功',

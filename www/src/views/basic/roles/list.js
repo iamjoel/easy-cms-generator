@@ -33,6 +33,7 @@ export default {
         if(row.isNew) {
           delete row.isNew
         }
+        this.fetchList()
         this.$message({
           showClose: true,
           message: '保存成功',
@@ -49,11 +50,14 @@ export default {
           type: 'success'
         })
       })
+    },
+    fetchList() {
+      fetchList(this.KEY).then(({data}) => {
+        this.list = data.data
+      })
     }
   },
   mounted() {
-    fetchList(this.KEY).then(({data}) => {
-      this.list = data.data
-    })
+    this.fetchList()
   }
 }

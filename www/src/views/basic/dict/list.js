@@ -34,13 +34,14 @@ export default {
     save(row) {
       var action = row.isNew ? addModel : editModel
       var data = {...row}
-      // data.value = data.value.filter(item => item.key !== '' && item.label !== '')
-      // data.value = JSON.stringify(data.value)
       delete data.isNew
       action(this.KEY, data).then(({data})=> {
         if(row.isNew) {
           delete row.isNew
         }
+        fetchList(this.KEY).then(({data}) => {
+          this.list = data.data
+        })
         this.$message({
           showClose: true,
           message: '保存成功',

@@ -3,12 +3,14 @@
     {
       "id": "fbbd34d3-7b09-128c-8681-a86ccc934313",
       "label": "管理员",
-      "key": "admin"
+      "key": "admin",
+      "updateAt": 1526980831112
     },
     {
       "id": "a6f6aa16-a16b-52d5-fd95-6303c278e4dc",
       "label": "店员",
-      "key": "shop"
+      "key": "shop",
+      "updateAt": 1526980831656
     }
   ],
   "dict": [
@@ -25,7 +27,8 @@
           "key": "classic",
           "label": "经典"
         }
-      ]
+      ],
+      "updateAt": 1526981418573
     },
     {
       "id": "e2c8e3c4-e44b-53f2-6ce5-9bfe0512f072",
@@ -40,14 +43,16 @@
           "key": "2",
           "label": "女"
         }
-      ]
+      ],
+      "updateAt": 1526981420434
     }
   ],
   "entityType": [
     {
       "id": "b74b632e-b263-1bb3-11f7-0d62e295f254",
       "key": "music",
-      "label": "音乐"
+      "label": "音乐",
+      "updateAt": 1526981485352
     }
   ],
   "entity": [
@@ -55,13 +60,15 @@
       "id": "58bec585-cb7b-4b21-c121-6a93db8e2428",
       "parentId": "b74b632e-b263-1bb3-11f7-0d62e295f254",
       "key": "singer",
-      "label": "歌手"
+      "label": "歌手",
+      "updateAt": 1526981553018
     },
     {
       "id": "e033884b-b52c-405a-6d58-c09fe3694c9e",
       "parentId": "b74b632e-b263-1bb3-11f7-0d62e295f254",
       "key": "song",
-      "label": "歌曲"
+      "label": "歌曲",
+      "updateAt": 1526981552560
     }
   ],
   "listPage": [
@@ -78,11 +85,6 @@
           "label": "名称",
           "key": "name",
           "formatFn": null
-        },
-        {
-          "label": "测试",
-          "key": "x",
-          "formatFn": "toRandomnum"
         }
       ],
       "operate": {
@@ -117,7 +119,8 @@
           "body": "return Math.ceil(Math.random() * 100)"
         }
       ],
-      "isFreeze": 0
+      "isFreeze": 0,
+      "updateAt": 1526981670194
     },
     {
       "id": "d780556b-c50f-f699-01e8-ee44dee29e42",
@@ -194,7 +197,8 @@
           "body": "return row.singer.name + row.name"
         }
       ],
-      "isFreeze": 0
+      "isFreeze": 0,
+      "updateAt": 1526981673121
     }
   ],
   "updatePage": [
@@ -221,7 +225,8 @@
         }
       ],
       "fn": [],
-      "isFreeze": 0
+      "isFreeze": 0,
+      "updateAt": 1526981716510
     },
     {
       "id": "dede6489-5952-0225-859b-f8eb9779a5b7",
@@ -326,7 +331,8 @@
         }
       ],
       "fn": [],
-      "isFreeze": 0
+      "isFreeze": 0,
+      "updateAt": 1526981720047
     }
   ],
   "router": [
@@ -336,7 +342,7 @@
       "type": "list",
       "routePath": "/music/singer/list",
       "filePath": "music/singer/List",
-      "updateAt": 1526896232528
+      "updateAt": 1526981813697
     },
     {
       "id": "ab237416-7ecc-a259-04af-e01926edc3f1",
@@ -344,7 +350,7 @@
       "type": "update",
       "routePath": "/music/singer/update/:id",
       "filePath": "music/singer/Update",
-      "updateAt": 1526896144168
+      "updateAt": 1526981812296
     },
     {
       "id": "c98deed1-e956-064b-325c-7b0af1e07dec",
@@ -352,7 +358,7 @@
       "type": "list",
       "routePath": "/music/song/list",
       "filePath": "music/song/List",
-      "updateAt": 1526895788583
+      "updateAt": 1526981807271
     },
     {
       "id": "cfb0645f-935f-6f04-96f9-c73a7c4570b0",
@@ -360,7 +366,7 @@
       "type": "update",
       "routePath": "/music/song/update/:id",
       "filePath": "music/song/Update",
-      "updateAt": 1526896157505
+      "updateAt": 1526981810278
     }
   ],
   "menu": [

@@ -39,11 +39,11 @@ var apis = {
 
 generateAPI(Object.keys(apis))
 
-var dashboard = require('./api/dashboard')
-app.get('/config/detail', dashboard.detail)
+var configApi = require('./api/config')
+app.get('/config/detail', configApi.detail)
 
 app.post('/config/sync/:type', (req, res)=> {
-  dashboard.syncConfig(req, res)
+  configApi.syncConfig(req, res)
 })
 
 var listPageApi = require('./api/list-page')
