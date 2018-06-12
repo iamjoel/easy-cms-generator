@@ -69,8 +69,9 @@ function generatorJS(config) {
       dictKey: col.dataSource.key
     }
   })
-  var js = `
-import updateMixin from '@/mixin/update'
+  var js = 
+`import updateMixin from '@/mixin/update'
+import modelScheme from './model'
 import JRemoteSelect from '@/components/remote-select'
 import deepClone from 'clone'
 
@@ -90,6 +91,7 @@ export default {
     return {
       KEY: '${config.basic.entity}',
       model,
+      modelScheme,
       rules,
     }  
   },
