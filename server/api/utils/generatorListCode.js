@@ -8,12 +8,13 @@ module.exports = function(config) {
 }
 
 function generatorJS(config) {
-  var js = `
-import listMixin from '@/mixin/list'
+  var js = 
+`import listMixin from '@/mixin/list'
 import JRemoteSelect from '@/components/remote-select'
 
 var searchConditions = ${generateSearchCondition(config.searchCondition)}
-var operateConfig = ${JSON.stringify(config.operate)}
+
+var operateConfig = ${JSON.stringify(config.operate, null, '  ')}
 
 export default {
   mixins: [listMixin],
@@ -22,7 +23,7 @@ export default {
   },
   data() {
     return {
-      KEY: null,
+      KEY: '${config.basic.entity}',
       searchConditions,
     }  
   },
@@ -35,10 +36,10 @@ export default {
         return isShow
       }
     },
-  ${generateVueMethods(config.fn)}
+${generateVueMethods(config.fn)}
   },
   mounted() {
-    this.key = '${config.basic.entity}'
+    
   }
 }`
   return js
@@ -49,39 +50,36 @@ function generatorVue(config) {
 <template> 
   <div class="main">
     <j-search-condition @search="search">
-     ${config.searchCondition.map(item => {
-      var inner
-      switch(item.dataType) {
-        case 'select': 
-
-          if(item.dataSource.type === 'dict') {
-            inner = `
-            <el-select v-model="searchConditions.${item.key}" placeholder="请选择" filterable clearable>
-              <el-option
-                v-for="item in $store.getters.dictObj.${item.dataSource.key}"
-                :key="item.key"
-                :label="item.label"
-                :value="item.key">
-              </el-option>
-            </el-select>`
-          } else {
-            inner = `
-            <j-remote-select v-model="searchConditions.${item.key}" url-key="${item.dataSource.key}" :autoFetch="true">
-            </j-remote-select>`
-          }
-          break;
-        case 'string':
-        default:
-        inner = `
-          <el-input v-model="searchConditions.${item.key}"></el-input>
-        `
+${config.searchCondition.map(item => {
+  var inner
+  switch(item.dataType) {
+    case 'select': 
+      if(item.dataSource.type === 'dict') {
+        inner = 
+`        <el-select v-model="searchConditions.${item.key}" placeholder="请选择" filterable clearable>
+          <el-option
+              v-for="item in $store.getters.dictObj.${item.dataSource.key}"
+              :key="item.key"
+              :label="item.label"
+              :value="item.key">
+          </el-option>
+        </el-select>`
+      } else {
+        inner = 
+`        <j-remote-select v-model="searchConditions.${item.key}" url-key="${item.dataSource.key}" :autoFetch="true" />`
       }
-      return `
-        <j-edit-item
-        label="${item.label}"
-        >${inner}
-        </j-edit-item>`
-     }).join('\n')}
+    break;
+  case 'string':
+  default:
+  inner = 
+`        <el-input v-model="searchConditions.${item.key}" />`
+}
+  var res = 
+`      <j-edit-item label="${item.label}">
+${inner}
+      </j-edit-item>`
+  return res
+}).join('\n\n')}
     </j-search-condition>
 
     <j-grid-box :is-show-add-btn="isShow('add')" :add-url="addPagePath" :pager="pager" @pageChange="handleCurrentChange">
@@ -95,21 +93,22 @@ function generatorVue(config) {
           align="center"
           width="80">
         </el-table-column>
-        ${config.cols.map(item => {
-          var inner = item.formatFn ? `
-            <template slot-scope="scope">
-              {{${item.formatFn}(scope.row)}}
-            </template>
-          ` : ''
-          return `
-          <el-table-column
-            prop="${item.key}"
-            label="${item.label}"
-            >
-            ${inner}
-          </el-table-column>
-          `
-        }).join('\n')}
+
+${config.cols.map(item => {
+  var inner = item.formatFn ? 
+`          <template slot-scope="scope">
+            {{${item.formatFn}(scope.row)}}
+          </template>` : ''
+  var res = 
+`        <el-table-column
+          prop="${item.key}"
+          label="${item.label}"
+        >
+${inner}
+        </el-table-column>`
+  return res
+}).join('\n\n')}
+
         <el-table-column
           prop="op"
           label="操作"
@@ -121,29 +120,28 @@ function generatorVue(config) {
             <el-button type="danger" size="small" @click="remove(scope.row.id)" v-if="isShow('delete')">删除</el-button>
           </template>
         </el-table-column>
-        
       </el-table>
     </j-grid-box>
   </div>
 </template>
-<script src="./list.js"></script>
-<style scoped>
-</style>
-      `
-  return vue
 
+<script src="./list.js"></script>
+
+<style scoped>
+</style>`
+
+  return vue
 }
 
 function generateSearchCondition(searchCondition) {
-  return `
-  {
-    ${searchCondition.map(item => {
-      return `${item.key}: ''`
-    }).join(',\n')}
-  }`
-  searchCondition.forEach(item => {
-    res
-  })
+  var res = 
+`{
+${searchCondition.map(item => {
+  let res = 
+`  ${item.key}: ''`
+  return res
+}).join(',\n')}
+}`
   return res
 }
 
@@ -153,9 +151,10 @@ function generateVueMethods(fns) {
   }
   return fns.map(fn => {
     var args = fn.args.length > 0 ? fn.args.join(', ') : ''
-    return `
-  ${fn.name}(${args}) {
-    ${fn.body}
-  }`
+    var res = 
+`    ${fn.name}(${args}) {
+      ${fn.body}
+    }`
+    return res
   }).join(',\n')
 }
