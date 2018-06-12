@@ -20,11 +20,12 @@ module.exports = {
         res.send(apiFormat.error({errMsg: '找不到配置'}))
         return
       }
-      var {vue, js} = generatorCode(config)
+      var {vue, js, model} = generatorCode(config)
       var codePath = `${codePathPrefix}/${config.basic.codePath ? config.basic.codePath : config.basic.entity}`
       Promise.all([
         writeFile(`${codePath}/Update.vue`, vue),
         writeFile(`${codePath}/update.js`, js),
+        writeFile(`${codePath}/model.js`, model),
       ]).then(()=> {
         res.send(apiFormat.success())
       }, error => {
