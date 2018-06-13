@@ -6,6 +6,17 @@ export default {
   components: {
     'j-edit-item': JEditItem,
   },
+  computed: {
+    defaultCodePath() {
+      var entity = this.entityList.filter(item => item.key === this.model.basic.entity)[0]
+      var res
+      if(entity) {
+        let entityType = this.entityTypeList.filter(item => item.id === entity.parentId)[0]
+        res = `${entityType ? entityType.key + '/' : ''}${entity.key}`
+      }
+      return res || ''
+    }
+  },
   data() {
     return {
       KEY: 'updatePage',
@@ -88,6 +99,8 @@ export default {
         }
       },
       dictList: [],
+      entityTypeList: [],
+      canSelectEntityList: [],
       entityList: [],
     }
   },
@@ -141,6 +154,7 @@ export default {
         }
       })
       model.basic = model.basic || {}
+      model.basic.codePath = model.basic.codePath || this.defaultCodePath
       model.cols = model.cols || []
       model.fn = model.fn || []
       var method = this.$route.params.id == -1 ? addModel : editModel
@@ -171,53 +185,78 @@ export default {
     },
     deepClone,
     fetchDetail() {
-      fetchModel(this.KEY, this.$route.params.id).then(({data}) => {
-        const pagesConfig = data.data
+      return new Promise((resolve, reject) => {
+        if(this.$route.params.id == -1) {
+          resolve()
+          return
+        }
+        fetchModel(this.KEY, this.$route.params.id).then(({data}) => {
+          const pagesConfig = data.data
 
-        var model = deepClone(pagesConfig)
-        model.basic = model.basic
-        model.cols = model.cols
-        model.fn = model.fn
+          var model = deepClone(pagesConfig)
+          model.basic = model.basic
+          model.cols = model.cols
+          model.fn = model.fn
 
-        model.cols = model.cols || []
-        model.cols = model.cols.map(col => {
-          return {
-            ...deepClone(this.colItemTemplate),
-            ...col
-          }
+          model.cols = model.cols || []
+          model.cols = model.cols.map(col => {
+            return {
+              ...deepClone(this.colItemTemplate),
+              ...col
+            }
+          })
+          model.basic = model.basic || {}
+          model.fn = model.fn || []
+          // 标准化函数数据
+          model.fn = model.fn.map(item => {
+            return {
+              ...item,
+              args: item.args.map(arg => {return {name: arg}})
+            }
+          })
+          // 添加内置函数
+          model.fn = model.fn.concat(this.$store.state.utilFns.map(item => {
+            return {
+              ...item,
+              args: item.args.map(arg => {return {name: arg}})
+            }
+          }))
+
+          this.model = model
+          resolve()
         })
-        model.basic = model.basic || {}
-        model.fn = model.fn || []
-        // 标准化函数数据
-        model.fn = model.fn.map(item => {
-          return {
-            ...item,
-            args: item.args.map(arg => {return {name: arg}})
-          }
-        })
-        // 添加内置函数
-        model.fn = model.fn.concat(this.$store.state.utilFns.map(item => {
-          return {
-            ...item,
-            args: item.args.map(arg => {return {name: arg}})
-          }
-        }))
-
-        this.model = model
       })
+      
     }
   },
   mounted() {
-    fetchList('dict').then(({data}) => {
-      this.dictList = data.data
-    })
+    this.fetchDetail().then(() => {
+      Promise.all([
+        fetchList('dict'),
+        fetchList('updatePage'),
+        fetchList('entityType'),
+        fetchList('entity')
+      ]).then( datas=> {
+        this.dict = datas[0].data.data
+        this.usedEntityKeys = datas[1].data.data.map(item => {
+          try {
+            return item.basic.entity
+          } catch(e) {
+            return false
+          }
+        }).filter(item => item)
 
-    fetchList('entity').then(({data}) => {
-      this.entityList = data.data
+        this.entityTypeList = datas[2].data.data
+        this.entityList = datas[3].data.data
+        // 用过实体的key的去掉
+        this.canSelectEntityList = 
+          this.entityList.filter(entity => {
+            var res = 
+              this.usedEntityKeys.indexOf(entity.key) === -1
+              || (this.model && this.model.basic && entity.key === this.model.basic.entity)
+            return res
+          })
+      })
     })
-    if(this.$route.params.id == -1) { // 新增
-      return
-    }
-    this.fetchDetail()
   }
 }

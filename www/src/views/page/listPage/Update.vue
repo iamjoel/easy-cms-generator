@@ -8,7 +8,7 @@
             label="实体" prop="name">
             <el-select v-model="model.basic.entity" placeholder="请选择" filterable clearable>
               <el-option
-                v-for="item in entityList"
+                v-for="item in canSelectEntityList"
                 :key="item.key"
                 :label="item.label"
                 :value="item.key">
@@ -19,7 +19,7 @@
             <el-row>
               <el-col :md="{span:8}" class="j-edit-item__label" style="padding-top:11px;">代码展开地址:@/views/</el-col>
               <el-col :md="{span:16}" class="j-edit-item__input" >
-                <el-input v-model="model.basic.codePath"></el-input>
+                <el-input v-model="model.basic.codePath" :placeholder="defaultCodePath"></el-input>
               </el-col>
             </el-row>
           </el-col>

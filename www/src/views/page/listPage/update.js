@@ -5,6 +5,17 @@ export default {
   components: {
     'j-edit-item': JEditItem,
   },
+  computed: {
+    defaultCodePath() {
+      var entity = this.entityList.filter(item => item.key === this.model.basic.entity)[0]
+      var res
+      if(entity) {
+        let entityType = this.entityTypeList.filter(item => item.id === entity.parentId)[0]
+        res = `${entityType ? entityType.key + '/' : ''}${entity.key}`
+      }
+      return res || ''
+    }
+  },
   data() {
     return {
       KEY: 'listPage',
@@ -70,6 +81,8 @@ export default {
       dictList: [],
       entityList: [],
       entityTypeList: [],
+      usedEntityKeys: [],
+      canSelectEntityList: [],
       roleList: [],
     }
   },
@@ -119,6 +132,7 @@ export default {
         }
       })
       model.basic = model.basic || {}
+      model.basic.codePath = model.basic.codePath || this.defaultCodePath
       model.cols = model.cols || []
       model.operate = model.operate || {}
       model.searchCondition = model.searchCondition || []
@@ -135,93 +149,123 @@ export default {
       })
     },
     fetchDetail() {
-      fetchModel(this.KEY, this.$route.params.id).then(({data}) => {
-        const pagesConfig = data.data
-        var model = deepClone(pagesConfig)
-        model.basic = model.basic
-        model.cols = model.cols
-        model.operate = model.operate
-        model.searchCondition = model.searchCondition
-        model.fn = model.fn
-        // 操作列表
-        this.opList = Object.keys(model.operate).map(opKey => {
-          const item = model.operate[opKey]
-          const showType = this.getShowType(item.isShow)
-          const showRoles = showType === 'roles' ? item.isShow : []
-          return {
-            label: this.opDict[opKey],
-            showType,
-            showRoles
-          }
-        })
-        // 标准化cols数据
-        model.cols = model.cols || []
-        model.cols = model.cols.map(item => {
-          return {
-            ...item,
-            formatFn: item.formatFn || null, 
-          }
-        })
-        // 标准化搜索条件数据
-        model.searchCondition = model.searchCondition || []
-        model.searchCondition = model.searchCondition.map(item => {
-          return {
-            ...item,
-            dataType: item.dataType || 'string',
-            dataSource: item.dataSource || {
-              type: '',
-              key: ''
-            },
-          }
-        })
-        // 标准化函数数据
-        model.fn = model.fn || []
-        model.fn = model.fn.map(item => {
-          return {
-            ...item,
-            args: item.args.map(arg => {return {name: arg}})
-          }
-        })
+      return new Promise((resolve, reject) => {
+        if(this.$route.params.id == -1) {
+          resolve()
+          return
+        }
+        fetchModel(this.KEY, this.$route.params.id).then(({data}) => {
+          const pagesConfig = data.data
+          var model = deepClone(pagesConfig)
+          model.basic = model.basic
+          model.cols = model.cols
+          model.operate = model.operate
+          model.searchCondition = model.searchCondition
+          model.fn = model.fn
+          // 操作列表
+          this.opList = Object.keys(model.operate).map(opKey => {
+            const item = model.operate[opKey]
+            const showType = this.getShowType(item.isShow)
+            const showRoles = showType === 'roles' ? item.isShow : []
+            return {
+              label: this.opDict[opKey],
+              showType,
+              showRoles
+            }
+          })
+          // 标准化cols数据
+          model.cols = model.cols || []
+          model.cols = model.cols.map(item => {
+            return {
+              ...item,
+              formatFn: item.formatFn || null, 
+            }
+          })
+          // 标准化搜索条件数据
+          model.searchCondition = model.searchCondition || []
+          model.searchCondition = model.searchCondition.map(item => {
+            return {
+              ...item,
+              dataType: item.dataType || 'string',
+              dataSource: item.dataSource || {
+                type: '',
+                key: ''
+              },
+            }
+          })
+          // 标准化函数数据
+          model.fn = model.fn || []
+          model.fn = model.fn.map(item => {
+            return {
+              ...item,
+              args: item.args.map(arg => {return {name: arg}})
+            }
+          })
 
-        // 添加内置函数
-        model.fn = model.fn.concat(this.$store.state.utilFns.map(item => {
-          return {
-            ...item,
-            args: item.args.map(arg => {return {name: arg}})
-          }
-        }))
+          // 添加内置函数
+          model.fn = model.fn.concat(this.$store.state.utilFns.map(item => {
+            return {
+              ...item,
+              args: item.args.map(arg => {return {name: arg}})
+            }
+          }))
 
-        this.model = model
+          this.model = model
+          resolve()
+        })
       })
+      
     }
   },
   mounted() {
-    Promise.all([
-      fetchList('dict'),
-      fetchList('role'),
-      fetchList('entityType'),
-      fetchList('entity')
-    ]).then( datas=> {
-      this.dict = datas[0].data.data
-      this.roleList = datas[1].data.data
-      this.entityTypeList = datas[2].data.data
-      this.entityList = datas[3].data.data
-      if(this.$route.params.id == -1) { // 新增
-        let model = this.model
-        this.opList = Object.keys(model.operate).map(opKey => {
-          const item = model.operate[opKey]
-          const showType = this.getShowType(item.isShow)
-          const showRoles = showType === 'roles' ? item.isShow : []
-          return {
-            label: this.opDict[opKey],
-            showType,
-            showRoles
+    this.fetchDetail().then(() => {
+      Promise.all([
+        fetchList('dict'),
+        fetchList('role'),
+        fetchList('entityType'),
+        fetchList('entity'),
+        fetchList('listPage')
+      ]).then( datas=> {
+        this.dict = datas[0].data.data
+        this.roleList = datas[1].data.data
+        this.entityTypeList = datas[2].data.data
+        this.entityList = datas[3].data.data
+
+        this.usedEntityKeys = datas[4].data.data.map(item => {
+          try {
+            return item.basic.entity
+          } catch(e) {
+            return false
           }
-        })
-        return
-      }
-      this.fetchDetail()
+        }).filter(item => item)
+
+        // 用过实体的key的去掉
+        this.canSelectEntityList = 
+          this.entityList.filter(entity => {
+            var res = 
+              this.usedEntityKeys.indexOf(entity.key) === -1
+              || (this.model && this.model.basic && entity.key === this.model.basic.entity)
+            return res
+          })
+
+        if(this.$route.params.id == -1) { // 新增
+          let model = this.model
+          this.opList = Object.keys(model.operate).map(opKey => {
+            const item = model.operate[opKey]
+            const showType = this.getShowType(item.isShow)
+            const showRoles = showType === 'roles' ? item.isShow : []
+            return {
+              label: this.opDict[opKey],
+              showType,
+              showRoles
+            }
+          })
+          return
+        }
+        
+      })
     })
+    
 
     
 
