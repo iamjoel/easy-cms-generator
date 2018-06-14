@@ -123,6 +123,7 @@ export default {
     },
     save() {
       var model = deepClone(this.model)
+      model.isSynced = false
       model.fn = model.fn.filter(item => {
         return item.name.indexOf('sys') === -1
       }).map(item => {

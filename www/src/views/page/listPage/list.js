@@ -25,6 +25,7 @@ export default {
     },
     expendCofigToFile(id) {
       this.$http.post(`${SERVER_PREFIX}/list-page/expendCofigToFile/${id}`).then(({data})=> {
+        this.fetchList()
         this.$message({
           showClose: true,
           message: '操作成功',
@@ -43,22 +44,25 @@ export default {
           type: 'success'
         })
       })
+    },
+    fetchList() {
+      fetchList('entity').then(({data}) => {
+        this.entities = data.data
+        fetchList(this.KEY).then(({data}) => {
+          this.list = data.data.map(item => {
+            return {
+              id: item.id,
+              isFreeze: item.isFreeze,
+              isSynced: item.isSynced,
+              basic: item.basic,
+              name: this.getName(item.basic.entity),
+            }
+          })
+        })
+      })
     }
   },
   mounted() {
-    fetchList('entity').then(({data}) => {
-      this.entities = data.data
-      fetchList(this.KEY).then(({data}) => {
-        this.list = data.data.map(item => {
-          return {
-            id: item.id,
-            isFreeze: item.isFreeze,
-            basic: item.basic,
-            name: this.getName(item.basic.entity),
-          }
-        })
-      })
-    })
-    
+    this.fetchList()
   }
 }

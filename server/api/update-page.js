@@ -27,6 +27,17 @@ module.exports = {
         writeFile(`${codePath}/update.js`, js),
         writeFile(`${codePath}/model.js`, model),
       ]).then(()=> {
+        // 将同步状态改为已同步
+        global.db
+          .get(tableName)
+          .find({
+            id: req.params.id,
+          })
+          .assign({
+            isSynced: true,
+            updateAt: Date.now()
+          })
+          .write()
         res.send(apiFormat.success())
       }, error => {
         res.send(apiFormat.error(error))

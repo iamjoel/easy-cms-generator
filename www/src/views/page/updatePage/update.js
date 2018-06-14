@@ -136,6 +136,7 @@ export default {
     },
     save() {
       var model = deepClone(this.model)
+      model.isSynced = false
       model.cols = model.cols.map(item => {
         if(item.dataType !== 'select') {
           delete item.dataSource
