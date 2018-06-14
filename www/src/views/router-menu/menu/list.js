@@ -30,7 +30,7 @@ export default {
         name: '',
         showType: 'show',
         roleIds: [],
-        order: null,
+        order: this.list.length + 1,
         children: []
       })
     },

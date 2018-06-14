@@ -5,13 +5,23 @@ export default {
     return {
       KEY: 'listPage',
       list: [],
-      entities: []
+      entities: [],
+      entityTypeList: [],
     }
   },
   methods: {
     getName(entityId) {
       var res = this.entities.filter(item => item.key === entityId)[0]
       return res ? res.label : '未知实体'
+    },
+    getTypeName(entityId) {
+      var res
+      var entity = this.entities.filter(item => item.key === entityId)[0]
+      if(entity) {
+        res = this.entityTypeList.filter(item => item.id === entity.parentId)[0]
+        return res ? res.label : '-'
+      }
+      return res || '-'
     },
     remove(id, index) {
       deleteModel(this.KEY, id).then(({data})=> {
@@ -56,6 +66,7 @@ export default {
               isSynced: item.isSynced,
               basic: item.basic,
               name: this.getName(item.basic.entity),
+              entityTypeName: this.getTypeName(item.basic.entity)
             }
           })
         })
@@ -63,6 +74,9 @@ export default {
     }
   },
   mounted() {
-    this.fetchList()
+    fetchList('entityType').then(({data}) => {
+      this.entityTypeList = data.data
+      this.fetchList()
+    })
   }
 }

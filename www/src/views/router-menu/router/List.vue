@@ -15,6 +15,11 @@
         width="80">
       </el-table-column>
       <el-table-column
+        prop="entityTypeName"
+        label="实体类型"
+        >
+      </el-table-column>
+      <el-table-column
         prop="entityId"
         label="实体"
         >
@@ -54,33 +59,17 @@
         </template>
       </el-table-column>
       <el-table-column
-        prop="routePath"
-        label="路由地址"
-        width="200"
+        prop="order"
+        label="排序"
         >
         <template slot-scope="scope">
-          <el-input  v-if="scope.row.type === 'other'" v-model="scope.row.routePath"></el-input>
-          <div v-else>{{scope.row.routePathPlaceholder}}</div>
-        </template>
-      </el-table-column>
-      <el-table-column
-        prop="filePath"
-        label="文件地址"
-        width="280"
-        >
-        <template slot-scope="scope">
-          <div v-if="scope.row.type === 'other'" class="ly ly-m">
-            <span>@/views/</span>
-            <el-input v-model="scope.row.filePath"></el-input>
-          </div>
-          <div v-else>
-            @/views/{{scope.row.filePathPlaceholder}}
-          </div>
+          <el-input v-model.number="scope.row.order"></el-input>
         </template>
       </el-table-column>
       <el-table-column
         prop="op"
         label="操作"
+        width="200"
         >
         <template slot-scope="scope">
           <el-button type="info" size="small" @click="save(scope.row)">保存</el-button>

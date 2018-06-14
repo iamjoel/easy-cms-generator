@@ -5,7 +5,7 @@ module.exports = function (tableName) {
   var sortKey = 'updateAt'
   var sortType = 'desc' // 降序
 
-  var shouldOrderTable = ['menu', 'entity', 'entityType']
+  var shouldOrderTable = ['menu', 'entity', 'entityType', 'router']
   if(shouldOrderTable.indexOf(tableName) !== -1) {
     sortKey = 'order'
     sortType = 'asc' // 升序

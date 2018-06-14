@@ -35,6 +35,8 @@ export default {
       var defaultFilePath = `${entityType ? `${entityType.key}/` : ''}${entityKey}/${item.type === 'list' ? 'List' : 'Update'}.vue`
       item.filePathPlaceholder = defaultFilePath
       
+      item.entityTypeName = entityType ? entityType.label : '-'
+
       return item
     },
     add() {
@@ -46,7 +48,10 @@ export default {
         routePath: '',
         filePath: '',
         routePathPlaceholder: '',
-        filePathPlaceholder: ''
+        filePathPlaceholder: '',
+        order: this.list.length > 0 
+            ? this.list[this.list.length - 1].order + 1
+            : 1
       })
     },
     sync() {

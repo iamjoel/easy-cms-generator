@@ -14,6 +14,11 @@
         width="80">
       </el-table-column>
       <el-table-column
+        prop="entityTypeName"
+        label="实体类型"
+        >
+      </el-table-column>
+      <el-table-column
         prop="name"
         label="实体"
         >
