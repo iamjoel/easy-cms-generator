@@ -5,9 +5,10 @@ module.exports = function (tableName) {
   var sortKey = 'updateAt'
   var sortType = 'desc' // 降序
 
-  if(tableName === 'menu') {
+  var shouldOrderTable = ['menu', 'entity', 'entityType']
+  if(shouldOrderTable.indexOf(tableName) !== -1) {
     sortKey = 'order'
-    sortType = 'asc'
+    sortType = 'asc' // 升序
   }
   return {
     list(req, res, pool) {

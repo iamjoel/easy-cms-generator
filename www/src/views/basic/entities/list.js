@@ -14,7 +14,10 @@ export default {
         isNew:true,
         key: '',
         label: '',
-        parentId: null
+        parentId: null,
+        order: this.list.length > 0 
+            ? this.list[this.list.length - 1].order + 1
+            : 1
       })
     },
     sync() {

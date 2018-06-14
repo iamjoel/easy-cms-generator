@@ -12,7 +12,8 @@ export default {
       this.list.push({
         isNew:true,
         key: '',
-        label: ''
+        label: '',
+        order: this.list.length + 1
       })
     },
     save(row) {

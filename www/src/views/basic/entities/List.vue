@@ -46,6 +46,15 @@
           <el-input v-model="scope.row.key"></el-input>
         </template>
       </el-table-column>
+
+      <el-table-column
+        prop="order"
+        label="排序"
+        >
+        <template slot-scope="scope">
+          <el-input v-model.number="scope.row.order"></el-input>
+        </template>
+      </el-table-column>
       <el-table-column
         prop="key"
         label="操作"
