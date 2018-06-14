@@ -7,6 +7,7 @@ export default {
       list: [],
       entityTypeList: [],
       entityList: [],
+      canSelectEntityList: [],
       typeList: [{
         key: 'list',
         label: '列表页'
@@ -99,18 +100,44 @@ export default {
           type: 'success'
         })
       })
+    },
+    getEntity(entityId) {
+      return [
+        this.entityList.filter(item => item.id === entityId)[0],
+        ...this.canSelectEntityList
+      ].filter(item => item)
     }
   },
   mounted() {
     Promise.all([
       fetchList('entityType'),
-      fetchList('entity')
+      fetchList('entity'),
+      fetchList(this.KEY),
     ]).then( datas=> {
       this.entityTypeList = datas[0].data.data
       this.entityList = datas[1].data.data
-      fetchList(this.KEY).then(({data}) => {
-        this.list = data.data.map(item => this.defaultChange(item))
-      })
+      this.list = datas[2].data.data.map(item => this.defaultChange(item))
+
+
+      var usedUpdateEntityKeys = this.list
+          .filter(item => item.type === 'update')
+          .map(item => item.entityId)
+      console.log(usedUpdateEntityKeys)
+
+      var usedListEntityKeys = this.list
+        .filter(item => item.type === 'list')
+        .map(item => item.entityId)
+      console.log(usedListEntityKeys)
+
+      // 用过实体的key的去掉
+      this.canSelectEntityList = 
+        this.entityList.filter(entity => {
+          var res = 
+            usedUpdateEntityKeys.indexOf(entity.id) === -1
+            || usedListEntityKeys.indexOf(entity.id) === -1
+          return res
+        })
+
     })
   }
 }

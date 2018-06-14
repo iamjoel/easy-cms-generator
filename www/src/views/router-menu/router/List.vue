@@ -21,8 +21,8 @@
         <template slot-scope="scope">
           <el-select v-model="scope.row.entityId" placeholder="请选择" filterable clearable @change="defaultChange(scope.row)">
             <el-option
-              v-for="item in entityList"
-              :key="item.id"
+              v-for="(item, i) in getEntity(scope.row.entityId)"
+              :key="i"
               :label="item.label"
               :value="item.id">
             </el-option>
