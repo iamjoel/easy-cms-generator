@@ -34,7 +34,7 @@
         <template slot-scope="scope">
           <el-select v-model="scope.row.entityTypeId" palceholder="" filterable clearable v-if="scope.row.isPage == 0">
             <el-option
-              v-for="item in entityTypeList"
+              v-for="item in getEntityTypeList(scope.row.entityTypeId)"
               :key="item.id"
               :label="item.label"
               :value="item.id">

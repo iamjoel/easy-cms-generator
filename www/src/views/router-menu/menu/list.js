@@ -9,6 +9,7 @@ export default {
       list: [],
       entityList: [],
       entityTypeList: [],
+      canSelectedEntityTypeList: [],
       roleList: [],
       opShowType: [{
         label: '总是显示',
@@ -85,19 +86,23 @@ export default {
       })
     },
     fetchList() {
-      fetchList(this.KEY).then(({data}) => {
-        this.list = data.data.map(item => {
-          if(item.roleIds === 'undefined') {
-            item.roleIds = ''
-          }
-          return {
-            ...item,
-            showType: item.roleIds ? 'roles' : 'show',
-            roleIds: item.roleIds ? item.roleIds.split(',') : [],
-            children: item.children || []
-          }
+      return new Promise((resolve, reject) => {
+        fetchList(this.KEY).then(({data}) => {
+          this.list = data.data.map(item => {
+            if(item.roleIds === 'undefined') {
+              item.roleIds = ''
+            }
+            return {
+              ...item,
+              showType: item.roleIds ? 'roles' : 'show',
+              roleIds: item.roleIds ? item.roleIds.split(',') : [],
+              children: item.children || []
+            }
+          })
+          resolve()
         })
       })
+      
     },
     filterRouteListByType(entityTypeId) {
       if(!entityTypeId) {
@@ -126,6 +131,12 @@ export default {
         }
       })
     },
+    getEntityTypeList(entityTypeId) {
+      return [
+        this.entityTypeList.filter(item => item.id === entityTypeId)[0],
+        ...this.canSelectedEntityTypeList
+      ].filter(item => item)
+    }
   },
   mounted() {
     Promise.all([
@@ -133,6 +144,7 @@ export default {
       fetchList('router'),
       fetchList('entity'),
       fetchList('entityType'),
+      fetchList(this.KEY)
     ]).then( datas=> {
       this.roleList = datas[0].data.data
       this.entityList = datas[2].data.data
@@ -149,8 +161,15 @@ export default {
           label: item.routePath || defaultRouterPath
         } 
       })
+
+
       
-      this.fetchList()
+      this.fetchList().then(() => {
+        var usedEntityType = this.list.map(item => item.entityTypeId)
+        // 剔除用过的
+        this.canSelectedEntityTypeList = this.entityTypeList
+          .filter(item => usedEntityType.indexOf(item.id) === -1)
+      })
     })
   }
 }
