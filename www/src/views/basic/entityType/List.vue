@@ -44,6 +44,7 @@
         >
         <template slot-scope="scope">
           <el-button type="info" size="small" @click="save(scope.row)">保存</el-button>
+          <el-button v-if="scope.row.id" type="success" size="small" @click="$router.push('/basic/entities/create/' + scope.row.id)">下一步</el-button>
           <el-button type="danger" size="small" @click="remove(scope.row.id, scope.$index)">删除</el-button>
         </template>
       </el-table-column>

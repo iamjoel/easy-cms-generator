@@ -8,6 +8,13 @@ var routes = [
       lazyLoading(resolve, 'Dashboard', false)
     },
   },
+  // 带实体类型id的列表
+  {
+    path: '/basic/entities/create/:typeId',
+    component: resolve => {
+      lazyLoading(resolve, 'basic/entities/List')
+    },
+  },
 ]
 
 // 页面的路由的定义

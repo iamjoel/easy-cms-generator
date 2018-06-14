@@ -34,6 +34,18 @@ export default {
       var data = {...row}
       delete data.isNew
       action(this.KEY, data).then(({data})=> {
+        if(this.$route.params.typeId) {
+          this.$message({
+            showClose: true,
+            message: '保存成功',
+            type: 'success'
+          })
+          fetchList(this.KEY).then(({data}) => {
+            this.list = data.data
+            this.$router.push('/basic/entities/list')
+          })
+          return
+        }
         if(row.isNew) {
           delete row.isNew
         }
@@ -63,7 +75,19 @@ export default {
       this.parentList = data.data
         fetchList(this.KEY).then(({data}) => {
           this.list = data.data
+          if(this.$route.params.typeId) {
+            this.list.unshift({
+              isNew:true,
+              key: '',
+              label: '',
+              parentId: this.$route.params.typeId,
+              order: this.list.length > 0 
+                  ? this.list[this.list.length - 1].order + 1
+                  : 1
+            })
+          }
         })
+
     })
     
   }
