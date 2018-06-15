@@ -55,7 +55,7 @@
         >
         <template slot-scope="scope">
           <el-input v-model="scope.row.name"
-          :placeholder="scope.row.namePlaceholder"></el-input>
+          :placeholder="scope.row.namePlaceholder" @change="scope.row.hasChanged = true"></el-input>
         </template>
       </el-table-column>
       <el-table-column
@@ -63,7 +63,7 @@
         label="排序"
         >
         <template slot-scope="scope">
-          <el-input v-model.number="scope.row.order"></el-input>
+          <el-input v-model.number="scope.row.order" @change="scope.row.hasChanged = true"></el-input>
         </template>
       </el-table-column>
       <el-table-column
@@ -72,7 +72,7 @@
         width="200"
         >
         <template slot-scope="scope">
-          <el-button type="info" size="small" @click="save(scope.row)">保存</el-button>
+          <el-button type="info" size="small" @click="save(scope.row)" v-show="scope.row.hasChanged">保存</el-button>
           <el-button type="danger" size="small" @click="remove(scope.row.id, scope.$index)">删除</el-button>
         </template>
       </el-table-column>

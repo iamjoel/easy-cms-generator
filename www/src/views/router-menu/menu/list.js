@@ -24,6 +24,7 @@ export default {
   methods: {
     add() {
       this.list.push({
+        hasChanged: true,
         isNew:true,
         isPage: 1,
         entityTypeId: null,
@@ -69,6 +70,7 @@ export default {
         if(row.isNew) {
           delete row.isNew
         }
+        row.hasChanged = false
         this.fetchList()
         this.$message({
           showClose: true,
@@ -100,7 +102,8 @@ export default {
               ...item,
               showType: item.roleIds ? 'roles' : 'show',
               roleIds: item.roleIds ? item.roleIds.split(',') : [],
-              children: item.children || []
+              children: item.children || [],
+              hasChanged: false
             }
           })
           resolve()
@@ -125,6 +128,7 @@ export default {
     move(row, index, action) {
       var changeIndex = action === 'up' ? index - 1 : index + 1
       var data = row.children
+      row.hasChanged = true
       row.children = data.map((item, currIndex) => {
         if(currIndex === index) {
           return data[changeIndex]

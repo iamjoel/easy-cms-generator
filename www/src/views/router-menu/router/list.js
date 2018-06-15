@@ -23,7 +23,10 @@ export default {
     }  
   },
   methods: {
-    defaultChange(item) {
+    defaultChange(item, notChange) {
+      if(!notChange) {
+        item.hasChanged = true
+      }
       var entity = this.entityList.filter(entity => item.entityId === entity.id)[0] || {}
       var entityKey = entity.key
       var entityName = entity.label
@@ -43,6 +46,7 @@ export default {
     },
     add() {
       this.list.push({
+        hasChanged: true,
         isNew:true,
         entityId: null,
         name: '',
@@ -89,8 +93,10 @@ export default {
         if(row.isNew) {
           delete row.isNew
         }
+        row.hasChanged = false
+
         fetchList(this.KEY).then(({data}) => {
-          this.list = data.data.map(item => this.defaultChange(item))
+          this.list = data.data.map(item => this.defaultChange(item, true))
         })
         this.$message({
           showClose: true,
@@ -129,7 +135,7 @@ export default {
     ]).then( datas=> {
       this.entityTypeList = datas[0].data.data
       this.entityList = datas[1].data.data
-      this.list = datas[2].data.data.map(item => this.defaultChange(item))
+      this.list = datas[2].data.data.map(item => this.defaultChange(item, true))
 
 
       var usedUpdateEntityKeys = this.list

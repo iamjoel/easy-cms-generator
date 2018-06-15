@@ -24,6 +24,7 @@ export default {
         if(row.isNew) {
           delete row.isNew
         }
+        row.hasChanged = false
         fetchList(this.KEY).then(({data}) => {
           this.list = data.data
         })

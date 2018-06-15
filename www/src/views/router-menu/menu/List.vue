@@ -32,7 +32,7 @@
         width="150"
         >
         <template slot-scope="scope">
-          <el-select v-model="scope.row.entityTypeId" palceholder="" filterable clearable v-if="scope.row.isPage == 0">
+          <el-select v-model="scope.row.entityTypeId" palceholder="" filterable clearable v-if="scope.row.isPage == 0"  @change="scope.row.hasChanged = true">
             <el-option
               v-for="item in getEntityTypeList(scope.row.entityTypeId)"
               :key="item.id"
@@ -51,7 +51,7 @@
         width="150"
         >
         <template slot-scope="scope">
-          <el-select v-model="scope.row.routerId" filterable clearable  v-if="scope.row.isPage == 1">
+          <el-select v-model="scope.row.routerId" filterable clearable  v-if="scope.row.isPage == 1"  @change="scope.row.hasChanged = true">
             <el-option
               v-for="item in routerList"
               :key="item.key"
@@ -71,7 +71,7 @@
         width="120"
         >
         <template slot-scope="scope">
-          <el-input v-model="scope.row.name"></el-input>
+          <el-input v-model="scope.row.name" @change="scope.row.hasChanged = true"></el-input>
         </template>
       </el-table-column>
       
@@ -80,7 +80,7 @@
         label="显示类型"
         >
         <template slot-scope="scope">
-          <el-select v-model="scope.row.showType" placeholder="无" filterable clearable>
+          <el-select v-model="scope.row.showType" @change="scope.row.hasChanged = true" placeholder="无" filterable clearable>
           <el-option
             v-for="item in opShowType"
             :key="item.key"
@@ -114,7 +114,7 @@
         width="80"
         >
         <template slot-scope="scope">
-          <el-input-number :controls="false" v-model.number="scope.row.order"></el-input-number>
+          <el-input-number :controls="false" v-model.number="scope.row.order" @change="scope.row.hasChanged = true"></el-input-number>
         </template>
       </el-table-column>
       <el-table-column
@@ -123,7 +123,7 @@
         width="280"
         >
         <template slot-scope="scope">
-          <el-button type="info" size="small" @click="save(scope.row)">保存</el-button>
+          <el-button type="info" size="small" @click="save(scope.row)" v-show="scope.row.hasChanged">保存</el-button>
           <el-button type="success" size="small" @click="addSub(scope.row)" v-if="scope.row.isPage == 0">添加子菜单</el-button>
           <el-button type="danger" size="small" @click="remove(scope.row.id, scope.$index)">删除</el-button>
         </template>
@@ -141,7 +141,7 @@
               label="路由"
               >
               <template slot-scope="subScope">
-                <el-select v-model="subScope.row.routerId" filterable clearable>
+                <el-select v-model="subScope.row.routerId" filterable clearable @change="scope.row.hasChanged = true">
                   <el-option
                     v-for="item in filterRouteListByType(scope.row.entityTypeId)"
                     :key="item.key"
@@ -155,16 +155,16 @@
               prop="name"
               label="显示名称"
               >
-              <template slot-scope="scope">
-                <el-input v-model="scope.row.name"></el-input>
+              <template slot-scope="subScope">
+                <el-input v-model="subScope.row.name" @change="scope.row.hasChanged = true"></el-input>
               </template>
             </el-table-column>
             <el-table-column
               prop="op"
               label="显示类型"
               >
-              <template slot-scope="scope">
-                <el-select v-model="scope.row.showType" placeholder="无" filterable clearable>
+              <template slot-scope="subScope">
+                <el-select v-model="subScope.row.showType"  @change="scope.row.hasChanged = true"placeholder="无" filterable clearable>
                 <el-option
                   v-for="item in opShowType"
                   :key="item.key"
@@ -178,9 +178,9 @@
               prop="key"
               label="显示角色"
               >
-              <template slot-scope="scope">
-                <div v-if="scope.row.showType === 'roles'" >
-                  <el-select v-model="scope.row.roleIds" placeholder="所有角色" multiple filterable clearable>
+              <template slot-scope="subScope">
+                <div v-if="subScope.row.showType === 'roles'" >
+                  <el-select v-model="subScope.row.roleIds" placeholder="所有角色" multiple filterable clearable>
                     <el-option
                       v-for="item in roleList"
                       :key="item.key"
@@ -199,7 +199,7 @@
               <template slot-scope="childScope">
                 <el-button v-if="childScope.$index > 0" size="small" type="info" @click="move(scope.row, childScope.$index, 'up')">上移</el-button>
                 <el-button v-if="childScope.$index < scope.row.children.length - 1" size="small" type="info" @click="move(scope.row, childScope.$index, 'down')">下移</el-button>
-                <el-button type="danger" size="small" @click="scope.row.children.splice(childScope.$index, 1)">删除</el-button>
+                <el-button type="danger" size="small" @click="scope.row.hasChanged = true && scope.row.children.splice(childScope.$index, 1)">删除</el-button>
 
               </template>
             </el-table-column>

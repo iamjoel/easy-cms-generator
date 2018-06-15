@@ -5,6 +5,7 @@ export default {
     return {
       KEY: 'dict',
       isShowDetailDialog: false,
+      currRow: {},
       currData: [],
       list: [],
       isSynced: false
@@ -12,6 +13,7 @@ export default {
   },
   methods: {
     showItems(row) {
+      this.currRow = row
       this.currData = row.value
       this.isShowDetailDialog = true
     },
@@ -63,6 +65,10 @@ export default {
         })
         this.isSynced = false
       })
+    },
+    removeSubItem(index) {
+      this.currRow.hasChanged = true
+      this.currData.splice(index, 1)
     }
   },
   mounted() {
@@ -70,7 +76,12 @@ export default {
       this.isSynced = data.data[this.KEY]
     })
     fetchList(this.KEY).then(({data}) => {
-      this.list = data.data
+      this.list = data.data.map(item =>{
+        return {
+          ...item,
+          hasChanged: false
+        }
+      })
     })
   }
 }

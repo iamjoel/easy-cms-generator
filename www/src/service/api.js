@@ -19,11 +19,15 @@ export const fetchModel = (key, id) => {
 }
 
 export const addModel = (key, data) => {
-  return axios.put(`${SERVER_PREFIX}/${key}`, Object.assign({}, data))
+  var model = Object.assign({}, data)
+  delete model.hasChanged
+  return axios.put(`${SERVER_PREFIX}/${key}`, model)
 }
 
 export const editModel = (key, data) => {
-  return axios.post(`${SERVER_PREFIX}/${key}/${data.id}`, Object.assign({}, data))
+  var model = Object.assign({}, data)
+  delete model.hasChanged
+  return axios.post(`${SERVER_PREFIX}/${key}/${data.id}`, model)
 }
 
 export const deleteModel = (key, id) => {
@@ -31,7 +35,7 @@ export const deleteModel = (key, id) => {
 }
 
 export const syncModel = (key, data) => {
-  return axios.post(`${SERVER_PREFIX}/config/sync/${key}`, Object.assign({}, data))
+  return axios.post(`${SERVER_PREFIX}/config/sync/${key}`)
 }
 
 export const syncStauts = (key) => {
