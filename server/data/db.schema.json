@@ -6,5 +6,12 @@
   "listPage": [],
   "updatePage": [],
   "router": [],
-  "menu": []
+  "menu": [],
+  "syncStatus": {
+    "dict": false,
+    "entity": false,
+    "role": false,
+    "router": false,
+    "menu": false
+  }
 }

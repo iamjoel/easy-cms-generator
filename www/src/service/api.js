@@ -33,3 +33,8 @@ export const deleteModel = (key, id) => {
 export const syncModel = (key, data) => {
   return axios.post(`${SERVER_PREFIX}/config/sync/${key}`, Object.assign({}, data))
 }
+
+export const syncStauts = (key) => {
+  return axios.get(`${SERVER_PREFIX}/sync-status`)
+}
+

@@ -39,6 +39,7 @@ module.exports = function (tableName) {
               updateAt: Date.now()
             }, req.body))
             .write()
+        setNotSynced(tableName)
         res.send(apiFormat.success())
       } catch(error) {
         res.send(apiFormat.error(error))
@@ -56,6 +57,7 @@ module.exports = function (tableName) {
               updateAt: Date.now()
             })
             .write()
+        setNotSynced(tableName)
         res.send(apiFormat.success())
       } catch(error) {
         res.send(apiFormat.error(error))
@@ -69,10 +71,20 @@ module.exports = function (tableName) {
               id: req.params.id,
             })
             .write()
+        setNotSynced(tableName)
         res.send(apiFormat.success())
       } catch(error) {
         res.send(apiFormat.error(error))
       }
     }
   }
+}
+
+function setNotSynced(tableName) {
+  global.db
+      .get('syncStatus')
+      .assign({
+        [tableName]: false
+      })
+      .write()
 }

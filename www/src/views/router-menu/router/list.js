@@ -1,4 +1,4 @@
-import { fetchList, addModel,editModel,deleteModel,syncModel } from '@/service/api'
+import { fetchList, addModel,editModel,deleteModel,syncModel, syncStauts } from '@/service/api'
 
 export default {
   data() {
@@ -17,7 +17,9 @@ export default {
       },{
         key: 'other',
         label: '其他'
-      }, ]
+      }, ],
+      isSynced: false
+
     }  
   },
   methods: {
@@ -61,6 +63,7 @@ export default {
           message: '同步成功',
           type: 'success'
         })
+        this.isSynced = true
       })
     },
     save(row) {
@@ -94,6 +97,7 @@ export default {
           message: '保存成功',
           type: 'success'
         })
+        this.isSynced = false
       })
     },
     remove(id, index) {
@@ -104,6 +108,7 @@ export default {
           message: '删除成功',
           type: 'success'
         })
+        this.isSynced = false
       })
     },
     getEntity(entityId) {
@@ -114,6 +119,9 @@ export default {
     }
   },
   mounted() {
+    syncStauts().then(({data}) => {
+      this.isSynced = data.data[this.KEY]
+    })
     Promise.all([
       fetchList('entityType'),
       fetchList('entity'),

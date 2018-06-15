@@ -6,6 +6,8 @@ const app = express()
 var bodyParser = require('body-parser')
 app.use(bodyParser.json())
 
+const apiFormat = require('./utils/apiFormat')
+
 // Lowdb https://github.com/typicode/lowdb
 const low = require('lowdb')
 const FileSync = require('lowdb/adapters/FileSync')
@@ -62,6 +64,13 @@ app.post('/update-page/expendCofigToFile/:id', (req, res)=> {
 
 app.post('/update-page/updateFreeze/:id', (req, res)=> {
   updatePageApi.updateFreeze(req, res)
+})
+
+app.get('/sync-status', (req, res)=> {
+  var results = global.db
+                      .get('syncStatus')
+                      .value()
+  res.send(apiFormat.success(results))
 })
 
 

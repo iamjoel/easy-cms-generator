@@ -20,6 +20,7 @@ module.exports = {
         fetchList(type).then(data => {
           return writeConfigFile(type, data)
         }).then(() => {
+          setSynced(type)
           res.send(apiFormat.success({}))
         }, (e) => {
           res.send(apiFormat.error(e))
@@ -29,6 +30,7 @@ module.exports = {
         fetchList('role').then(data => {
           return writeConfigFile('roles', data)
         }).then(() => {
+          setSynced(type)
           res.send(apiFormat.success({}))
         }, (e) => {
           res.send(apiFormat.error(e))
@@ -38,6 +40,7 @@ module.exports = {
         fetchList('entity').then(data => {
           return writeConfigFile('entities', data)
         }).then(() => {
+          setSynced(type)
           res.send(apiFormat.success({}))
         }, (e) => {
           res.send(apiFormat.error(e))
@@ -51,6 +54,7 @@ module.exports = {
           fetchList('menu'),
         ]).then(([entity, entityType, router, menu]) => {
           writeConfigFile('menu', menu, [entity, entityType, router]).then(() => {
+            setSynced(type)
             res.send(apiFormat.success({}))
           }, (e) => {
             res.send(apiFormat.error(e))
@@ -62,9 +66,20 @@ module.exports = {
       default: 
         res.send(apiFormat.error('未知类型！'))
     }
+
+    
   }
   
 }
+
+function setSynced(type) {
+  global.db
+      .get('syncStatus')
+      .assign({
+        [type]: true
+      })
+      .write()
+} 
 
 function fetchList(tableName) {
   return new Promise((resolve, reject) => {

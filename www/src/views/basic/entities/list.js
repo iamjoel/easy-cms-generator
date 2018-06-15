@@ -1,4 +1,4 @@
-import { fetchList, addModel,editModel,deleteModel,syncModel } from '@/service/api'
+import { fetchList, addModel, editModel, deleteModel, syncModel, syncStauts } from '@/service/api'
 
 export default {
   data() {
@@ -6,6 +6,7 @@ export default {
       KEY: 'entity',
       list: [],
       parentList: [],
+      isSynced: false
     }  
   },
   methods: {
@@ -27,6 +28,7 @@ export default {
           message: '同步成功',
           type: 'success'
         })
+        this.isSynced = true
       })
     },
     save(row) {
@@ -57,6 +59,7 @@ export default {
           message: '保存成功',
           type: 'success'
         })
+        this.isSynced = false
       })
     },
     remove(id, index) {
@@ -67,10 +70,14 @@ export default {
           message: '删除成功',
           type: 'success'
         })
+        this.isSynced = false
       })
     }
   },
   mounted() {
+      syncStauts().then(({data}) => {
+        this.isSynced = data.data[this.KEY]
+      })
      fetchList('entityType').then(({data}) => {
       this.parentList = data.data
         fetchList(this.KEY).then(({data}) => {

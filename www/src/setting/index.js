@@ -68,7 +68,8 @@ var _menuConfig = [{
   },
 ]
 
-export const urls = {}
+export const urls = {
+}
 
 const DEFAULT_PAGES = [{
   type: 'list'
