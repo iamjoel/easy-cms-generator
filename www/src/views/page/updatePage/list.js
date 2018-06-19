@@ -25,12 +25,16 @@ export default {
       return res || '-'
     },
     remove(id, index) {
-      deleteModel(this.KEY, id).then(({data})=> {
-        this.list.splice(index, 1)
-        this.$message({
-          showClose: true,
-          message: '删除成功',
-          type: 'success'
+      this.$confirm(`确认删除: ${this.list[index].name} 对应的编辑页?`,  {
+        type: 'warning'
+      }).then(() => {
+        deleteModel(this.KEY, id).then(({data})=> {
+          this.list.splice(index, 1)
+          this.$message({
+            showClose: true,
+            message: '删除成功',
+            type: 'success'
+          })
         })
       })
     },

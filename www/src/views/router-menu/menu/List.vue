@@ -125,7 +125,7 @@
         <template slot-scope="scope">
           <el-button type="info" size="small" @click="save(scope.row)" v-show="scope.row.hasChanged">保存</el-button>
           <el-button type="success" size="small" @click="addSub(scope.row)" v-if="scope.row.isPage == 0">添加子菜单</el-button>
-          <el-button type="danger" size="small" @click="remove(scope.row.id, scope.$index)">删除</el-button>
+          <el-button type="danger" size="small" @click="remove(scope.row.id, scope.$index)" v-if="scope.row.children.length === 0">删除</el-button>
         </template>
       </el-table-column>
       <el-table-column type="expand">
@@ -199,7 +199,7 @@
               <template slot-scope="childScope">
                 <el-button v-if="childScope.$index > 0" size="small" type="info" @click="move(scope.row, childScope.$index, 'up')">上移</el-button>
                 <el-button v-if="childScope.$index < scope.row.children.length - 1" size="small" type="info" @click="move(scope.row, childScope.$index, 'down')">下移</el-button>
-                <el-button type="danger" size="small" @click="scope.row.hasChanged = true && scope.row.children.splice(childScope.$index, 1)">删除</el-button>
+                <el-button type="danger" size="small" @click="removeSub(scope.row, childScope.$index, childScope.row.name)">删除</el-button>
 
               </template>
             </el-table-column>

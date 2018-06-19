@@ -81,15 +81,27 @@ export default {
       })
     },
     remove(id, index) {
-      deleteModel(this.KEY, id).then(({data})=> {
-        this.list.splice(index, 1)
-        this.$message({
-          showClose: true,
-          message: '删除成功',
-          type: 'success'
+      this.$confirm(`确认删除菜单?`,  {
+        type: 'warning'
+      }).then(() => {
+        deleteModel(this.KEY, id).then(({data})=> {
+          this.list.splice(index, 1)
+          this.$message({
+            showClose: true,
+            message: '删除成功',
+            type: 'success'
+          })
+          this.isSynced = false
         })
-        this.isSynced = false
-      })
+      }).catch(() => {})
+      
+    },
+    removeSub(row, index, name) {
+      this.$confirm(`确认删除: ${name}?`,  {
+        type: 'warning'
+      }).then(() => {
+        row.children.splice(index, 1)
+      }).catch(() => {})
     },
     fetchList() {
       return new Promise((resolve, reject) => {

@@ -39,12 +39,16 @@ export default {
       })
     },
     remove(id, index) {
-      deleteModel(this.KEY, id).then(({data})=> {
-        this.entityTypeList.splice(index, 1)
-        this.$message({
-          showClose: true,
-          message: '删除成功',
-          type: 'success'
+      this.$confirm(`确认删除: ${this.entityTypeList[index].label}?`,  {
+        type: 'warning'
+      }).then(() => {
+        deleteModel(this.KEY, id).then(({data})=> {
+          this.entityTypeList.splice(index, 1)
+          this.$message({
+            showClose: true,
+            message: '删除成功',
+            type: 'success'
+          })
         })
       })
     },
@@ -85,15 +89,19 @@ export default {
         this.isSynced = false
       })
     },
-    removeEntity(id, index) {
-      deleteModel('entity', id).then(({data})=> {
-        this.reloadList()
-        this.$message({
-          showClose: true,
-          message: '删除成功',
-          type: 'success'
+    removeEntity(id, index, label) {
+      this.$confirm(`确认删除: ${label}?`,  {
+        type: 'warning'
+      }).then(() => {
+        deleteModel('entity', id).then(({data})=> {
+          this.reloadList()
+          this.$message({
+            showClose: true,
+            message: '删除成功',
+            type: 'success'
+          })
+          this.isSynced = false
         })
-        this.isSynced = false
       })
     },
     getEntityList(parentId) {
