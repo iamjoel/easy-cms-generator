@@ -97,7 +97,7 @@ ${inner}
 ${config.cols.map(item => {
   var inner = item.formatFn ? 
 `          <template slot-scope="scope">
-            {{${item.formatFn}(scope.row)}}
+            {{${item.formatFn}(scope.row, '${item.key}')}}
           </template>` : ''
   var res = 
 `        <el-table-column
