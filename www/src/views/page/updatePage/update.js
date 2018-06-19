@@ -238,7 +238,7 @@ export default {
         fetchList('entityType'),
         fetchList('entity')
       ]).then( datas=> {
-        this.dict = datas[0].data.data
+        this.dictList = datas[0].data.data
         this.usedEntityKeys = datas[1].data.data.map(item => {
           try {
             return item.basic.entity
@@ -257,6 +257,7 @@ export default {
               || (this.model && this.model.basic && entity.key === this.model.basic.entity)
             return res
           })
+
       })
     })
   }
