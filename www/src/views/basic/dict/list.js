@@ -38,6 +38,7 @@ export default {
     save(row) {
       var action = row.isNew ? addModel : editModel
       var data = {...row}
+      // todo 改成数字
       delete data.isNew
       action(this.KEY, data).then(({data})=> {
         if(row.isNew) {

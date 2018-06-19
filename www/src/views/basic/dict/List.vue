@@ -71,7 +71,7 @@
           label="值"
           >
           <template slot-scope="scope">
-            <el-input v-model="scope.row.key" @change="currRow.hasChanged = true"></el-input>
+            <el-input v-model.number="scope.row.key" @change="currRow.hasChanged = true"></el-input>
           </template>
         </el-table-column>
         <el-table-column

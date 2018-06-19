@@ -5,7 +5,7 @@
 * 解决 table 有横向滚动条的bug
 * 设置下面的属性，会导致menu list 的table 宽度不断变，所有不用。
 */
-.main:not(.menu-list-page) .el-table__body {
+.main:not(.menu-list-page, .entity-and-its-type-page) .el-table__body {
   width: auto !important; 
 }
 .el-menu {
