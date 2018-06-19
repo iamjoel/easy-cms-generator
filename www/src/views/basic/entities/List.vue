@@ -58,10 +58,15 @@
       <el-table-column
         prop="key"
         label="操作"
+        width="300"
         >
         <template slot-scope="scope">
           <el-button type="info" size="small" @click="save(scope.row)" v-show="scope.row.hasChanged">保存</el-button>
           <el-button type="danger" size="small" @click="remove(scope.row.id, scope.$index)">删除</el-button>
+          <el-button type="success" size="small" @click="$router.push('/page/listPage/update/' + scope.row.listPage.id)" v-if="scope.row.listPage" :disabled="scope.row.listPage.isFreeze == 1">编辑列表页</el-button>
+          <el-button type="info" size="small" @click="$router.push('/page/listPage/update/-1')" v-else>新增列表页</el-button>
+          <el-button type="success" size="small"  @click="$router.push('/page/updatePage/update/' + scope.row.updatePage.id)" v-if="scope.row.updatePage" :disabled="scope.row.updatePage.isFreeze == 1">编辑编辑页</el-button>
+          <el-button type="info" size="small" @click="$router.push('/page/updatePage/update/-1')" v-else>新增编辑页</el-button>
         </template>
       </el-table-column>
     </el-table>

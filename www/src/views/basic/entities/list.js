@@ -74,16 +74,29 @@ export default {
         })
         this.isSynced = false
       })
-    }
+    },
   },
   mounted() {
       syncStauts().then(({data}) => {
         this.isSynced = data.data[this.KEY]
       })
-     fetchList('entityType').then(({data}) => {
-      this.parentList = data.data
+      Promise.all([
+        fetchList('listPage'),
+        fetchList('updatePage'),
+        fetchList('entityType'),
+      ]).then( datas => {
+        let listPage = datas[0].data.data
+        let updatePage = datas[1].data.data
+        this.parentList = datas[2].data.data
+
         fetchList(this.KEY).then(({data}) => {
-          this.list = data.data
+          this.list = data.data.map(item => {
+            return {
+              ...item,
+              listPage: listPage.filter(page => page.basic && page.basic.entity === item.key)[0],
+              updatePage: updatePage.filter(page => page.basic && page.basic.entity === item.key)[0],
+            }
+          })
           if(this.$route.params.typeId) {
             this.list.unshift({
               isNew:true,
@@ -92,7 +105,9 @@ export default {
               parentId: this.$route.params.typeId,
               order: this.list.length > 0 
                   ? this.list[this.list.length - 1].order + 1
-                  : 1
+                  : 1,
+              listPage: false,
+              updatePage: false
             })
           }
         })
