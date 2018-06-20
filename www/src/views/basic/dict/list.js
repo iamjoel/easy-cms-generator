@@ -38,6 +38,13 @@ export default {
     save(row) {
       var action = row.isNew ? addModel : editModel
       var data = {...row}
+      data.value = data.value.map(item => {
+        return {
+          ...item,
+          // 后台的字典子项目，如果数字的，就不是字符串的。
+          key: /^\d+$/.test(item.key) ? parseInt(item.key) : item.key
+        }
+      })
       // todo 改成数字
       delete data.isNew
       action(this.KEY, data).then(({data})=> {
