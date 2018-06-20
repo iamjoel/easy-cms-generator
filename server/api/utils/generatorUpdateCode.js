@@ -33,12 +33,13 @@ function generatorJS(config) {
       saveFormatFnCode.push(
 `      model.${col.key} = this.${col.saveFormatFn}(model)`)
     }
-    if(col.dataType === 'select' && col.dataSource.type === 'entity') {
-      initRemoteSelectCode.push(`
-      if(model.${col.key}) {
-        this.$refs.${col.key}.setVal(model.${col.key})
-      }
-      `)
+    
+    if(col.dataType === 'select' && col.dataSource.type === 'entities') {
+      initRemoteSelectCode.push(
+`        if(model.${col.key}) {
+          this.$refs.${col.key}.setVal(model.${col.key})
+        }`
+      )
       // xxxId to xxx
       model.moreInfo[col.key.substr(0, col.key.length - 2)] = {
         name: null
@@ -225,7 +226,8 @@ ${config.cols.map(col => {
   }
 
   var viewValue = `model.${col.key}`
-  if(dataType === 'select' && col.dataSource.type === 'entity') {
+
+  if(dataType === 'select' && col.dataSource.type === 'entities') {
     viewValue = `model.moreInfo.${col.key.substr(0, col.key.length - 2)}.name`
   }
   var res = 
