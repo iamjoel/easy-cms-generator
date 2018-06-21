@@ -71,6 +71,9 @@ export default {
       },{
         key: 'bool',
         label: '布尔值'
+      },{
+        key: 'price',
+        label: '价格'
       },],
       isShowEditArgsDialog: false,
       isShowDataSourceDialog: false,

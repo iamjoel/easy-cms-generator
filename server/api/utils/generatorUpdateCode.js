@@ -15,7 +15,13 @@ function generatorJS(config) {
     }
   }
   var formatFnCode = []
+  var formatPriceCode = []
+  var allFormatCode = []
+
   var saveFormatFnCode = []
+  var savePriceFormatCode = []
+  var allSaveFormatCode = []
+
   var initRemoteSelectCode = []
 
   config.cols.forEach(col => {
@@ -44,11 +50,20 @@ function generatorJS(config) {
       model.moreInfo[col.key.replace(/Id$/i, '')] = {
         name: null
       }
+    } else if(col.dataType === 'price') {
+      formatPriceCode.push(
+`      if(model.${col.key}) {
+        model.${col.key} /= 100
+      }`)
+      savePriceFormatCode.push(
+`      model.${col.key} *= 100
+      `)
     }
   })
 
-  formatFnCode = formatFnCode.join('\n')
-  saveFormatFnCode = saveFormatFnCode.join('\n')
+  allFormatCode = [...formatFnCode, ...formatPriceCode].join('\n')
+  allSaveFormatCode = [...saveFormatFnCode, ...savePriceFormatCode].join('\n')
+  
   initRemoteSelectCode = initRemoteSelectCode.join('\n')
 
   var rules = {}
@@ -56,7 +71,7 @@ function generatorJS(config) {
     if(col.validRules && col.validRules.length > 0) {
       rules[col.key] = col.validRules.map(rule => {
         if(rule.name === 'required') {
-          return `{ ${ col.dataType === 'number' ? `type: 'number',`: ''}required: true, message: '${rule.errMsg}', trigger: 'blur' }`
+          return `{ ${ (col.dataType === 'number' || col.dataType === 'price') ? `type: 'number', `: ''}required: true, message: '${rule.errMsg}', trigger: 'blur' }`
         }
         return false
       }).filter(item => item)
@@ -99,7 +114,7 @@ export default {
   methods: {
     formatFetchData(model) {
       model = deepClone(model)
-${formatFnCode}
+${allFormatCode}
       // 下拉框赋值
       if(!this.isView) {
 ${initRemoteSelectCode}
@@ -117,8 +132,7 @@ ${dictModelCols.length > 0 ?
     },
     formatSaveData() {
       var model = deepClone(this.model)
-
-${saveFormatFnCode ? saveFormatFnCode : ''}
+${allSaveFormatCode}
       return model
     },
 ${generateVueMethods(config.fn)}
@@ -150,7 +164,7 @@ ${config.cols.map(col => {
   } else if(dataType === 'strings') {
     inner = 
 `      <el-input v-model="model.${col.key}" type="textarea" :rows="3"></el-input>`
-  } else if(dataType === 'number') {
+  } else if(dataType === 'number' || dataType === 'price') { // 价格也是数字
     inner = 
 `      <el-input-number v-model.number="model.${col.key}" :controls="false"></el-input-number>`
   } else if(dataType === 'select') {
