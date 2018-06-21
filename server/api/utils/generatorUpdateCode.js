@@ -70,8 +70,8 @@ function generatorJS(config) {
   config.cols.forEach(col => {
     if(col.validRules && col.validRules.length > 0) {
       rules[col.key] = col.validRules.map(rule => {
-        if(rule.name === 'required') {
-          return `{ ${ (col.dataType === 'number' || col.dataType === 'price') ? `type: 'number', `: ''}required: true, message: '${rule.errMsg}', trigger: 'blur' }`
+        if(rule.name === 'required') { // 布尔值只能是 0 或 1，所以也是数字型的。
+          return `{ ${ (['number','price','bool'].indexOf(col.dataType) !== -1) ? `type: 'number', `: ''}required: true, message: '${rule.errMsg}', trigger: 'blur' }`
         }
         return false
       }).filter(item => item)

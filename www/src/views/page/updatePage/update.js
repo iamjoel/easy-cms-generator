@@ -175,6 +175,7 @@ export default {
       var action
       switch(item.dataType) {
         case 'select':
+        case 'bool':
           action = '选择'
           break;
         case 'img':
