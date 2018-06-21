@@ -237,6 +237,9 @@ ${config.cols.map(col => {
         :on-value="1"
         :off-value="0">
       </el-switch>`
+  } else if(dataType === 'password') {
+    inner = 
+`      <el-input v-model="model.${col.key}" type="password"></el-input>`
   } else {
     inner = 
 `未知类型${dataType}。无法描绘`

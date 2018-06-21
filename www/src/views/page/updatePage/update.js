@@ -74,6 +74,9 @@ export default {
       },{
         key: 'price',
         label: '价格'
+      },{
+        key: 'password',
+        label: '密码'
       },],
       isShowEditArgsDialog: false,
       isShowDataSourceDialog: false,
