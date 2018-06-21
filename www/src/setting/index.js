@@ -2,8 +2,8 @@ import standardizeMenu from '@/assets/utils/standardize-menu-config'
 var HOST
 var useFEMock = false
 
-HOST = 'http://127.0.0.1:8002'
-// HOST = 'http://192.168.2.109:8002'
+// HOST = 'http://127.0.0.1:8002'
+HOST = 'http://192.168.2.109:8002'
 
 export var SERVER_PREFIX = `${HOST}`
 

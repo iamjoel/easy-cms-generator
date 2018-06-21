@@ -41,7 +41,7 @@ function generatorJS(config) {
         }`
       )
       // xxxId to xxx
-      model.moreInfo[col.key.substr(0, col.key.length - 2)] = {
+      model.moreInfo[col.key.replace(/Id$/i, '')] = {
         name: null
       }
     }
@@ -104,11 +104,15 @@ ${formatFnCode}
       if(!this.isView) {
 ${initRemoteSelectCode}
       } else {
+${dictModelCols.length > 0 ? 
+`        // 预览时，字典key对应的文字
         var dictModelCols = ${JSON.stringify(dictModelCols)} || []
         dictModelCols.length > 0 && dictModelCols.forEach(col => {
           model[col.key] = this.getDictName(col.dictKey, model[col.key])
-        })
+        })` : ''
+}
       }
+
       return model
     },
     formatSaveData() {
@@ -228,7 +232,7 @@ ${config.cols.map(col => {
   var viewValue = `model.${col.key}`
 
   if(dataType === 'select' && col.dataSource.type === 'entities') {
-    viewValue = `model.moreInfo.${col.key.substr(0, col.key.length - 2)}.name`
+    viewValue = `model.moreInfo.${col.key.replace(/Id$/i, '')}.name`
   }
   var res = 
 `      <j-edit-item ${['strings', 'img', 'imgs'].indexOf(col.dataType) !== -1 ? 'fill' : ''} label="${col.label}" prop="${col.key}" :is-view="${isView}" :view-value="${viewValue}">
