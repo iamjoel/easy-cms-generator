@@ -117,8 +117,8 @@ ${dictModelCols.length > 0 ?
     },
     formatSaveData() {
       var model = deepClone(this.model)
-      ${saveFormatFnCode}
-      delete model.moreInfo // 表关联的数据
+
+${saveFormatFnCode ? saveFormatFnCode : ''}
       return model
     },
 ${generateVueMethods(config.fn)}
@@ -213,15 +213,19 @@ ${config.cols.map(col => {
         <div class="img-upload" style="text-align:left" v-else>
           <img v-if="model.${col.key}" :src="img | img" class="image-show mr-10 mb-10" v-for="(img, index) in model.${col.key}.split(',')">
         </div>`
-  } else { // 布尔值
+  } else if(dataType === 'bool'){ // 布尔值
+    // 布尔值，后台存的一定是数字型的
     inner = 
 `      <el-switch
         v-model="model.${col.key}"
         on-text="是"
         off-text="否"
-        on-value="1"
-        off-value="0">
+        :on-value="1"
+        :off-value="0">
       </el-switch>`
+  } else {
+    inner = 
+`未知类型${dataType}。无法描绘`
   }
   var isView = 'isView'
   // 图片类型，自定义显示类型
@@ -233,7 +237,10 @@ ${config.cols.map(col => {
 
   if(dataType === 'select' && col.dataSource.type === 'entities') {
     viewValue = `model.moreInfo.${col.key.replace(/Id$/i, '')}.name`
+  } else if(dataType === 'bool') {
+    viewValue = `model.${col.key} == 1 ? '是' : '否'`
   }
+
   var res = 
 `      <j-edit-item ${['strings', 'img', 'imgs'].indexOf(col.dataType) !== -1 ? 'fill' : ''} label="${col.label}" prop="${col.key}" :is-view="${isView}" :view-value="${viewValue}">
   ${inner}
