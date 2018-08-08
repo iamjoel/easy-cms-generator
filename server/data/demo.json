@@ -1,0 +1,217 @@
+{
+  "role": [],
+  "dict": [],
+  "entityType": [
+    {
+      "id": "ea507603-c1d8-0c0c-8cb3-6bd001872f5d",
+      "updateAt": 1533691990117,
+      "key": "demo",
+      "label": "Demo",
+      "order": 1,
+      "children": []
+    },
+    {
+      "id": "0885956a-df1d-99be-5536-a87a629400cd",
+      "updateAt": 1533692053339,
+      "key": "first",
+      "label": "一级目录",
+      "order": 2,
+      "children": []
+    }
+  ],
+  "entity": [
+    {
+      "id": "95dc1e2d-cd02-7d73-3350-1a79a4a0b3ce",
+      "key": "list",
+      "label": "列表",
+      "parentId": "ea507603-c1d8-0c0c-8cb3-6bd001872f5d",
+      "order": null,
+      "roleIds": ""
+    }
+  ],
+  "listPage": [
+    {
+      "id": "407f3e7d-79bc-5615-fe1e-c01ab03a9265",
+      "updateAt": 1533692599346,
+      "basic": {
+        "entity": "list",
+        "codePath": "demo/list"
+      },
+      "cols": [
+        {
+          "label": "名称",
+          "key": "name",
+          "formatFn": null
+        },
+        {
+          "label": "",
+          "key": "",
+          "formatFn": null
+        }
+      ],
+      "operate": {
+        "add": {
+          "isShow": true
+        },
+        "edit": {
+          "isShow": true
+        },
+        "detail": {
+          "isShow": true
+        },
+        "delete": {
+          "isShow": true
+        }
+      },
+      "searchCondition": [],
+      "fn": [],
+      "isSynced": true
+    }
+  ],
+  "updatePage": [
+    {
+      "id": "81f235e3-dc52-1b22-320b-63b684569fa9",
+      "updateAt": 1533692602060,
+      "basic": {
+        "entity": "list",
+        "codePath": "demo/list"
+      },
+      "cols": [
+        {
+          "label": "姓名",
+          "key": "name",
+          "dataType": "string",
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请输入姓名"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "年龄",
+          "key": "age",
+          "dataType": "number",
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请输入年龄"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "是会员",
+          "key": "isMember",
+          "dataType": "bool",
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请选择是会员"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "头像",
+          "key": "avatar",
+          "dataType": "img",
+          "imgConfig": {
+            "max": 5,
+            "tip": "建议尺寸 300 * 300"
+          },
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请上传图片"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "更多图片",
+          "key": "imgs",
+          "dataType": "imgs",
+          "imgConfig": {
+            "max": 5,
+            "tip": "建议尺寸 750 * 300"
+          },
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请上传图片"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "描述",
+          "key": "des",
+          "dataType": "string",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        }
+      ],
+      "fn": [],
+      "isSynced": true
+    }
+  ],
+  "router": [
+    {
+      "id": "d99da7e5-4e73-6042-1c75-c4a99dbddf91",
+      "entityId": "95dc1e2d-cd02-7d73-3350-1a79a4a0b3ce",
+      "name": "列表",
+      "type": "list",
+      "routePath": "/demo/list/list",
+      "filePath": "demo/list/List",
+      "order": 1,
+      "entityTypeName": "Demo"
+    },
+    {
+      "id": "11294228-73d5-c94e-517d-88694fc181c8",
+      "entityId": "95dc1e2d-cd02-7d73-3350-1a79a4a0b3ce",
+      "name": "更新",
+      "type": "update",
+      "routePath": "/demo/list/update/:id",
+      "filePath": "demo/list/Update",
+      "order": 2,
+      "entityTypeName": "Demo"
+    }
+  ],
+  "menu": [
+    {
+      "id": "8a6870a6-b9f6-d1b0-67dd-9c5dd123b207",
+      "isPage": 0,
+      "entityTypeId": "ea507603-c1d8-0c0c-8cb3-6bd001872f5d",
+      "routerId": "d99da7e5-4e73-6042-1c75-c4a99dbddf91",
+      "name": "示例",
+      "roleIds": "",
+      "order": 1,
+      "children": [
+        {
+          "routerId": "d99da7e5-4e73-6042-1c75-c4a99dbddf91",
+          "name": "会员列表",
+          "showType": "show",
+          "roleIds": []
+        }
+      ]
+    }
+  ],
+  "syncStatus": {
+    "dict": false,
+    "entity": true,
+    "role": false,
+    "router": true,
+    "menu": true,
+    "entityType": false,
+    "listPage": false,
+    "updatePage": false
+  }
+}
