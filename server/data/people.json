@@ -1,0 +1,4093 @@
+{
+  "role": [
+    {
+      "id": "b2ab54b9-2d66-d794-7ed9-386320a985bc",
+      "key": "1",
+      "label": "系统管理员"
+    },
+    {
+      "id": "9988c7bc-3395-1dce-90eb-353d511aa18d",
+      "key": "2",
+      "label": "业务主管"
+    },
+    {
+      "id": "dacc415f-5a8c-0331-41ef-3faa84d43afe",
+      "key": "3",
+      "label": "文员"
+    }
+  ],
+  "dict": [
+    {
+      "id": "4e92a690-6cdc-d990-2d99-8479d5dd9969",
+      "key": "identityType",
+      "label": "证件类型",
+      "value": [
+        {
+          "key": 1,
+          "label": "身份证"
+        },
+        {
+          "key": 2,
+          "label": "护照"
+        }
+      ]
+    },
+    {
+      "id": "9e67c231-248f-4ca1-3b66-783477df4e63",
+      "key": "supportLevel",
+      "label": "扶持力度",
+      "value": [
+        {
+          "key": 1,
+          "label": "小"
+        },
+        {
+          "key": 2,
+          "label": "中"
+        },
+        {
+          "key": 3,
+          "label": "大"
+        }
+      ]
+    },
+    {
+      "id": "9b38f199-03bc-0b0c-c8f8-3de3bb970d0b",
+      "key": "difficultyLevel",
+      "label": "申报难度",
+      "value": [
+        {
+          "key": 1,
+          "label": "容易"
+        },
+        {
+          "key": 2,
+          "label": "中等"
+        },
+        {
+          "key": 3,
+          "label": "难"
+        }
+      ]
+    },
+    {
+      "id": "cb533b56-0159-7743-d256-06342ce1b3b6",
+      "key": "role",
+      "label": "角色",
+      "value": [
+        {
+          "key": 1,
+          "label": "人才"
+        },
+        {
+          "key": 2,
+          "label": "企业"
+        },
+        {
+          "key": 3,
+          "label": "政府"
+        },
+        {
+          "key": 4,
+          "label": "服务机构"
+        },
+        {
+          "key": 5,
+          "label": "专家"
+        }
+      ]
+    },
+    {
+      "id": "e9bdab72-d597-5189-9b77-f50722385bb3",
+      "key": "adminRole",
+      "label": "管理后台角色",
+      "value": [
+        {
+          "key": 1,
+          "label": "系统管理员"
+        },
+        {
+          "key": 2,
+          "label": "业务主管"
+        },
+        {
+          "key": 3,
+          "label": "文员"
+        }
+      ]
+    },
+    {
+      "id": "58f14b98-5a2d-690f-d996-18c4d6a10997",
+      "key": "level",
+      "label": "行政等级",
+      "value": [
+        {
+          "key": 0,
+          "label": "省"
+        },
+        {
+          "key": 1,
+          "label": "市"
+        },
+        {
+          "key": 2,
+          "label": "区"
+        },
+        {
+          "key": 3,
+          "label": "街道或板块"
+        }
+      ]
+    },
+    {
+      "id": "73363b63-6859-2a56-c2f1-86f79944ab6c",
+      "key": "gender",
+      "label": "性别",
+      "value": [
+        {
+          "key": 0,
+          "label": "未知"
+        },
+        {
+          "key": 1,
+          "label": "男"
+        },
+        {
+          "key": 2,
+          "label": "女"
+        }
+      ]
+    }
+  ],
+  "entityType": [
+    {
+      "id": "46ed3088-258f-0cdd-71ce-81bc97679783",
+      "updateAt": 1541472868486,
+      "key": "account",
+      "label": "帐号",
+      "order": 1,
+      "children": []
+    },
+    {
+      "id": "6d50c351-f5d5-20b4-dc6d-499252acbe8a",
+      "updateAt": 1541473497585,
+      "key": "region",
+      "label": "区域",
+      "order": 2,
+      "children": []
+    },
+    {
+      "id": "8d49b721-4f28-fe03-8e80-e366d4b80cae",
+      "updateAt": 1541473593696,
+      "key": "talent_org",
+      "label": "人才和组织",
+      "order": 3,
+      "children": []
+    },
+    {
+      "id": "e4674db0-a40a-b32e-fc05-9cb7671c9a0a",
+      "updateAt": 1541473749932,
+      "key": "policy",
+      "label": "政策",
+      "order": 4,
+      "children": []
+    },
+    {
+      "id": "554dc62e-3f2a-0a9b-2fb1-5b7e618a168f",
+      "updateAt": 1541473807989,
+      "key": "business_data",
+      "label": "业务数据",
+      "order": 5,
+      "children": []
+    },
+    {
+      "id": "9415f023-6119-9a1c-550a-4beba969f211",
+      "updateAt": 1541473892209,
+      "key": "dict",
+      "label": "字典",
+      "order": 6,
+      "children": []
+    },
+    {
+      "id": "eae39d47-af70-35da-bfa6-a4467ec954d8",
+      "updateAt": 1541473947721,
+      "key": "info",
+      "label": "资讯",
+      "order": 7,
+      "children": []
+    },
+    {
+      "id": "2ffa81f9-b447-97dd-857a-41f43b874fc0",
+      "updateAt": 1541474046924,
+      "key": "member",
+      "label": "会员",
+      "order": 8,
+      "children": []
+    }
+  ],
+  "entity": [
+    {
+      "id": "6ff0ae34-592d-3830-7eb2-156f6a136e21",
+      "key": "account",
+      "label": "帐号",
+      "parentId": "46ed3088-258f-0cdd-71ce-81bc97679783",
+      "order": null,
+      "roleIds": ""
+    },
+    {
+      "id": "2614eeb9-35df-6509-c996-2ac29df2c316",
+      "key": "region",
+      "label": "区域",
+      "parentId": "6d50c351-f5d5-20b4-dc6d-499252acbe8a",
+      "order": 1,
+      "roleIds": ""
+    },
+    {
+      "id": "ed12e0a6-33e9-a322-02c4-162f15a89e95",
+      "key": "slider",
+      "label": "区域轮播图",
+      "parentId": "6d50c351-f5d5-20b4-dc6d-499252acbe8a",
+      "order": 2,
+      "roleIds": ""
+    },
+    {
+      "id": "ffe80936-f37a-cbd7-e736-5f3babae32ed",
+      "key": "region_intro",
+      "label": "区域介绍",
+      "parentId": "6d50c351-f5d5-20b4-dc6d-499252acbe8a",
+      "order": 3,
+      "roleIds": ""
+    },
+    {
+      "id": "2361293a-9b41-150f-cece-978244a3e86e",
+      "key": "talent",
+      "label": "人才",
+      "parentId": "8d49b721-4f28-fe03-8e80-e366d4b80cae",
+      "order": 1,
+      "roleIds": ""
+    },
+    {
+      "id": "e24a0aaa-b18f-29ed-18a7-7b8a015b7df0",
+      "key": "company",
+      "label": "人才企业",
+      "parentId": "8d49b721-4f28-fe03-8e80-e366d4b80cae",
+      "order": 2,
+      "roleIds": ""
+    },
+    {
+      "id": "42b7c743-8691-0407-cdc9-f0f0ee4ada53",
+      "key": "talent_management",
+      "label": "人才管理",
+      "parentId": "8d49b721-4f28-fe03-8e80-e366d4b80cae",
+      "order": 3,
+      "roleIds": ""
+    },
+    {
+      "id": "42e850c3-5ef1-52f1-e85b-66877003c081",
+      "key": "carrier",
+      "label": "载体",
+      "parentId": "8d49b721-4f28-fe03-8e80-e366d4b80cae",
+      "order": 4,
+      "roleIds": ""
+    },
+    {
+      "id": "574682e9-22f8-8c98-fe3b-903dba02d65d",
+      "key": "consultancy",
+      "label": "服务机构",
+      "parentId": "8d49b721-4f28-fe03-8e80-e366d4b80cae",
+      "order": 5,
+      "roleIds": ""
+    },
+    {
+      "id": "57cbbc7c-8c76-2aed-f7e3-122721df9d50",
+      "key": "specialist",
+      "label": "专家顾问",
+      "parentId": "8d49b721-4f28-fe03-8e80-e366d4b80cae",
+      "order": 6,
+      "roleIds": ""
+    },
+    {
+      "id": "01bdaa7f-500b-079f-0fa2-baffb0e9d129",
+      "key": "policy",
+      "label": "政策解读",
+      "parentId": "e4674db0-a40a-b32e-fc05-9cb7671c9a0a",
+      "order": 1,
+      "roleIds": ""
+    },
+    {
+      "id": "fd7451e1-1a84-84ac-7661-f44526170630",
+      "key": "policy_collection",
+      "label": "政策合集",
+      "parentId": "e4674db0-a40a-b32e-fc05-9cb7671c9a0a",
+      "order": 2,
+      "roleIds": ""
+    },
+    {
+      "id": "efe85d18-595f-3322-0caf-1d9260375b1e",
+      "key": "project",
+      "label": "项目",
+      "parentId": "554dc62e-3f2a-0a9b-2fb1-5b7e618a168f",
+      "order": 1,
+      "roleIds": ""
+    },
+    {
+      "id": "1f97b6d7-521b-0676-edbe-81c5aa25de51",
+      "key": "need",
+      "label": "需求",
+      "parentId": "554dc62e-3f2a-0a9b-2fb1-5b7e618a168f",
+      "order": 2,
+      "roleIds": ""
+    },
+    {
+      "id": "1e0e1770-5c00-a9a0-d5e6-8b5eb03daf39",
+      "key": "guide",
+      "label": "服务指南",
+      "parentId": "554dc62e-3f2a-0a9b-2fb1-5b7e618a168f",
+      "order": 3,
+      "roleIds": ""
+    },
+    {
+      "id": "462e0c9a-9c3e-a79c-3e5d-e1b6ebd8c769",
+      "key": "tag",
+      "label": "标签管理",
+      "parentId": "554dc62e-3f2a-0a9b-2fb1-5b7e618a168f",
+      "order": 4,
+      "roleIds": ""
+    },
+    {
+      "id": "f405fdc4-4d6f-97c2-02c2-9bda09633be9",
+      "key": "dict_type",
+      "label": "字典类型",
+      "parentId": "9415f023-6119-9a1c-550a-4beba969f211",
+      "order": 1,
+      "roleIds": ""
+    },
+    {
+      "id": "10d5294f-84dc-ca07-3045-adfc6273e68d",
+      "key": "dict",
+      "label": "字典",
+      "parentId": "9415f023-6119-9a1c-550a-4beba969f211",
+      "order": 2,
+      "roleIds": ""
+    },
+    {
+      "id": "43bbb810-104e-8dc3-aed8-ead3533f243d",
+      "key": "news",
+      "label": "动态资讯",
+      "parentId": "eae39d47-af70-35da-bfa6-a4467ec954d8",
+      "order": 1,
+      "roleIds": ""
+    },
+    {
+      "id": "45d153e6-81c0-fe5d-2778-aeb9f9b765c6",
+      "key": "template",
+      "label": "模板资料",
+      "parentId": "eae39d47-af70-35da-bfa6-a4467ec954d8",
+      "order": 2,
+      "roleIds": ""
+    },
+    {
+      "id": "0d0aa143-968a-0ff1-d1fb-2d6dd355ff28",
+      "key": "question",
+      "label": "常见问题",
+      "parentId": "eae39d47-af70-35da-bfa6-a4467ec954d8",
+      "order": 3,
+      "roleIds": ""
+    },
+    {
+      "id": "25e6c402-4826-ebb5-a830-2e8cc39e7df2",
+      "key": "userinfo",
+      "label": "会员",
+      "parentId": "2ffa81f9-b447-97dd-857a-41f43b874fc0",
+      "order": 1,
+      "roleIds": ""
+    },
+    {
+      "id": "3687fab1-4bf5-965d-d579-d97e76cc44b9",
+      "key": "talent_plan",
+      "label": "人才计划",
+      "parentId": "8d49b721-4f28-fe03-8e80-e366d4b80cae",
+      "order": 2.1,
+      "roleIds": ""
+    }
+  ],
+  "listPage": [
+    {
+      "id": "527d6f62-3a09-9e6f-2b75-2792b76e9a3a",
+      "updateAt": 1541473299725,
+      "basic": {
+        "entity": "account",
+        "codePath": "account/account"
+      },
+      "cols": [
+        {
+          "label": "姓名",
+          "key": "name",
+          "formatFn": null
+        },
+        {
+          "label": "用户名",
+          "key": "account",
+          "formatFn": null
+        },
+        {
+          "label": "角色",
+          "key": "role",
+          "formatFn": null
+        }
+      ],
+      "operate": {
+        "add": {
+          "isShow": true
+        },
+        "edit": {
+          "isShow": true
+        },
+        "detail": {
+          "isShow": true
+        },
+        "delete": {
+          "isShow": true
+        }
+      },
+      "searchCondition": [
+        {
+          "label": "帐号",
+          "key": "account",
+          "dataType": "string",
+          "dataSource": {
+            "type": "",
+            "key": ""
+          }
+        }
+      ],
+      "fn": [],
+      "isSynced": true
+    },
+    {
+      "id": "9fecd68a-0370-9b31-c8f9-9ef06ef76b9a",
+      "updateAt": 1541474457607,
+      "basic": {
+        "entity": "region",
+        "codePath": "region/region"
+      },
+      "cols": [
+        {
+          "label": "名称",
+          "key": "name",
+          "formatFn": null
+        },
+        {
+          "label": "行政等级",
+          "key": "level",
+          "formatFn": null
+        },
+        {
+          "label": "区域码",
+          "key": "code",
+          "formatFn": null
+        }
+      ],
+      "operate": {
+        "add": {
+          "isShow": true
+        },
+        "edit": {
+          "isShow": true
+        },
+        "detail": {
+          "isShow": true
+        },
+        "delete": {
+          "isShow": true
+        }
+      },
+      "searchCondition": [
+        {
+          "label": "名称",
+          "key": "name",
+          "dataType": "string",
+          "dataSource": {
+            "type": "",
+            "key": ""
+          }
+        }
+      ],
+      "fn": [],
+      "isSynced": true,
+      "isFreeze": 1
+    },
+    {
+      "id": "540aca35-28f3-e60c-a707-44710ddb1971",
+      "updateAt": 1541481932863,
+      "basic": {
+        "entity": "slider",
+        "codePath": "region/slider"
+      },
+      "cols": [
+        {
+          "label": "区域",
+          "key": "regionId",
+          "formatFn": null
+        }
+      ],
+      "operate": {
+        "add": {
+          "isShow": true
+        },
+        "edit": {
+          "isShow": true
+        },
+        "detail": {
+          "isShow": true
+        },
+        "delete": {
+          "isShow": true
+        }
+      },
+      "searchCondition": [
+        {
+          "label": "区域",
+          "key": "regionName",
+          "dataType": "string",
+          "dataSource": {
+            "type": "",
+            "key": ""
+          }
+        }
+      ],
+      "fn": [],
+      "isSynced": true
+    },
+    {
+      "id": "2f81eb8e-4932-46ae-671e-44142dc3490a",
+      "updateAt": 1541483001629,
+      "basic": {
+        "entity": "region_intro",
+        "codePath": "region/region_intro"
+      },
+      "cols": [
+        {
+          "label": "区域",
+          "key": "regionId",
+          "formatFn": null
+        }
+      ],
+      "operate": {
+        "add": {
+          "isShow": true
+        },
+        "edit": {
+          "isShow": true
+        },
+        "detail": {
+          "isShow": true
+        },
+        "delete": {
+          "isShow": true
+        }
+      },
+      "searchCondition": [
+        {
+          "label": "区域",
+          "key": "regionName",
+          "dataType": "string",
+          "dataSource": {
+            "type": "",
+            "key": ""
+          }
+        }
+      ],
+      "fn": [],
+      "isSynced": true
+    },
+    {
+      "id": "788cfdb0-c4d1-4735-e0b6-a359999b5fd4",
+      "updateAt": 1541489703156,
+      "basic": {
+        "entity": "talent",
+        "codePath": "talent_org/talent"
+      },
+      "cols": [
+        {
+          "label": "区域",
+          "key": "regionId",
+          "formatFn": null
+        },
+        {
+          "label": "姓名",
+          "key": "name",
+          "formatFn": null
+        },
+        {
+          "label": "头像",
+          "key": "avatar",
+          "formatFn": null
+        },
+        {
+          "label": "手机",
+          "key": "tel",
+          "formatFn": null
+        },
+        {
+          "label": "所属行业",
+          "key": "industryTypeId",
+          "formatFn": null
+        },
+        {
+          "label": "技术领域",
+          "key": "technicalFieldTypeId",
+          "formatFn": null
+        }
+      ],
+      "operate": {
+        "add": {
+          "isShow": true
+        },
+        "edit": {
+          "isShow": true
+        },
+        "detail": {
+          "isShow": true
+        },
+        "delete": {
+          "isShow": true
+        }
+      },
+      "searchCondition": [
+        {
+          "label": "区域",
+          "key": "regionName",
+          "dataType": "string",
+          "dataSource": {
+            "type": "",
+            "key": ""
+          }
+        }
+      ],
+      "fn": [],
+      "isSynced": true
+    },
+    {
+      "id": "5bdabce9-2241-fe28-d6df-5a1442424eb7",
+      "updateAt": 1541486392444,
+      "basic": {
+        "entity": "company",
+        "codePath": "talent_org/company"
+      },
+      "cols": [
+        {
+          "label": "区域",
+          "key": "regionId",
+          "formatFn": null
+        },
+        {
+          "label": "名称",
+          "key": "name",
+          "formatFn": null
+        },
+        {
+          "label": "法人代表",
+          "key": "companyKeeper",
+          "formatFn": null
+        },
+        {
+          "label": "技术领域",
+          "key": "technicalFieldTypeId",
+          "formatFn": null
+        },
+        {
+          "label": "单位类型",
+          "key": "companyTypeId",
+          "formatFn": null
+        }
+      ],
+      "operate": {
+        "add": {
+          "isShow": true
+        },
+        "edit": {
+          "isShow": true
+        },
+        "detail": {
+          "isShow": true
+        },
+        "delete": {
+          "isShow": true
+        }
+      },
+      "searchCondition": [
+        {
+          "label": "区域",
+          "key": "regionName",
+          "dataType": "string",
+          "dataSource": {
+            "type": "",
+            "key": ""
+          }
+        }
+      ],
+      "fn": [],
+      "isSynced": true
+    },
+    {
+      "id": "7c541014-6d46-fd47-6482-528a616850fc",
+      "updateAt": 1541487103586,
+      "basic": {
+        "entity": "talent_management",
+        "codePath": "talent_org/talent_management"
+      },
+      "cols": [
+        {
+          "label": "区域",
+          "key": "regionId",
+          "formatFn": null
+        },
+        {
+          "label": "组织名称",
+          "key": "name",
+          "formatFn": null
+        },
+        {
+          "label": "组织类型",
+          "key": "organizationTypeId",
+          "formatFn": null
+        }
+      ],
+      "operate": {
+        "add": {
+          "isShow": true
+        },
+        "edit": {
+          "isShow": true
+        },
+        "detail": {
+          "isShow": true
+        },
+        "delete": {
+          "isShow": true
+        }
+      },
+      "searchCondition": [
+        {
+          "label": "区域",
+          "key": "regionName",
+          "dataType": "string",
+          "dataSource": {
+            "type": "",
+            "key": ""
+          }
+        }
+      ],
+      "fn": [],
+      "isSynced": true
+    },
+    {
+      "id": "89c45ae6-2977-5098-3482-d0e3ab6dbfda",
+      "updateAt": 1541487076937,
+      "basic": {
+        "entity": "carrier",
+        "codePath": "talent_org/carrier"
+      },
+      "cols": [
+        {
+          "label": "区域",
+          "key": "regionId",
+          "formatFn": null
+        },
+        {
+          "label": "名称",
+          "key": "name",
+          "formatFn": null
+        },
+        {
+          "label": "联系人",
+          "key": "contact",
+          "formatFn": null
+        }
+      ],
+      "operate": {
+        "add": {
+          "isShow": true
+        },
+        "edit": {
+          "isShow": true
+        },
+        "detail": {
+          "isShow": true
+        },
+        "delete": {
+          "isShow": true
+        }
+      },
+      "searchCondition": [
+        {
+          "label": "区域",
+          "key": "regionName",
+          "dataType": "string",
+          "dataSource": {
+            "type": "",
+            "key": ""
+          }
+        }
+      ],
+      "fn": [],
+      "isSynced": true
+    },
+    {
+      "id": "4793d83a-665a-bcf6-45de-84c20561c042",
+      "updateAt": 1541487754249,
+      "basic": {
+        "entity": "consultancy",
+        "codePath": "talent_org/consultancy"
+      },
+      "cols": [
+        {
+          "label": "区域",
+          "key": "regionName",
+          "formatFn": null
+        },
+        {
+          "label": "名称",
+          "key": "name",
+          "formatFn": null
+        },
+        {
+          "label": "技术领域",
+          "key": "technicalFieldTypeId",
+          "formatFn": null
+        },
+        {
+          "label": "服务领域",
+          "key": "serviceFieldTypeId",
+          "formatFn": null
+        }
+      ],
+      "operate": {
+        "add": {
+          "isShow": true
+        },
+        "edit": {
+          "isShow": true
+        },
+        "detail": {
+          "isShow": true
+        },
+        "delete": {
+          "isShow": true
+        }
+      },
+      "searchCondition": [
+        {
+          "label": "区域",
+          "key": "regionName",
+          "dataType": "string",
+          "dataSource": {
+            "type": "",
+            "key": ""
+          }
+        }
+      ],
+      "fn": [],
+      "isSynced": true
+    },
+    {
+      "id": "c69169d2-0b3f-ee87-3fb4-e60e6079b9a5",
+      "updateAt": 1541488047352,
+      "basic": {
+        "entity": "specialist",
+        "codePath": "talent_org/specialist"
+      },
+      "cols": [
+        {
+          "label": "区域",
+          "key": "regionId",
+          "formatFn": null
+        },
+        {
+          "label": "姓名",
+          "key": "name",
+          "formatFn": null
+        },
+        {
+          "label": "电话",
+          "key": "tel",
+          "formatFn": null
+        },
+        {
+          "label": "技术领域",
+          "key": "technicalFieldTypeId",
+          "formatFn": null
+        },
+        {
+          "label": "服务领域",
+          "key": "serviceFieldTypeId",
+          "formatFn": null
+        }
+      ],
+      "operate": {
+        "add": {
+          "isShow": true
+        },
+        "edit": {
+          "isShow": true
+        },
+        "detail": {
+          "isShow": true
+        },
+        "delete": {
+          "isShow": true
+        }
+      },
+      "searchCondition": [
+        {
+          "label": "区域",
+          "key": "regionName",
+          "dataType": "string",
+          "dataSource": {
+            "type": "",
+            "key": ""
+          }
+        }
+      ],
+      "fn": [],
+      "isSynced": true
+    },
+    {
+      "id": "804cecfe-62a3-2257-86f0-b6835a74425a",
+      "updateAt": 1541488156677,
+      "basic": {
+        "entity": "policy",
+        "codePath": "policy/policy"
+      },
+      "cols": [
+        {
+          "label": "区域",
+          "key": "regionId",
+          "formatFn": null
+        },
+        {
+          "label": "标题",
+          "key": "name",
+          "formatFn": null
+        }
+      ],
+      "operate": {
+        "add": {
+          "isShow": true
+        },
+        "edit": {
+          "isShow": true
+        },
+        "detail": {
+          "isShow": true
+        },
+        "delete": {
+          "isShow": true
+        }
+      },
+      "searchCondition": [
+        {
+          "label": "区域",
+          "key": "regionName",
+          "dataType": "string",
+          "dataSource": {
+            "type": "",
+            "key": ""
+          }
+        }
+      ],
+      "fn": [],
+      "isSynced": true
+    },
+    {
+      "id": "2dd3c698-b27b-0c12-eb50-55a0e73012c7",
+      "updateAt": 1541488294703,
+      "basic": {
+        "entity": "policy_collection",
+        "codePath": "policy/policy_collection"
+      },
+      "cols": [
+        {
+          "label": "区域",
+          "key": "regionId",
+          "formatFn": null
+        },
+        {
+          "label": "名称",
+          "key": "name",
+          "formatFn": null
+        }
+      ],
+      "operate": {
+        "add": {
+          "isShow": true
+        },
+        "edit": {
+          "isShow": true
+        },
+        "detail": {
+          "isShow": true
+        },
+        "delete": {
+          "isShow": true
+        }
+      },
+      "searchCondition": [
+        {
+          "label": "区域",
+          "key": "regionName",
+          "dataType": "string",
+          "dataSource": {
+            "type": "",
+            "key": ""
+          }
+        }
+      ],
+      "fn": [],
+      "isSynced": true
+    },
+    {
+      "id": "da3d92f2-afa2-861e-b087-9ec791a3adcb",
+      "updateAt": 1541488787980,
+      "basic": {
+        "entity": "project",
+        "codePath": "business_data/project"
+      },
+      "cols": [
+        {
+          "label": "区域",
+          "key": "regionId",
+          "formatFn": null
+        },
+        {
+          "label": "名称",
+          "key": "name",
+          "formatFn": null
+        },
+        {
+          "label": "技术领域",
+          "key": "technicalFieldTypeId",
+          "formatFn": null
+        }
+      ],
+      "operate": {
+        "add": {
+          "isShow": true
+        },
+        "edit": {
+          "isShow": true
+        },
+        "detail": {
+          "isShow": true
+        },
+        "delete": {
+          "isShow": true
+        }
+      },
+      "searchCondition": [
+        {
+          "label": "区域",
+          "key": "regionName",
+          "dataType": "string",
+          "dataSource": {
+            "type": "",
+            "key": ""
+          }
+        }
+      ],
+      "fn": [],
+      "isSynced": true
+    },
+    {
+      "id": "40aefc90-3e02-8556-1f8f-e4f628a21624",
+      "updateAt": 1541489670356,
+      "basic": {
+        "entity": "need",
+        "codePath": "business_data/need"
+      },
+      "cols": [
+        {
+          "label": "区域",
+          "key": "regionId",
+          "formatFn": null
+        },
+        {
+          "label": "标题",
+          "key": "title",
+          "formatFn": null
+        },
+        {
+          "label": "需求类型",
+          "key": "needTypeId",
+          "formatFn": null
+        }
+      ],
+      "operate": {
+        "add": {
+          "isShow": true
+        },
+        "edit": {
+          "isShow": true
+        },
+        "detail": {
+          "isShow": true
+        },
+        "delete": {
+          "isShow": true
+        }
+      },
+      "searchCondition": [
+        {
+          "label": "区域",
+          "key": "regionName",
+          "dataType": "string",
+          "dataSource": {
+            "type": "",
+            "key": ""
+          }
+        }
+      ],
+      "fn": [],
+      "isSynced": true
+    },
+    {
+      "id": "3bebdc3b-bfb0-1e52-96b3-73a3cc882c84",
+      "updateAt": 1541489528499,
+      "basic": {
+        "entity": "guide",
+        "codePath": "business_data/guide"
+      },
+      "cols": [
+        {
+          "label": "区域",
+          "key": "regionId",
+          "formatFn": null
+        },
+        {
+          "label": "标题",
+          "key": "name",
+          "formatFn": null
+        }
+      ],
+      "operate": {
+        "add": {
+          "isShow": true
+        },
+        "edit": {
+          "isShow": true
+        },
+        "detail": {
+          "isShow": true
+        },
+        "delete": {
+          "isShow": true
+        }
+      },
+      "searchCondition": [
+        {
+          "label": "区域",
+          "key": "regionName",
+          "dataType": "string",
+          "dataSource": {
+            "type": "",
+            "key": ""
+          }
+        }
+      ],
+      "fn": [],
+      "isSynced": true
+    },
+    {
+      "id": "cfc3050f-f2b1-5eb0-e39c-379f8ab8f891",
+      "updateAt": 1541489107918,
+      "basic": {
+        "entity": "tag",
+        "codePath": "business_data/tag"
+      },
+      "cols": [
+        {
+          "label": "名称",
+          "key": "name",
+          "formatFn": null
+        }
+      ],
+      "operate": {
+        "add": {
+          "isShow": true
+        },
+        "edit": {
+          "isShow": true
+        },
+        "detail": {
+          "isShow": true
+        },
+        "delete": {
+          "isShow": true
+        }
+      },
+      "searchCondition": [
+        {
+          "label": "名称",
+          "key": "tag",
+          "dataType": "string",
+          "dataSource": {
+            "type": "",
+            "key": ""
+          }
+        }
+      ],
+      "fn": [],
+      "isSynced": true
+    },
+    {
+      "id": "142d6780-85ca-8cbc-5f3d-680faa9b86a8",
+      "updateAt": 1541491411914,
+      "basic": {
+        "entity": "dict_type",
+        "codePath": "dict/dict_type"
+      },
+      "cols": [
+        {
+          "label": "名称",
+          "key": "name",
+          "formatFn": null
+        },
+        {
+          "label": "值",
+          "key": "code",
+          "formatFn": null
+        }
+      ],
+      "operate": {
+        "add": {
+          "isShow": true
+        },
+        "edit": {
+          "isShow": true
+        },
+        "detail": {
+          "isShow": true
+        },
+        "delete": {
+          "isShow": true
+        }
+      },
+      "searchCondition": [
+        {
+          "label": "名称",
+          "key": "name",
+          "dataType": "string",
+          "dataSource": {
+            "type": "",
+            "key": ""
+          }
+        }
+      ],
+      "fn": [],
+      "isSynced": true
+    },
+    {
+      "id": "a43eb302-38d4-54b3-da71-e80f40e77ecf",
+      "updateAt": 1541494070024,
+      "basic": {
+        "entity": "dict",
+        "codePath": "dict/dict"
+      },
+      "cols": [
+        {
+          "label": "字典类型",
+          "key": "typeId",
+          "formatFn": null
+        },
+        {
+          "label": "名称",
+          "key": "name",
+          "formatFn": null
+        },
+        {
+          "label": "上级字典",
+          "key": "parentId",
+          "formatFn": null
+        }
+      ],
+      "operate": {
+        "add": {
+          "isShow": true
+        },
+        "edit": {
+          "isShow": true
+        },
+        "detail": {
+          "isShow": true
+        },
+        "delete": {
+          "isShow": true
+        }
+      },
+      "searchCondition": [
+        {
+          "label": "字典类型",
+          "key": "typeId",
+          "dataType": "select",
+          "dataSource": {
+            "type": "entities",
+            "key": "dict_type"
+          }
+        }
+      ],
+      "fn": [],
+      "isSynced": true
+    },
+    {
+      "id": "427e5719-916f-053c-df0c-be8a42f299f5",
+      "updateAt": 1541494204487,
+      "basic": {
+        "entity": "news",
+        "codePath": "info/news"
+      },
+      "cols": [
+        {
+          "label": "标题",
+          "key": "name",
+          "formatFn": null
+        },
+        {
+          "label": "来源",
+          "key": "infoFrom",
+          "formatFn": null
+        }
+      ],
+      "operate": {
+        "add": {
+          "isShow": true
+        },
+        "edit": {
+          "isShow": true
+        },
+        "detail": {
+          "isShow": true
+        },
+        "delete": {
+          "isShow": true
+        }
+      },
+      "searchCondition": [
+        {
+          "label": "标题",
+          "key": "name",
+          "dataType": "string",
+          "dataSource": {
+            "type": "",
+            "key": ""
+          }
+        }
+      ],
+      "fn": [],
+      "isSynced": true
+    },
+    {
+      "id": "31513070-e97f-e273-44b6-10d3024d5d5a",
+      "updateAt": 1541494351763,
+      "basic": {
+        "entity": "template",
+        "codePath": "info/template"
+      },
+      "cols": [
+        {
+          "label": "标题",
+          "key": "name",
+          "formatFn": null
+        }
+      ],
+      "operate": {
+        "add": {
+          "isShow": true
+        },
+        "edit": {
+          "isShow": true
+        },
+        "detail": {
+          "isShow": true
+        },
+        "delete": {
+          "isShow": true
+        }
+      },
+      "searchCondition": [
+        {
+          "label": "标题",
+          "key": "name",
+          "dataType": "string",
+          "dataSource": {
+            "type": "",
+            "key": ""
+          }
+        }
+      ],
+      "fn": [],
+      "isSynced": true
+    },
+    {
+      "id": "770fda62-44e4-3dee-6844-01cf7f70fe03",
+      "updateAt": 1541494282922,
+      "basic": {
+        "entity": "question",
+        "codePath": "info/question"
+      },
+      "cols": [
+        {
+          "label": "标题",
+          "key": "title",
+          "formatFn": null
+        }
+      ],
+      "operate": {
+        "add": {
+          "isShow": true
+        },
+        "edit": {
+          "isShow": true
+        },
+        "detail": {
+          "isShow": true
+        },
+        "delete": {
+          "isShow": true
+        }
+      },
+      "searchCondition": [
+        {
+          "label": "标题",
+          "key": "title",
+          "dataType": "string",
+          "dataSource": {
+            "type": "",
+            "key": ""
+          }
+        }
+      ],
+      "fn": [],
+      "isSynced": true
+    },
+    {
+      "id": "ec5af93d-a4da-4188-8fd1-a7f499bab82b",
+      "updateAt": 1541494742573,
+      "basic": {
+        "entity": "userinfo",
+        "codePath": "member/userinfo"
+      },
+      "cols": [
+        {
+          "label": "区域",
+          "key": "regionId",
+          "formatFn": null
+        },
+        {
+          "label": "姓名",
+          "key": "name",
+          "formatFn": null
+        },
+        {
+          "label": "手机号",
+          "key": "tel",
+          "formatFn": null
+        },
+        {
+          "label": "角色",
+          "key": "role",
+          "formatFn": null
+        }
+      ],
+      "operate": {
+        "add": {
+          "isShow": true
+        },
+        "edit": {
+          "isShow": true
+        },
+        "detail": {
+          "isShow": true
+        },
+        "delete": {
+          "isShow": true
+        }
+      },
+      "searchCondition": [
+        {
+          "label": "区域",
+          "key": "regionName",
+          "dataType": "string",
+          "dataSource": {
+            "type": "",
+            "key": ""
+          }
+        }
+      ],
+      "fn": [],
+      "isSynced": true
+    },
+    {
+      "id": "e830c607-23b4-006f-2971-e465477b1c7a",
+      "updateAt": 1541747839771,
+      "basic": {
+        "entity": "talent_plan",
+        "codePath": "talent_org/talent_plan"
+      },
+      "cols": [
+        {
+          "label": "名称",
+          "key": "name",
+          "formatFn": null
+        }
+      ],
+      "operate": {
+        "add": {
+          "isShow": true
+        },
+        "edit": {
+          "isShow": true
+        },
+        "detail": {
+          "isShow": true
+        },
+        "delete": {
+          "isShow": true
+        }
+      },
+      "searchCondition": [
+        {
+          "label": "名称",
+          "key": "name",
+          "dataType": "string",
+          "dataSource": {
+            "type": "",
+            "key": ""
+          }
+        }
+      ],
+      "fn": [],
+      "isSynced": true
+    }
+  ],
+  "updatePage": [
+    {
+      "id": "d812a664-5fdd-7030-fc1c-e5ca737faeb9",
+      "updateAt": 1541473352534,
+      "basic": {
+        "entity": "account",
+        "codePath": "account/account"
+      },
+      "cols": [
+        {
+          "label": "姓名",
+          "key": "name",
+          "dataType": "string",
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请输入姓名"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "帐号",
+          "key": "account",
+          "dataType": "string",
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请输入帐号"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "密码",
+          "key": "password",
+          "dataType": "password",
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请输入密码"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "角色",
+          "key": "role",
+          "dataType": "select",
+          "dataSource": {
+            "type": "dict",
+            "key": "adminRole"
+          },
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请选择角色"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        }
+      ],
+      "fn": [],
+      "isSynced": true
+    },
+    {
+      "id": "46a02809-74d4-3bba-8d46-ef14fc4be975",
+      "updateAt": 1541481929323,
+      "basic": {
+        "entity": "slider",
+        "codePath": "region/slider"
+      },
+      "cols": [
+        {
+          "label": "区域",
+          "key": "regionId",
+          "dataType": "string",
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请输入区域"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "图片",
+          "key": "imgs",
+          "dataType": "imgs",
+          "imgConfig": {
+            "max": 5,
+            "tip": "建议尺寸 750 * 300"
+          },
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请上传图片"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "跳转地址",
+          "key": "links",
+          "dataType": "strings",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        }
+      ],
+      "fn": [],
+      "isSynced": true
+    },
+    {
+      "id": "2b9b2967-de38-14e3-a657-2855407b7837",
+      "updateAt": 1541483046552,
+      "basic": {
+        "entity": "region_intro",
+        "codePath": "region/region_intro"
+      },
+      "cols": [
+        {
+          "label": "区域",
+          "key": "regionId",
+          "dataType": "string",
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请输入区域"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "轮播图片",
+          "key": "imgs",
+          "dataType": "imgs",
+          "imgConfig": {
+            "max": 5,
+            "tip": "建议尺寸 750 * 300"
+          },
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请输入轮播图片"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "跳转地址",
+          "key": "links",
+          "dataType": "strings",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "介绍",
+          "key": "intro",
+          "dataType": "strings",
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请输入介绍"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        }
+      ],
+      "fn": [],
+      "isSynced": true
+    },
+    {
+      "id": "d470648c-42ca-7508-445f-ae88f13f6f3a",
+      "updateAt": 1541581127382,
+      "basic": {
+        "entity": "talent",
+        "codePath": "talent_org/talent"
+      },
+      "cols": [
+        {
+          "label": "区域",
+          "key": "regionId",
+          "dataType": "string",
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请输入区域"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "姓名",
+          "key": "name",
+          "dataType": "string",
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请输入姓名"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "性别",
+          "key": "gender",
+          "dataType": "select",
+          "dataSource": {
+            "type": "dict",
+            "key": "gender"
+          },
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "手机",
+          "key": "tel",
+          "dataType": "string",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "职称",
+          "key": "jobTitleId",
+          "dataType": "string",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "职称等级",
+          "key": "jobTitleLevelId",
+          "dataType": "string",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "职务",
+          "key": "jobRankId",
+          "dataType": "string",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "技术领域",
+          "key": "technicalFieldTypeId",
+          "dataType": "string",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "所属行业",
+          "key": "industryTypeId",
+          "dataType": "string",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "职业资格",
+          "key": "qualificationId",
+          "dataType": "string",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "简介",
+          "key": "intro",
+          "dataType": "strings",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "国籍",
+          "key": "nationalityId",
+          "dataType": "string",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "学历",
+          "key": "educationId",
+          "dataType": "string",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "政治面貌",
+          "key": "politicalStatusId",
+          "dataType": "string",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "是否留学归国",
+          "key": "isStudyAbroad",
+          "dataType": "bool",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "工作单位",
+          "key": "companyName",
+          "dataType": "string",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "单位类型",
+          "key": "companyTypeId",
+          "dataType": "string",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "证件类型",
+          "key": "identityType",
+          "dataType": "select",
+          "dataSource": {
+            "type": "dict",
+            "key": "identityType"
+          },
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "证件号",
+          "key": "identityNumber",
+          "dataType": "string",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "联系地址",
+          "key": "address",
+          "dataType": "string",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "意向落户地",
+          "key": "intentionLocaltion",
+          "dataType": "string",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "落户工作方式",
+          "key": "settlementWorkTypeId",
+          "dataType": "string",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        }
+      ],
+      "fn": [],
+      "isSynced": true
+    },
+    {
+      "id": "1511eceb-3a61-cba0-e53e-be55d8585868",
+      "updateAt": 1541497867609,
+      "basic": {
+        "entity": "company",
+        "codePath": "talent_org/company"
+      },
+      "cols": [
+        {
+          "label": "区域",
+          "key": "regionId",
+          "dataType": "string",
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请输入区域"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "公司名称",
+          "key": "name",
+          "dataType": "string",
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请输入公司名称"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "法人代表",
+          "key": "companyKeeper",
+          "dataType": "string",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "统一社会信用代码",
+          "key": "identityNumber",
+          "dataType": "string",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "地址",
+          "key": "address",
+          "dataType": "string",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "注册资本",
+          "key": "registeredCapital",
+          "dataType": "string",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "实缴资本",
+          "key": "paidCapital",
+          "dataType": "string",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "技术领域",
+          "key": "technicalFieldTypeId",
+          "dataType": "string",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "所属行业",
+          "key": "industryTypeId",
+          "dataType": "string",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "引进人才类别",
+          "key": "introducingTalentTypeId",
+          "dataType": "string",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "成立日期",
+          "key": "registeredDate",
+          "dataType": "date",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "经营状态",
+          "key": "businessStatusTypeId",
+          "dataType": "string",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "单位类型",
+          "key": "companyTypeId",
+          "dataType": "string",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "联系人",
+          "key": "contact",
+          "dataType": "string",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "经营范围",
+          "key": "businessScope",
+          "dataType": "strings",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        }
+      ],
+      "fn": [],
+      "isSynced": true
+    },
+    {
+      "id": "b0267241-d34a-68f4-b96f-6d5a51a6e991",
+      "updateAt": 1541497325107,
+      "basic": {
+        "entity": "talent_management",
+        "codePath": "talent_org/talent_management"
+      },
+      "cols": [
+        {
+          "label": "区域",
+          "key": "regionId",
+          "dataType": "string",
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请输入区域"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "组织名称",
+          "key": "name",
+          "dataType": "string",
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请输入组织名称"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "组织类型",
+          "key": "organizationTypeId",
+          "dataType": "string",
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请输入组织类型"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        }
+      ],
+      "fn": [],
+      "isSynced": true
+    },
+    {
+      "id": "c4f0a20d-1ff8-90aa-7c30-b3e55fe1f4d0",
+      "updateAt": 1541497591106,
+      "basic": {
+        "entity": "carrier",
+        "codePath": "talent_org/carrier"
+      },
+      "cols": [
+        {
+          "label": "区域",
+          "key": "regionId",
+          "dataType": "string",
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请输入区域"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "名称",
+          "key": "name",
+          "dataType": "string",
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请输入名称"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "联系人",
+          "key": "contact",
+          "dataType": "string",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "电话",
+          "key": "tel",
+          "dataType": "string",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "Logo",
+          "key": "logo",
+          "dataType": "img",
+          "imgConfig": {
+            "max": 5,
+            "tip": "建议尺寸 750 * 300"
+          },
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请上传图片"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "轮播",
+          "key": "imgs",
+          "dataType": "imgs",
+          "imgConfig": {
+            "max": 5,
+            "tip": "建议尺寸 750 * 300"
+          },
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请上传图片"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "地址",
+          "key": "address",
+          "dataType": "strings",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "优惠政策",
+          "key": "policy",
+          "dataType": "strings",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "服务内容",
+          "key": "detail",
+          "dataType": "strings",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        }
+      ],
+      "fn": [],
+      "isSynced": true
+    },
+    {
+      "id": "4d3cb414-8b24-e0d9-feb9-a045ddcb6432",
+      "updateAt": 1541497826793,
+      "basic": {
+        "entity": "consultancy",
+        "codePath": "talent_org/consultancy"
+      },
+      "cols": [
+        {
+          "label": "区域",
+          "key": "regionId",
+          "dataType": "string",
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请输入区域"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "名称",
+          "key": "name",
+          "dataType": "string",
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请输入名称"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "电话",
+          "key": "tel",
+          "dataType": "string",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "轮播图",
+          "key": "imgs",
+          "dataType": "string",
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请输入轮播图"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "统一社会信用代码",
+          "key": "identityNumber",
+          "dataType": "string",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "法人代表",
+          "key": "companyKeeper",
+          "dataType": "string",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "注册资本",
+          "key": "registeredCapital",
+          "dataType": "string",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "成立时间",
+          "key": "registeredDate",
+          "dataType": "date",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "所属行业",
+          "key": "industryTypeId",
+          "dataType": "string",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "技术领域",
+          "key": "technicalFieldTypeId",
+          "dataType": "string",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "服务领域",
+          "key": "serviceFieldTypeId",
+          "dataType": "string",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "简介",
+          "key": "intro",
+          "dataType": "strings",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        }
+      ],
+      "fn": [],
+      "isSynced": true
+    },
+    {
+      "id": "59907145-144e-8285-7c5e-f84b5198ae86",
+      "updateAt": 1541498225134,
+      "basic": {
+        "entity": "specialist",
+        "codePath": "talent_org/specialist"
+      },
+      "cols": [
+        {
+          "label": "区域",
+          "key": "regionId",
+          "dataType": "string",
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请输入区域"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "姓名",
+          "key": "name",
+          "dataType": "string",
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请输入姓名"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "头像",
+          "key": "avatar",
+          "dataType": "img",
+          "imgConfig": {
+            "max": 5,
+            "tip": "建议尺寸 750 * 300"
+          },
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "电话",
+          "key": "tel",
+          "dataType": "string",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "服务领域",
+          "key": "serviceFieldTypeId",
+          "dataType": "string",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "技术领域",
+          "key": "serviceFieldTypeId",
+          "dataType": "string",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "简介",
+          "key": "intro",
+          "dataType": "strings",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "咨询经历",
+          "key": "experience",
+          "dataType": "strings",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        }
+      ],
+      "fn": [],
+      "isSynced": true
+    },
+    {
+      "id": "ab484e47-c0ea-354f-2534-2953a6b8bfbc",
+      "updateAt": 1541498990327,
+      "basic": {
+        "entity": "policy",
+        "codePath": "policy/policy"
+      },
+      "cols": [
+        {
+          "label": "区域",
+          "key": "regionId",
+          "dataType": "string",
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请输入区域"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "封面图",
+          "key": "img",
+          "dataType": "img",
+          "imgConfig": {
+            "max": 5,
+            "tip": "建议尺寸 750 * 300"
+          },
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请上传图片"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "标题",
+          "key": "title",
+          "dataType": "string",
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请输入标题"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "文号",
+          "key": "newsNumber",
+          "dataType": "string",
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请输入文号"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "生效日期",
+          "key": "startDate",
+          "dataType": "date",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "失效日期",
+          "key": "endDate",
+          "dataType": "date",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "颁布单位",
+          "key": "issuer",
+          "dataType": "string",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "扶持力度",
+          "key": "supportLevel",
+          "dataType": "select",
+          "dataSource": {
+            "type": "dict",
+            "key": "supportLevel"
+          },
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "申报难度",
+          "key": "difficultyLevel",
+          "dataType": "select",
+          "dataSource": {
+            "type": "dict",
+            "key": "difficultyLevel"
+          },
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "申报时间",
+          "key": "declarationTime",
+          "dataType": "date",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "原文",
+          "key": "originFile",
+          "dataType": "img",
+          "imgConfig": {
+            "max": 5,
+            "tip": "要改成上传文件"
+          },
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "政策简介",
+          "key": "intro",
+          "dataType": "strings",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        }
+      ],
+      "fn": [],
+      "isSynced": true
+    },
+    {
+      "id": "b99a7b20-c460-fe38-39f7-c5e7eaacb1bb",
+      "updateAt": 1541663680142,
+      "basic": {
+        "entity": "policy_collection",
+        "codePath": "policy/policy_collection"
+      },
+      "cols": [
+        {
+          "label": "区域",
+          "key": "regionId",
+          "dataType": "string",
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请输入区域"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "标题",
+          "key": "name",
+          "dataType": "string",
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请输入标题"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "轮播",
+          "key": "imgs",
+          "dataType": "imgs",
+          "imgConfig": {
+            "max": 5,
+            "tip": "建议尺寸 750 * 300"
+          },
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请输入轮播"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "导读",
+          "key": "foreword",
+          "dataType": "strings",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "是否推荐",
+          "key": "isHot",
+          "dataType": "bool",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        }
+      ],
+      "fn": [],
+      "isSynced": true
+    },
+    {
+      "id": "f9dac2f9-316d-5342-2114-6d8286771119",
+      "updateAt": 1541499908896,
+      "basic": {
+        "entity": "project",
+        "codePath": "business_data/project"
+      },
+      "cols": [
+        {
+          "label": "区域",
+          "key": "regionId",
+          "dataType": "string",
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请输入区域"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "项目编号",
+          "key": "no",
+          "dataType": "string",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "项目名称",
+          "key": "name",
+          "dataType": "string",
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请输入项目名称"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "技术领域",
+          "key": "technicalFieldTypeId",
+          "dataType": "string",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "当前估值",
+          "key": "valuation",
+          "dataType": "string",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "目标融资",
+          "key": "financingValuation",
+          "dataType": "string",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "所处阶段",
+          "key": "researchStageTypeId",
+          "dataType": "string",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "创建人",
+          "key": "talentId",
+          "dataType": "string",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "项目简介",
+          "key": "intro",
+          "dataType": "strings",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "创新特色",
+          "key": "projectfeature",
+          "dataType": "strings",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "核心介绍",
+          "key": "keyMan",
+          "dataType": "strings",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "知识产权",
+          "key": "knowledgeRight",
+          "dataType": "strings",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "财务分析",
+          "key": "financialAnalysis",
+          "dataType": "strings",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        }
+      ],
+      "fn": [],
+      "isSynced": true
+    },
+    {
+      "id": "94d10192-24ba-fe17-5dd4-4d989b455a4b",
+      "updateAt": 1541500198972,
+      "basic": {
+        "entity": "need",
+        "codePath": "business_data/need"
+      },
+      "cols": [
+        {
+          "label": "区域",
+          "key": "regionId",
+          "dataType": "string",
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请输入区域"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "创建人姓名",
+          "key": "name",
+          "dataType": "string",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "标题",
+          "key": "title",
+          "dataType": "string",
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请输入标题"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "需求类型",
+          "key": "needTypeId",
+          "dataType": "string",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "图片",
+          "key": "imgs",
+          "dataType": "imgs",
+          "imgConfig": {
+            "max": 5,
+            "tip": "建议尺寸 750 * 300"
+          },
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "详情",
+          "key": "detail",
+          "dataType": "strings",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        }
+      ],
+      "fn": [],
+      "isSynced": true
+    },
+    {
+      "id": "2bd825d3-b2dd-cea3-e1ae-0c6525f72914",
+      "updateAt": 1541749580605,
+      "basic": {
+        "entity": "guide",
+        "codePath": "business_data/guide"
+      },
+      "cols": [
+        {
+          "label": "区域",
+          "key": "regionId",
+          "dataType": "string",
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请输入区域"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "标题",
+          "key": "title",
+          "dataType": "string",
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请输入标题"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "人才类型",
+          "key": "talentTypeId",
+          "dataType": "string",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "封面头图",
+          "key": "coverImg",
+          "dataType": "img",
+          "imgConfig": {
+            "max": 5,
+            "tip": "建议尺寸 750 * 300"
+          },
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "办理时间",
+          "key": "applyTime",
+          "dataType": "string",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "申报条件",
+          "key": "applyCondition",
+          "dataType": "strings",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "所需材料",
+          "key": "fileText",
+          "dataType": "strings",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "申报流程",
+          "key": "process",
+          "dataType": "strings",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "受理单位",
+          "key": "approveDept",
+          "dataType": "strings",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "注意事项",
+          "key": "reminder",
+          "dataType": "strings",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "相关服务指南",
+          "key": "relateGuides",
+          "dataType": "select",
+          "dataSource": {
+            "type": "entities",
+            "key": "guide"
+          },
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "附件上传",
+          "key": "files",
+          "dataType": "imgs",
+          "imgConfig": {
+            "max": 5,
+            "tip": "建议尺寸 750 * 300"
+          },
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "附件名称",
+          "key": "fileNames",
+          "dataType": "strings",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        }
+      ],
+      "fn": [],
+      "isSynced": true
+    },
+    {
+      "id": "f5ce4587-cb1c-1f28-0df8-a130422242d3",
+      "updateAt": 1541499272514,
+      "basic": {
+        "entity": "tag",
+        "codePath": "business_data/tag"
+      },
+      "cols": [
+        {
+          "label": "名称",
+          "key": "name",
+          "dataType": "string",
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请输入名称"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        }
+      ],
+      "fn": [],
+      "isSynced": true
+    },
+    {
+      "id": "1aeea430-19b1-c199-1365-314589284e12",
+      "updateAt": 1541500352660,
+      "basic": {
+        "entity": "dict",
+        "codePath": "dict/dict"
+      },
+      "cols": [
+        {
+          "label": "字典类型",
+          "key": "typeId",
+          "dataType": "select",
+          "dataSource": {
+            "type": "entities",
+            "key": "dict_type"
+          },
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请输入字典类型"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "名称",
+          "key": "name",
+          "dataType": "string",
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请输入名称"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "上级字典",
+          "key": "parentId",
+          "dataType": "select",
+          "dataSource": {
+            "type": "entities",
+            "key": "dict"
+          },
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请输入上级字典"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        }
+      ],
+      "fn": [],
+      "isSynced": true
+    },
+    {
+      "id": "37cd1af6-e183-8d06-4849-32e551a84ad8",
+      "updateAt": 1541500735987,
+      "basic": {
+        "entity": "news",
+        "codePath": "info/news"
+      },
+      "cols": [
+        {
+          "label": "区域",
+          "key": "regionId",
+          "dataType": "string",
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请输入区域"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "标题",
+          "key": "name",
+          "dataType": "string",
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请输入标题"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "来源",
+          "key": "infoFrom",
+          "dataType": "string",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "文号",
+          "key": "newsNumber",
+          "dataType": "string",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "是否热门",
+          "key": "isHot",
+          "dataType": "bool",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "图片",
+          "key": "img",
+          "dataType": "img",
+          "imgConfig": {
+            "max": 5,
+            "tip": "建议尺寸 750 * 300"
+          },
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "文件附件",
+          "key": "file",
+          "dataType": "img",
+          "imgConfig": {
+            "max": 5,
+            "tip": "文件上传",
+            "size": ""
+          },
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "正文",
+          "key": "detail",
+          "dataType": "strings",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        }
+      ],
+      "fn": [],
+      "isSynced": true
+    },
+    {
+      "id": "ec4cba26-af09-8a59-50a9-f392e59c791d",
+      "updateAt": 1541553958298,
+      "basic": {
+        "entity": "template",
+        "codePath": "info/template"
+      },
+      "cols": [
+        {
+          "label": "标题",
+          "key": "name",
+          "dataType": "string",
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请输入标题"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "是否热门",
+          "key": "isHot",
+          "dataType": "bool",
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请选择是否热门"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "简介",
+          "key": "detail",
+          "dataType": "strings",
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "附件",
+          "key": "fileId",
+          "dataType": "img",
+          "imgConfig": {
+            "max": 5,
+            "tip": "建议尺寸 750 * 300"
+          },
+          "validRules": [],
+          "formatFn": null,
+          "saveFormatFn": null
+        }
+      ],
+      "fn": [],
+      "isSynced": true
+    },
+    {
+      "id": "98d2075d-415b-7b58-45df-457f5d39502b",
+      "updateAt": 1541663909335,
+      "basic": {
+        "entity": "question",
+        "codePath": "info/question"
+      },
+      "cols": [
+        {
+          "label": "标题",
+          "key": "title",
+          "dataType": "string",
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请输入标题"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "是否推荐",
+          "key": "isHot",
+          "dataType": "bool",
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请选择是否推荐"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "详情",
+          "key": "detail",
+          "dataType": "strings",
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请输入详情"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        }
+      ],
+      "fn": [],
+      "isSynced": true
+    },
+    {
+      "id": "3f6b2654-a438-1673-4d06-c94b8d49defc",
+      "updateAt": 1541554321835,
+      "basic": {
+        "entity": "userinfo",
+        "codePath": "member/userinfo"
+      },
+      "cols": [
+        {
+          "label": "区域",
+          "key": "regionId",
+          "dataType": "string",
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请输入区域"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "姓名",
+          "key": "name",
+          "dataType": "string",
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请输入姓名"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "手机",
+          "key": "tel",
+          "dataType": "string",
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请输入手机"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        },
+        {
+          "label": "密码",
+          "key": "password",
+          "dataType": "string",
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请输入密码"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        }
+      ],
+      "fn": [],
+      "isSynced": true
+    },
+    {
+      "id": "e087708e-b480-e776-05a8-9f5ec2def1bb",
+      "updateAt": 1541747544371,
+      "basic": {
+        "entity": "talent_plan",
+        "codePath": "talent_org/talent_plan"
+      },
+      "cols": [
+        {
+          "label": "名称",
+          "key": "name",
+          "dataType": "string",
+          "validRules": [
+            {
+              "name": "required",
+              "errMsg": "请输入名称"
+            }
+          ],
+          "formatFn": null,
+          "saveFormatFn": null
+        }
+      ],
+      "fn": [],
+      "isSynced": true
+    }
+  ],
+  "router": [
+    {
+      "id": "d0f94553-84af-7110-769b-0f35985efe97",
+      "entityId": "6ff0ae34-592d-3830-7eb2-156f6a136e21",
+      "name": "",
+      "type": "list",
+      "routePath": "/account/account/list",
+      "filePath": "account/account/List",
+      "order": 1,
+      "entityTypeName": "帐号"
+    },
+    {
+      "id": "314349b3-70f5-797a-1736-60f533c5cb60",
+      "entityId": "6ff0ae34-592d-3830-7eb2-156f6a136e21",
+      "name": "",
+      "type": "update",
+      "routePath": "/account/account/update/:id",
+      "filePath": "account/account/Update",
+      "order": 2,
+      "entityTypeName": "帐号"
+    },
+    {
+      "id": "1e97f0da-0b8f-d287-0112-dfadb6ee7cb5",
+      "entityId": "2614eeb9-35df-6509-c996-2ac29df2c316",
+      "name": "",
+      "type": "list",
+      "routePath": "/region/region/list",
+      "filePath": "region/region/List",
+      "order": 3,
+      "entityTypeName": "区域"
+    },
+    {
+      "id": "8a8504d0-462c-8164-7c20-d2deaebacee7",
+      "entityId": "ed12e0a6-33e9-a322-02c4-162f15a89e95",
+      "name": "",
+      "type": "list",
+      "routePath": "/region/slider/list",
+      "filePath": "region/slider/List",
+      "order": 4,
+      "entityTypeName": "区域"
+    },
+    {
+      "id": "cde87ca8-0985-61af-cfa8-e3ef94c6a5f3",
+      "entityId": "ed12e0a6-33e9-a322-02c4-162f15a89e95",
+      "name": "",
+      "type": "update",
+      "routePath": "/region/slider/update/:id",
+      "filePath": "region/slider/Update",
+      "order": 5,
+      "entityTypeName": "区域"
+    },
+    {
+      "id": "54dc0307-25e9-b766-45b0-cc9405128080",
+      "entityId": "ffe80936-f37a-cbd7-e736-5f3babae32ed",
+      "name": "",
+      "type": "list",
+      "routePath": "/region/region_intro/list",
+      "filePath": "region/region_intro/List",
+      "order": 6,
+      "entityTypeName": "区域"
+    },
+    {
+      "id": "5e27f387-b1b0-56ce-5d57-ba168766a033",
+      "entityId": "ffe80936-f37a-cbd7-e736-5f3babae32ed",
+      "name": "",
+      "type": "update",
+      "routePath": "/region/region_intro/update/:id",
+      "filePath": "region/region_intro/Update",
+      "order": 7,
+      "entityTypeName": "区域"
+    },
+    {
+      "id": "01562e69-4df2-4a81-fbc1-b289b58b36bc",
+      "entityId": "2361293a-9b41-150f-cece-978244a3e86e",
+      "name": "",
+      "type": "list",
+      "routePath": "/talent_org/talent/list",
+      "filePath": "talent_org/talent/List",
+      "order": 8,
+      "entityTypeName": "人才和组织"
+    },
+    {
+      "id": "9fa55755-ad4a-dae4-9e90-c7e855852e7c",
+      "entityId": "2361293a-9b41-150f-cece-978244a3e86e",
+      "name": "",
+      "type": "update",
+      "routePath": "/talent_org/talent/update/:id",
+      "filePath": "talent_org/talent/Update",
+      "order": 9,
+      "entityTypeName": "人才和组织"
+    },
+    {
+      "id": "108e70a6-87dd-4e3e-f153-872613a2057a",
+      "entityId": "e24a0aaa-b18f-29ed-18a7-7b8a015b7df0",
+      "name": "",
+      "type": "list",
+      "routePath": "/talent_org/company/list",
+      "filePath": "talent_org/company/List",
+      "order": 10,
+      "entityTypeName": "人才和组织"
+    },
+    {
+      "id": "939620d0-9f7f-2a04-78ae-aa9eb956c34e",
+      "entityId": "e24a0aaa-b18f-29ed-18a7-7b8a015b7df0",
+      "name": "",
+      "type": "update",
+      "routePath": "/talent_org/company/update/:id",
+      "filePath": "talent_org/company/Update",
+      "order": 11,
+      "entityTypeName": "人才和组织"
+    },
+    {
+      "id": "7c7f2189-a85d-8289-649f-67d76d463832",
+      "entityId": "42b7c743-8691-0407-cdc9-f0f0ee4ada53",
+      "name": "",
+      "type": "update",
+      "routePath": "/talent_org/talent_management/update/:id",
+      "filePath": "talent_org/talent_management/Update",
+      "order": 13,
+      "entityTypeName": "人才和组织"
+    },
+    {
+      "id": "65b82c70-6623-c08a-28f2-c88a843ce7b7",
+      "entityId": "42b7c743-8691-0407-cdc9-f0f0ee4ada53",
+      "name": "",
+      "type": "list",
+      "routePath": "/talent_org/talent_management/list",
+      "filePath": "talent_org/talent_management/List",
+      "order": 14,
+      "entityTypeName": "人才和组织"
+    },
+    {
+      "id": "5e9bd9a7-04e6-fe6a-4449-a6a12c2f6fb6",
+      "entityId": "42e850c3-5ef1-52f1-e85b-66877003c081",
+      "name": "",
+      "type": "list",
+      "routePath": "/talent_org/carrier/list",
+      "filePath": "talent_org/carrier/List",
+      "order": 15,
+      "entityTypeName": "人才和组织"
+    },
+    {
+      "id": "c753dc25-ee1e-7096-bf6e-42aa9336b123",
+      "entityId": "42e850c3-5ef1-52f1-e85b-66877003c081",
+      "name": "",
+      "type": "update",
+      "routePath": "/talent_org/carrier/update/:id",
+      "filePath": "talent_org/carrier/Update",
+      "order": 16,
+      "entityTypeName": "人才和组织"
+    },
+    {
+      "id": "812db1af-a4bf-a314-dfca-ca52d9ba764d",
+      "entityId": "574682e9-22f8-8c98-fe3b-903dba02d65d",
+      "name": "",
+      "type": "list",
+      "routePath": "/talent_org/consultancy/list",
+      "filePath": "talent_org/consultancy/List",
+      "order": 17,
+      "entityTypeName": "人才和组织"
+    },
+    {
+      "id": "b276860c-53aa-1121-f8c2-741bc15c2e86",
+      "entityId": "574682e9-22f8-8c98-fe3b-903dba02d65d",
+      "name": "",
+      "type": "update",
+      "routePath": "/talent_org/consultancy/update/:id",
+      "filePath": "talent_org/consultancy/Update",
+      "order": 18,
+      "entityTypeName": "人才和组织"
+    },
+    {
+      "id": "7503d19d-5bbc-4300-85ee-cf7b90726c9e",
+      "entityId": "57cbbc7c-8c76-2aed-f7e3-122721df9d50",
+      "name": "",
+      "type": "list",
+      "routePath": "/talent_org/specialist/list",
+      "filePath": "talent_org/specialist/List",
+      "order": 19,
+      "entityTypeName": "人才和组织"
+    },
+    {
+      "id": "097792e8-4656-73b6-f82b-73c5dfb7b355",
+      "entityId": "57cbbc7c-8c76-2aed-f7e3-122721df9d50",
+      "name": "",
+      "type": "update",
+      "routePath": "/talent_org/specialist/update/:id",
+      "filePath": "talent_org/specialist/Update",
+      "order": 20,
+      "entityTypeName": "人才和组织"
+    },
+    {
+      "id": "9bb1456b-b321-fd9b-a4b6-c228f10b27e5",
+      "entityId": "01bdaa7f-500b-079f-0fa2-baffb0e9d129",
+      "name": "",
+      "type": "list",
+      "routePath": "/policy/policy/list",
+      "filePath": "policy/policy/List",
+      "order": 21,
+      "entityTypeName": "政策"
+    },
+    {
+      "id": "e1536328-7356-a5e2-fb1b-26cda9f024c3",
+      "entityId": "01bdaa7f-500b-079f-0fa2-baffb0e9d129",
+      "name": "",
+      "type": "update",
+      "routePath": "/policy/policy/update/:id",
+      "filePath": "policy/policy/Update",
+      "order": 22,
+      "entityTypeName": "政策"
+    },
+    {
+      "id": "c57bdc93-2557-06dd-c14f-d451f04e282f",
+      "entityId": "fd7451e1-1a84-84ac-7661-f44526170630",
+      "name": "",
+      "type": "list",
+      "routePath": "/policy/policy_collection/list",
+      "filePath": "policy/policy_collection/List",
+      "order": 23,
+      "entityTypeName": "政策"
+    },
+    {
+      "id": "8ec5af31-8fc3-0d4d-3df1-18224e5ae524",
+      "entityId": "fd7451e1-1a84-84ac-7661-f44526170630",
+      "name": "",
+      "type": "update",
+      "routePath": "/policy/policy_collection/update/:id",
+      "filePath": "policy/policy_collection/Update",
+      "order": 24,
+      "entityTypeName": "政策"
+    },
+    {
+      "id": "3f5196c3-fe5b-8ab1-f57e-4eed614216ff",
+      "entityId": "efe85d18-595f-3322-0caf-1d9260375b1e",
+      "name": "",
+      "type": "list",
+      "routePath": "/business_data/project/list",
+      "filePath": "business_data/project/List",
+      "order": 25,
+      "entityTypeName": "业务数据"
+    },
+    {
+      "id": "f09010df-e27e-a467-60b5-87906a85495c",
+      "entityId": "efe85d18-595f-3322-0caf-1d9260375b1e",
+      "name": "",
+      "type": "update",
+      "routePath": "/business_data/project/update/:id",
+      "filePath": "business_data/project/Update",
+      "order": 26,
+      "entityTypeName": "业务数据"
+    },
+    {
+      "id": "33507184-2610-4fc5-ce6d-174ce4c117c5",
+      "entityId": "1f97b6d7-521b-0676-edbe-81c5aa25de51",
+      "name": "",
+      "type": "list",
+      "routePath": "/business_data/need/list",
+      "filePath": "business_data/need/List",
+      "order": 27,
+      "entityTypeName": "业务数据"
+    },
+    {
+      "id": "5f13f3ea-0c36-4062-6cef-0e27bc8fc471",
+      "entityId": "1f97b6d7-521b-0676-edbe-81c5aa25de51",
+      "name": "",
+      "type": "update",
+      "routePath": "/business_data/need/update/:id",
+      "filePath": "business_data/need/Update",
+      "order": 28,
+      "entityTypeName": "业务数据"
+    },
+    {
+      "id": "8a8049ae-7a3d-4d52-0e73-07f6f3c67662",
+      "entityId": "1e0e1770-5c00-a9a0-d5e6-8b5eb03daf39",
+      "name": "",
+      "type": "list",
+      "routePath": "/business_data/guide/list",
+      "filePath": "business_data/guide/List",
+      "order": 29,
+      "entityTypeName": "业务数据"
+    },
+    {
+      "id": "8a7fe242-eb09-71eb-5b10-f559974c6214",
+      "entityId": "1e0e1770-5c00-a9a0-d5e6-8b5eb03daf39",
+      "name": "",
+      "type": "update",
+      "routePath": "/business_data/guide/update/:id",
+      "filePath": "business_data/guide/Update",
+      "order": 30,
+      "entityTypeName": "业务数据"
+    },
+    {
+      "id": "2ac80453-85a8-60f9-533e-90aa6ef4454b",
+      "entityId": "462e0c9a-9c3e-a79c-3e5d-e1b6ebd8c769",
+      "name": "",
+      "type": "list",
+      "routePath": "/business_data/tag/list",
+      "filePath": "business_data/tag/List",
+      "order": 31,
+      "entityTypeName": "业务数据"
+    },
+    {
+      "id": "b6db1632-43c1-8e40-c232-0893179add84",
+      "entityId": "462e0c9a-9c3e-a79c-3e5d-e1b6ebd8c769",
+      "name": "",
+      "type": "update",
+      "routePath": "/business_data/tag/update/:id",
+      "filePath": "business_data/tag/Update",
+      "order": 32,
+      "entityTypeName": "业务数据"
+    },
+    {
+      "id": "2bb23d84-13a3-dc5a-b496-4de43d4f42cc",
+      "entityId": "f405fdc4-4d6f-97c2-02c2-9bda09633be9",
+      "name": "",
+      "type": "list",
+      "routePath": "/dict/dict_type/list",
+      "filePath": "dict/dict_type/List",
+      "order": 33,
+      "entityTypeName": "字典"
+    },
+    {
+      "id": "5dac58e0-0a9a-61dc-9e3a-ccf368025b8d",
+      "entityId": "f405fdc4-4d6f-97c2-02c2-9bda09633be9",
+      "name": "",
+      "type": "update",
+      "routePath": "/dict/dict_type/update/:id",
+      "filePath": "dict/dict_type/Update",
+      "order": 34,
+      "entityTypeName": "字典"
+    },
+    {
+      "id": "8a3e07fd-4de2-8a29-7f93-67d2cfc2ee40",
+      "entityId": "10d5294f-84dc-ca07-3045-adfc6273e68d",
+      "name": "",
+      "type": "list",
+      "routePath": "/dict/dict/list",
+      "filePath": "dict/dict/List",
+      "order": 35,
+      "entityTypeName": "字典"
+    },
+    {
+      "id": "9872aaf9-6ee9-c39b-a123-3513cec72ac2",
+      "entityId": "10d5294f-84dc-ca07-3045-adfc6273e68d",
+      "name": "",
+      "type": "update",
+      "routePath": "/dict/dict/update/:id",
+      "filePath": "dict/dict/Update",
+      "order": 36,
+      "entityTypeName": "字典"
+    },
+    {
+      "id": "5bbd3144-0345-412f-f459-5ff6432f2809",
+      "entityId": "43bbb810-104e-8dc3-aed8-ead3533f243d",
+      "name": "",
+      "type": "list",
+      "routePath": "/info/news/list",
+      "filePath": "info/news/List",
+      "order": 37,
+      "entityTypeName": "资讯"
+    },
+    {
+      "id": "02d65a80-b8c3-3ac8-b37f-b0d6ef74b522",
+      "entityId": "43bbb810-104e-8dc3-aed8-ead3533f243d",
+      "name": "",
+      "type": "update",
+      "routePath": "/info/news/update/:id",
+      "filePath": "info/news/Update",
+      "order": 38,
+      "entityTypeName": "资讯"
+    },
+    {
+      "id": "ccd66308-75f7-99f4-fc3f-77763285d8da",
+      "entityId": "45d153e6-81c0-fe5d-2778-aeb9f9b765c6",
+      "name": "",
+      "type": "list",
+      "routePath": "/info/template/list",
+      "filePath": "info/template/List",
+      "order": 39,
+      "entityTypeName": "资讯"
+    },
+    {
+      "id": "1f40043b-d236-2728-3eab-172568452eb9",
+      "entityId": "45d153e6-81c0-fe5d-2778-aeb9f9b765c6",
+      "name": "",
+      "type": "update",
+      "routePath": "/info/template/update/:id",
+      "filePath": "info/template/Update",
+      "order": 40,
+      "entityTypeName": "资讯"
+    },
+    {
+      "id": "f5f9f308-6ded-1311-40b5-bf35881a351d",
+      "entityId": "0d0aa143-968a-0ff1-d1fb-2d6dd355ff28",
+      "name": "",
+      "type": "list",
+      "routePath": "/info/question/list",
+      "filePath": "info/question/List",
+      "order": 41,
+      "entityTypeName": "资讯"
+    },
+    {
+      "id": "4879f66c-0a93-e132-5852-d5a328149962",
+      "entityId": "0d0aa143-968a-0ff1-d1fb-2d6dd355ff28",
+      "name": "",
+      "type": "update",
+      "routePath": "/info/question/update/:id",
+      "filePath": "info/question/Update",
+      "order": 42,
+      "entityTypeName": "资讯"
+    },
+    {
+      "id": "fff48825-5585-441b-5cd3-1b660f423525",
+      "entityId": "25e6c402-4826-ebb5-a830-2e8cc39e7df2",
+      "name": "",
+      "type": "list",
+      "routePath": "/member/userinfo/list",
+      "filePath": "member/userinfo/List",
+      "order": 43,
+      "entityTypeName": "会员"
+    },
+    {
+      "id": "bf55360b-1d20-4413-f918-11325af95759",
+      "entityId": "25e6c402-4826-ebb5-a830-2e8cc39e7df2",
+      "name": "",
+      "type": "update",
+      "routePath": "/member/userinfo/update/:id",
+      "filePath": "member/userinfo/Update",
+      "order": 44,
+      "entityTypeName": "会员"
+    },
+    {
+      "id": "545deb33-a2f7-09da-de10-9f7e8867b7ad",
+      "entityId": "3687fab1-4bf5-965d-d579-d97e76cc44b9",
+      "name": "",
+      "type": "list",
+      "routePath": "/talent_org/talent_plan/list",
+      "filePath": "talent_org/talent_plan/List",
+      "order": 11.1,
+      "entityTypeName": "人才和组织"
+    },
+    {
+      "id": "9c88e826-7d9e-46a0-2169-14d653351ac1",
+      "entityId": "3687fab1-4bf5-965d-d579-d97e76cc44b9",
+      "name": "",
+      "type": "update",
+      "routePath": "/talent_org/talent_plan/update/:id",
+      "filePath": "talent_org/talent_plan/Update",
+      "order": 11.2,
+      "entityTypeName": "人才和组织"
+    }
+  ],
+  "menu": [
+    {
+      "id": "d71e347c-e530-b5e2-aaa2-331865e4f82e",
+      "isPage": 1,
+      "entityTypeId": null,
+      "routerId": "d0f94553-84af-7110-769b-0f35985efe97",
+      "name": "帐号",
+      "roleIds": "",
+      "order": 1,
+      "children": []
+    },
+    {
+      "id": "5ca68b4b-b7aa-5e1a-786e-77d28041b397",
+      "isPage": 0,
+      "entityTypeId": "6d50c351-f5d5-20b4-dc6d-499252acbe8a",
+      "routerId": null,
+      "name": "区域",
+      "roleIds": "",
+      "order": 2,
+      "children": [
+        {
+          "routerId": "1e97f0da-0b8f-d287-0112-dfadb6ee7cb5",
+          "name": "区域",
+          "showType": "show",
+          "roleIds": []
+        },
+        {
+          "routerId": "8a8504d0-462c-8164-7c20-d2deaebacee7",
+          "name": "区域轮播图",
+          "showType": "show",
+          "roleIds": []
+        },
+        {
+          "routerId": "54dc0307-25e9-b766-45b0-cc9405128080",
+          "name": "区域介绍",
+          "showType": "show",
+          "roleIds": []
+        }
+      ]
+    },
+    {
+      "id": "9b1e0885-f838-af0e-1d6e-7e51c4afd54f",
+      "isPage": 0,
+      "entityTypeId": "8d49b721-4f28-fe03-8e80-e366d4b80cae",
+      "routerId": null,
+      "name": "人才和组织",
+      "roleIds": "",
+      "order": 3,
+      "children": [
+        {
+          "routerId": "01562e69-4df2-4a81-fbc1-b289b58b36bc",
+          "name": "人才",
+          "showType": "show",
+          "roleIds": []
+        },
+        {
+          "routerId": "108e70a6-87dd-4e3e-f153-872613a2057a",
+          "name": "人才企业",
+          "showType": "show",
+          "roleIds": []
+        },
+        {
+          "routerId": "545deb33-a2f7-09da-de10-9f7e8867b7ad",
+          "name": "人才计划",
+          "showType": "show",
+          "roleIds": []
+        },
+        {
+          "routerId": "65b82c70-6623-c08a-28f2-c88a843ce7b7",
+          "name": "人才管理",
+          "showType": "show",
+          "roleIds": []
+        },
+        {
+          "routerId": "5e9bd9a7-04e6-fe6a-4449-a6a12c2f6fb6",
+          "name": "载体",
+          "showType": "show",
+          "roleIds": []
+        },
+        {
+          "routerId": "812db1af-a4bf-a314-dfca-ca52d9ba764d",
+          "name": "服务机构",
+          "showType": "show",
+          "roleIds": []
+        },
+        {
+          "routerId": "7503d19d-5bbc-4300-85ee-cf7b90726c9e",
+          "name": "专家顾问",
+          "showType": "show",
+          "roleIds": []
+        }
+      ]
+    },
+    {
+      "id": "36829d00-1061-4fbf-d484-2a0c9688cacd",
+      "isPage": 0,
+      "entityTypeId": "e4674db0-a40a-b32e-fc05-9cb7671c9a0a",
+      "routerId": null,
+      "name": "政策",
+      "roleIds": "",
+      "order": 4,
+      "children": [
+        {
+          "routerId": "9bb1456b-b321-fd9b-a4b6-c228f10b27e5",
+          "name": "政策解读",
+          "showType": "show",
+          "roleIds": []
+        },
+        {
+          "routerId": "c57bdc93-2557-06dd-c14f-d451f04e282f",
+          "name": "政策合集",
+          "showType": "show",
+          "roleIds": []
+        }
+      ]
+    },
+    {
+      "id": "8cae498b-fda2-eeec-138d-bc5aaa201645",
+      "isPage": 0,
+      "entityTypeId": "554dc62e-3f2a-0a9b-2fb1-5b7e618a168f",
+      "routerId": null,
+      "name": "业务数据",
+      "roleIds": "",
+      "order": 5,
+      "children": [
+        {
+          "routerId": "3f5196c3-fe5b-8ab1-f57e-4eed614216ff",
+          "name": "项目",
+          "showType": "show",
+          "roleIds": []
+        },
+        {
+          "routerId": "33507184-2610-4fc5-ce6d-174ce4c117c5",
+          "name": "需求",
+          "showType": "show",
+          "roleIds": []
+        },
+        {
+          "routerId": "8a8049ae-7a3d-4d52-0e73-07f6f3c67662",
+          "name": "服务指南",
+          "showType": "show",
+          "roleIds": []
+        },
+        {
+          "routerId": "2ac80453-85a8-60f9-533e-90aa6ef4454b",
+          "name": "标签管理",
+          "showType": "show",
+          "roleIds": []
+        }
+      ]
+    },
+    {
+      "id": "498bf861-0c59-b18d-cd2e-04dddb4e36aa",
+      "isPage": 0,
+      "entityTypeId": "9415f023-6119-9a1c-550a-4beba969f211",
+      "routerId": null,
+      "name": "字典",
+      "roleIds": "",
+      "order": 6,
+      "children": [
+        {
+          "routerId": "2bb23d84-13a3-dc5a-b496-4de43d4f42cc",
+          "name": "字典类型",
+          "showType": "show",
+          "roleIds": []
+        },
+        {
+          "routerId": "8a3e07fd-4de2-8a29-7f93-67d2cfc2ee40",
+          "name": "字典",
+          "showType": "show",
+          "roleIds": []
+        }
+      ]
+    },
+    {
+      "id": "61f47062-790b-a559-b13e-fbf453fd0fe5",
+      "isPage": 0,
+      "entityTypeId": "eae39d47-af70-35da-bfa6-a4467ec954d8",
+      "routerId": null,
+      "name": "资讯",
+      "roleIds": "",
+      "order": 7,
+      "children": [
+        {
+          "routerId": "5bbd3144-0345-412f-f459-5ff6432f2809",
+          "name": "动态资讯",
+          "showType": "show",
+          "roleIds": []
+        },
+        {
+          "routerId": "ccd66308-75f7-99f4-fc3f-77763285d8da",
+          "name": "模板资料",
+          "showType": "show",
+          "roleIds": []
+        },
+        {
+          "routerId": "f5f9f308-6ded-1311-40b5-bf35881a351d",
+          "name": "常见问题",
+          "showType": "show",
+          "roleIds": []
+        }
+      ]
+    },
+    {
+      "id": "d21efd29-c420-7dd0-faef-580de0eed8e3",
+      "isPage": 0,
+      "entityTypeId": "2ffa81f9-b447-97dd-857a-41f43b874fc0",
+      "routerId": "fff48825-5585-441b-5cd3-1b660f423525",
+      "name": "会员",
+      "roleIds": "",
+      "order": 8,
+      "children": [
+        {
+          "routerId": "fff48825-5585-441b-5cd3-1b660f423525",
+          "name": "会员",
+          "showType": "show",
+          "roleIds": []
+        }
+      ]
+    }
+  ],
+  "syncStatus": {
+    "dict": true,
+    "entity": true,
+    "role": true,
+    "router": true,
+    "menu": true,
+    "entityType": false,
+    "listPage": false,
+    "updatePage": false
+  }
+}

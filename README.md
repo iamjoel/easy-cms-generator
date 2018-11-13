@@ -1,4 +1,4 @@
-# 后台管理系统的前端代码生成工具
+# 服务端接口与管理后台代码生成工具
 后台管理系统的很多页面的逻辑是类似的。因此，可以抽象出一系列规则配置，通过配置来生成页面。详细介绍可以见下面的功能。
 
 该工具能生成项目 [admin-template](https://github.com/iamjoel/front-end-template/tree/master/admin) 的列表，新增，编辑，详情页。
