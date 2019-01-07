@@ -1,5 +1,164 @@
 <template>
   <div class="main">
+    <el-tabs v-model="activeTab" >
+      <el-tab-pane label="基本设置" name="basic">
+        <el-form :inline="true" :model="model.basic"  label-position="right" >
+        <el-row type="flex" justify="start" class="multi-line">
+          <j-edit-item
+            label="名称" prop="name">
+            <el-input v-model="model.basic.name" placeholder="请输入名称"></el-input>
+          </j-edit-item>
+
+          <j-edit-item
+            label="描述" prop="name">
+            <el-input v-model="model.basic.des" placeholder="请输入描述"></el-input>
+          </j-edit-item>
+          
+          <j-edit-item
+            label="有列表页" prop="name">
+            <el-input v-model="model.basic.des" placeholder="请输入描述"></el-input>
+          </j-edit-item>
+
+          <j-edit-item
+            label="有更新页" prop="name">
+            <el-input v-model="model.basic.des" placeholder="请输入描述"></el-input>
+          </j-edit-item>
+        </el-row>
+      </el-form>
+      </el-tab-pane>
+      <el-tab-pane label="详情字段" name="cols">
+        <div class="ly ly-r mb-10">
+          <el-button type="primary" @click="model.cols.push(deepClone(colItemTemplate))">添加字段</el-button>
+        </div>
+        <el-table
+          :data="model.cols"
+          border
+          stripe>
+          <el-table-column
+            type="index"
+            label="序列"
+            align="center"
+            width="80">
+          </el-table-column>
+          <el-table-column
+            prop="key"
+            label="字段名称"
+            >
+            <template  slot-scope="scope">
+              <el-input v-model="scope.row.key" placeholder=""></el-input>
+            </template>
+          </el-table-column>
+          <el-table-column
+            prop="label"
+            label="显示名称"
+            >
+            <template  slot-scope="scope">
+              <el-input v-model="scope.row.label" placeholder=""></el-input>
+            </template>
+          </el-table-column>
+          <el-table-column
+            prop="label"
+            label="数据类型"
+            >
+            <template  slot-scope="scope">
+              <el-select v-model="scope.row.dataType" placeholder="请选择">
+                <el-option
+                  v-for="item in colsDataType"
+                  :key="item.key"
+                  :label="item.label"
+                  :value="item.key">
+                </el-option>
+              </el-select>
+              
+            </template>
+          </el-table-column>
+          <el-table-column
+            prop="label"
+            label="验证规则"
+            >
+            <template  slot-scope="scope">
+              {{scope.row.validRules.map(item=>item.name).join()}}
+             <el-button @click="showDialog(scope.row, 'Rule')">编辑</el-button>
+
+            </template>
+          </el-table-column>
+          
+          
+          
+          <el-table-column
+            prop="key"
+            label="操作"
+            width="200"
+            >
+            <template slot-scope="scope">
+              <el-button v-if="scope.$index > 0" size="small" type="info" @click="move('cols', scope.$index, 'up')">上移</el-button>
+              <el-button v-if="scope.$index < model.cols.length - 1" size="small" type="info" @click="move('cols', scope.$index, 'down')">下移</el-button>
+              <el-button size="small" type="danger" @click="model.cols.splice(scope.$index, 1)">删除</el-button>
+
+            </template>
+          </el-table-column>
+        </el-table>
+      </el-tab-pane>
+    
+    </el-tabs>
+    <div class="ly ly-c mt-10">
+      <el-button type="primary" @click="save">保存</el-button>
+    </div>
+    
+
+    <el-dialog title="验证规则" :visible.sync="isShowRuleDialog">
+      <div class="ly ly-r mb-10">
+        <el-button type="primary" @click="currRow.validRules.push({
+          name: 'required',
+          errMsg: generatorErrmsg(currRow)
+        })">添加规则</el-button>
+      </div>
+      <el-table
+        :data="currRow.validRules"
+        border
+        stripe>
+        <el-table-column
+          type="index"
+          label="序列"
+          align="center"
+          width="80">
+        </el-table-column>
+        <el-table-column
+          prop="model"
+          label="规则名称"
+          >
+          <template slot-scope="scope">
+            <el-select v-model="scope.row.name" placeholder="请选择">
+              <el-option
+                v-for="item in validRuleType"
+                :key="item.key"
+                :label="item.label"
+                :value="item.key">
+              </el-option>
+            </el-select>
+          </template>
+        </el-table-column>
+        <el-table-column
+          prop="errMsg"
+          label="错误信息"
+          >
+          <template slot-scope="scope">
+            <el-input v-model="scope.row.errMsg" placeholder="请输入内容"></el-input>
+          </template>
+        </el-table-column>
+        <el-table-column
+          prop="op"
+          label="操作"
+          >
+          <template slot-scope="scope">
+            <el-button type="danger" size="small" @click="currRow.validRules.splice(scope.index, 1)">删除</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+      <span slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="isShowRuleDialog = false">关 闭</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
