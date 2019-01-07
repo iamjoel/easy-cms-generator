@@ -26,7 +26,7 @@
         </el-row>
       </el-form>
       </el-tab-pane>
-      <el-tab-pane label="详情字段" name="cols">
+      <el-tab-pane label="字段设置" name="cols">
         <div class="ly ly-r mb-10">
           <el-button type="primary" @click="model.cols.push(deepClone(colItemTemplate))">添加字段</el-button>
         </div>
@@ -98,6 +98,10 @@
             </template>
           </el-table-column>
         </el-table>
+      </el-tab-pane>
+
+      <el-tab-pane label="关联设置" name="relations">
+        TODO
       </el-tab-pane>
     
     </el-tabs>
