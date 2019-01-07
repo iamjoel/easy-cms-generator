@@ -4,3 +4,9 @@
 * `npm start` 运行
 
 调试接口可以用 [Postman](https://www.getpostman.com/)。
+
+## 注意
+只能同时一个项目用。具体见 `api/project.js` 里的 `choose`。
+
+## 文档
+* [fs-extra](https://www.npmjs.com/package/fs-extra)

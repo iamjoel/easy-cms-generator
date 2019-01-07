@@ -8,12 +8,7 @@ app.use(bodyParser.json())
 
 const apiFormat = require('./utils/apiFormat')
 
-// Lowdb https://github.com/typicode/lowdb
-const low = require('lowdb')
-const FileSync = require('lowdb/adapters/FileSync')
-const adapter = new FileSync(`data/${config.databaseFileName}.json`)
-const db = low(adapter)
-global.db = db
+
 // 不要设置db.defaults。设置 default 导致 db.json 被间歇性的reload。导致开发时，服务器不断重启。。。
 
 app.get('/', (req, res) => res.send('It works!'))
@@ -40,6 +35,17 @@ var apis = {
 }
 
 generateAPI(Object.keys(apis))
+
+var projectApi = require('./api/project')
+app.get('/project/check-folds-exist', projectApi.checkFoldsExist)
+
+app.post('/project/create-folder', (req, res)=> {
+  projectApi.createFile(req, res)
+})
+
+app.post('/project/choose', (req, res)=> {
+  projectApi.choose(req, res)
+})
 
 var configApi = require('./api/config')
 app.get('/config/detail', configApi.detail)

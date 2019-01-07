@@ -32,6 +32,7 @@ module.exports = function (tableName) {
     },
     add(req, res, pool) {
       try {
+        console.log(req.body)
         global.db
             .get(tableName)
             .push(Object.assign({

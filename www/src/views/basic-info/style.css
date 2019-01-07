@@ -1,0 +1,14 @@
+.row {
+  display: flex;
+  align-items: center;
+  line-height: 1.5;
+}
+.label {
+  margin-right: 10px;
+  width: 200px;
+  text-align: right;
+}
+.config-btn {
+  margin-top: 10px;
+  margin-left: 200px;
+}

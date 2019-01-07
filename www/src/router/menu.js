@@ -5,7 +5,7 @@ var routes = [
   {
     path: '/',
     component: resolve => {
-      lazyLoading(resolve, 'Dashboard', false)
+      lazyLoading(resolve, 'basic-info', true)
     },
   },
   // 带实体类型id的列表
