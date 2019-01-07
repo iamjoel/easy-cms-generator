@@ -3,15 +3,7 @@ const apiFormat = require('../utils/apiFormat')
 var fs = require('fs-extra')
 const deepClone = require('clone')
 
-const settingFileFoldPath = `${config.feCodeRootPath}/src/setting/base`
-
 module.exports = {
-  detail(req, res) {
-    res.send(apiFormat.success({
-      databaseFileName: config.databaseFileName,
-      feCodeRootPath: config.feCodeRootPath
-    }))
-  },
   syncConfig(req, res) {
     const type = req.params.type
     switch(type) {
@@ -152,7 +144,7 @@ function writeConfigFile(name, content, [entityList, entityTypeList, router]=[])
       })
   }
   return new Promise((resolve, reject) => {
-    var filePath = `${settingFileFoldPath}/${name}.js`
+    var filePath = `${global.feCodeRootPath}/src/setting/base${name}.js`
     fs.outputFile(filePath, 'export default ' + formatContent(content), err => {
         if(err) {
           reject(err)

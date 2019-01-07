@@ -5,7 +5,6 @@ const tableName = 'listPage'
 const commonCRUD = require
 
 var config = require('../config')
-const codePathPrefix = `${config.feCodeRootPath}/src/views`
 const fs = require('fs-extra')
 
 module.exports = {
@@ -23,7 +22,7 @@ module.exports = {
         return
       }
       var {vue, js} = generatorCode(config)
-      var codePath = `${codePathPrefix}/${config.basic.codePath ? config.basic.codePath : config.basic.entity}`
+      var codePath = `${global.feCodeRootPath}/src/views/${config.basic.codePath ? config.basic.codePath : config.basic.entity}`
       Promise.all([
         writeFile(`${codePath}/List.vue`, vue),
         writeFile(`${codePath}/list.js`, js),

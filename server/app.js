@@ -8,9 +8,6 @@ app.use(bodyParser.json())
 
 const apiFormat = require('./utils/apiFormat')
 
-
-// 不要设置db.defaults。设置 default 导致 db.json 被间歇性的reload。导致开发时，服务器不断重启。。。
-
 app.get('/', (req, res) => res.send('It works!'))
 
 // 跨域头设置
@@ -20,6 +17,16 @@ app.all('*', function(req, res, next) {
     res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
     res.header("Content-Type", "application/json;charset=utf-8");
     next();
+})
+
+// 有没设置的检查
+app.use(function(req, res, next) {
+  console.log(req.path)
+  if(req.path.indexOf('project/choose') !== -1 || global.projectName) {
+    next()
+  } else {
+    res.send(apiFormat.error('未设置项目', 2))
+  }
 })
 
 // 所有的api
@@ -48,8 +55,6 @@ app.post('/project/choose', (req, res)=> {
 })
 
 var configApi = require('./api/config')
-app.get('/config/detail', configApi.detail)
-
 app.post('/config/sync/:type', (req, res)=> {
   configApi.syncConfig(req, res)
 })

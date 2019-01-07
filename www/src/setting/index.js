@@ -23,6 +23,10 @@ var _menuConfig = [{
     }]
   },
   {
+    id: 'entity',
+    name: '实体',
+  },
+  {
     id: 'basic',
     name: '基础数据',
     children: [{
@@ -33,10 +37,7 @@ var _menuConfig = [{
       id: 'dict',
       name: '字典',
     },
-    {
-      id: 'entity',
-      name: '实体',
-    }]
+    ]
   },
   {
     id: 'page',

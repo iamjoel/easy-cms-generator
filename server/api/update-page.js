@@ -3,7 +3,6 @@ const generatorCode = require('./utils/generatorUpdateCode')
 const tableName = 'updatePage'
 
 var config = require('../config')
-const codePathPrefix = `${config.feCodeRootPath}/src/views`
 const fs = require('fs-extra')
 
 module.exports = {
@@ -21,7 +20,7 @@ module.exports = {
         return
       }
       var {vue, js, model} = generatorCode(config)
-      var codePath = `${codePathPrefix}/${config.basic.codePath ? config.basic.codePath : config.basic.entity}`
+      var codePath = `${global.feCodeRootPath}/src/views/${config.basic.codePath ? config.basic.codePath : config.basic.entity}`
       Promise.all([
         writeFile(`${codePath}/Update.vue`, vue),
         writeFile(`${codePath}/update.js`, js),

@@ -54,17 +54,14 @@ export default {
             type: 'success'
           })
         }
-        
+        this.checkFoldersExist()
       })
-
-      this.checkFoldersExist()
     },
     createFolder(name) {
       this.$http.post(`${SERVER_PREFIX}/project/create-folder`, {
         filePath: `${this.projectRootPath}/${name}`
       }).then(({data}) => {
         this.checkFoldersExist()
-
         this.$message({
           showClose: true,
           message: '创建操作!',

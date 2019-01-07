@@ -39,6 +39,7 @@ module.exports = {
       }
       const adapter = new FileSync(`data/${req.body.name}.json`)
       const db = low(adapter)
+      // 不要设置db.defaults。设置 default 导致 db.json 被间歇性的reload。导致开发时，服务器不断重启。。。
       global.db = db
       global.projectName = req.body.name
       global.feCodeRootPath = `${req.body.rootPath}/admin`

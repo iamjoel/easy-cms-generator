@@ -5,9 +5,9 @@ module.exports = {
       data
     }
   },
-  error(error) {
+  error(error, errCode) {
     return {
-      errCode: 1,
+      errCode: errCode || 1,
       error
     }
   }

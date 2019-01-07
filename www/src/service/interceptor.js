@@ -7,11 +7,11 @@ axios.interceptors.response.use(function (response) {
   var config = response.config
   var errorCode = data.errCode
   if(errorCode !== 0) {
-    
     Message({
       message: data.error || '未知错误',
       type: 'error'
     })
+    
     return Promise.reject()
   }
   return response;

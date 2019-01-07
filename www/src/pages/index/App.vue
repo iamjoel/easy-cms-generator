@@ -19,6 +19,7 @@ import Sidebar from '@/components/siderbar'
 import Topbar from '@/components/topbar'
 import Breadcrumb from '@/components/breadcrumb'
 import * as types from '@/store/mutation-types'
+import {SERVER_PREFIX} from '@/setting'
 
 export default {
   name: 'app',
