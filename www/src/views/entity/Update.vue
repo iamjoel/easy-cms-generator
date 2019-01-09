@@ -13,15 +13,32 @@
             label="描述" prop="name">
             <el-input v-model="model.basic.des" placeholder="请输入描述"></el-input>
           </j-edit-item>
-          
+          <!-- 有能公共访问的路由 -->
+          <j-edit-item
+            label="支持公开访问" prop="isPublic">
+            <el-switch
+              v-model="model.basic.isPublic"
+              on-text="是"
+              off-text="否">
+            </el-switch>
+          </j-edit-item>
+
           <j-edit-item
             label="有列表页" prop="name">
-            <el-input v-model="model.basic.des" placeholder="请输入描述"></el-input>
+            <el-switch
+              v-model="model.basic.hasListPage"
+              on-text="是"
+              off-text="否">
+            </el-switch>
           </j-edit-item>
 
           <j-edit-item
             label="有更新页" prop="name">
-            <el-input v-model="model.basic.des" placeholder="请输入描述"></el-input>
+            <el-switch
+              v-model="model.basic.hasUpdatePage"
+              on-text="是"
+              off-text="否">
+            </el-switch>
           </j-edit-item>
         </el-row>
       </el-form>
@@ -69,21 +86,24 @@
                   :value="item.key">
                 </el-option>
               </el-select>
-              
+
+              <div v-if="scope.row.dataType === 'string'">
+                <el-input v-model="scope.row.maxLength" placeholder="请输入内容"></el-input>
+              </div>
             </template>
           </el-table-column>
           <el-table-column
             prop="label"
-            label="验证规则"
+            label="必填"
             >
             <template  slot-scope="scope">
-              {{scope.row.validRules.map(item=>item.name).join()}}
-             <el-button @click="showDialog(scope.row, 'Rule')">编辑</el-button>
-
+              <el-switch
+                v-model="scope.row.required"
+                on-text="是"
+                off-text="否">
+              </el-switch>
             </template>
           </el-table-column>
-          
-          
           
           <el-table-column
             prop="key"
@@ -101,7 +121,7 @@
       </el-tab-pane>
 
       <el-tab-pane label="关联设置" name="relations">
-        TODO
+        设计&开发中...
       </el-tab-pane>
     
     </el-tabs>

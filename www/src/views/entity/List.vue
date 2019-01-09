@@ -16,12 +16,12 @@
       </el-table-column>
       
       <el-table-column
-        prop="name"
+        prop="basic.name"
         label="名称"
         >
       </el-table-column>
       <el-table-column
-        prop="des"
+        prop="basic.des"
         label="描述"
         >
       </el-table-column>
@@ -32,7 +32,7 @@
         >
         <template slot-scope="scope">
           <el-button type="success" size="small" @click="$router.push('/entity/update/' + scope.row.id)">编辑</el-button>
-          <el-button type="danger" size="small" @click="remove(scope.row.id, scope.$index, scope.$index.name)">删除</el-button>
+          <el-button type="danger" size="small" @click="remove(scope.row.id, scope.$index, scope.row.basic.name)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>

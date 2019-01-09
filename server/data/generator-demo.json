@@ -2,7 +2,29 @@
   "role": [],
   "dict": [],
   "entityType": [],
-  "entity": [],
+  "entity": [
+    {
+      "id": "ad95c1d4-b6c3-0e91-6dde-0951d61cf8d9",
+      "updateAt": 1547001914639,
+      "basic": {
+        "isPublic": true,
+        "name": "teacher",
+        "des": "老师",
+        "hasListPage": true,
+        "hasUpdatePage": true
+      },
+      "cols": [
+        {
+          "label": "姓名",
+          "key": "name",
+          "dataType": "string",
+          "maxLength": "8",
+          "required": true
+        }
+      ],
+      "isSynced": false
+    }
+  ],
   "listPage": [],
   "updatePage": [],
   "router": [],

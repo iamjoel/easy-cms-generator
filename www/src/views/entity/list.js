@@ -25,6 +25,18 @@ export default {
         })
       })
     },
+    reloadList() {
+      fetchList('entity').then(({data}) => {
+        this.entityList = data.data.map(item => {
+          return {
+            ...item,
+            listPage: this.listPage.filter(page => page.basic && page.basic.entity === item.key)[0],
+            updatePage: this.updatePage.filter(page => page.basic && page.basic.entity === item.key)[0],
+          }
+        })
+      })
+
+    }
     
   },
   mounted() {
