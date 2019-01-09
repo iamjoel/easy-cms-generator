@@ -41,7 +41,16 @@ var apis = {
   menu: require('./api/utils/commonCRUD')('menu'),
 }
 
-generateAPI(Object.keys(apis))
+generateAPI(Object.keys(apis).map(name => {
+  if(name === 'entity') {
+    return {
+      name: 'entity',
+      config: {list: true, detail: true, remove: true}
+    }
+  } else {
+    return name
+  }
+}))
 
 var projectApi = require('./api/project')
 app.get('/project/check-folds-exist', projectApi.checkFoldsExist)
@@ -57,6 +66,15 @@ app.post('/project/choose', (req, res)=> {
 var configApi = require('./api/config')
 app.post('/config/sync/:type', (req, res)=> {
   configApi.syncConfig(req, res)
+})
+
+var entityApi = require('./api/entity')
+app.put(`/entity`, (req,res) => {
+  entityApi.add(req, res)
+})
+
+app.post(`/entity/:id`, (req,res) => {
+  entityApi.edit(req, res)
 })
 
 var listPageApi = require('./api/list-page')
@@ -88,26 +106,46 @@ app.get('/sync-status', (req, res)=> {
 
 function generateAPI(names) {
   names.forEach(name => {
-    // 列表
-    app.get(`/${name}/list`, (req,res) => {
-      apis[name].list(req, res)
-    })
-    // 详情
-    app.get(`/${name}/:id`, (req,res) => {
-      apis[name].detail(req, res)
-    })
-    // 新增
-    app.put(`/${name}`, (req,res) => {
-      apis[name].add(req, res)
-    })
-    // 修改
-    app.post(`/${name}/:id`, (req,res) => {
-      apis[name].edit(req, res)
-    })
-    // 删除
-    app.delete(`/${name}/:id`, (req,res) => {
-      apis[name].remove(req, res)
-    })
+    var config
+    if(typeof name === 'object') {
+      config = name.config
+      name = name.name
+    }
+    if(!config || config.list) {
+      // 列表
+      app.get(`/${name}/list`, (req,res) => {
+        apis[name].list(req, res)
+      })
+    }
+    
+    if(!config || config.detail) {
+      // 详情
+      app.get(`/${name}/:id`, (req,res) => {
+        apis[name].detail(req, res)
+      })
+    }
+
+    if(!config || config.add) {
+      // 新增
+      app.put(`/${name}`, (req,res) => {
+        apis[name].add(req, res)
+      })
+    }
+
+    if(!config || config.edit) {
+      // 修改
+      app.post(`/${name}/:id`, (req,res) => {
+        apis[name].edit(req, res)
+      })
+    }
+
+    if(!config || config.remove) {
+      // 删除
+      app.delete(`/${name}/:id`, (req,res) => {
+        apis[name].remove(req, res)
+      })
+    }
+
   })
 }
 

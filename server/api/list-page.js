@@ -2,8 +2,6 @@ const apiFormat = require('../utils/apiFormat')
 const generatorCode = require('./utils/generatorListCode')
 const tableName = 'listPage'
 
-const commonCRUD = require
-
 var config = require('../config')
 const fs = require('fs-extra')
 
