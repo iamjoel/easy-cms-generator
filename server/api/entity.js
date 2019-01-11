@@ -50,6 +50,7 @@ function createPage(data, entityId) {
           }
         }))
         .write()
+      // 添加路由 TODO
     }
   }
 
@@ -79,7 +80,6 @@ function createPage(data, entityId) {
 
 /*
 * 删除实体，删除对应的页面
-* 待调试
 */
 function removePage(entityId) {
   var hasListPage = global.db.get('listPage').filter(page => {
