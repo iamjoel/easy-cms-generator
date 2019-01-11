@@ -1,12 +1,13 @@
 <template>
   <div class="main">
+    {{model.basic}}
     <el-tabs v-model="activeTab" >
       <el-tab-pane label="基本设置" name="basic">
         <el-form :inline="true" :model="model.basic"  label-position="right" >
         <el-row type="flex" justify="start" class="multi-line">
           <j-edit-item
             label="实体" prop="name">
-            <el-select v-model="model.basic.entity" placeholder="请选择" filterable clearable>
+            <el-select v-model="model.basic.entity.id" placeholder="请选择" filterable clearable>
               <el-option
                 v-for="item in canSelectEntityList"
                 :key="item.key"

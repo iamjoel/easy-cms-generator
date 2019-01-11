@@ -138,6 +138,9 @@ export default {
     }
   },
   mounted() {
+    fetchList('entityType').then(({data}) => {
+      this.entityTypeList = data.data
+    })
     this.fetchDetail()
   }
 }

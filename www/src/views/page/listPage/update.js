@@ -7,7 +7,7 @@ export default {
   },
   computed: {
     defaultCodePath() {
-      var entity = this.entityList.filter(item => item.key === this.model.basic.entity)[0]
+      var entity = this.entityList.filter(item => item.key === this.model.basic.entity.id)[0]
       var res
       if(entity) {
         let entityType = this.entityTypeList.filter(item => item.id === entity.parentId)[0]
@@ -158,12 +158,9 @@ export default {
         fetchModel(this.KEY, this.$route.params.id).then(({data}) => {
           const pagesConfig = data.data
           var model = deepClone(pagesConfig)
-          model.basic = model.basic
-          model.cols = model.cols
-          model.operate = model.operate
-          model.searchCondition = model.searchCondition
-          model.fn = model.fn
+          
           // 操作列表
+          model.operate = model.operate || {}
           this.opList = Object.keys(model.operate).map(opKey => {
             const item = model.operate[opKey]
             const showType = this.getShowType(item.isShow)
@@ -245,7 +242,7 @@ export default {
           this.entityList.filter(entity => {
             var res = 
               this.usedEntityKeys.indexOf(entity.key) === -1
-              || (this.model && this.model.basic && entity.key === this.model.basic.entity)
+              || (this.model && this.model.basic && entity.id === this.model.basic.entity.id)
             return res
           })
 

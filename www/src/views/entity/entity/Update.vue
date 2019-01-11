@@ -13,6 +13,19 @@
             label="描述" prop="name">
             <el-input v-model="model.basic.des" placeholder="请输入描述"></el-input>
           </j-edit-item>
+
+          <j-edit-item
+            label="所属分类" prop="type">
+            <el-select v-model="model.basic.type" placeholder="请选择分类">
+              <el-option
+                v-for="item in entityTypeList"
+                :key="item.id"
+                :label="item.label"
+                :value="item.id">
+              </el-option>
+            </el-select>
+          </j-edit-item>
+
           <!-- 有能公共访问的路由 -->
           <j-edit-item
             label="支持公开访问" prop="isPublic">

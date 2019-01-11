@@ -25,6 +25,15 @@ var _menuConfig = [{
   {
     id: 'entity',
     name: '实体',
+    children: [{
+      id: 'entity',
+      name: '实体',
+    },
+    {
+      id: 'entity-type',
+      name: '实体分类',
+    },
+    ]
   },
   {
     id: 'basic',

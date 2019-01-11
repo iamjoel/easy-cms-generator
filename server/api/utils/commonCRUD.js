@@ -30,13 +30,13 @@ module.exports = function (tableName) {
                           .value()
       res.send(apiFormat.success(results))
     },
-    add(req, res, pool) {
+    add(req, res, pool, id) {
       try {
         // console.log(req.body)
         global.db
             .get(tableName)
             .push(Object.assign({
-              id: guidFn(),
+              id: id || guidFn(),
               updateAt: Date.now()
             }, req.body))
             .write()

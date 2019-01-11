@@ -10,18 +10,9 @@ export default {
     }
   },
   methods: {
-    getName(entityId) {
-      var res = this.entities.filter(item => item.key === entityId)[0]
-      return res ? res.label : '未知实体'
-    },
-    getTypeName(entityId) {
-      var res
-      var entity = this.entities.filter(item => item.key === entityId)[0]
-      if(entity) {
-        res = this.entityTypeList.filter(item => item.id === entity.parentId)[0]
-        return res ? res.label : '-'
-      }
-      return res || '-'
+    getTypeName(entityTypeId) {
+      var res = this.entityTypeList.filter(item => item.id === entityTypeId)[0]
+      return res ? res.label : '-'
     },
     remove(id, index) {
       this.$confirm(`确认删除: ${this.list[index].name} 对应的列表页?`,  {
@@ -70,8 +61,7 @@ export default {
               isFreeze: item.isFreeze,
               isSynced: item.isSynced,
               basic: item.basic,
-              name: this.getName(item.basic.entity),
-              entityTypeName: this.getTypeName(item.basic.entity)
+              entityTypeName: this.getTypeName(item.basic.entity.type)
             }
           })
         })

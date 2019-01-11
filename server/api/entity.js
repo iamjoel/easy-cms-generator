@@ -3,15 +3,19 @@ const apiFormat = require('../utils/apiFormat')
 const tableName = 'entity'
 const commonCRUD = require('./utils/commonCRUD.js')(tableName)
 
-
 module.exports = {
   add(req, res, pool) {
-    createPage(req.body.basic)
-    commonCRUD.add(req, res, pool)
+    var id = guidFn()
+    createPage(req.body.basic, id)
+    commonCRUD.add(req, res, pool, id)
   },
   edit(req, res, pool) {
-    createPage(req.body.basic)
+    createPage(req.body.basic, req.body.id)
     commonCRUD.edit(req, res, pool)
+  },
+  remove(req, res, pool) {
+    removePage(req.params.id)
+    commonCRUD.remove(req, res, pool)
   }
 }
 
@@ -20,13 +24,19 @@ module.exports = {
 * 同步条件：实体设置了有列表页/更新页，但列表或更新表没有那条数据，则创建。
 * 不覆盖和删除。
 */
-function createPage(data) {
+function createPage(data, entityId) {
   const entityName = data.name
+  var entity = {
+    id: entityId,
+    name: entityName,
+    type: data.type
+  }
   if(data.hasListPage) {
-    var hasListPage = global.db.get('listPage').filter(page => {
-      return page.basic.entity === entityName
-    })[0]
-    
+    var hasListPage = global.db.get('listPage')
+                            .filter(page => {
+                              return page.basic.entity.id === entityId
+                            })
+                            .value()[0]
     if(!hasListPage) {
       global.db
         .get('listPage')
@@ -35,8 +45,8 @@ function createPage(data) {
           updateAt: Date.now()
         }, {
           "basic": {
-            "entity": entityName, // 存id，冗杂个name吧。
-            // "codePath": "account/account" //目录怎么处理？,一定要有分类？实体分类
+            entity,
+            "codePath": `${data.type ? `${data.type}/` : ''}${entityName}`
           }
         }))
         .write()
@@ -44,9 +54,11 @@ function createPage(data) {
   }
 
   if(data.hasUpdatePage) {
-    var hasUpdatePage = global.db.get('updatePage').filter(page => {
-      return page.basic.entity === entityName
-    })[0]
+    var hasUpdatePage = global.db.get('updatePage')
+                            .filter(page => {
+                              return page.basic.entity.id === entityId
+                            })
+                            .value()[0]
     
     if(!hasUpdatePage) {
       global.db
@@ -56,31 +68,41 @@ function createPage(data) {
           updateAt: Date.now()
         }, {
           "basic": {
-            "entity": entityName,
-            // "codePath": "account/account" //目录怎么处理？,一定要有分类？实体分类
+            entity,
+            "codePath": `${data.type ? `${data.type}/` : ''}${entityName}`
           }
         }))
         .write()
     }
   }
-
 }
 
 /*
 * 删除实体，删除对应的页面
 * 待调试
 */
-function removePage() {
+function removePage(entityId) {
   var hasListPage = global.db.get('listPage').filter(page => {
-      return page.basic.entity === entityName
-    })[0]
-    if(hasListPage) {
-      global.db
-      .get('listPage')
-      .remove({
-        id: hasListPage[0].id,
-      })
-      .write()
-    }
-    
+    return page.basic.entity.id === entityId
+  }).value()[0]
+  if(hasListPage) {
+    global.db
+    .get('listPage')
+    .remove({
+      id: hasListPage.id,
+    })
+    .write()
+  }
+  
+  var hasUpatePage = global.db.get('updatePage').filter(page => {
+    return page.basic.entity.id === entityId
+  }).value()[0]
+  if(hasUpatePage) {
+    global.db
+    .get('updatePage')
+    .remove({
+      id: hasUpatePage.id,
+    })
+    .write()
+  }
 }

@@ -45,7 +45,7 @@ generateAPI(Object.keys(apis).map(name => {
   if(name === 'entity') {
     return {
       name: 'entity',
-      config: {list: true, detail: true, remove: true}
+      config: {list: true, detail: true}
     }
   } else {
     return name
@@ -75,6 +75,10 @@ app.put(`/entity`, (req,res) => {
 
 app.post(`/entity/:id`, (req,res) => {
   entityApi.edit(req, res)
+})
+
+app.delete(`/entity/:id`, (req,res) => {
+  entityApi.remove(req, res)
 })
 
 var listPageApi = require('./api/list-page')

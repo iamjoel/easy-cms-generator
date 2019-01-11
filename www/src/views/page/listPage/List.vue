@@ -19,7 +19,7 @@
         >
       </el-table-column>
       <el-table-column
-        prop="basic.entity"
+        prop="basic.entity.name"
         label="实体"
         >
       </el-table-column>
