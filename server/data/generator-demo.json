@@ -11,15 +11,14 @@
   ],
   "entity": [
     {
-      "id": "c598a79f-38cd-ab9d-d186-5df15e6a4e00",
-      "updateAt": 1547610051232,
+      "id": "102513c3-6b30-8ef0-5f74-67ceb4513931",
+      "updateAt": 1547625716085,
       "basic": {
         "isPublic": true,
-        "name": "a",
-        "des": "b",
         "hasListPage": true,
-        "entityTypeId": "6e185105-cf2a-4a32-6096-b6ac0c23b8db",
-        "hasUpdatePage": true
+        "hasUpdatePage": true,
+        "name": "a",
+        "des": "bbbb"
       },
       "cols": [],
       "isSynced": false
@@ -27,11 +26,11 @@
   ],
   "listPage": [
     {
-      "id": "3f8d162e-a701-bb3b-8d2b-1315df39aacd",
-      "updateAt": 1547609967188,
+      "id": "7e6253b0-f020-8ca6-d82f-e93d9e6d3cee",
+      "updateAt": 1547625716082,
       "basic": {
         "entity": {
-          "id": "c598a79f-38cd-ab9d-d186-5df15e6a4e00",
+          "id": "102513c3-6b30-8ef0-5f74-67ceb4513931",
           "name": "a"
         },
         "codePath": "a"
@@ -40,42 +39,35 @@
   ],
   "updatePage": [
     {
-      "id": "87bb4352-85c5-572c-72b3-4b26ddff1423",
-      "updateAt": 1547610051231,
+      "id": "c86db67c-ae2f-8d54-2bbd-92086ddad20e",
+      "updateAt": 1547625716083,
       "basic": {
         "entity": {
-          "id": "c598a79f-38cd-ab9d-d186-5df15e6a4e00",
-          "name": "a",
-          "entityTypeId": "6e185105-cf2a-4a32-6096-b6ac0c23b8db"
+          "id": "102513c3-6b30-8ef0-5f74-67ceb4513931",
+          "name": "a"
         },
-        "codePath": "people/a"
+        "codePath": "a"
       }
     }
   ],
   "router": [
     {
-      "entityId": "4e87b71d-79ee-4dcc-b2ee-26c863186124",
-      "name": "老师列表页",
-      "pageType": "list",
-      "routePath": "/teacher/list",
-      "filePath": "/teacher/List.vue",
-      "updateAt": 1547608005575
-    },
-    {
-      "entityId": "c598a79f-38cd-ab9d-d186-5df15e6a4e00",
-      "name": "b列表页",
+      "id": "9a2913aa-f03b-f562-fd03-783c41a612be",
+      "entityId": "102513c3-6b30-8ef0-5f74-67ceb4513931",
+      "name": "bbbb列表页",
       "pageType": "list",
       "routePath": "/a/list",
       "filePath": "/a/List.vue",
-      "updateAt": 1547609967189
+      "updateAt": 1547625716082
     },
     {
-      "entityId": "c598a79f-38cd-ab9d-d186-5df15e6a4e00",
-      "name": "b更新页",
+      "id": "78b891bf-8f11-e4ab-0b2e-9faa6fdf0eff",
+      "entityId": "102513c3-6b30-8ef0-5f74-67ceb4513931",
+      "name": "bbbb更新页",
       "pageType": "update",
-      "routePath": "/people/a/update/:id",
-      "filePath": "/people/a/Update.vue",
-      "updateAt": 1547610051231
+      "routePath": "/a/update/:id",
+      "filePath": "/a/Update.vue",
+      "updateAt": 1547625716084
     }
   ],
   "menu": [],

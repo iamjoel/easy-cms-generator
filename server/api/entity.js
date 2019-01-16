@@ -57,7 +57,6 @@ function addPageAndRoute(entityBasic, entityId, pageType) {
                         })
                         .value()
 
-    // console.log(entity.entityTypeId + ';' + entityType)
     // 新增页面
     global.db
       .get(`${pageType}Page`)
@@ -72,11 +71,11 @@ function addPageAndRoute(entityBasic, entityId, pageType) {
       }))
       .write()
     
-    
     // 新增路由
     global.db
       .get('router')
       .push({
+        id: guidFn(),
         entityId,
         name: `${entityBasic.des}${pageType === 'list'? '列表页' : '更新页'}`,
         pageType,
@@ -92,34 +91,24 @@ function addPageAndRoute(entityBasic, entityId, pageType) {
 * 删除实体，删除对应的页面
 */
 function removePage(entityId) {
-  
-  
-  var hasUpatePage = global.db.get('updatePage').filter(page => {
-    return page.basic.entity.id === entityId
-  }).value()[0]
-  if(hasUpatePage) {
-    global.db
-    .get('updatePage')
-    .remove({
-      id: hasUpatePage.id,
-    })
-    .write()
-  }
+  removePageAndRouter(entityId, 'list')
+  removePageAndRouter(entityId, 'update')
 }
 
 function removePageAndRouter(entityId, pageType) {
-  var hasPage = global.db.get('listPage').filter(page => {
+  var hasPage = global.db.get(`${pageType}Page`).filter(page => {
     return page.basic.entity.id === entityId
-  }).value().length > 0
-  if(hasPage) {
-    
+  }).value()
+  if(hasPage.length > 0) {
+    // 删页面
     global.db
       .get(`${pageType}Page`)
       .remove({
-        id: hasPage.id,
+        id: hasPage[0].id,
       })
       .write()
 
+    // 删路由
     global.db
       .get('router')
       .remove({

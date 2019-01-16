@@ -60,12 +60,9 @@ var _menuConfig = [{
     },]
   },
   {
-    id: 'router-menu',
-    name: '路由和菜单',
-    children: [{
-      id: 'router',
-      name: '路由',
-    },
+    id: 'menu',
+    name: '菜单',
+    children: [
     {
       id: 'menu',
       name: '菜单',

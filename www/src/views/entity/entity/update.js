@@ -12,7 +12,9 @@ export default {
       activeTab: this.$route.params.id == -1 ? 'basic' : 'cols',
       model: {
         basic: {
-          isPublic: true
+          isPublic: true,
+          hasListPage: true,
+          hasUpdatePage: true
         },
         cols: [],
       },
