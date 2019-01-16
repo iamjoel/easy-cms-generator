@@ -16,7 +16,7 @@
 
           <j-edit-item
             label="所属分类" prop="type">
-            <el-select v-model="model.basic.type" placeholder="请选择分类">
+            <el-select v-model="model.basic.entityTypeId" placeholder="请选择分类">
               <el-option
                 v-for="item in entityTypeList"
                 :key="item.id"
