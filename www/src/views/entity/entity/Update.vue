@@ -45,10 +45,22 @@
             </el-switch>
           </j-edit-item>
 
+
+
           <j-edit-item
             label="有更新页" prop="name">
             <el-switch
               v-model="model.basic.hasUpdatePage"
+              on-text="是"
+              off-text="否">
+            </el-switch>
+          </j-edit-item>
+
+          <j-edit-item
+            label="在菜单中显示" prop="name">
+            <el-switch
+              v-if="model.basic.hasListPage"
+              v-model="model.basic.isShowInMenu"
               on-text="是"
               off-text="否">
             </el-switch>

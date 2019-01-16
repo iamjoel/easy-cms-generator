@@ -9,16 +9,40 @@ module.exports = {
       var results = global.db.get(tableName)
                           .orderBy('order', 'asc')
                           .value()
-      results = results.map(item => {
+      results = results.map(entity => {
         let entityType = global.db
                         .get('entityType')
                         .find({
-                          id: item.basic.entityTypeId
+                          id: entity.basic.entityTypeId
                         })
                         .value()
         let entityTypeName = entityType ? (entityType.label || '未命名') : '-'
+
+        if(entity.basic.hasListPage) {
+          let page = global.db
+                        .get('listPage')
+                        .filter(page => {
+                          return page.basic.entity.id === entity.id
+                        })
+                        .value()[0]
+          if(page) {
+            entity.basic.listPageId = page.id
+          }
+        }
+
+        if(entity.basic.hasUpdatePage) {
+          let page = global.db
+                        .get('updatePage')
+                        .filter(page => {
+                          return page.basic.entity.id === entity.id
+                        })
+                        .value()[0]
+          if(page) {
+            entity.basic.updatePageId = page.id
+          }
+        }
         return {
-          ...item,
+          ...entity,
           entityTypeName
         }
       })
@@ -33,6 +57,7 @@ module.exports = {
   add(req, res, pool) {
     var id = guidFn()
     createPage(req.body.basic, id)
+
     commonCRUD.add(req, res, pool, id)
   },
   edit(req, res, pool) {

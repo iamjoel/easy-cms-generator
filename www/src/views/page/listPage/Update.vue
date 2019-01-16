@@ -1,29 +1,17 @@
 <template>
   <div class="main">
-    {{model.basic}}
     <el-tabs v-model="activeTab" >
-      <el-tab-pane label="基本设置" name="basic">
+      <el-tab-pane label="基本信息" name="basic">
         <el-form :inline="true" :model="model.basic"  label-position="right" >
         <el-row type="flex" justify="start" class="multi-line">
           <j-edit-item
             label="实体" prop="name">
-            <el-select v-model="model.basic.entity.id" placeholder="请选择" filterable clearable>
-              <el-option
-                v-for="item in canSelectEntityList"
-                :key="item.key"
-                :label="item.label"
-                :value="item.key">
-              </el-option>
-            </el-select>
+            {{model.basic.entity.name}}
           </j-edit-item>
-          <el-col :md="{span: 16}">
-            <el-row>
-              <el-col :md="{span:8}" class="j-edit-item__label" style="padding-top:11px;">代码展开地址:@/views/</el-col>
-              <el-col :md="{span:16}" class="j-edit-item__input" >
-                <el-input v-model="model.basic.codePath" :placeholder="defaultCodePath"></el-input>
-              </el-col>
-            </el-row>
-          </el-col>
+          <j-edit-item
+            label="代码展开目录" prop="name">
+            @/views/{{model.basic.codePath}}
+          </j-edit-item>
         </el-row>
       </el-form>
       </el-tab-pane>
@@ -322,6 +310,7 @@
       </el-tab-pane>
     </el-tabs>
     <div class="ly ly-c mt-10">
+      <el-button type="default" @click="$router.push('/page/listPage/list')">返回</el-button>
       <el-button type="primary" @click="save">保存</el-button>
     </div>
     <el-dialog title="详情" :visible.sync="isShowEditArgsDialog">

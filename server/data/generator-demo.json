@@ -11,15 +11,16 @@
   ],
   "entity": [
     {
-      "id": "0395f779-7e1c-7b55-d6f9-f6f67a9e64c0",
-      "updateAt": 1547630582323,
+      "id": "b6a7f110-0783-04c7-76e7-c95bd70cf8dd",
+      "updateAt": 1547632909232,
       "basic": {
         "isPublic": true,
         "hasListPage": true,
         "hasUpdatePage": true,
-        "name": "teacher",
-        "des": "老师",
-        "entityTypeId": "6e185105-cf2a-4a32-6096-b6ac0c23b8db"
+        "name": "a",
+        "des": "b",
+        "listPageId": "42c22fd6-12ce-4e34-a7b0-33094cfbe0d9",
+        "updatePageId": "6225a667-931c-5bb1-deef-7d2f5af80f57"
       },
       "cols": [],
       "isSynced": false
@@ -27,50 +28,50 @@
   ],
   "listPage": [
     {
-      "id": "4c5bb601-64f1-511b-03cc-674cc5a99b3b",
-      "updateAt": 1547630582319,
+      "id": "42c22fd6-12ce-4e34-a7b0-33094cfbe0d9",
+      "updateAt": 1547632196689,
       "basic": {
         "entity": {
-          "id": "0395f779-7e1c-7b55-d6f9-f6f67a9e64c0",
-          "name": "teacher",
-          "entityTypeId": "6e185105-cf2a-4a32-6096-b6ac0c23b8db"
+          "id": "b6a7f110-0783-04c7-76e7-c95bd70cf8dd",
+          "name": "a",
+          "listPageId": "42c22fd6-12ce-4e34-a7b0-33094cfbe0d9"
         },
-        "codePath": "people/teacher"
+        "codePath": "a"
       }
     }
   ],
   "updatePage": [
     {
-      "id": "d988e16d-d47c-27da-8ed3-6eddad76fd72",
-      "updateAt": 1547630582320,
+      "id": "6225a667-931c-5bb1-deef-7d2f5af80f57",
+      "updateAt": 1547632196691,
       "basic": {
         "entity": {
-          "id": "0395f779-7e1c-7b55-d6f9-f6f67a9e64c0",
-          "name": "teacher",
-          "entityTypeId": "6e185105-cf2a-4a32-6096-b6ac0c23b8db"
+          "id": "b6a7f110-0783-04c7-76e7-c95bd70cf8dd",
+          "name": "a",
+          "updatePageId": "6225a667-931c-5bb1-deef-7d2f5af80f57"
         },
-        "codePath": "people/teacher"
+        "codePath": "a"
       }
     }
   ],
   "router": [
     {
-      "id": "52d4bf89-f09f-2077-d695-7caf77b36eac",
-      "entityId": "0395f779-7e1c-7b55-d6f9-f6f67a9e64c0",
-      "name": "老师列表页",
+      "id": "049162ce-7df9-392b-25b0-30e7a0562501",
+      "entityId": "b6a7f110-0783-04c7-76e7-c95bd70cf8dd",
+      "name": "b列表页",
       "pageType": "list",
-      "routePath": "/people/teacher/list",
-      "filePath": "/people/teacher/List.vue",
-      "updateAt": 1547630582319
+      "routePath": "/a/list",
+      "filePath": "/a/List.vue",
+      "updateAt": 1547632196690
     },
     {
-      "id": "f8d51c01-f6a3-58b2-445d-53761d27f260",
-      "entityId": "0395f779-7e1c-7b55-d6f9-f6f67a9e64c0",
-      "name": "老师更新页",
+      "id": "d97aba7f-b69d-3912-f6a1-c35593dee994",
+      "entityId": "b6a7f110-0783-04c7-76e7-c95bd70cf8dd",
+      "name": "b更新页",
       "pageType": "update",
-      "routePath": "/people/teacher/update/:id",
-      "filePath": "/people/teacher/Update.vue",
-      "updateAt": 1547630582322
+      "routePath": "/a/update/:id",
+      "filePath": "/a/Update.vue",
+      "updateAt": 1547632196691
     }
   ],
   "menu": [],

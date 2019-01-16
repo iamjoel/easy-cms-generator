@@ -1,8 +1,5 @@
 <template>
   <div class="main">
-    <div class="ly ly-r mb-10">
-      <el-button type="primary" @click="$router.push('/page/updatePage/update/-1')">新增</el-button>
-    </div>
     <el-table
       :data="list"
       border

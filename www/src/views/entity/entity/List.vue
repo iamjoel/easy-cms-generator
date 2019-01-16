@@ -33,9 +33,22 @@
       <el-table-column
         prop="key"
         label="操作"
+        width="300"
         >
         <template slot-scope="scope">
           <el-button type="success" size="small" @click="$router.push('/entity/entity/update/' + scope.row.id)">编辑</el-button>
+          <el-button 
+            type="info" size="small"
+            v-if="scope.row.basic.hasListPage"
+            @click="$router.push('/page/listPage/update/' + scope.row.basic.listPageId)">列表页
+          </el-button>
+
+          <el-button 
+            type="info" size="small"
+            v-if="scope.row.basic.hasUpdatePage"
+            @click="$router.push('/page/updatePage/update/' + scope.row.basic.updatePageId)">编辑页
+          </el-button>
+
           <el-button type="danger" size="small" @click="remove(scope.row.id, scope.$index, scope.row.basic.name)">删除</el-button>
         </template>
       </el-table-column>
