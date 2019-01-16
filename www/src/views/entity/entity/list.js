@@ -47,7 +47,7 @@ export default {
     ]).then( datas => {
       this.listPage = datas[0].data.data
       this.updatePage = datas[1].data.data
-
+      // debugger
      this.entityList = datas[2].data.data.map(item => {
         return {
           ...item,

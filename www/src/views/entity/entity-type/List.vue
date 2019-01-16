@@ -15,20 +15,22 @@
         align="center"
         width="80">
       </el-table-column>
-      <el-table-column
-        prop="label"
-        label="名称"
-        >
-        <template slot-scope="scope">
-          <el-input v-model="scope.row.label" @change="scope.row.hasChanged = true"></el-input>
-        </template>
-      </el-table-column>
+      
       <el-table-column
         prop="key"
-        label="值"
+        label="名称(英文)"
         >
         <template slot-scope="scope">
           <el-input v-model="scope.row.key" @change="scope.row.hasChanged = true"></el-input>
+        </template>
+      </el-table-column>
+      
+      <el-table-column
+        prop="label"
+        label="描述(中文)"
+        >
+        <template slot-scope="scope">
+          <el-input v-model="scope.row.label" @change="scope.row.hasChanged = true"></el-input>
         </template>
       </el-table-column>
       <el-table-column

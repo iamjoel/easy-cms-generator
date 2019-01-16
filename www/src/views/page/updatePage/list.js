@@ -61,7 +61,7 @@ export default {
               isFreeze: item.isFreeze,
               isSynced: item.isSynced,
               basic: item.basic,
-              entityTypeName: this.getTypeName(item.basic.entity.type)
+              entityTypeName: this.getTypeName(item.basic.entity.entityTypeId)
             }
           })
         })

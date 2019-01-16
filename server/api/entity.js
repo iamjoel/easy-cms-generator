@@ -4,6 +4,32 @@ const tableName = 'entity'
 const commonCRUD = require('./utils/commonCRUD.js')(tableName)
 
 module.exports = {
+  list(req, res, pool) {
+    try {
+      var results = global.db.get(tableName)
+                          .orderBy('order', 'asc')
+                          .value()
+      results = results.map(item => {
+        let entityType = global.db
+                        .get('entityType')
+                        .find({
+                          id: item.basic.entityTypeId
+                        })
+                        .value()
+        let entityTypeName = entityType ? (entityType.label || '未命名') : '-'
+        return {
+          ...item,
+          entityTypeName
+        }
+      })
+      res.send(apiFormat.success(results))
+    } catch(error) {
+      res.send(apiFormat.error(error))
+    }
+  },
+  detail(req, res, pool) {
+    commonCRUD.detail(req, res, pool, req.params.id)
+  },
   add(req, res, pool) {
     var id = guidFn()
     createPage(req.body.basic, id)
@@ -25,7 +51,6 @@ module.exports = {
 * 如果已有列表或更新页，不做覆盖和删除的处理。
 */
 function createPage(data, entityId) {
-  
   if(data.hasListPage) {
     addPageAndRoute(data, entityId, 'list')
   }
@@ -48,7 +73,6 @@ function addPageAndRoute(entityBasic, entityId, pageType) {
                               return page.basic.entity.id === entityId
                             })
                             .value().length > 0
-  console.log(hasPage)
   if(!hasPage) {
     var entityType = global.db
                         .get('entityType')

@@ -21,11 +21,27 @@ app.all('*', function(req, res, next) {
 
 // 有没设置的检查
 app.use(function(req, res, next) {
-  console.log(req.path)
   if(req.path.indexOf('project/choose') !== -1 || global.projectName) {
     next()
   } else {
-    res.send(apiFormat.error('未设置项目', 2))
+    let isTest = true
+    if(isTest) {
+      let name = 'generator-demo'
+      let rootPath = '/Users/jinweiqiang/front-end/generator-demo'
+      const FileSync = require('lowdb/adapters/FileSync')
+      const adapter = new FileSync(`data/${name}.json`)
+      const low = require('lowdb')
+      const db = low(adapter)
+      // 不要设置db.defaults。设置 default 导致 db.json 被间歇性的reload。导致开发时，服务器不断重启。。。
+      global.db = db
+      global.projectName = name
+      global.feCodeRootPath = `${rootPath}/admin`
+      global.serverCodeRootPath = `${rootPath}/server`
+      next()
+    } else {
+      res.send(apiFormat.error('未设置项目', 2))
+    }
+    
   }
 })
 
@@ -34,23 +50,13 @@ var apis = {
   dict: require('./api/utils/commonCRUD')('dict'),
   role: require('./api/utils/commonCRUD')('role'),
   entityType: require('./api/utils/commonCRUD')('entityType'),
-  entity: require('./api/utils/commonCRUD')('entity'),
   router: require('./api/utils/commonCRUD')('router'),
   listPage: require('./api/utils/commonCRUD')('listPage'),
   updatePage: require('./api/utils/commonCRUD')('updatePage'),
   menu: require('./api/utils/commonCRUD')('menu'),
 }
 
-generateAPI(Object.keys(apis).map(name => {
-  if(name === 'entity') {
-    return {
-      name: 'entity',
-      config: {list: true, detail: true}
-    }
-  } else {
-    return name
-  }
-}))
+generateAPI(Object.keys(apis).map(name => name))
 
 var projectApi = require('./api/project')
 app.get('/project/check-folds-exist', projectApi.checkFoldsExist)
@@ -69,6 +75,14 @@ app.post('/config/sync/:type', (req, res)=> {
 })
 
 var entityApi = require('./api/entity')
+app.get(`/entity/list`, (req,res) => {
+  entityApi.list(req, res)
+})
+
+app.get(`/entity/:id`, (req,res) => {
+  entityApi.detail(req, res)
+})
+
 app.put(`/entity`, (req,res) => {
   entityApi.add(req, res)
 })

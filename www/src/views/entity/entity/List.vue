@@ -14,7 +14,11 @@
         align="center"
         width="80">
       </el-table-column>
-      
+      <el-table-column
+        prop="entityTypeName"
+        label="实体分类"
+        >
+      </el-table-column>
       <el-table-column
         prop="basic.name"
         label="名称"
