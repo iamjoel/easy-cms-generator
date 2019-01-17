@@ -1,6 +1,21 @@
 {
   "role": [],
   "dict": [],
+  "entityConfig": {
+    "commonCols": [{
+      "name":"id",
+      "dataType": "varchar(36)",
+      "description": "36位的 Guid"
+    },{
+      "name":"createTime",
+      "dataType": "datetime",
+      "description": "创建时间"
+    },{
+      "name":"updateTime",
+      "dataType": "datetime",
+      "description": "更新时间"
+    }]
+  },
   "entityType": [
     {
       "id": "6e185105-cf2a-4a32-6096-b6ac0c23b8db",

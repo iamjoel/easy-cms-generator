@@ -33,6 +33,10 @@ var _menuConfig = [{
       id: 'entity-type',
       name: '实体分类',
     },
+    {
+      id: 'config',
+      name: '配置',
+    },
     ]
   },
   {

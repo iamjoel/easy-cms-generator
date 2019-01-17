@@ -95,6 +95,10 @@ app.delete(`/entity/:id`, (req,res) => {
   entityApi.remove(req, res)
 })
 
+app.get(`/entity-common-cols/list`, (req,res) => {
+  entityApi.commonCols(req, res)
+})
+
 var listPageApi = require('./api/list-page')
 app.post('/list-page/expendCofigToFile/:id', (req, res)=> {
   listPageApi.expendCofigToFile(req, res)

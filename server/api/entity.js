@@ -67,6 +67,16 @@ module.exports = {
   remove(req, res, pool) {
     removePage(req.params.id)
     commonCRUD.remove(req, res, pool)
+  },
+  commonCols(req, res, pool) {
+    try {
+        var results = global.db.get('entityConfig')
+                            .value()
+                            .commonCols
+        res.send(apiFormat.success(results))
+      } catch(error) {
+        res.send(apiFormat.error(error))
+      }
   }
 }
 
