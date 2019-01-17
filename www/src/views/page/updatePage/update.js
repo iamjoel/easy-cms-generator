@@ -15,6 +15,23 @@ export default {
         res = `${entityType ? entityType.key + '/' : ''}${entity.key}`
       }
       return res || ''
+    },
+    allColsList() {
+      if(this.model.basic.entity && this.model.basic.entity.id) {
+        var tarEntity = this.entityList.filter(entity => entity.id === this.model.basic.entity.id)[0]
+        return tarEntity ? tarEntity.cols : []
+      } else {
+        return []
+      }
+    },
+    canChooseCols() {
+      if(!this.allColsList) {
+        return []
+      }
+      return this.allColsList.filter(item => {
+        var hasSelected = this.model.cols.filter(col => item.key === col.key).length > 0
+        return !hasSelected
+      })
     }
   },
   data() {
@@ -22,7 +39,9 @@ export default {
       KEY: 'updatePage',
       activeTab: this.$route.params.id == -1 ? 'basic' : 'cols',
       model: {
-        basic: {},
+        basic: {
+          entity: {}
+        },
         cols: [],
         fn: this.$store.state.utilFns.map(item => {
           return {
@@ -43,7 +62,6 @@ export default {
           max: 5,
           tip: '建议尺寸 750 * 300'
         },
-        validRules: [],
         formatFn: null,
         saveFormatFn: null,
       },
@@ -78,6 +96,8 @@ export default {
         key: 'password',
         label: '密码'
       },],
+      isShowChooseColDialog: false,
+      tempSelectedCols: [],
       isShowEditArgsDialog: false,
       isShowDataSourceDialog: false,
       dataSourceType: [{
@@ -92,7 +112,6 @@ export default {
         key: 'required',
         label: '非空验证'
       }],
-      isShowRuleDialog: false,
       currFn: {},
       currRow: {
         dataSource: {
@@ -171,7 +190,7 @@ export default {
           message: '保存成功',
           type: 'success'
         })
-        this.$router.go(-1)
+        this.$router.push('/page/updatePage/list')
       })
     },
     generatorErrmsg(item) {
@@ -234,7 +253,28 @@ export default {
           resolve()
         })
       })
-      
+    },
+    showChooseColDialog() {
+      this.tempSelectedCols = []
+      this.isShowChooseColDialog = true
+    },
+    chooseCols() {
+      this.model.cols = this.model.cols.concat([...this.tempSelectedCols])
+      this.isShowChooseColDialog = false
+    },
+    handleSelectedColsChange(selectedCol) {
+      this.tempSelectedCols = [...selectedCol].map(item => {
+        var data = {
+          key: item.key,
+          label: item.label,
+          dataType: item.dataType,
+          required: item.required,
+        }
+        return {
+          ...deepClone(this.colItemTemplate),
+          ...data
+        }
+      })
     }
   },
   mounted() {

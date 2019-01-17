@@ -17,6 +17,7 @@
       </el-tab-pane>
       <el-tab-pane label="详情字段" name="cols">
         <div class="ly ly-r mb-10">
+          <el-button type="info" @click="showChooseColDialog">从实体中选择</el-button>
           <el-button type="primary" @click="model.cols.push(deepClone(colItemTemplate))">添加字段</el-button>
         </div>
         <el-table
@@ -69,12 +70,14 @@
           </el-table-column>
           <el-table-column
             prop="label"
-            label="验证规则"
+            label="是否必填"
             >
             <template  slot-scope="scope">
-              {{scope.row.validRules.map(item=>item.name).join()}}
-             <el-button @click="showDialog(scope.row, 'Rule')">编辑</el-button>
-
+              <el-switch
+                v-model="scope.row.required"
+                on-text="是"
+                off-text="否">
+              </el-switch>
             </template>
           </el-table-column>
           <el-table-column
@@ -121,6 +124,32 @@
             </template>
           </el-table-column>
         </el-table>
+
+        <el-dialog 
+          title="选择字段"
+          :visible.sync="isShowChooseColDialog"
+        >
+          <el-table
+            :data="canChooseCols"
+            @selection-change="handleSelectedColsChange"
+            border
+            stripe>
+            <!-- 改成checkbox -->
+            <el-table-column
+              type="selection"
+              width="55">
+            </el-table-column>
+            <el-table-column
+              prop="label"
+              label="名称"
+              >
+            </el-table-column>
+          </el-table>
+          <span slot="footer" class="dialog-footer">
+            <el-button @click="isShowChooseColDialog = false">取 消</el-button>
+            <el-button type="primary" @click="chooseCols">确 定</el-button>
+          </span>
+        </el-dialog>
       </el-tab-pane>
     
       <el-tab-pane label="函数" name="fn">
@@ -271,60 +300,6 @@
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button type="primary" @click="isShowImgDialog = false">关 闭</el-button>
-      </span>
-    </el-dialog>
-
-    <el-dialog title="验证规则" :visible.sync="isShowRuleDialog">
-      <div class="ly ly-r mb-10">
-        <el-button type="primary" @click="currRow.validRules.push({
-          name: 'required',
-          errMsg: generatorErrmsg(currRow)
-        })">添加规则</el-button>
-      </div>
-      <el-table
-        :data="currRow.validRules"
-        border
-        stripe>
-        <el-table-column
-          type="index"
-          label="序列"
-          align="center"
-          width="80">
-        </el-table-column>
-        <el-table-column
-          prop="model"
-          label="规则名称"
-          >
-          <template slot-scope="scope">
-            <el-select v-model="scope.row.name" placeholder="请选择">
-              <el-option
-                v-for="item in validRuleType"
-                :key="item.key"
-                :label="item.label"
-                :value="item.key">
-              </el-option>
-            </el-select>
-          </template>
-        </el-table-column>
-        <el-table-column
-          prop="errMsg"
-          label="错误信息"
-          >
-          <template slot-scope="scope">
-            <el-input v-model="scope.row.errMsg" placeholder="请输入内容"></el-input>
-          </template>
-        </el-table-column>
-        <el-table-column
-          prop="op"
-          label="操作"
-          >
-          <template slot-scope="scope">
-            <el-button type="danger" size="small" @click="currRow.validRules.splice(scope.index, 1)">删除</el-button>
-          </template>
-        </el-table-column>
-      </el-table>
-      <span slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="isShowRuleDialog = false">关 闭</el-button>
       </span>
     </el-dialog>
   </div>

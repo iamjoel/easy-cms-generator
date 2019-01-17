@@ -31,7 +31,7 @@
   "entity": [
     {
       "id": "7725f55d-0ce8-9308-f188-0fea3b276129",
-      "updateAt": 1547744217535,
+      "updateAt": 1547745532536,
       "basic": {
         "isPublic": true,
         "hasListPage": true,
@@ -51,9 +51,9 @@
           "required": true
         },
         {
-          "label": "性别",
-          "key": "age",
-          "dataType": "string",
+          "label": "数字",
+          "key": "num",
+          "dataType": "int",
           "maxLength": "1",
           "required": false
         }
@@ -112,14 +112,35 @@
   "updatePage": [
     {
       "id": "de91bd47-76c7-5c4f-d6ea-7f11b540e8b4",
-      "updateAt": 1547720713875,
+      "updateAt": 1547745654433,
       "basic": {
         "entity": {
           "id": "7725f55d-0ce8-9308-f188-0fea3b276129",
           "name": "str"
         },
         "codePath": "str"
-      }
+      },
+      "cols": [
+        {
+          "label": "名称",
+          "key": "name",
+          "dataType": "string",
+          "formatFn": null,
+          "saveFormatFn": null,
+          "validRules": [],
+          "required": true
+        },
+        {
+          "label": "数字",
+          "key": "num",
+          "dataType": "int",
+          "formatFn": null,
+          "saveFormatFn": null,
+          "required": true
+        }
+      ],
+      "fn": [],
+      "isSynced": false
     },
     {
       "id": "c9557505-fdab-2a2e-1ccf-17c4ad0f00dc",
