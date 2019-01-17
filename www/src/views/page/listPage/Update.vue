@@ -5,18 +5,23 @@
         <el-form :inline="true" :model="model.basic"  label-position="right" >
         <el-row type="flex" justify="start" class="multi-line">
           <j-edit-item
-            label="实体" prop="name">
+            label="实体">
             {{model.basic.entity.name}}
           </j-edit-item>
           <j-edit-item
-            label="代码展开目录" prop="name">
+            label="代码展开目录">
             @/views/{{model.basic.codePath}}
+          </j-edit-item>
+          <j-edit-item
+            label="包含代码">
+            List.vue, list.js
           </j-edit-item>
         </el-row>
       </el-form>
       </el-tab-pane>
       <el-tab-pane label="列表字段" name="cols">
         <div class="ly ly-r mb-10">
+          <el-button type="info" @click="isShowChooseColDialog = true">从实体中选择</el-button>
           <el-button type="primary" @click="model.cols.push({
             label: '',
             key: '',
@@ -94,6 +99,34 @@
             </template>
           </el-table-column>
         </el-table>
+
+        <el-dialog 
+          title="选择字段"
+          :visible.sync="isShowChooseColDialog"
+        >
+          <el-table
+            :data="canChooseCols"
+            border
+            stripe>
+            <!-- 改成checkbox -->
+            <el-table-column
+              type="index"
+              label="序列"
+              align="center"
+              width="80">
+            </el-table-column>
+            <el-table-column
+              prop="label"
+              label="名称"
+              >
+            </el-table-column>
+            
+          </el-table>
+          <span slot="footer" class="dialog-footer">
+            <el-button @click="isShowChooseColDialog = false">取 消</el-button>
+            <el-button type="primary" @click="chooseEntity">确 定</el-button>
+          </span>
+        </el-dialog>
       </el-tab-pane>
       
       <el-tab-pane label="操作" name="op">

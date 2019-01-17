@@ -31,7 +31,7 @@
   "entity": [
     {
       "id": "7725f55d-0ce8-9308-f188-0fea3b276129",
-      "updateAt": 1547720713876,
+      "updateAt": 1547721972126,
       "basic": {
         "isPublic": true,
         "hasListPage": true,
@@ -42,7 +42,15 @@
         "listPageId": "d62aa4e5-2b89-0b90-ac25-e5f8978976a0",
         "updatePageId": "de91bd47-76c7-5c4f-d6ea-7f11b540e8b4"
       },
-      "cols": [],
+      "cols": [
+        {
+          "label": "名称",
+          "key": "name",
+          "dataType": "string",
+          "maxLength": "24",
+          "required": false
+        }
+      ],
       "isSynced": false,
       "isShowInMenu": false
     },
@@ -55,7 +63,8 @@
         "hasUpdatePage": true,
         "isShowInMenu": true,
         "des": "cc",
-        "name": "ssss"
+        "name": "ssss",
+        "updatePageId": "c9557505-fdab-2a2e-1ccf-17c4ad0f00dc"
       },
       "cols": [],
       "isSynced": false,
@@ -137,6 +146,14 @@
       "name": "人员",
       "updateAt": 1547720646954,
       "children": []
+    },
+    {
+      "id": "2e2e3bf0-17d7-8ada-3466-7a9de6178906",
+      "isPage": 1,
+      "entityTypeId": null,
+      "routerId": "5e9cb08e-ae62-7ce8-35f2-3007099d0270",
+      "name": "aaa",
+      "updateAt": 1547721972123
     }
   ],
   "syncStatus": {

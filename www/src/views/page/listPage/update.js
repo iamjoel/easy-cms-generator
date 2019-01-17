@@ -14,6 +14,23 @@ export default {
         res = `${entityType ? entityType.key + '/' : ''}${entity.key}`
       }
       return res || ''
+    },
+    allColsList() {
+      if(this.model.basic.entity && this.model.basic.entity.id) {
+        var tarEntity = this.entityList.filter(entity => entity.id === this.model.basic.entity.id)[0]
+        return tarEntity ? tarEntity.cols : []
+      } else {
+        return []
+      }
+    },
+    canChooseCols() {
+      if(!this.allColsList) {
+        return []
+      }
+      return this.allColsList.filter(item => {
+        var hasSelected = this.model.cols.filter(col => item.key === col.key).length > 0
+        return !hasSelected
+      })
     }
   },
   data() {
@@ -21,7 +38,9 @@ export default {
       KEY: 'listPage',
       activeTab: this.$route.params.id == -1 ? 'basic' : 'cols',
       model: {
-        basic: {},
+        basic: {
+          entity: {}
+        },
         cols: [],
         operate: {
           add: {
@@ -45,6 +64,7 @@ export default {
           }
         }),
       },
+      isShowChooseColDialog: false,
       opList: [],
       opDict: {
         'add': '新增',
@@ -213,6 +233,9 @@ export default {
         })
       })
       
+    },
+    chooseEntity() {
+
     }
   },
   mounted() {
@@ -228,7 +251,7 @@ export default {
         this.roleList = datas[1].data.data
         this.entityTypeList = datas[2].data.data
         this.entityList = datas[3].data.data
-
+        
         this.usedEntityKeys = datas[4].data.data.map(item => {
           try {
             return item.basic.entity
