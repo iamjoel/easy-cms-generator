@@ -65,6 +65,7 @@ export default {
         }),
       },
       isShowChooseColDialog: false,
+      tempSelectedCols: [],
       opList: [],
       opDict: {
         'add': '新增',
@@ -234,8 +235,23 @@ export default {
       })
       
     },
-    chooseEntity() {
-
+    showChooseColDialog() {
+      this.tempSelectedCols = []
+      this.isShowChooseColDialog = true
+    },
+    chooseCols() {
+      this.model.cols = this.model.cols.concat([...this.tempSelectedCols])
+      this.isShowChooseColDialog = false
+    },
+    handleSelectedColsChange(selectedCol) {
+      this.tempSelectedCols = [...selectedCol].map(item => {
+        return {
+          key: item.key,
+          label: item.label,
+          dataType: item.dataType,
+          formatFn: null
+        }
+      })
     }
   },
   mounted() {

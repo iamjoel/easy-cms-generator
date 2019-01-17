@@ -21,7 +21,7 @@
       </el-tab-pane>
       <el-tab-pane label="列表字段" name="cols">
         <div class="ly ly-r mb-10">
-          <el-button type="info" @click="isShowChooseColDialog = true">从实体中选择</el-button>
+          <el-button type="info" @click="showChooseColDialog">从实体中选择</el-button>
           <el-button type="primary" @click="model.cols.push({
             label: '',
             key: '',
@@ -106,25 +106,23 @@
         >
           <el-table
             :data="canChooseCols"
+            @selection-change="handleSelectedColsChange"
             border
             stripe>
             <!-- 改成checkbox -->
             <el-table-column
-              type="index"
-              label="序列"
-              align="center"
-              width="80">
+              type="selection"
+              width="55">
             </el-table-column>
             <el-table-column
               prop="label"
               label="名称"
               >
             </el-table-column>
-            
           </el-table>
           <span slot="footer" class="dialog-footer">
             <el-button @click="isShowChooseColDialog = false">取 消</el-button>
-            <el-button type="primary" @click="chooseEntity">确 定</el-button>
+            <el-button type="primary" @click="chooseCols">确 定</el-button>
           </span>
         </el-dialog>
       </el-tab-pane>

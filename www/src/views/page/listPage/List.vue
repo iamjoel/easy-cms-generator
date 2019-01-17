@@ -19,6 +19,9 @@
         prop="basic.entity.name"
         label="实体"
         >
+        <template slot-scope="scope">
+          <a href="javascript:void(0);" @click="$router.push('/entity/entity/update/' + scope.row.basic.entity.id)">{{scope.row.basic.entity.name}}</a>
+        </template>
       </el-table-column>
       <el-table-column
         prop="name"

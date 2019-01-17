@@ -31,7 +31,7 @@
   "entity": [
     {
       "id": "7725f55d-0ce8-9308-f188-0fea3b276129",
-      "updateAt": 1547721972126,
+      "updateAt": 1547744217535,
       "basic": {
         "isPublic": true,
         "hasListPage": true,
@@ -48,6 +48,13 @@
           "key": "name",
           "dataType": "string",
           "maxLength": "24",
+          "required": true
+        },
+        {
+          "label": "性别",
+          "key": "age",
+          "dataType": "string",
+          "maxLength": "1",
           "required": false
         }
       ],
@@ -74,14 +81,32 @@
   "listPage": [
     {
       "id": "d62aa4e5-2b89-0b90-ac25-e5f8978976a0",
-      "updateAt": 1547720713874,
+      "updateAt": 1547743961561,
       "basic": {
         "entity": {
           "id": "7725f55d-0ce8-9308-f188-0fea3b276129",
           "name": "str"
         },
         "codePath": "str"
-      }
+      },
+      "operate": {},
+      "cols": [
+        {
+          "key": "name",
+          "label": "名称",
+          "dataType": "string",
+          "formatFn": "sysToNumber"
+        },
+        {
+          "key": "age",
+          "label": "性别",
+          "dataType": "string",
+          "formatFn": null
+        }
+      ],
+      "searchCondition": [],
+      "fn": [],
+      "isSynced": false
     }
   ],
   "updatePage": [
