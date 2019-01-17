@@ -12,6 +12,10 @@
             label="代码展开目录" prop="name">
             @/views/{{model.basic.codePath}}
           </j-edit-item>
+          <j-edit-item
+            label="包含文件">
+            Update.vue, update.js, model.js
+          </j-edit-item>
         </el-row>
       </el-form>
       </el-tab-pane>

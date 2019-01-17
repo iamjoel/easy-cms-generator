@@ -13,7 +13,7 @@
             @/views/{{model.basic.codePath}}
           </j-edit-item>
           <j-edit-item
-            label="包含代码">
+            label="包含文件">
             List.vue, list.js
           </j-edit-item>
         </el-row>
