@@ -14,7 +14,8 @@ export default {
         basic: {
           isPublic: true,
           hasListPage: true,
-          hasUpdatePage: true
+          hasUpdatePage: true,
+          isShowInMenu: true
         },
         cols: [],
       },
@@ -96,6 +97,9 @@ export default {
       
       model.basic = model.basic || {}
       model.cols = model.cols || []
+      if(!model.hasListPage) {
+        model.isShowInMenu = false
+      }
 
       var method = this.$route.params.id == -1 ? addModel : editModel
       method(this.KEY, model).then(()=> {

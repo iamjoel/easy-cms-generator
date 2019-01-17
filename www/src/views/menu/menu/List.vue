@@ -12,7 +12,7 @@
     >
       <el-table-column
         prop="isPage"
-        label="是页面"
+        label="类型"
         width="90"
         >
         <template slot-scope="scope">
@@ -20,19 +20,20 @@
             v-model="scope.row.isPage"
             :on-value="1"
             :off-value="0"
-            on-text="是"
-            off-text="否"
+            on-text="页面"
+            off-text="分类"
           >
           </el-switch>
         </template>
       </el-table-column>
       <el-table-column
         prop="parentId"
-        label="分类名称"
+        label="名称"
         width="150"
         >
         <template slot-scope="scope">
-          <el-select v-model="scope.row.entityTypeId" palceholder="" filterable clearable v-if="scope.row.isPage == 0"  @change="scope.row.hasChanged = true">
+          <el-select 
+          v-model="scope.row.entityTypeId" palceholder="" filterable clearable v-if="scope.row.isPage == 0"  @change="scope.row.hasChanged = true">
             <el-option
               v-for="item in getEntityTypeList(scope.row.entityTypeId)"
               :key="item.id"
@@ -41,37 +42,15 @@
             </el-option>
           </el-select>
           <div v-else>
-            -
+            <el-select v-model="scope.row.routerId" filterable clearable @change="scope.row.hasChanged = true">
+              <el-option
+                v-for="item in routerList"
+                :key="item.id"
+                :label="item.name || item.routePath"
+                :value="item.id">
+              </el-option>
+            </el-select>
           </div>
-        </template>
-      </el-table-column>
-      <el-table-column
-        prop="name"
-        label="路由"
-        width="150"
-        >
-        <template slot-scope="scope">
-          <el-select v-model="scope.row.routerId" filterable clearable  v-if="scope.row.isPage == 1"  @change="scope.row.hasChanged = true">
-            <el-option
-              v-for="item in routerList"
-              :key="item.key"
-              :label="item.label"
-              :value="item.key">
-            </el-option>
-          </el-select>
-          <div v-else>
-            -
-          </div>
-        </template>
-      </el-table-column>
-      
-      <el-table-column
-        prop="name"
-        label="显示名称"
-        width="120"
-        >
-        <template slot-scope="scope">
-          <el-input v-model="scope.row.name" @change="scope.row.hasChanged = true"></el-input>
         </template>
       </el-table-column>
       
@@ -144,9 +123,9 @@
                 <el-select v-model="subScope.row.routerId" filterable clearable @change="scope.row.hasChanged = true">
                   <el-option
                     v-for="item in filterRouteListByType(scope.row.entityTypeId)"
-                    :key="item.key"
-                    :label="item.label"
-                    :value="item.key">
+                    :key="item.id"
+                    :label="item.name || item.routePath"
+                    :value="item.id">
                   </el-option>
                 </el-select>
               </template>

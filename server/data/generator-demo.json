@@ -2,94 +2,143 @@
   "role": [],
   "dict": [],
   "entityConfig": {
-    "commonCols": [{
-      "name":"id",
-      "dataType": "varchar(36)",
-      "description": "36位的 Guid"
-    },{
-      "name":"createTime",
-      "dataType": "datetime",
-      "description": "创建时间"
-    },{
-      "name":"updateTime",
-      "dataType": "datetime",
-      "description": "更新时间"
-    }]
+    "commonCols": [
+      {
+        "name": "id",
+        "dataType": "varchar(36)",
+        "description": "36位的 Guid"
+      },
+      {
+        "name": "createTime",
+        "dataType": "datetime",
+        "description": "创建时间"
+      },
+      {
+        "name": "updateTime",
+        "dataType": "datetime",
+        "description": "更新时间"
+      }
+    ]
   },
   "entityType": [
     {
-      "id": "6e185105-cf2a-4a32-6096-b6ac0c23b8db",
-      "updateAt": 1547192720807,
+      "id": "2f17368e-0356-ede1-ec50-ccfb9adf339e",
+      "updateAt": 1547720634450,
       "key": "people",
       "label": "人员"
     }
   ],
   "entity": [
     {
-      "id": "b6a7f110-0783-04c7-76e7-c95bd70cf8dd",
-      "updateAt": 1547632909232,
+      "id": "7725f55d-0ce8-9308-f188-0fea3b276129",
+      "updateAt": 1547720713876,
       "basic": {
         "isPublic": true,
         "hasListPage": true,
         "hasUpdatePage": true,
-        "name": "a",
-        "des": "b",
-        "listPageId": "42c22fd6-12ce-4e34-a7b0-33094cfbe0d9",
-        "updatePageId": "6225a667-931c-5bb1-deef-7d2f5af80f57"
+        "isShowInMenu": true,
+        "name": "str",
+        "des": "aaa",
+        "listPageId": "d62aa4e5-2b89-0b90-ac25-e5f8978976a0",
+        "updatePageId": "de91bd47-76c7-5c4f-d6ea-7f11b540e8b4"
       },
       "cols": [],
-      "isSynced": false
+      "isSynced": false,
+      "isShowInMenu": false
+    },
+    {
+      "id": "0bc85f64-204b-9706-386b-2ea825bb3471",
+      "updateAt": 1547720755085,
+      "basic": {
+        "isPublic": true,
+        "hasListPage": false,
+        "hasUpdatePage": true,
+        "isShowInMenu": true,
+        "des": "cc",
+        "name": "ssss"
+      },
+      "cols": [],
+      "isSynced": false,
+      "isShowInMenu": false
     }
   ],
   "listPage": [
     {
-      "id": "42c22fd6-12ce-4e34-a7b0-33094cfbe0d9",
-      "updateAt": 1547632196689,
+      "id": "d62aa4e5-2b89-0b90-ac25-e5f8978976a0",
+      "updateAt": 1547720713874,
       "basic": {
         "entity": {
-          "id": "b6a7f110-0783-04c7-76e7-c95bd70cf8dd",
-          "name": "a",
-          "listPageId": "42c22fd6-12ce-4e34-a7b0-33094cfbe0d9"
+          "id": "7725f55d-0ce8-9308-f188-0fea3b276129",
+          "name": "str"
         },
-        "codePath": "a"
+        "codePath": "str"
       }
     }
   ],
   "updatePage": [
     {
-      "id": "6225a667-931c-5bb1-deef-7d2f5af80f57",
-      "updateAt": 1547632196691,
+      "id": "de91bd47-76c7-5c4f-d6ea-7f11b540e8b4",
+      "updateAt": 1547720713875,
       "basic": {
         "entity": {
-          "id": "b6a7f110-0783-04c7-76e7-c95bd70cf8dd",
-          "name": "a",
-          "updatePageId": "6225a667-931c-5bb1-deef-7d2f5af80f57"
+          "id": "7725f55d-0ce8-9308-f188-0fea3b276129",
+          "name": "str"
         },
-        "codePath": "a"
+        "codePath": "str"
+      }
+    },
+    {
+      "id": "c9557505-fdab-2a2e-1ccf-17c4ad0f00dc",
+      "updateAt": 1547720755084,
+      "basic": {
+        "entity": {
+          "id": "0bc85f64-204b-9706-386b-2ea825bb3471",
+          "name": "ssss"
+        },
+        "codePath": "ssss"
       }
     }
   ],
   "router": [
     {
-      "id": "049162ce-7df9-392b-25b0-30e7a0562501",
-      "entityId": "b6a7f110-0783-04c7-76e7-c95bd70cf8dd",
-      "name": "b列表页",
+      "id": "5e9cb08e-ae62-7ce8-35f2-3007099d0270",
+      "entityId": "7725f55d-0ce8-9308-f188-0fea3b276129",
+      "name": "aaa列表页",
       "pageType": "list",
-      "routePath": "/a/list",
-      "filePath": "/a/List.vue",
-      "updateAt": 1547632196690
+      "routePath": "/str/list",
+      "filePath": "/str/List.vue",
+      "updateAt": 1547720713874
     },
     {
-      "id": "d97aba7f-b69d-3912-f6a1-c35593dee994",
-      "entityId": "b6a7f110-0783-04c7-76e7-c95bd70cf8dd",
-      "name": "b更新页",
+      "id": "24b73243-eab2-61c8-7581-baac73c4dcc9",
+      "entityId": "7725f55d-0ce8-9308-f188-0fea3b276129",
+      "name": "aaa更新页",
       "pageType": "update",
-      "routePath": "/a/update/:id",
-      "filePath": "/a/Update.vue",
-      "updateAt": 1547632196691
+      "routePath": "/str/update/:id",
+      "filePath": "/str/Update.vue",
+      "updateAt": 1547720713876
+    },
+    {
+      "id": "97f346e5-025d-d715-21aa-6b5d442de730",
+      "entityId": "0bc85f64-204b-9706-386b-2ea825bb3471",
+      "name": "cc更新页",
+      "pageType": "update",
+      "routePath": "/ssss/update/:id",
+      "filePath": "/ssss/Update.vue",
+      "updateAt": 1547720755084
     }
   ],
-  "menu": [],
+  "menu": [
+    {
+      "id": "cc4d3ca5-3f50-d4dc-5e86-0cde4c981f17",
+      "isPage": 0,
+      "entityTypeId": "2f17368e-0356-ede1-ec50-ccfb9adf339e",
+      "routerId": null,
+      "name": "人员",
+      "updateAt": 1547720646954,
+      "children": []
+    }
+  ],
   "syncStatus": {
     "dict": false,
     "entity": false,

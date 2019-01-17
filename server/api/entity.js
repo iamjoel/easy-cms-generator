@@ -56,12 +56,22 @@ module.exports = {
   },
   add(req, res, pool) {
     var id = guidFn()
-    createPage(req.body.basic, id)
+    let basic = req.body.basic
+    createPage(basic, id)
+    if(basic.hasListPage && basic.isShowInMenu) {
+      addMenu(basic, id)
+    }
 
     commonCRUD.add(req, res, pool, id)
   },
   edit(req, res, pool) {
-    createPage(req.body.basic, req.params.id)
+    var id = req.params.id
+    let basic = req.body.basic
+    createPage(basic, id)
+    if(basic.hasListPage && basic.isShowInMenu) {
+      addMenu(basic, id)
+    }
+
     commonCRUD.edit(req, res, pool)
   },
   remove(req, res, pool) {
@@ -146,15 +156,92 @@ function addPageAndRoute(entityBasic, entityId, pageType) {
   }
 }
 
+// 新增菜单
+function addMenu(entityBasic, entityId) {
+  var entityType = global.db
+                        .get('entityType')
+                        .find({
+                          id: entityBasic.entityTypeId
+                        })
+                        .value()
+  var menu = global.db
+                    .get('menu')
+                    .value()
+
+  var tarRouter = global.db
+                        .get('router')
+                        .find({
+                          entityId: entityId
+                        })
+                        .value()
+
+  var needAddPage = {
+    routerId: tarRouter.id,
+    name: entityBasic.des || entityBasic.name,
+    "showType": "show",
+    "roleIds": []
+  }
+
+  if(entityType) { // 归属于某个分类
+    var tarMenuItem
+    var tarPages
+    menu.forEach(item => {
+      if(item.entityTypeId === entityBasic.entityTypeId) {
+        tarMenuItem = item
+      }
+    })
+    
+    if(tarMenuItem) {// 已经有分类
+      tarMenuItem.children = tarMenuItem.children || []
+      tarPages = tarMenuItem.children
+      var hasPage = tarPages.filter(item => item.routerId === needAddPage.routerId).length > 0
+      if(!hasPage) {
+        tarPages.push(needAddPage)
+      }
+    } else {
+      menu.push({
+        id: guidFn(),
+        "isPage": 0,
+        "entityTypeId": entityType.id,
+        "routerId": null,
+        "name": entityType.label || entityType.key,
+        "updateAt": Date.now(),
+        children: [needAddPage]
+      })
+    } 
+  } else { // 无分类
+    var hasPage = menu.filter(item => item.routerId === needAddPage.routerId).length > 0
+    if(!hasPage) {
+      menu.push({
+        id: guidFn(),
+        "isPage": 1,
+        "entityTypeId": null,
+        "routerId": needAddPage.routerId,
+        "name": needAddPage.name,
+        "updateAt": Date.now(),
+      })
+    }
+  }
+
+  global.db.set('menu', menu).write()
+}
+
 /*
 * 删除实体，删除对应的页面
 */
 function removePage(entityId) {
-  removePageAndRouter(entityId, 'list')
-  removePageAndRouter(entityId, 'update')
+  var entityBasic = global.db
+                    .get('entity')
+                    .find({
+                      id: entityId
+                    })
+                    .value()
+                    .basic
+  removePageAndRouter(entityId, entityBasic, 'list')
+  removePageAndRouter(entityId, entityBasic, 'update')
 }
 
-function removePageAndRouter(entityId, pageType) {
+function removePageAndRouter(entityId, entityBasic, pageType) {
   var hasPage = global.db.get(`${pageType}Page`).filter(page => {
     return page.basic.entity.id === entityId
   }).value()
@@ -166,6 +253,48 @@ function removePageAndRouter(entityId, pageType) {
         id: hasPage[0].id,
       })
       .write()
+
+    // 删菜单
+    if(pageType === 'list') {
+      var entityType = global.db
+                        .get('entityType')
+                        .find({
+                          id: entityBasic.entityTypeId
+                        })
+                        .value()
+      var menu = global.db
+                    .get('menu')
+                    .value()
+
+      var tarRouter = global.db
+                        .get('router')
+                        .find({
+                          entityId: entityId
+                        })
+                        .value()
+
+      if(entityType) {
+        var tarMenuItem
+        var tarPages
+        menu.forEach(item => {
+          if(item.entityTypeId === entityBasic.entityTypeId) {
+            tarMenuItem = item
+          }
+        })
+
+        if(tarMenuItem && tarMenuItem.children && tarMenuItem.children.length > 0) {
+          tarMenuItem.children = tarMenuItem.children.filter(item => item.routerId !== tarRouter.id)
+        }
+
+      } else {
+        menu = menu.filter(item => {
+          console.log(item.routerId === tarRouter.id)
+          return item.routerId !== tarRouter.id
+        })
+      }
+
+      global.db.set('menu', menu).write()
+    }
 
     // 删路由
     global.db
