@@ -3,7 +3,6 @@
   "dict": [
     {
       "id": "3dda8247-1350-8cc2-8c75-f90fdfcf0fa1",
-      "updateAt": 1547804160019,
       "key": "dd",
       "label": "a",
       "value": []
@@ -39,7 +38,7 @@
   "entity": [
     {
       "id": "0de463a1-ba14-1bf3-8e6d-c9f4fdae168d",
-      "updateAt": 1547826733078,
+      "updateAt": 1547827636016,
       "basic": {
         "isPublic": true,
         "hasListPage": true,
@@ -47,8 +46,8 @@
         "isShowInMenu": true,
         "name": "allType",
         "des": "各种数据类型",
-        "listPageId": "df2534a5-796b-c694-c390-655cb2d057ac",
-        "updatePageId": "9cfd4362-81c1-9f3e-88d3-40814817c1ae"
+        "listPageId": "d956c6d6-9587-fac2-7ce4-4668877f57a9",
+        "updatePageId": "25d841ea-b848-2054-0ab5-9e1578e1b46b"
       },
       "cols": [
         {
@@ -98,33 +97,7 @@
       "isShowInMenu": false
     }
   ],
-  "listPage": [
-    {
-      "id": "f5c17b02-d778-f608-59ed-ef21566e1c38",
-      "updateAt": 1547826733073,
-      "basic": {
-        "entity": {
-          "id": "0de463a1-ba14-1bf3-8e6d-c9f4fdae168d",
-          "name": "allType"
-        },
-        "codePath": "allType"
-      },
-      "operate": {
-        "add": {
-          "isShow": true
-        },
-        "edit": {
-          "isShow": true
-        },
-        "detail": {
-          "isShow": true
-        },
-        "delete": {
-          "isShow": true
-        }
-      }
-    }
-  ],
+  "listPage": [],
   "updatePage": [
     {
       "id": "25d841ea-b848-2054-0ab5-9e1578e1b46b",
@@ -140,15 +113,6 @@
   ],
   "router": [
     {
-      "id": "22ecd03c-c126-14a5-7fb3-17fd28f39a38",
-      "entityId": "0de463a1-ba14-1bf3-8e6d-c9f4fdae168d",
-      "name": "各种数据类型列表页",
-      "pageType": "list",
-      "routePath": "/allType/list",
-      "filePath": "/allType/List.vue",
-      "updateAt": 1547826733074
-    },
-    {
       "id": "d73e9cd4-ab50-fabf-abbd-52fa1155469d",
       "entityId": "0de463a1-ba14-1bf3-8e6d-c9f4fdae168d",
       "name": "各种数据类型更新页",
@@ -158,51 +122,9 @@
       "updateAt": 1547826733075
     }
   ],
-  "menu": [
-    {
-      "id": "cc4d3ca5-3f50-d4dc-5e86-0cde4c981f17",
-      "isPage": 0,
-      "entityTypeId": "2f17368e-0356-ede1-ec50-ccfb9adf339e",
-      "routerId": null,
-      "name": "人员",
-      "updateAt": 1547720646954,
-      "children": []
-    },
-    {
-      "id": "e5172f64-f5c0-b185-1af9-a854edda16c3",
-      "isPage": 1,
-      "entityTypeId": null,
-      "routerId": "9061ac77-c59b-1f15-36c0-82cabcdadb2b",
-      "name": "各种数据类型",
-      "updateAt": 1547805344687
-    },
-    {
-      "id": "81a92544-63e0-b277-87d1-f58c2058d80d",
-      "isPage": 1,
-      "entityTypeId": null,
-      "routerId": "3d4b438d-e518-ec81-5b88-c539523d4894",
-      "name": "各种数据类型",
-      "updateAt": 1547826289862
-    },
-    {
-      "id": "cb6584b1-2835-d164-b283-79c83f4e9a02",
-      "isPage": 1,
-      "entityTypeId": null,
-      "routerId": "fe45b57d-89ae-32f4-365d-2e22249c2a9d",
-      "name": "各种数据类型",
-      "updateAt": 1547826636560
-    },
-    {
-      "id": "290ce937-fecd-3055-4ad4-5fa12bf4ac75",
-      "isPage": 1,
-      "entityTypeId": null,
-      "routerId": "22ecd03c-c126-14a5-7fb3-17fd28f39a38",
-      "name": "各种数据类型",
-      "updateAt": 1547826733075
-    }
-  ],
+  "menu": [],
   "syncStatus": {
-    "dict": false,
+    "dict": true,
     "entity": false,
     "role": false,
     "router": false,

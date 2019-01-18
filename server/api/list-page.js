@@ -32,8 +32,44 @@ module.exports = {
                           id: page.basic.entity.id,
                         })
                         .value()
-    // 删除路由
+    
     if(entity) {
+      var entityType = global.db
+                        .get('entityType')
+                        .find({
+                          id: entity.entityTypeId
+                        })
+                        .value()
+      var menu = global.db
+                    .get('menu')
+                    .value()
+      var tarRouter = global.db
+                        .get('router')
+                        .find({
+                          entityId: entity.id
+                        })
+                        .value()
+      if(entityType) {
+        var tarMenuItem
+        var tarPages
+        menu.forEach(item => {
+          if(item.entityTypeId === entity.entityTypeId) {
+            tarMenuItem = item
+          }
+        })
+
+        if(tarMenuItem && tarMenuItem.children && tarMenuItem.children.length > 0) {
+          tarMenuItem.children = tarMenuItem.children.filter(item => item.routerId !== tarRouter.id)
+        }
+
+      } else {
+        menu = menu.filter(item => {
+          return item.routerId !== tarRouter.id
+        })
+      }
+      // 删菜单
+      global.db.set('menu', menu).write()
+      // 删除路由
        global.db
             .get('router')
             .remove({
