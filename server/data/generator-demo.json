@@ -1,6 +1,14 @@
 {
   "role": [],
-  "dict": [],
+  "dict": [
+    {
+      "id": "3dda8247-1350-8cc2-8c75-f90fdfcf0fa1",
+      "updateAt": 1547804160019,
+      "key": "dd",
+      "label": "a",
+      "value": []
+    }
+  ],
   "entityConfig": {
     "commonCols": [
       {
@@ -63,13 +71,13 @@
     },
     {
       "id": "0bc85f64-204b-9706-386b-2ea825bb3471",
-      "updateAt": 1547720755085,
+      "updateAt": 1547802237361,
       "basic": {
         "isPublic": true,
         "hasListPage": false,
         "hasUpdatePage": true,
         "isShowInMenu": true,
-        "des": "cc",
+        "des": "cc2",
         "name": "ssss",
         "updatePageId": "c9557505-fdab-2a2e-1ccf-17c4ad0f00dc"
       },

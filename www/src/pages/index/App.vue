@@ -1,13 +1,12 @@
 <template>
   <div id="app">
     <j-topbar></j-topbar>
-    <el-row :gutter="20" style="margin-top: 65px;">
-      <!-- min-height 为了占位 -->
+    <el-row :gutter="20" style="margin-top: 100px;">
       <el-col :span="4" style="min-height: 100px;">
-        <j-siderbar :menu="$store.state.menu"></j-siderbar>
+        <j-siderbar :menu="menu"></j-siderbar>
       </el-col>
       <el-col :span="20">
-        <j-breadcrumb :menu="$store.state.menu"></j-breadcrumb>
+        <!-- {{$store.state.menu}} -->
         <router-view id="main-content"></router-view>
       </el-col>
     </el-row>
@@ -27,6 +26,16 @@ export default {
     'j-siderbar': Sidebar,
     'j-topbar': Topbar,
     'j-breadcrumb': Breadcrumb,
+  },
+  data() {
+    return {
+      menu: [
+        { "id": "dashboard", "name": "基础设置", "path": "/basic/info" },
+        { "id": "entity", "name": "实体", "path": "/entity/list/entity" },
+        { "id": "page", "name": "生成页面", "path": "/page/list" },
+        { "id": "menu", "name": "菜单", "path": "/menu/list" },
+      ]
+    }
   },
   mounted() {
     var role = localStorage.getItem('j-role') || 'user'

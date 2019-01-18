@@ -1,8 +1,16 @@
 import {SERVER_PREFIX} from '@/setting'
+import DictList from './dict/List.vue'
+import RoleList from './roles/List.vue'
+
 
 export default {
+  components: {
+    DictList,
+    RoleList
+  },
   data() {
     return {
+      activeName: 'info',
       projectRootPath: localStorage.getItem('project-root-path'),
       tempProjectRootPath: null,
       prevProjectRootPath: null,
@@ -87,9 +95,14 @@ export default {
       } else {
         return path
       }
+    },
+    handleChange(tab) {
+      this.$router.push(`/basic/${tab.name}`)
     }
   },
   mounted() {
+    this.activeName = this.$route.params.type
+
     if(this.projectName) {
       this.setCurrProject()
     }

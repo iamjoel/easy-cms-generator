@@ -1,20 +1,7 @@
-
-
 <template>
   <div class="main">
-    <el-card>
-      <div slot="header">
-        <div class="ly ly-j">
-          <h1>目标项目信息</h1>
-          <div>
-            <!-- 开发中
-            <el-button type="primary">导出数据库创建脚本</el-button>
-            <el-button type="info">生成测试数据</el-button> -->
-          </div>
-        </div>
-      </div>
-
-      <div class="card-body">
+    <el-tabs v-model="activeName" @tab-click="handleChange">
+      <el-tab-pane label="项目信息" name="info">
         <div class="row">
           <div class="label">项目根路径:</div>
           <div>
@@ -69,8 +56,15 @@
             <div>{{dbPath}}</div>
           </div>
         </div>
-      </div>
-    </el-card>
+      </el-tab-pane>
+      <el-tab-pane label="字典" name="dict">
+        <dict-list />
+      </el-tab-pane>
+      <el-tab-pane label="角色" name="role">
+        <role-list />
+      </el-tab-pane>
+    </el-tabs>
+   
   </div>
 </template>
 

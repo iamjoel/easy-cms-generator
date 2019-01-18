@@ -7,7 +7,6 @@
       </el-menu-item>
       <el-submenu :index="item.id" v-else>
         <template slot="title">
-          <!-- <i :class="'el-icon-' + item.icon"></i> -->
           {{item.name}}
         </template>
         <el-menu-item-group title="" v-if="item.children">

@@ -1,6 +1,5 @@
 <template>
 <div class="main">
-    <h1 class="mb-10 fw-b">实体的公共字段</h1>
     <el-table
       :data="list"
       border

@@ -11,7 +11,7 @@ export default new Router({
     // 出错的默认地址
     {
       path: '*',
-      redirect: '/'
+      redirect: '/basic/info'
     }
   ]
 })

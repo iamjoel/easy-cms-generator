@@ -15,7 +15,7 @@ export var uitlFnsConfig = uitlFns
 // 页面
 var _menuConfig = [{
     id: 'dashboard',
-    name: '基本信息',
+    name: '项目设置',
     pages: [{
       type: 'dashboard',
       filePath: 'dashboard',
@@ -40,19 +40,6 @@ var _menuConfig = [{
     ]
   },
   {
-    id: 'basic',
-    name: '基础数据',
-    children: [{
-      id: 'roles',
-      name: '角色',
-    },
-    {
-      id: 'dict',
-      name: '字典',
-    },
-    ]
-  },
-  {
     id: 'page',
     name: '页面',
     children: [{
@@ -71,6 +58,19 @@ var _menuConfig = [{
       id: 'menu',
       name: '菜单',
     },]
+  },
+  {
+    id: 'basic',
+    name: '基础数据',
+    children: [{
+      id: 'roles',
+      name: '角色',
+    },
+    {
+      id: 'dict',
+      name: '字典',
+    },
+    ]
   },
 ]
 

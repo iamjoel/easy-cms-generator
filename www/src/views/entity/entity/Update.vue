@@ -151,6 +151,7 @@
     
     </el-tabs>
     <div class="ly ly-c mt-10">
+      <el-button type="defalut" @click="$router.go(-1)">返回</el-button>
       <el-button type="primary" @click="save">保存</el-button>
     </div>
     
