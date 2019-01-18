@@ -167,7 +167,7 @@ export default {
           message: '保存成功',
           type: 'success'
         })
-        this.$router.push('/page/listPage/list')
+        this.$router.push('/page/list/list')
       })
     },
     fetchDetail() {

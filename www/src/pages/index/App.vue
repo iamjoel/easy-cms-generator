@@ -32,7 +32,7 @@ export default {
       menu: [
         { "id": "dashboard", "name": "基础设置", "path": "/basic/info" },
         { "id": "entity", "name": "实体", "path": "/entity/list/entity" },
-        { "id": "page", "name": "生成页面", "path": "/page/list" },
+        { "id": "page", "name": "生成页面", "path": "/page/list/list" },
         { "id": "menu", "name": "菜单", "path": "/menu/list" },
       ]
     }

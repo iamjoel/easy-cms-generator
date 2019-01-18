@@ -20,31 +20,32 @@ var routes = [
       lazyLoading(resolve, 'entity/entity/Update')
     },
   },
-
-  // 带实体类型id的列表
   {
-    path: '/basic/entities/create/:typeId',
+    path: '/page/list/:type',
     component: resolve => {
-      lazyLoading(resolve, 'basic/entities/List')
+      lazyLoading(resolve, 'page', true)
+    },
+  },
+  {
+    path: '/page/listPage/update/:id',
+    component: resolve => {
+      lazyLoading(resolve, 'page/listPage/Update')
+    },
+  },
+  {
+    path: '/page/updatePage/update/:id',
+    component: resolve => {
+      lazyLoading(resolve, 'page/updatePage/Update')
+    },
+  },
+  {
+    path: '/menu/list',
+    component: resolve => {
+      lazyLoading(resolve, 'menu/menu/List')
     },
   },
 ]
 
-// 页面的路由的定义
-// menuConfig.forEach(menu => {
-//   var parentId = menu.id
-//   if(menu.children) { // 二级菜单
-//     menu.children.forEach(pageGroup => {
-//       pageGroup.pages.forEach(page => {
-//         addRoute(page.filePath, page.routePath)
-//       })
-//     })
-//   } else { // 一级路由
-//     menu.pages.forEach(page => {
-//       addRoute(page.filePath, page.routePath)
-//     })
-//   }
-// })
 
 function addRoute(filePath, routePath) {
   routes.push({

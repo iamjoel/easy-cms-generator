@@ -215,7 +215,7 @@
       </el-tab-pane>
     </el-tabs>
     <div class="ly ly-c mt-10">
-      <el-button type="default" @click="$router.push('/page/updatePage/list')">返回</el-button>
+      <el-button type="default" @click="$router.push('/page/list/update')">返回</el-button>
       <el-button type="primary" @click="save">保存</el-button>
     </div>
     <el-dialog title="详情" :visible.sync="isShowEditArgsDialog">

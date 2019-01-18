@@ -190,7 +190,7 @@ export default {
           message: '保存成功',
           type: 'success'
         })
-        this.$router.push('/page/updatePage/list')
+        this.$router.push('/page/list/update')
       })
     },
     generatorErrmsg(item) {
