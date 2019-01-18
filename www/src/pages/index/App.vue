@@ -6,7 +6,7 @@
         <j-siderbar :menu="menu"></j-siderbar>
       </el-col>
       <el-col :span="20">
-        <!-- {{$store.state.menu}} -->
+        <!-- {{$store.getters.isProjectInited}} -->
         <router-view id="main-content"></router-view>
       </el-col>
     </el-row>
@@ -30,7 +30,7 @@ export default {
   data() {
     return {
       menu: [
-        { "id": "dashboard", "name": "基础设置", "path": "/basic/info" },
+        { "id": "home", "name": "基础设置", "path": "/basic/info", alwaysShow: true },
         { "id": "entity", "name": "实体", "path": "/entity/list/entity" },
         { "id": "page", "name": "生成页面", "path": "/page/list/list" },
         { "id": "menu", "name": "菜单", "path": "/menu/list" },

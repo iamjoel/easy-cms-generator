@@ -1,7 +1,7 @@
 import {SERVER_PREFIX} from '@/setting'
 import DictList from './dict/List.vue'
 import RoleList from './roles/List.vue'
-
+import { Loading } from 'element-ui'
 
 export default {
   components: {
@@ -16,7 +16,9 @@ export default {
       prevProjectRootPath: null,
       hasAdminFolder: true,
       hasServerFolder: true,
-      dbPath: ''
+      dbPath: '',
+      isShowAdminInitTipDialog: false,
+      isShowServerInitTipDialog: false,
     }
   },
   computed: {
@@ -50,6 +52,8 @@ export default {
       this.projectRootPath = this.prevProjectRootPath
     },
     setCurrProject(isShowMsg) {
+      // let loadingInstance = Loading.service({fullscreen: true});
+
       this.$http.post(`${SERVER_PREFIX}/project/choose`, {
         name: this.projectName,
         rootPath: this.projectRootPath
@@ -62,7 +66,15 @@ export default {
             type: 'success'
           })
         }
+
+        // 以后改成这些接口都好后隐藏
         this.checkFoldersExist()
+        this.check('admin')
+        this.check('server')
+
+        // setTimeout(() => {
+        //   loadingInstance.close()
+        // }, 2000)
       })
     },
     createFolder(name) {
@@ -72,7 +84,7 @@ export default {
         this.checkFoldersExist()
         this.$message({
           showClose: true,
-          message: '创建操作!',
+          message: '切换操作!',
           type: 'success'
         })
 
@@ -98,6 +110,16 @@ export default {
     },
     handleChange(tab) {
       this.$router.push(`/basic/${tab.name}`)
+    },
+    showTip(type) {
+      if(type === 'admin') {
+        this.isShowAdminInitTipDialog = true
+      } else {
+        this.isShowServerInitTipDialog = true
+      }
+    },
+    check(type) {
+
     }
   },
   mounted() {

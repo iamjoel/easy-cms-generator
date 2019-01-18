@@ -12,3 +12,12 @@
   margin-top: 10px;
   margin-left: 200px;
 }
+
+.c-red {
+  color: #f00;
+}
+
+.list {
+  list-style-type: decimal;
+  list-style-position: inside;
+}

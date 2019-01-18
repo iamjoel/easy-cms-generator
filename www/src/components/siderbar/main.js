@@ -5,6 +5,16 @@ export default {
     }
   },
   computed: {
+    canShowMenu() {
+      var res
+      if(this.$store.getters.isProjectInited) {
+        res = this.menu
+      } else {
+        // 项目没有初始化。很多功能菜单不能显示
+        res = this.menu.filter(item => item.alwaysShow)
+      }
+      return res
+    },
     pathArr() {
       return this.$route.path.split('/').filter(item=> {
         return item !== ''

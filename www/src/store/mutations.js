@@ -37,6 +37,16 @@ const mutations = {
   [types.BASIC_DATA_LOADED] (state, data) {
     state.hasLoadBasicData = true 
   },
+  inited( state, type) {
+    state[type] = true
+    localStorage.getItem(`${type}-inited`, 1)
+  },
+  resetProjectStatus() {
+    state.adminInited = false
+    localStorage.removeItem('admin-inited')
+    state.serverInited = false
+    localStorage.removeItem('server-inited')
+  }
 }
 
 export default mutations

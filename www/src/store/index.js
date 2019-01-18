@@ -28,6 +28,9 @@ const state = {
   role: '',// 角色
   menu: [], // 所有有权限的菜单
   limit: {}, // 权限
+  projectPath: localStorage.getItem('project-root-path') || false,
+  adminInited: localStorage.getItem('admin-inited') || false,
+  serverInited: localStorage.getItem('server-inited') || false, 
 }
 
 export default new Vuex.Store({
