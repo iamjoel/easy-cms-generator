@@ -125,7 +125,7 @@ function addPageAndRoute(entityBasic, entityId, pageType) {
                           id: entity.entityTypeId
                         })
                         .value()
-
+    
     // 新增页面
     global.db
       .get(`${pageType}Page`)
@@ -137,7 +137,22 @@ function addPageAndRoute(entityBasic, entityId, pageType) {
           entity,
           "codePath": `${entityType ? `${entityType.key}/` : ''}${entityName}`
         }
-      }))
+      }, pageType === 'list' ? {
+        operate: {
+          add: {
+            isShow: true,
+          },
+          edit: {
+            isShow: true
+          },
+          detail: {
+            isShow: true
+          },
+          delete: {
+            isShow: true
+          }
+        },
+      } : {}))
       .write()
     
     // 新增路由

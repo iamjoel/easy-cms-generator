@@ -38,110 +38,200 @@
   ],
   "entity": [
     {
-      "id": "7725f55d-0ce8-9308-f188-0fea3b276129",
-      "updateAt": 1547745532536,
+      "id": "0de463a1-ba14-1bf3-8e6d-c9f4fdae168d",
+      "updateAt": 1547813345277,
       "basic": {
         "isPublic": true,
         "hasListPage": true,
         "hasUpdatePage": true,
         "isShowInMenu": true,
-        "name": "str",
-        "des": "aaa",
-        "listPageId": "d62aa4e5-2b89-0b90-ac25-e5f8978976a0",
-        "updatePageId": "de91bd47-76c7-5c4f-d6ea-7f11b540e8b4"
+        "name": "allType",
+        "des": "各种数据类型",
+        "listPageId": "bb9011c2-642c-60ec-4a43-9a270660dff5",
+        "updatePageId": "a34dac0e-d93b-573e-cf63-f3a80c2a517d"
       },
       "cols": [
         {
-          "label": "名称",
-          "key": "name",
+          "label": "字符串",
+          "key": "str",
           "dataType": "string",
-          "maxLength": "24",
+          "maxLength": "10",
           "required": true
         },
         {
-          "label": "数字",
-          "key": "num",
+          "label": "多行文本",
+          "key": "text",
+          "dataType": "text",
+          "maxLength": null,
+          "required": true
+        },
+        {
+          "label": "整数",
+          "key": "int",
           "dataType": "int",
-          "maxLength": "1",
-          "required": false
+          "maxLength": null,
+          "required": true
+        },
+        {
+          "label": "小数",
+          "key": "num",
+          "dataType": "double",
+          "maxLength": null,
+          "required": true
+        },
+        {
+          "label": "布尔",
+          "key": "bool",
+          "dataType": "bool",
+          "maxLength": null,
+          "required": true
+        },
+        {
+          "label": "日期",
+          "key": "date",
+          "dataType": "date",
+          "maxLength": null,
+          "required": true
         }
       ],
-      "isSynced": false,
-      "isShowInMenu": false
-    },
-    {
-      "id": "0bc85f64-204b-9706-386b-2ea825bb3471",
-      "updateAt": 1547802237361,
-      "basic": {
-        "isPublic": true,
-        "hasListPage": false,
-        "hasUpdatePage": true,
-        "isShowInMenu": true,
-        "des": "cc2",
-        "name": "ssss",
-        "updatePageId": "c9557505-fdab-2a2e-1ccf-17c4ad0f00dc"
-      },
-      "cols": [],
       "isSynced": false,
       "isShowInMenu": false
     }
   ],
   "listPage": [
     {
-      "id": "d62aa4e5-2b89-0b90-ac25-e5f8978976a0",
-      "updateAt": 1547743961561,
+      "id": "bb9011c2-642c-60ec-4a43-9a270660dff5",
+      "updateAt": 1547813414355,
       "basic": {
         "entity": {
-          "id": "7725f55d-0ce8-9308-f188-0fea3b276129",
-          "name": "str"
+          "id": "0de463a1-ba14-1bf3-8e6d-c9f4fdae168d",
+          "name": "allType"
         },
-        "codePath": "str"
+        "codePath": "allType"
       },
-      "operate": {},
+      "operate": {
+        "add": {
+          "isShow": true
+        },
+        "edit": {
+          "isShow": true
+        },
+        "detail": {
+          "isShow": true
+        },
+        "delete": {
+          "isShow": true
+        }
+      },
       "cols": [
         {
-          "key": "name",
-          "label": "名称",
+          "key": "str",
+          "label": "字符串",
           "dataType": "string",
-          "formatFn": "sysToNumber"
+          "formatFn": null
         },
         {
-          "key": "age",
-          "label": "性别",
-          "dataType": "string",
+          "key": "text",
+          "label": "多行文本",
+          "dataType": "text",
+          "formatFn": null
+        },
+        {
+          "key": "int",
+          "label": "整数",
+          "dataType": "int",
+          "formatFn": null
+        },
+        {
+          "key": "num",
+          "label": "小数",
+          "dataType": "double",
+          "formatFn": null
+        },
+        {
+          "key": "bool",
+          "label": "布尔",
+          "dataType": "bool",
+          "formatFn": null
+        },
+        {
+          "key": "date",
+          "label": "日期",
+          "dataType": "date",
           "formatFn": null
         }
       ],
-      "searchCondition": [],
+      "searchCondition": [
+        {
+          "key": "str",
+          "label": "字符串",
+          "dataType": "string",
+          "dataSource": {
+            "type": "",
+            "key": ""
+          }
+        }
+      ],
       "fn": [],
       "isSynced": false
     }
   ],
   "updatePage": [
     {
-      "id": "de91bd47-76c7-5c4f-d6ea-7f11b540e8b4",
-      "updateAt": 1547745654433,
+      "id": "a34dac0e-d93b-573e-cf63-f3a80c2a517d",
+      "updateAt": 1547813630912,
       "basic": {
         "entity": {
-          "id": "7725f55d-0ce8-9308-f188-0fea3b276129",
-          "name": "str"
+          "id": "0de463a1-ba14-1bf3-8e6d-c9f4fdae168d",
+          "name": "allType"
         },
-        "codePath": "str"
+        "codePath": "allType"
       },
       "cols": [
         {
-          "label": "名称",
-          "key": "name",
+          "label": "字符串",
+          "key": "str",
           "dataType": "string",
           "formatFn": null,
           "saveFormatFn": null,
-          "validRules": [],
           "required": true
         },
         {
-          "label": "数字",
-          "key": "num",
+          "label": "多行文本",
+          "key": "text",
+          "dataType": "text",
+          "formatFn": null,
+          "saveFormatFn": null,
+          "required": true
+        },
+        {
+          "label": "整数",
+          "key": "int",
           "dataType": "int",
+          "formatFn": null,
+          "saveFormatFn": null,
+          "required": true
+        },
+        {
+          "label": "小数",
+          "key": "num",
+          "dataType": "double",
+          "formatFn": null,
+          "saveFormatFn": null,
+          "required": true
+        },
+        {
+          "label": "布尔",
+          "key": "bool",
+          "dataType": "bool",
+          "formatFn": null,
+          "saveFormatFn": null,
+          "required": true
+        },
+        {
+          "label": "日期",
+          "key": "date",
+          "dataType": "date",
           "formatFn": null,
           "saveFormatFn": null,
           "required": true
@@ -149,46 +239,35 @@
       ],
       "fn": [],
       "isSynced": false
-    },
-    {
-      "id": "c9557505-fdab-2a2e-1ccf-17c4ad0f00dc",
-      "updateAt": 1547720755084,
-      "basic": {
-        "entity": {
-          "id": "0bc85f64-204b-9706-386b-2ea825bb3471",
-          "name": "ssss"
-        },
-        "codePath": "ssss"
-      }
     }
   ],
   "router": [
     {
-      "id": "5e9cb08e-ae62-7ce8-35f2-3007099d0270",
-      "entityId": "7725f55d-0ce8-9308-f188-0fea3b276129",
-      "name": "aaa列表页",
+      "id": "9061ac77-c59b-1f15-36c0-82cabcdadb2b",
+      "entityId": "0de463a1-ba14-1bf3-8e6d-c9f4fdae168d",
+      "name": "各种数据类型列表页",
       "pageType": "list",
-      "routePath": "/str/list",
-      "filePath": "/str/List.vue",
-      "updateAt": 1547720713874
+      "routePath": "/allType/list",
+      "filePath": "/allType/List.vue",
+      "updateAt": 1547805344685
     },
     {
-      "id": "24b73243-eab2-61c8-7581-baac73c4dcc9",
-      "entityId": "7725f55d-0ce8-9308-f188-0fea3b276129",
-      "name": "aaa更新页",
+      "id": "6e190e40-8dfc-0e41-4047-d6c4c318fdea",
+      "entityId": "0de463a1-ba14-1bf3-8e6d-c9f4fdae168d",
+      "name": "各种数据类型更新页",
       "pageType": "update",
-      "routePath": "/str/update/:id",
-      "filePath": "/str/Update.vue",
-      "updateAt": 1547720713876
+      "routePath": "/allType/update/:id",
+      "filePath": "/allType/Update.vue",
+      "updateAt": 1547805344687
     },
     {
-      "id": "97f346e5-025d-d715-21aa-6b5d442de730",
-      "entityId": "0bc85f64-204b-9706-386b-2ea825bb3471",
-      "name": "cc更新页",
-      "pageType": "update",
-      "routePath": "/ssss/update/:id",
-      "filePath": "/ssss/Update.vue",
-      "updateAt": 1547720755084
+      "id": "72d5f2ec-6271-5db8-8a1a-e84209a37d04",
+      "entityId": "0de463a1-ba14-1bf3-8e6d-c9f4fdae168d",
+      "name": "各种数据类型列表页",
+      "pageType": "list",
+      "routePath": "/allType/list",
+      "filePath": "/allType/List.vue",
+      "updateAt": 1547813345275
     }
   ],
   "menu": [
@@ -202,12 +281,12 @@
       "children": []
     },
     {
-      "id": "2e2e3bf0-17d7-8ada-3466-7a9de6178906",
+      "id": "e5172f64-f5c0-b185-1af9-a854edda16c3",
       "isPage": 1,
       "entityTypeId": null,
-      "routerId": "5e9cb08e-ae62-7ce8-35f2-3007099d0270",
-      "name": "aaa",
-      "updateAt": 1547721972123
+      "routerId": "9061ac77-c59b-1f15-36c0-82cabcdadb2b",
+      "name": "各种数据类型",
+      "updateAt": 1547805344687
     }
   ],
   "syncStatus": {

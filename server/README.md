@@ -10,3 +10,49 @@
 
 ## 文档
 * [fs-extra](https://www.npmjs.com/package/fs-extra)
+
+## 各种数据结构
+```
+{
+  "label": "字符串",
+  "key": "str",
+  "dataType": "string",
+  "maxLength": "10",
+  "required": true
+},
+{
+  "label": "多行文本",
+  "key": "text",
+  "dataType": "text",
+  "maxLength": null,
+  "required": true
+},
+{
+  "label": "整数",
+  "key": "int",
+  "dataType": "int",
+  "maxLength": null,
+  "required": true
+},
+{
+  "label": "小数",
+  "key": "num",
+  "dataType": "double",
+  "maxLength": null,
+  "required": true
+},
+{
+  "label": "布尔",
+  "key": "bool",
+  "dataType": "bool",
+  "maxLength": null,
+  "required": true
+},
+{
+  "label": "日期",
+  "key": "date",
+  "dataType": "date",
+  "maxLength": null,
+  "required": true
+}
+```

@@ -1,5 +1,6 @@
 <template>
   <div class="main">
+
     <el-tabs v-model="activeTab" >
       <el-tab-pane label="基本信息" name="basic">
         <el-form :inline="true" :model="model.basic"  label-position="right" >
@@ -21,13 +22,21 @@
       </el-tab-pane>
       <el-tab-pane label="列表字段" name="cols">
         <div class="ly ly-r mb-10">
-          <el-button type="info" @click="showChooseColDialog">从实体中选择</el-button>
+          <el-button type="info" @click="show('listChooseCol')">从实体中选择</el-button>
           <el-button type="primary" @click="model.cols.push({
             label: '',
             key: '',
             formatFn: null,
           })">添加字段</el-button>
         </div>
+
+        <choose-col 
+          ref="listChooseCol"
+          :entity-id="model.basic.entity.id"
+          :choosed-cols="model.cols"
+          @choosed="choosedListCols"
+        />
+
         <el-table
           :data="model.cols"
           border
@@ -100,31 +109,7 @@
           </el-table-column>
         </el-table>
 
-        <el-dialog 
-          title="选择字段"
-          :visible.sync="isShowChooseColDialog"
-        >
-          <el-table
-            :data="canChooseCols"
-            @selection-change="handleSelectedColsChange"
-            border
-            stripe>
-            <!-- 改成checkbox -->
-            <el-table-column
-              type="selection"
-              width="55">
-            </el-table-column>
-            <el-table-column
-              prop="label"
-              label="名称"
-              >
-            </el-table-column>
-          </el-table>
-          <span slot="footer" class="dialog-footer">
-            <el-button @click="isShowChooseColDialog = false">取 消</el-button>
-            <el-button type="primary" @click="chooseCols">确 定</el-button>
-          </span>
-        </el-dialog>
+        
       </el-tab-pane>
       
       <el-tab-pane label="操作" name="op">
@@ -181,6 +166,7 @@
       </el-tab-pane>
       <el-tab-pane label="搜索条件" name="searchCondition">
         <div class="ly ly-r mb-10">
+          <el-button type="info" @click="show('searchChooseCol')">从实体中选择</el-button>
           <el-button type="primary" @click="model.searchCondition.push({
               label: '',
               key: '',
@@ -190,6 +176,12 @@
                 key: ''
               }
           })">添加搜索条件</el-button>
+          <choose-col 
+            ref="searchChooseCol"
+            :entity-id="model.basic.entity.id"
+            :choosed-cols="model.searchCondition"
+            @choosed="choosedSearchCols"
+          />
         </div>
         <el-table
           :data="model.searchCondition"
@@ -385,6 +377,8 @@
         <el-button @click="isShowEditArgsDialog=false">关 闭</el-button>
       </span>
     </el-dialog>
+
+    
   </div>
 </template>
 

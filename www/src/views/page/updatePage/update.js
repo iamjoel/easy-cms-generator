@@ -69,11 +69,14 @@ export default {
         key: 'string',
         label: '文字'
       },{
-        key: 'strings',
+        key: 'text',
         label: '多行文字'
       },{
-        key: 'number',
-        label: '数字'
+        key: 'int',
+        label: '整数'
+      },{
+        key: 'double',
+        label: '小数'
       },{
         key: 'select',
         label: '下拉'

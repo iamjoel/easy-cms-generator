@@ -1,9 +1,11 @@
 import JEditItem from '@/components/edit-item'
 import deepClone from 'clone'
 import {fetchList, fetchModel, addModel, editModel} from '@/service/api' 
+import ChooseCol from '@/components/choose-col'
 export default {
   components: {
-    'j-edit-item': JEditItem,
+    JEditItem,
+    ChooseCol
   },
   computed: {
     defaultCodePath() {
@@ -15,23 +17,7 @@ export default {
       }
       return res || ''
     },
-    allColsList() {
-      if(this.model.basic.entity && this.model.basic.entity.id) {
-        var tarEntity = this.entityList.filter(entity => entity.id === this.model.basic.entity.id)[0]
-        return tarEntity ? tarEntity.cols : []
-      } else {
-        return []
-      }
-    },
-    canChooseCols() {
-      if(!this.allColsList) {
-        return []
-      }
-      return this.allColsList.filter(item => {
-        var hasSelected = this.model.cols.filter(col => item.key === col.key).length > 0
-        return !hasSelected
-      })
-    }
+    
   },
   data() {
     return {
@@ -64,7 +50,6 @@ export default {
           }
         }),
       },
-      isShowChooseColDialog: false,
       tempSelectedCols: [],
       opList: [],
       opDict: {
@@ -235,23 +220,31 @@ export default {
       })
       
     },
-    showChooseColDialog() {
-      this.tempSelectedCols = []
-      this.isShowChooseColDialog = true
-    },
-    chooseCols() {
-      this.model.cols = this.model.cols.concat([...this.tempSelectedCols])
-      this.isShowChooseColDialog = false
-    },
-    handleSelectedColsChange(selectedCol) {
-      this.tempSelectedCols = [...selectedCol].map(item => {
+    choosedListCols(selectedCol) {
+      this.model.cols = this.model.cols.concat(selectedCol.map(item => {
         return {
           key: item.key,
           label: item.label,
           dataType: item.dataType,
           formatFn: null
         }
-      })
+      }))
+    },
+    choosedSearchCols(selectedCol) {
+      this.model.searchCondition = this.model.searchCondition.concat(selectedCol.map(item => {
+        return {
+          key: item.key,
+          label: item.label,
+          dataType: item.dataType,
+          dataSource: {
+            type: '',
+            key: ''
+          }
+        }
+      }))
+    },
+    show(key) {
+      this.$refs[key].show()
     }
   },
   mounted() {
