@@ -39,21 +39,28 @@ module.exports = {
         })
         break;
       case 'menu':
-        Promise.all([
-          fetchList('entity'),
-          fetchList('entityType'),
-          fetchList('router'),
-          fetchList('menu'),
-        ]).then(([entity, entityType, router, menu]) => {
-          writeConfigFile('menu', menu, [entity, entityType, router]).then(() => {
-            setSynced(type)
-            res.send(apiFormat.success({}))
+        // 同步菜单的时候，同步路由
+        fetchList('router').then(data => {
+          return writeConfigFile('router', data)
+        }).then(() => {
+          setSynced('router')
+          Promise.all([
+            fetchList('entity'),
+            fetchList('entityType'),
+            fetchList('router'),
+            fetchList('menu'),
+          ]).then(([entity, entityType, router, menu]) => {
+            writeConfigFile('menu', menu, [entity, entityType, router]).then(() => {
+              setSynced(type)
+              res.send(apiFormat.success({}))
+            }, (e) => {
+              res.send(apiFormat.error(e))
+            })
           }, (e) => {
             res.send(apiFormat.error(e))
           })
-        }, (e) => {
-          res.send(apiFormat.error(e))
         })
+        
         break;
       default: 
         res.send(apiFormat.error('未知类型！'))
@@ -125,9 +132,10 @@ function writeConfigFile(name, content, [entityList, entityTypeList, router]=[])
           routerId: item.routerId
         }
         if(item.isPage == 1) {
-          res.path = routerList.filter(each => {
+          let router = routerList.filter(each => {
             return each.id === item.routerId
-          })[0].routePath
+          })[0]
+          res.path = router ? router.routePath : ''
          
         } else {
           res.children = item.children.map(page => {
@@ -144,7 +152,8 @@ function writeConfigFile(name, content, [entityList, entityTypeList, router]=[])
       })
   }
   return new Promise((resolve, reject) => {
-    var filePath = `${global.feCodeRootPath}/src/setting/base${name}.js`
+    console.log()
+    var filePath = `${global.feCodeRootPath}/src/setting/base/${name}.js`
     fs.outputFile(filePath, 'export default ' + formatContent(content), err => {
         if(err) {
           reject(err)

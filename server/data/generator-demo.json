@@ -38,7 +38,7 @@
   "entity": [
     {
       "id": "0de463a1-ba14-1bf3-8e6d-c9f4fdae168d",
-      "updateAt": 1547827636016,
+      "updateAt": 1547827774887,
       "basic": {
         "isPublic": true,
         "hasListPage": true,
@@ -46,7 +46,7 @@
         "isShowInMenu": true,
         "name": "allType",
         "des": "各种数据类型",
-        "listPageId": "d956c6d6-9587-fac2-7ce4-4668877f57a9",
+        "listPageId": "c4109ae7-2f78-b7c4-dd5a-a92fdeec5e92",
         "updatePageId": "25d841ea-b848-2054-0ab5-9e1578e1b46b"
       },
       "cols": [
@@ -97,7 +97,33 @@
       "isShowInMenu": false
     }
   ],
-  "listPage": [],
+  "listPage": [
+    {
+      "id": "c4109ae7-2f78-b7c4-dd5a-a92fdeec5e92",
+      "updateAt": 1547827774884,
+      "basic": {
+        "entity": {
+          "id": "0de463a1-ba14-1bf3-8e6d-c9f4fdae168d",
+          "name": "allType"
+        },
+        "codePath": "allType"
+      },
+      "operate": {
+        "add": {
+          "isShow": true
+        },
+        "edit": {
+          "isShow": true
+        },
+        "detail": {
+          "isShow": true
+        },
+        "delete": {
+          "isShow": true
+        }
+      }
+    }
+  ],
   "updatePage": [
     {
       "id": "25d841ea-b848-2054-0ab5-9e1578e1b46b",
@@ -118,17 +144,32 @@
       "name": "各种数据类型更新页",
       "pageType": "update",
       "routePath": "/allType/update/:id",
-      "filePath": "/allType/Update.vue",
-      "updateAt": 1547826733075
+      "filePath": "/allType/Update.vue"
+    },
+    {
+      "id": "1b991032-c7ca-951b-66df-5f1375f88ab2",
+      "entityId": "0de463a1-ba14-1bf3-8e6d-c9f4fdae168d",
+      "name": "各种数据类型列表页",
+      "pageType": "list",
+      "routePath": "/allType/list",
+      "filePath": "/allType/List.vue"
     }
   ],
-  "menu": [],
+  "menu": [
+    {
+      "id": "30a4caa3-76a1-153e-1358-ed8a10602e23",
+      "isPage": 1,
+      "entityTypeId": null,
+      "routerId": "d73e9cd4-ab50-fabf-abbd-52fa1155469d",
+      "name": "各种数据类型"
+    }
+  ],
   "syncStatus": {
     "dict": true,
     "entity": false,
     "role": false,
-    "router": false,
-    "menu": false,
+    "router": true,
+    "menu": true,
     "listPage": false,
     "entityType": false,
     "updatePage": false
