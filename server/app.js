@@ -51,8 +51,6 @@ var apis = {
   role: require('./api/utils/commonCRUD')('role'),
   entityType: require('./api/utils/commonCRUD')('entityType'),
   router: require('./api/utils/commonCRUD')('router'),
-  listPage: require('./api/utils/commonCRUD')('listPage'),
-  updatePage: require('./api/utils/commonCRUD')('updatePage'),
   menu: require('./api/utils/commonCRUD')('menu'),
 }
 
@@ -108,6 +106,26 @@ app.post('/list-page/updateFreeze/:id', (req, res)=> {
   listPageApi.updateFreeze(req, res)
 })
 
+app.get(`/listPage/list`, (req,res) => {
+  listPageApi.list(req, res)
+})
+
+app.get(`/listPage/:id`, (req,res) => {
+  listPageApi.detail(req, res)
+})
+
+app.put(`/listPage`, (req,res) => {
+  listPageApi.add(req, res)
+})
+
+app.post(`/listPage/:id`, (req,res) => {
+  listPageApi.edit(req, res)
+})
+
+app.delete(`/listPage/:id`, (req,res) => {
+  listPageApi.remove(req, res)
+})
+
 var updatePageApi = require('./api/update-page')
 app.post('/update-page/expendCofigToFile/:id', (req, res)=> {
   updatePageApi.expendCofigToFile(req, res)
@@ -115,6 +133,26 @@ app.post('/update-page/expendCofigToFile/:id', (req, res)=> {
 
 app.post('/update-page/updateFreeze/:id', (req, res)=> {
   updatePageApi.updateFreeze(req, res)
+})
+
+app.get(`/updatePage/list`, (req,res) => {
+  updatePageApi.list(req, res)
+})
+
+app.get(`/updatePage/:id`, (req,res) => {
+  updatePageApi.detail(req, res)
+})
+
+app.put(`/updatePage`, (req,res) => {
+  updatePageApi.add(req, res)
+})
+
+app.post(`/updatePage/:id`, (req,res) => {
+  updatePageApi.edit(req, res)
+})
+
+app.delete(`/updatePage/:id`, (req,res) => {
+  updatePageApi.remove(req, res)
 })
 
 app.get('/sync-status', (req, res)=> {
