@@ -68,13 +68,11 @@ function generatorJS(config) {
 
   var rules = {}
   config.cols.forEach(col => {
-    if(col.validRules && col.validRules.length > 0) {
-      rules[col.key] = col.validRules.map(rule => {
-        if(rule.name === 'required') { // 布尔值只能是 0 或 1，所以也是数字型的。
-          return `{ ${ (['number','price','bool'].indexOf(col.dataType) !== -1) ? `type: 'number', `: ''}required: true, message: '${rule.errMsg}', trigger: 'blur' }`
-        }
-        return false
-      }).filter(item => item)
+    if(col.required) {
+      rules[col.key] = [{}].map(rule => {
+        var errMsg = `请${['select','date'].includes(col.dataType) ? '选择' : '输入'}${col.label}`
+        return `{ ${['int','double', 'price','bool'].includes(col.dataType) ? `type: 'number', `: ''}required: true, message: '${errMsg}', trigger: 'blur' }`
+      })
     }
   })
   var dictModelCols = config.cols.filter(col => {
@@ -105,7 +103,7 @@ export default {
   },
   data() {
     return {
-      KEY: '${config.basic.entity}',
+      KEY: '${config.basic.entity.name}',
       model,
       modelScheme,
       rules,
@@ -161,10 +159,10 @@ ${config.cols.map(col => {
   if(!dataType || dataType === 'string') {
     inner = 
 `      <el-input v-model="model.${col.key}"></el-input>`
-  } else if(dataType === 'strings') {
+  } else if(dataType === 'text') {
     inner = 
 `      <el-input v-model="model.${col.key}" type="textarea" :rows="3"></el-input>`
-  } else if(dataType === 'number' || dataType === 'price') { // 价格也是数字
+  } else if(['int', 'double', 'price'].includes(dataType)) { // 价格也是数字
     inner = 
 `      <el-input-number v-model.number="model.${col.key}" :controls="false"></el-input-number>`
   } else if(dataType === 'select') {

@@ -223,14 +223,78 @@
   "updatePage": [
     {
       "id": "25d841ea-b848-2054-0ab5-9e1578e1b46b",
-      "updateAt": 1547826733074,
+      "updateAt": 1547902973873,
       "basic": {
         "entity": {
           "id": "0de463a1-ba14-1bf3-8e6d-c9f4fdae168d",
           "name": "allType"
         },
         "codePath": "allType"
-      }
+      },
+      "cols": [
+        {
+          "label": "字符串",
+          "key": "str",
+          "dataType": "string",
+          "formatFn": null,
+          "saveFormatFn": null,
+          "required": true
+        },
+        {
+          "label": "多行文本",
+          "key": "text",
+          "dataType": "text",
+          "formatFn": null,
+          "saveFormatFn": null,
+          "required": false
+        },
+        {
+          "label": "整数",
+          "key": "int",
+          "dataType": "int",
+          "formatFn": null,
+          "saveFormatFn": null,
+          "required": false
+        },
+        {
+          "label": "小数",
+          "key": "num",
+          "dataType": "double",
+          "formatFn": null,
+          "saveFormatFn": null,
+          "required": true
+        },
+        {
+          "label": "布尔",
+          "key": "bool",
+          "dataType": "bool",
+          "formatFn": null,
+          "saveFormatFn": null,
+          "required": true
+        },
+        {
+          "label": "日期",
+          "key": "date",
+          "dataType": "date",
+          "formatFn": null,
+          "saveFormatFn": null,
+          "required": true
+        },
+        {
+          "label": "下拉",
+          "key": "select",
+          "dataType": "select",
+          "dataSource": {
+            "type": "entities",
+            "key": ""
+          },
+          "formatFn": null,
+          "saveFormatFn": null,
+          "required": true
+        }
+      ],
+      "fn": [],
+      "isSynced": true
     }
   ],
   "router": [
