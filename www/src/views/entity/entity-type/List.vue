@@ -18,7 +18,7 @@
       
       <el-table-column
         prop="key"
-        label="名称(英文)"
+        label="英文名"
         >
         <template slot-scope="scope">
           <el-input v-model="scope.row.key" @change="scope.row.hasChanged = true"></el-input>
@@ -27,7 +27,7 @@
       
       <el-table-column
         prop="label"
-        label="描述(中文)"
+        label="中文名"
         >
         <template slot-scope="scope">
           <el-input v-model="scope.row.label" @change="scope.row.hasChanged = true"></el-input>

@@ -5,12 +5,13 @@
         <el-form :inline="true" :model="model.basic"  label-position="right" >
         <el-row type="flex" justify="start" class="multi-line">
           <j-edit-item
-            label="名称(英文)" prop="name">
+            label="英文名" prop="name">
             <el-input v-model="model.basic.name" placeholder="请输入名称"></el-input>
+            <p class="tip">会做为key</p>
           </j-edit-item>
 
           <j-edit-item
-            label="描述(中文)" prop="des">
+            label="中文名" prop="des">
             <el-input v-model="model.basic.des" placeholder="请输入描述"></el-input>
           </j-edit-item>
 

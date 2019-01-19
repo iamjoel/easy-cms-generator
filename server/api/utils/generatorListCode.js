@@ -19,27 +19,20 @@ var operateConfig = ${JSON.stringify(config.operate, null, '  ')}
 export default {
   mixins: [listMixin],
   components: {
-   'j-remote-select': JRemoteSelect,
+    JRemoteSelect,
   },
   data() {
     return {
-      KEY: '${config.basic.entity}',
+      KEY: '${config.basic.entity.name}',
+      operateConfig,
       searchConditions,
     }  
   },
-  methods: {
-    isShow(type) {
-      var isShow = operateConfig[type].isShow
-      if(Array.isArray(isShow)) {
-        return isShow.indexOf(this.$store.state.role) !== -1
-      } else {
-        return isShow
-      }
-    },
-${generateVueMethods(config.fn)}
-  },
   mounted() {
     
+  },
+  methods: {
+${generateVueMethods(config.fn)}
   }
 }`
   return js
@@ -82,7 +75,7 @@ ${inner}
 }).join('\n\n')}
     </j-search-condition>
 
-    <j-grid-box :is-show-add-btn="isShow('add')" :add-url="addPagePath" :pager="pager" @pageChange="handleCurrentChange">
+    <j-grid-box :is-show-add-btn="isShowAction('add')" :add-url="addPagePath" :pager="pager" @pageChange="handleCurrentChange">
       <el-table
         :data="tableData"
         border
@@ -115,9 +108,9 @@ ${inner}
           width="350"
           >
           <template slot-scope="scope">
-            <el-button type="success" size="small" @click="$router.push(viewPagePath(scope.row.id))" v-if="isShow('detail')">详情</el-button>
-            <el-button type="info" size="small" @click="$router.push(editPagePath(scope.row.id))" v-if="isShow('edit')">编辑</el-button>
-            <el-button type="danger" size="small" @click="remove(scope.row.id)" v-if="isShow('delete')">删除</el-button>
+            <el-button type="success" size="small" @click="$router.push(viewPagePath(scope.row.id))" v-if="isShowAction('detail')">详情</el-button>
+            <el-button type="info" size="small" @click="$router.push(editPagePath(scope.row.id))" v-if="isShowAction('edit')">编辑</el-button>
+            <el-button type="danger" size="small" @click="remove(scope.row.id)" v-if="isShowAction('delete')">删除</el-button>
           </template>
         </el-table-column>
       </el-table>

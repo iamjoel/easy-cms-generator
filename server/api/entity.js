@@ -164,7 +164,7 @@ function addPageAndRoute(entityBasic, entityId, pageType) {
         name: `${entityBasic.des}${pageType === 'list'? '列表页' : '更新页'}`,
         pageType,
         routePath: `${entityType ? `/${entityType.key}` : ''}/${entityName}/${pageType === 'list' ? 'list' : 'update/:id'}`,
-        filePath: `${entityType ? `/${entityType.key}` : ''}/${entityName}/${pageType === 'list' ? 'List' : 'Update'}.vue`,
+        filePath: `${entityType ? `${entityType.key}` : ''}/${entityName}/${pageType === 'list' ? 'List' : 'Update'}.vue`,
         updateAt: Date.now()
       })
       .write()

@@ -58,3 +58,7 @@
 .detail-item__val {
   flex-grow: 1;
 }
+.tip {
+  text-align: left;
+  color: #999;
+}

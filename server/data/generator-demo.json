@@ -1,5 +1,18 @@
 {
-  "role": [],
+  "role": [
+    {
+      "id": "86f18dc2-2bc9-9526-8285-e95cad4a62d2",
+      "updateAt": 1547901431031,
+      "key": "admin",
+      "label": "管理员"
+    },
+    {
+      "id": "8f6fd7f5-9498-4f9c-7873-6cd30d784526",
+      "updateAt": 1547901440070,
+      "key": "staff",
+      "label": "文员"
+    }
+  ],
   "dict": [
     {
       "id": "3dda8247-1350-8cc2-8c75-f90fdfcf0fa1",
@@ -100,7 +113,7 @@
   "listPage": [
     {
       "id": "c4109ae7-2f78-b7c4-dd5a-a92fdeec5e92",
-      "updateAt": 1547827774884,
+      "updateAt": 1547901520732,
       "basic": {
         "entity": {
           "id": "0de463a1-ba14-1bf3-8e6d-c9f4fdae168d",
@@ -110,18 +123,101 @@
       },
       "operate": {
         "add": {
-          "isShow": true
+          "isShow": false
         },
         "edit": {
-          "isShow": true
+          "isShow": [
+            "staff"
+          ]
         },
         "detail": {
-          "isShow": true
+          "isShow": [
+            "admin",
+            "staff"
+          ]
         },
         "delete": {
           "isShow": true
         }
-      }
+      },
+      "cols": [
+        {
+          "key": "str",
+          "label": "字符串",
+          "dataType": "string",
+          "formatFn": null
+        },
+        {
+          "key": "text",
+          "label": "多行文本",
+          "dataType": "text",
+          "formatFn": null
+        },
+        {
+          "key": "int",
+          "label": "整数",
+          "dataType": "int",
+          "formatFn": null
+        },
+        {
+          "key": "num",
+          "label": "小数",
+          "dataType": "double",
+          "formatFn": null
+        },
+        {
+          "key": "bool",
+          "label": "布尔",
+          "dataType": "bool",
+          "formatFn": null
+        },
+        {
+          "key": "date",
+          "label": "日期",
+          "dataType": "date",
+          "formatFn": null
+        }
+      ],
+      "searchCondition": [
+        {
+          "key": "str",
+          "label": "字符串",
+          "dataType": "string",
+          "dataSource": {
+            "type": "",
+            "key": ""
+          }
+        },
+        {
+          "key": "int",
+          "label": "整数",
+          "dataType": "int",
+          "dataSource": {
+            "type": "",
+            "key": ""
+          }
+        },
+        {
+          "key": "num",
+          "label": "小数",
+          "dataType": "double",
+          "dataSource": {
+            "type": "",
+            "key": ""
+          }
+        },
+        {
+          "key": "bool",
+          "label": "布尔",
+          "dataType": "bool",
+          "dataSource": {
+            "type": "",
+            "key": ""
+          }
+        }
+      ],
+      "fn": [],
+      "isSynced": true
     }
   ],
   "updatePage": [
@@ -160,8 +256,11 @@
       "id": "30a4caa3-76a1-153e-1358-ed8a10602e23",
       "isPage": 1,
       "entityTypeId": null,
-      "routerId": "d73e9cd4-ab50-fabf-abbd-52fa1155469d",
-      "name": "各种数据类型"
+      "routerId": "1b991032-c7ca-951b-66df-5f1375f88ab2",
+      "name": "各种数据类型",
+      "roleIds": "",
+      "children": [],
+      "order": 0
     }
   ],
   "syncStatus": {

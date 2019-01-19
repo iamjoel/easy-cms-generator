@@ -142,6 +142,11 @@ export default {
       model.basic.codePath = model.basic.codePath || this.defaultCodePath
       model.cols = model.cols || []
       model.operate = model.operate || {}
+      this.opList.forEach(op => {
+        model.operate[op.key] =  model.operate[op.key] || {}
+        model.operate[op.key].isShow = op.showRoles.length > 0 ? op.showRoles : op.showType === 'show'
+      })
+      
       model.searchCondition = model.searchCondition || []
       model.fn = model.fn || []
 
@@ -172,6 +177,7 @@ export default {
             const showType = this.getShowType(item.isShow)
             const showRoles = showType === 'roles' ? item.isShow : []
             return {
+              key: opKey,
               label: this.opDict[opKey],
               showType,
               showRoles
