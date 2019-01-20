@@ -7,6 +7,9 @@
       </el-col>
       <el-col :span="20">
         <!-- {{$store.getters.isProjectInited}} -->
+        <div class="ly ly-r">
+          <el-button type="success" @click="syncToProject">同步代码到项目</el-button>
+        </div>
         <router-view id="main-content"></router-view>
       </el-col>
     </el-row>
@@ -38,11 +41,20 @@ export default {
     }
   },
   mounted() {
-    var role = localStorage.getItem('j-role') || 'user'
     // this.$store.commit(types.ROLE, role)
-    this.$store.commit(types.ROLE, 'admin')
-    this.$store.dispatch('fetchMenuAndLimit')
-    this.$store.dispatch('fetchBasicData')
+    // this.$store.commit(types.ROLE, 'admin')
+    // this.$store.dispatch('fetchMenuAndLimit')
+    // this.$store.dispatch('fetchBasicData')
+  },
+  methods: {
+    syncToProject() {
+      this.$http.post(`${SERVER_PREFIX}/config/sync-to-project`).then(({data}) => {
+        this.$message({
+          type: 'success',
+          message: '同步成功!'
+        })
+      })
+    }
   }
 }
 </script>

@@ -68,8 +68,8 @@ app.post('/project/choose', (req, res)=> {
 })
 
 var configApi = require('./api/config')
-app.post('/config/sync/:type', (req, res)=> {
-  configApi.syncConfig(req, res)
+app.post('/config/sync-to-project', (req, res)=> {
+  configApi.syncToProject(req, res)
 })
 
 var entityApi = require('./api/entity')

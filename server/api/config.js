@@ -4,81 +4,79 @@ var fs = require('fs-extra')
 const deepClone = require('clone')
 
 module.exports = {
-  syncConfig(req, res) {
-    const type = req.params.type
+  syncToProject(req, res) {
+    // 同步代码到项目
+    Promise.all([
+      sync('dict'),
+      sync('role'),
+      sync('entity'),
+      sync('router'),
+      sync('menu'),
+    ]).then(() => {
+      console.log('all succss')
+      res.send(apiFormat.success({}))
+    }, (e) => {
+      res.send(apiFormat.error(e))
+    })
+  }
+  
+}
+
+function sync(type) {
+  return new Promise((resolve, reject) => {
     switch(type) {
       case 'dict':
       case 'router':
         fetchList(type).then(data => {
           return writeConfigFile(type, data)
         }).then(() => {
-          setSynced(type)
-          res.send(apiFormat.success({}))
+          resolve()
         }, (e) => {
-          res.send(apiFormat.error(e))
+          reject(e)
         })
         break;
       case 'role':
         fetchList('role').then(data => {
           return writeConfigFile('roles', data)
         }).then(() => {
-          setSynced(type)
-          res.send(apiFormat.success({}))
+          resolve()
         }, (e) => {
-          res.send(apiFormat.error(e))
+          reject(e)
         })
         break;
       case 'entity':
         fetchList('entity').then(data => {
           return writeConfigFile('entities', data)
         }).then(() => {
-          setSynced(type)
-          res.send(apiFormat.success({}))
+          resolve()
         }, (e) => {
-          res.send(apiFormat.error(e))
+          reject(e)
         })
         break;
       case 'menu':
-        // 同步菜单的时候，同步路由
-        fetchList('router').then(data => {
-          return writeConfigFile('router', data)
-        }).then(() => {
-          setSynced('router')
-          Promise.all([
-            fetchList('entity'),
-            fetchList('entityType'),
-            fetchList('router'),
-            fetchList('menu'),
-          ]).then(([entity, entityType, router, menu]) => {
-            writeConfigFile('menu', menu, [entity, entityType, router]).then(() => {
-              setSynced(type)
-              res.send(apiFormat.success({}))
-            }, (e) => {
-              res.send(apiFormat.error(e))
-            })
+        Promise.all([
+          fetchList('entity'),
+          fetchList('entityType'),
+          fetchList('router'),
+          fetchList('menu'),
+        ]).then(([entity, entityType, router, menu]) => {
+          writeConfigFile('menu', menu, [entity, entityType, router]).then(() => {
+            resolve()
           }, (e) => {
-            res.send(apiFormat.error(e))
+            reject(e)
           })
+        }, (e) => {
+          reject(e)
         })
         
         break;
       default: 
-        res.send(apiFormat.error('未知类型！'))
+        reject('未知类型！')
     }
-
-    
-  }
+  })
   
 }
 
-function setSynced(type) {
-  global.db
-      .get('syncStatus')
-      .assign({
-        [type]: true
-      })
-      .write()
-} 
 
 function fetchList(tableName) {
   return new Promise((resolve, reject) => {
@@ -152,7 +150,6 @@ function writeConfigFile(name, content, [entityList, entityTypeList, router]=[])
       })
   }
   return new Promise((resolve, reject) => {
-    console.log()
     var filePath = `${global.feCodeRootPath}/src/setting/base/${name}.js`
     fs.outputFile(filePath, 'export default ' + formatContent(content), err => {
         if(err) {

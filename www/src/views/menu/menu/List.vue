@@ -1,7 +1,6 @@
 <template>
   <div class="main menu-list-page">
     <div class="ly ly-r mb-10">
-      <el-button type="success" @click="sync" v-show="!isSynced">同步</el-button>
       <el-button type="primary" @click="add">新增</el-button>
     </div>
     <el-table

@@ -1,4 +1,4 @@
-import { fetchList, addModel,editModel,deleteModel,syncModel, syncStauts } from '@/service/api'
+import { fetchList, addModel,editModel,deleteModel } from '@/service/api'
 
 export default {
   data() {
@@ -6,7 +6,6 @@ export default {
       KEY: 'role',
       isShowDetailDialog: false,
       list: [],
-      isSynced: false
     }  
   },
   methods: {
@@ -15,16 +14,6 @@ export default {
         isNew:true,
         key: '',
         label: ''
-      })
-    },
-    sync() {
-      syncModel(this.KEY).then(({data})=> {
-        this.$message({
-          showClose: true,
-          message: '同步成功',
-          type: 'success'
-        })
-        this.isSynced = true
       })
     },
     save(row) {
@@ -41,7 +30,6 @@ export default {
           message: '保存成功',
           type: 'success'
         })
-        this.isSynced = false
       })
     },
     remove(id, index) {
@@ -55,7 +43,6 @@ export default {
             message: '删除成功',
             type: 'success'
           })
-          this.isSynced = false
         })
       })
     },
@@ -66,9 +53,6 @@ export default {
     }
   },
   mounted() {
-    syncStauts().then(({data}) => {
-      this.isSynced = data.data[this.KEY]
-    })
     this.fetchList()
   }
 }
