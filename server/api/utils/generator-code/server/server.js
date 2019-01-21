@@ -6,8 +6,7 @@ var fs = require('fs-extra')
 module.exports = (modelList) => {
   return Promise.all([
     generatorRouter(modelList),
-    // generatorModelMap(modelList)
-
+    generatorModelMap(modelList)
   ])
 } 
 
@@ -54,6 +53,20 @@ function writeFile(filePath, content) {
 
 function generatorModelMap(modelList) {
   var modelMapPath = `${global.serverCodeRootPath}/config/auto-model-map.js`
+  var mainContent = {}
+
+  modelList.forEach(model => {
+    mainContent[model.name] = `${model.type ? `${model.type}/` : ''}model/${model.name}`
+  })
+
+  var content =
+`/*
+* 代码生成工具生成的代码。
+* 注意：请勿改动，会有被覆盖的风险。
+*/
+module.exports = ${JSON.stringify(mainContent, null, '  ')}
+`
+  return writeFile(modelMapPath, content)
 }
 
 function line2upper(str) {
