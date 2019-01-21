@@ -50,6 +50,11 @@
         "key": "updateTime",
         "dataType": "datetime",
         "label": "更新时间"
+      },
+      {
+        "key": "delFlg",
+        "dataType": "bool",
+        "label": "删除标志位"
       }
     ]
   },
@@ -93,7 +98,7 @@
       ],
       "isSynced": true,
       "isShowInMenu": false,
-      "updateAt": 1548080083332
+      "updateAt": 1548080486744
     },
     {
       "id": "ab17606e-5792-003c-f8e9-13ccfacfdbe8",
@@ -109,7 +114,7 @@
       "cols": [],
       "isSynced": true,
       "isShowInMenu": false,
-      "updateAt": 1548079124359
+      "updateAt": 1548080250916
     }
   ],
   "listPage": [

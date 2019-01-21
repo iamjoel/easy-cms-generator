@@ -55,8 +55,10 @@ function generatorCol(col) {
       break;
     case 'double':
       content += `decimal(10, 2)`
+      break;
     case 'bool':
       content += `int(1)`
+      break;
     case 'date': 
     case 'datetime': 
       content += `datetime`

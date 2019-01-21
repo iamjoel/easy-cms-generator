@@ -15,14 +15,14 @@ function generatorRouter(modelList) {
   var routerPath = `${global.serverCodeRootPath}/app/auto-router.js` // 这时候 serverCodeRootPath 一定有
 
   var mainContent = modelList.map(model => {
-    var modelSuffixPath = `${model.name}${model.type ? `/${model.type}` : ''}`
-    var controllerPrefixPath = line2upper(`${model.name}${model.type ? `.${model.type}` : ''}`)
+    var modelSuffixPath = `${model.type ? `${model.type}/` : ''}${model.name}`
+    var controllerPrefixPath = line2upper(`${model.type ? `${model.type}.` : ''}${model.name}`)
     var res =
-`  router.get('/api/${modelSuffixPath}/list', jwt, controller.${controllerPrefixPath}.list)${model.isPublic ? `\n  router.get(\`/\${publicPrefix}/${modelSuffixPath}/list\`, controller.${controllerPrefixPath}.list)` : ''}
-  router.get('/api/${modelSuffixPath}/detail/:id', jwt, controller.${controllerPrefixPath}.detail)${model.isPublic ? `\n  router.get(\`/\${publicPrefix}/${modelSuffixPath}/detail/:id\`, controller.${controllerPrefixPath}.detail)` : ''}
-  router.post('/api/${modelSuffixPath}/add', jwt, controller.${controllerPrefixPath}.add)${model.isPublic ? `\n  router.post(\`/\${publicPrefix}/${modelSuffixPath}/add\`, controller.${controllerPrefixPath}.add)` : ''}
-  router.post('/api/${modelSuffixPath}/edit', jwt, controller.${controllerPrefixPath}.edit)${model.isPublic ? `\n  router.post(\`/\${publicPrefix}/${modelSuffixPath}/edit\`, controller.${controllerPrefixPath}.edit)` : ''}
-  router.post('/api/${modelSuffixPath}/del/:id', jwt, controller.${controllerPrefixPath}.del)${model.isPublic ? `\n  router.post(\`/\${publicPrefix}/${modelSuffixPath}/del/:id\`, controller.${controllerPrefixPath}.del)` : ''}`
+`  router.get('/api/${model.name}/list', jwt, controller.${controllerPrefixPath}.list)${model.isPublic ? `\n  router.get(\`/\${publicPrefix}/${modelSuffixPath}/list\`, controller.${controllerPrefixPath}.list)` : ''}
+  router.get('/api/${model.name}/detail/:id', jwt, controller.${controllerPrefixPath}.detail)${model.isPublic ? `\n  router.get(\`/\${publicPrefix}/${modelSuffixPath}/detail/:id\`, controller.${controllerPrefixPath}.detail)` : ''}
+  router.post('/api/${model.name}/add', jwt, controller.${controllerPrefixPath}.add)${model.isPublic ? `\n  router.post(\`/\${publicPrefix}/${modelSuffixPath}/add\`, controller.${controllerPrefixPath}.add)` : ''}
+  router.post('/api/${model.name}/edit', jwt, controller.${controllerPrefixPath}.edit)${model.isPublic ? `\n  router.post(\`/\${publicPrefix}/${modelSuffixPath}/edit\`, controller.${controllerPrefixPath}.edit)` : ''}
+  router.post('/api/${model.name}/del/:id', jwt, controller.${controllerPrefixPath}.del)${model.isPublic ? `\n  router.post(\`/\${publicPrefix}/${modelSuffixPath}/del/:id\`, controller.${controllerPrefixPath}.del)` : ''}`
     return res
   }).join('\n\n')
 
@@ -31,7 +31,7 @@ function generatorRouter(modelList) {
 * 代码生成工具生成的代码。
 * 注意：请勿改动，会有被覆盖的风险。
 */
-module.exports = function (router, controller) {
+module.exports = function (router, controller, jwt, publicPrefix) {
 ${mainContent}
 }
 `
@@ -74,5 +74,3 @@ function line2upper(str) {
     return letter.toUpperCase();
   })
 }
-
-
