@@ -91,9 +91,9 @@
           "required": true
         }
       ],
-      "isSynced": false,
+      "isSynced": true,
       "isShowInMenu": false,
-      "updateAt": 1548062310092
+      "updateAt": 1548079131427
     },
     {
       "id": "ab17606e-5792-003c-f8e9-13ccfacfdbe8",
@@ -107,8 +107,9 @@
         "updatePageId": "ab9fa08a-b5b0-d270-64be-a9688ca00328"
       },
       "cols": [],
-      "isSynced": false,
-      "isShowInMenu": false
+      "isSynced": true,
+      "isShowInMenu": false,
+      "updateAt": 1548079124359
     }
   ],
   "listPage": [

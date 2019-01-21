@@ -7,30 +7,51 @@ module.exports = function(entity, entityTypeName, commonCols) {
 }
 
 function generatorModel(entity, entityTypeName, commonCols = []) {
+  let dist = `${global.serverCodeRootPath}/app/service/${entityTypeName ? `${entityTypeName}/` : ''}model/${entity.basic.name}.js` // 从项目根路径开始算的
+
   var basic = entity.basic
   var cols = entity.cols || []
   cols = [...commonCols, ...cols]
-  let dist = `${global.serverCodeRootPath}/app/service/${entityTypeName ? `${entityTypeName}/` : ''}model/${entity.basic.name}.js` // 从项目根路径开始算的
-  var validFields = 
-`${JSON.stringify(cols.map(col => {
-    return {
-      key: `'${col.key}'`,
-      name: `'${col.label}'`,
-      rule: {
-        type: 'string', // todo
-      },
-      validType: 'all'
-    }
-  }), null, '  ')}`
+
+  var model = {
+    viewFields: cols.map(col => col.key),
+    validFields: cols.map(col => {
+      var rule = { // https://github.com/node-modules/parameter
+        required: col.required,
+        type: `${getRuleType(col.dataType)}`
+      }
+      if(col.dataType === 'string') {
+        rule.max = col.maxLength || 10
+      }
+      return {
+        key: `${col.key}`,
+        name: `${col.label}`,
+        rule,
+        validType: 'all'
+      }
+    })
+  }
 
   const template = 
-`module.exports = {
-  viewFields: ${JSON.stringify(cols.map(col => col.key))},
-  validFields: ${validFields}
-}`
+`module.exports = ${JSON.stringify(model, null, '  ')}`
   fs.outputFileSync(dist, template)
 }
 
+function getRuleType(type) {
+  var res = {
+    'string': 'string',
+    'text': 'string',
+    'int': 'int',
+    'bool': 'int',
+    'double': 'number',
+    'date': 'number',
+    'datetime': 'number',
+  }[type]
+  if(!res) {
+    throw `Unknow Type: ${type}`
+  }
+  return res
+}
 
 function generatorService(entity, entityTypeName) {
   const {modelName, modelPrefix, modelSuffix} = info

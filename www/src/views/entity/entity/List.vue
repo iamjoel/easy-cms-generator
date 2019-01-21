@@ -33,7 +33,7 @@
       <el-table-column
         prop="key"
         label="操作"
-        width="300"
+        width="400"
         >
         <template slot-scope="scope">
           <el-button type="success" size="small" @click="$router.push('/entity/entity/update/' + scope.row.id)">编辑</el-button>
@@ -49,7 +49,7 @@
             @click="$router.push('/page/updatePage/update/' + scope.row.basic.updatePageId)">编辑页
           </el-button>
 
-          <el-button type="warning" size="small" @click="expendCofigToFile(scope.row.id)">展开代码到文件</el-button>
+          <el-button type="warning" size="small" @click="expendCofigToFile(scope.row.id)" v-show="!scope.row.isSynced">展开代码到文件</el-button>
 
           <el-button type="danger" size="small" @click="remove(scope.row.id, scope.$index, scope.row.basic.name)">删除</el-button>
         </template>

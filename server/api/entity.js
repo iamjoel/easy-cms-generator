@@ -105,6 +105,16 @@ module.exports = {
                             .value()
                             .commonCols
     curdGenerator(entity, entityType ? entityType.key : false, commonCols).then(() => {
+      global.db
+            .get(tableName)
+            .find({
+              id: req.params.id
+            })
+            .assign({
+              isSynced: true,
+              updateAt: Date.now()
+            })
+            .write() 
       res.send(apiFormat.success({}))
     }, (e) => {
       res.send(apiFormat.error())
