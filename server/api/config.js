@@ -2,7 +2,7 @@ var config = require('../config')
 const apiFormat = require('../utils/apiFormat')
 var fs = require('fs-extra')
 const deepClone = require('clone')
-const generatorDBSchema = require('./utils/generatorDBSchema')
+const generatorDBSchema = require('./utils/generator-code/server/db-schema.js')
 
 module.exports = {
   syncToProject(req, res) {

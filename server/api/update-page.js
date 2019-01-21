@@ -1,5 +1,5 @@
 const apiFormat = require('../utils/apiFormat')
-const generatorCode = require('./utils/generatorUpdateCode')
+const generatorCode = require('./utils/generator-code/front-end/update-page')
 const tableName = 'updatePage'
 const commonCRUD = require('./utils/commonCRUD.js')(tableName)
 

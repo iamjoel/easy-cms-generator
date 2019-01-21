@@ -1,4 +1,6 @@
 module.exports = function(config) {
+  config.cols = config.cols || []
+  config.fn = config.fn || []
   var js = generatorJS(config)
   var vue = generatorVue(config)
   var model = generatorModel(config)

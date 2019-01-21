@@ -1,4 +1,7 @@
 module.exports = function(config) {
+  config.cols = config.cols || []
+  config.searchCondition = config.searchCondition || []
+  
   var js = generatorJS(config)
   var vue = generatorVue(config)
   return {
@@ -42,7 +45,7 @@ function generatorVue(config) {
         var vue = `
 <template> 
   <div class="main">
-    <j-search-condition @search="search">
+    <j-search-condition @search="search" v-if="searchConditions.length > 0">
 ${config.searchCondition.map(item => {
   var inner
   switch(item.dataType) {
@@ -127,6 +130,9 @@ ${inner}
 }
 
 function generateSearchCondition(searchCondition) {
+  if(!searchCondition || searchCondition.length === 0) {
+    return '[]'
+  }
   var res = 
 `{
 ${searchCondition.map(item => {

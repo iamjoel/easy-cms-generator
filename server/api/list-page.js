@@ -1,5 +1,5 @@
 const apiFormat = require('../utils/apiFormat')
-const generatorCode = require('./utils/generatorListCode')
+const generatorCode = require('./utils/generator-code/front-end/list-page')
 const tableName = 'listPage'
 const commonCRUD = require('./utils/commonCRUD.js')(tableName)
 
@@ -113,9 +113,11 @@ module.exports = {
           .write()
         res.send(apiFormat.success())
       }, error => {
+        console.log(error)
         res.send(apiFormat.error(error))
       })
     } catch(error) {
+      console.log(error)
       res.send(apiFormat.error(error));
     }
   },

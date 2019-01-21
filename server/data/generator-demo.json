@@ -95,14 +95,15 @@
       "isShowInMenu": false
     },
     {
-      "id": "4faf54b2-217f-ac7d-26fa-16ba2ac9f40e",
-      "updateAt": 1548041688055,
+      "id": "ab17606e-5792-003c-f8e9-13ccfacfdbe8",
       "basic": {
         "isPublic": true,
         "hasListPage": true,
-        "hasUpdatePage": false,
+        "hasUpdatePage": true,
         "isShowInMenu": true,
-        "name": "b"
+        "name": "cccc",
+        "listPageId": "c929322c-9e32-936e-a0d3-cb4bf6a30e5f",
+        "updatePageId": "ab9fa08a-b5b0-d270-64be-a9688ca00328"
       },
       "cols": [],
       "isSynced": false,
@@ -148,14 +149,14 @@
       "isSynced": true
     },
     {
-      "id": "9a541fee-5d1d-1378-a570-095c617133bf",
-      "updateAt": 1548041688053,
+      "id": "c929322c-9e32-936e-a0d3-cb4bf6a30e5f",
+      "updateAt": 1548055415772,
       "basic": {
         "entity": {
-          "id": "4faf54b2-217f-ac7d-26fa-16ba2ac9f40e",
-          "name": "b"
+          "id": "ab17606e-5792-003c-f8e9-13ccfacfdbe8",
+          "name": "cccc"
         },
-        "codePath": "b"
+        "codePath": "cccc"
       },
       "operate": {
         "add": {
@@ -170,7 +171,11 @@
         "delete": {
           "isShow": true
         }
-      }
+      },
+      "cols": [],
+      "searchCondition": [],
+      "isSynced": true,
+      "fn": []
     }
   ],
   "updatePage": [
@@ -205,6 +210,20 @@
       ],
       "fn": [],
       "isSynced": true
+    },
+    {
+      "id": "ab9fa08a-b5b0-d270-64be-a9688ca00328",
+      "updateAt": 1548054505632,
+      "basic": {
+        "entity": {
+          "id": "ab17606e-5792-003c-f8e9-13ccfacfdbe8",
+          "name": "cccc"
+        },
+        "codePath": "cccc"
+      },
+      "cols": [],
+      "fn": [],
+      "isSynced": true
     }
   ],
   "router": [
@@ -225,13 +244,20 @@
       "filePath": "people/stu/Update.vue"
     },
     {
-      "id": "8583428f-2907-70ba-7cbe-67c6593b7a76",
-      "entityId": "4faf54b2-217f-ac7d-26fa-16ba2ac9f40e",
+      "id": "8ed0ca8b-514d-591b-5a12-0238ec60097f",
+      "entityId": "ab17606e-5792-003c-f8e9-13ccfacfdbe8",
       "name": "undefined列表页",
       "pageType": "list",
-      "routePath": "/b/list",
-      "filePath": "/b/List.vue",
-      "updateAt": 1548041688053
+      "routePath": "/cccc/list",
+      "filePath": "cccc/List.vue"
+    },
+    {
+      "id": "055ed5cd-35a8-d1a3-d2c6-e4b311ce1584",
+      "entityId": "ab17606e-5792-003c-f8e9-13ccfacfdbe8",
+      "name": "undefined更新页",
+      "pageType": "update",
+      "routePath": "/cccc/update/:id",
+      "filePath": "cccc/Update.vue"
     }
   ],
   "menu": [
@@ -251,12 +277,11 @@
       ]
     },
     {
-      "id": "157f6743-4d56-35f9-41aa-693a2a2c46a1",
+      "id": "997baf5d-e37f-70b5-61e4-a894b22bfdd6",
       "isPage": 1,
       "entityTypeId": null,
-      "routerId": "8583428f-2907-70ba-7cbe-67c6593b7a76",
-      "name": "b",
-      "updateAt": 1548041688055
+      "routerId": "8ed0ca8b-514d-591b-5a12-0238ec60097f",
+      "name": "cccc"
     }
   ],
   "syncStatus": {
