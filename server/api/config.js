@@ -3,9 +3,22 @@ const apiFormat = require('../utils/apiFormat')
 var fs = require('fs-extra')
 const deepClone = require('clone')
 const generatorDBSchema = require('./utils/generator-code/server/db-schema.js')
+const syncToServerCode = require('./utils/generator-code/server/server')
 
 module.exports = {
   syncToProject(req, res) {
+    var entityData = global.db.get('entity')
+                            .value()
+    var entityTypeList = global.db.get('entityType')
+                            .value()
+    entityData = entityData.map(entity => {
+      var entityType = entityTypeList.filter(item => item.id === entity.basic.entityTypeId)[0]
+      return {
+        name: entity.basic.name,
+        type: entityType ? entityType.key : false,
+        isPublic: entity.basic.isPublic
+      }
+    })
     // 同步代码到项目
     Promise.all([
       sync('dict'),
@@ -13,6 +26,7 @@ module.exports = {
       sync('entity'),
       sync('router'),
       sync('menu'),
+      syncToServerCode(entityData)
     ]).then(() => {
       console.log('all succss')
       res.send(apiFormat.success({}))

@@ -65,7 +65,7 @@
     {
       "id": "94d0e4c7-ff14-2011-e70a-eabfa5f7659e",
       "basic": {
-        "isPublic": true,
+        "isPublic": false,
         "hasListPage": true,
         "hasUpdatePage": true,
         "isShowInMenu": true,
@@ -92,7 +92,8 @@
         }
       ],
       "isSynced": false,
-      "isShowInMenu": false
+      "isShowInMenu": false,
+      "updateAt": 1548062310092
     },
     {
       "id": "ab17606e-5792-003c-f8e9-13ccfacfdbe8",

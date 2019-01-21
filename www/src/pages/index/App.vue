@@ -53,11 +53,7 @@ export default {
     }
   },
   mounted() {
-    // this.$store.commit(types.ROLE, role)
-    // this.$store.commit(types.ROLE, 'admin')
-    // this.$store.dispatch('fetchMenuAndLimit')
-    // this.$store.dispatch('fetchBasicData')
-    this.fetchDBSchema()
+    this.syncToProject()
   },
   methods: {
     syncToProject() {
