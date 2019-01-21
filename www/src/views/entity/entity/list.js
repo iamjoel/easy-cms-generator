@@ -1,5 +1,5 @@
 import { fetchList, addModel,editModel,deleteModel } from '@/service/api'
-
+import {SERVER_PREFIX} from '@/setting'
 export default {
   data() {
     return {
@@ -35,16 +35,16 @@ export default {
         })
       })
     },
-    sync() {
-      syncModel(this.KEY).then(({data})=> {
+    expendCofigToFile(id) {
+      this.$http.post(`${SERVER_PREFIX}/entity/expendCofigToFile/${id}`).then(({data})=> {
+        this.reloadList()
         this.$message({
           showClose: true,
-          message: '同步成功',
+          message: '操作成功',
           type: 'success'
         })
       })
     },
-    
   },
   mounted() {
     Promise.all([

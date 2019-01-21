@@ -2,6 +2,7 @@ const guidFn = require('../utils/guid')
 const apiFormat = require('../utils/apiFormat')
 const tableName = 'entity'
 const commonCRUD = require('./utils/commonCRUD.js')(tableName)
+const curdGenerator = require('./utils/generator-code/server/crud')
 
 module.exports = {
   list(req, res, pool) {
@@ -87,6 +88,27 @@ module.exports = {
       } catch(error) {
         res.send(apiFormat.error(error))
       }
+  },
+  expendCofigToFile(req, res) {
+    var entity = global.db
+                  .get(tableName)
+                  .find({
+                    id: req.params.id
+                  })
+                  .value()
+    var entityType = global.db
+                  .get('entityType')
+                  .filter(type => type.id === entity.basic.entityTypeId)
+                  .value()[0]
+
+    var commonCols = global.db.get('entityConfig')
+                            .value()
+                            .commonCols
+    curdGenerator(entity, entityType ? entityType.key : false, commonCols).then(() => {
+      res.send(apiFormat.success({}))
+    }, (e) => {
+      res.send(apiFormat.error())
+    })
   }
 }
 

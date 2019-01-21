@@ -53,7 +53,6 @@ export default {
     }
   },
   mounted() {
-    this.syncToProject()
   },
   methods: {
     syncToProject() {
