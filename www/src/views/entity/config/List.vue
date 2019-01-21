@@ -11,8 +11,13 @@
         width="80">
       </el-table-column>
       <el-table-column
-        prop="name"
+        prop="key"
         label="名称"
+        >
+      </el-table-column>
+      <el-table-column
+        prop="label"
+        label="说明"
         >
       </el-table-column>
       <el-table-column
@@ -20,11 +25,7 @@
         label="数据类型"
         >
       </el-table-column>
-      <el-table-column
-        prop="description"
-        label="描述"
-        >
-      </el-table-column>
+      
     </el-table>
 </div>
 </template>

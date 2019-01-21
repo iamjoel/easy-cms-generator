@@ -5,14 +5,14 @@
         <el-form :inline="true" :model="model.basic"  label-position="right" >
         <el-row type="flex" justify="start" class="multi-line">
           <j-edit-item
-            label="英文名" prop="name">
+            label="名称" prop="name">
             <el-input v-model="model.basic.name" placeholder="请输入名称"></el-input>
             <p class="tip">会做为key</p>
           </j-edit-item>
 
           <j-edit-item
-            label="中文名" prop="des">
-            <el-input v-model="model.basic.des" placeholder="请输入描述"></el-input>
+            label="说明" prop="des">
+            <el-input v-model="model.basic.des" placeholder="请输入说明"></el-input>
           </j-edit-item>
 
           <j-edit-item
@@ -85,7 +85,7 @@
           </el-table-column>
           <el-table-column
             prop="key"
-            label="字段名称(英文)"
+            label="名称"
             >
             <template  slot-scope="scope">
               <el-input v-model="scope.row.key" placeholder=""></el-input>
@@ -93,7 +93,7 @@
           </el-table-column>
           <el-table-column
             prop="label"
-            label="显示名称(中文)"
+            label="说明(中文)"
             >
             <template  slot-scope="scope">
               <el-input v-model="scope.row.label" placeholder=""></el-input>

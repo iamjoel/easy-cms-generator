@@ -36,19 +36,20 @@
   "entityConfig": {
     "commonCols": [
       {
-        "name": "id",
-        "dataType": "varchar(36)",
-        "description": "36位的 Guid"
+        "key": "id",
+        "dataType": "string",
+        "maxLength": "32",
+        "label": "36位的 Guid"
       },
       {
-        "name": "createTime",
+        "key": "createTime",
         "dataType": "datetime",
-        "description": "创建时间"
+        "label": "创建时间"
       },
       {
-        "name": "updateTime",
+        "key": "updateTime",
         "dataType": "datetime",
-        "description": "更新时间"
+        "label": "更新时间"
       }
     ]
   },
@@ -92,6 +93,20 @@
       ],
       "isSynced": false,
       "isShowInMenu": false
+    },
+    {
+      "id": "4faf54b2-217f-ac7d-26fa-16ba2ac9f40e",
+      "updateAt": 1548041688055,
+      "basic": {
+        "isPublic": true,
+        "hasListPage": true,
+        "hasUpdatePage": false,
+        "isShowInMenu": true,
+        "name": "b"
+      },
+      "cols": [],
+      "isSynced": false,
+      "isShowInMenu": false
     }
   ],
   "listPage": [
@@ -131,6 +146,31 @@
       "searchCondition": [],
       "fn": [],
       "isSynced": true
+    },
+    {
+      "id": "9a541fee-5d1d-1378-a570-095c617133bf",
+      "updateAt": 1548041688053,
+      "basic": {
+        "entity": {
+          "id": "4faf54b2-217f-ac7d-26fa-16ba2ac9f40e",
+          "name": "b"
+        },
+        "codePath": "b"
+      },
+      "operate": {
+        "add": {
+          "isShow": true
+        },
+        "edit": {
+          "isShow": true
+        },
+        "detail": {
+          "isShow": true
+        },
+        "delete": {
+          "isShow": true
+        }
+      }
     }
   ],
   "updatePage": [
@@ -183,6 +223,15 @@
       "pageType": "update",
       "routePath": "/people/stu/update/:id",
       "filePath": "people/stu/Update.vue"
+    },
+    {
+      "id": "8583428f-2907-70ba-7cbe-67c6593b7a76",
+      "entityId": "4faf54b2-217f-ac7d-26fa-16ba2ac9f40e",
+      "name": "undefined列表页",
+      "pageType": "list",
+      "routePath": "/b/list",
+      "filePath": "/b/List.vue",
+      "updateAt": 1548041688053
     }
   ],
   "menu": [
@@ -200,6 +249,14 @@
           "roleIds": []
         }
       ]
+    },
+    {
+      "id": "157f6743-4d56-35f9-41aa-693a2a2c46a1",
+      "isPage": 1,
+      "entityTypeId": null,
+      "routerId": "8583428f-2907-70ba-7cbe-67c6593b7a76",
+      "name": "b",
+      "updateAt": 1548041688055
     }
   ],
   "syncStatus": {

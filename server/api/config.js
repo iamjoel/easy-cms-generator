@@ -23,7 +23,10 @@ module.exports = {
   generatorDBSchema(req, res) {
     var entityData = global.db.get('entity')
                             .value()
-    var schema = generatorDBSchema(global.projectName, entityData)
+    var commonCols = global.db.get('entityConfig')
+                            .value()
+                            .commonCols
+    var schema = generatorDBSchema(global.projectName, entityData, commonCols)
     res.send(apiFormat.success(schema))
   }
   

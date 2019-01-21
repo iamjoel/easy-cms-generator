@@ -1,21 +1,27 @@
-module.exports = function (tableName, entityList, commonCol) {
+module.exports = function (tableName, entityList, commonCols) {
   var res = 
 `
+DROP SCHEMA IF EXISTS \`${tableName}\`;
 CREATE SCHEMA \`${tableName}\`;
 use \`${tableName}\`;
 
 SET FOREIGN_KEY_CHECKS=0;
 ${entityList.map(entity => {
   let res = `
-${generatorTable(entity)}`
+${generatorTable(entity, commonCols)}`
   return res
 }).join('\n')}`
 
   return res
 }
 
-function generatorTable(entity) {
+function generatorTable(entity, commonCols = []) {
   var name = entity.basic.name
+  var cols = [
+              ...commonCols.filter(item => item.key !== 'id'),
+              ...entity.cols
+            ]
+
   var res = 
 `
 -- ----------------------------
@@ -23,16 +29,15 @@ function generatorTable(entity) {
 -- ----------------------------
 DROP TABLE IF EXISTS \`${name}\`;
 CREATE TABLE \`${name}\` (
-  \`id\` varchar(36) NOT NULL,${entity.cols.map(col => {
+  \`id\` varchar(36) NOT NULL,${cols.map(col => {
   let res = 
-`    ${generatorCol(col)}`
+  `${generatorCol(col)}`
   return res
 }).join(',')},
   PRIMARY KEY (\`id\`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 `
-  // console.log(res)
   return res
 }
 
@@ -53,15 +58,15 @@ function generatorCol(col) {
     case 'bool':
       content += `int(1)`
     case 'date': 
+    case 'datetime': 
       content += `datetime`
       break;
     default: 
-      console.log(`未知类型${col.dataType}`)
+      console.log(`未知类型${col.dataType}。 col: ${col}`)
       throw `未知类型${col.dataType}`
   }
   content += ` ${col.required ? 'NOT NULL' : 'DEFAULT NULL'} COMMENT '${col.label}'`
   var res = 
-`
-${content}`
+`\n  ${content}`
   return res
 }

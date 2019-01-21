@@ -21,12 +21,12 @@
       </el-table-column>
       <el-table-column
         prop="basic.name"
-        label="英文名"
+        label="名称"
         >
       </el-table-column>
       <el-table-column
         prop="basic.des"
-        label="中文名"
+        label="说明"
         >
       </el-table-column>
       
