@@ -67,11 +67,6 @@ app.post('/project/choose', (req, res)=> {
   projectApi.choose(req, res)
 })
 
-var configApi = require('./api/config')
-app.post('/config/sync-to-project', (req, res)=> {
-  configApi.syncToProject(req, res)
-})
-
 var entityApi = require('./api/entity')
 app.get(`/entity/list`, (req,res) => {
   entityApi.list(req, res)
@@ -155,14 +150,14 @@ app.delete(`/updatePage/:id`, (req,res) => {
   updatePageApi.remove(req, res)
 })
 
-app.get('/sync-status', (req, res)=> {
-  var results = global.db
-                      .get('syncStatus')
-                      .value()
-  res.send(apiFormat.success(results))
+var configApi = require('./api/config')
+app.post('/config/sync-to-project', (req, res)=> {
+  configApi.syncToProject(req, res)
 })
 
-
+app.get('/config/db-schema', (req, res)=> {
+  configApi.generatorDBSchema(req, res)
+})
 
 function generateAPI(names) {
   names.forEach(name => {

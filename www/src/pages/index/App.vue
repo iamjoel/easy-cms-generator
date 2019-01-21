@@ -8,11 +8,21 @@
       <el-col :span="20">
         <!-- {{$store.getters.isProjectInited}} -->
         <div class="ly ly-r">
+          <el-button type="info" @click="fetchDBSchema">数据库Schema</el-button>
           <el-button type="success" @click="syncToProject">同步代码到项目</el-button>
         </div>
-        <router-view id="main-content"></router-view>
+        <router-view id="main-content" class="mt-10"></router-view>
       </el-col>
     </el-row>
+
+    <el-dialog 
+      title="数据库Schema"
+      :visible.sync="isShowDBSchemaDialog"
+    >
+      <pre>
+{{dbSchema}}
+      </pre>
+    </el-dialog>
   </div>
 </template>
 
@@ -37,7 +47,9 @@ export default {
         { "id": "entity", "name": "实体", "path": "/entity/list/entity" },
         { "id": "page", "name": "生成页面", "path": "/page/list/list" },
         { "id": "menu", "name": "菜单", "path": "/menu/list" },
-      ]
+      ],
+      dbSchema: null,
+      isShowDBSchemaDialog: false
     }
   },
   mounted() {
@@ -45,6 +57,7 @@ export default {
     // this.$store.commit(types.ROLE, 'admin')
     // this.$store.dispatch('fetchMenuAndLimit')
     // this.$store.dispatch('fetchBasicData')
+    this.fetchDBSchema()
   },
   methods: {
     syncToProject() {
@@ -54,8 +67,15 @@ export default {
           message: '同步成功!'
         })
       })
+    },
+    fetchDBSchema() {
+      this.$http.get(`${SERVER_PREFIX}/config/db-schema`).then(({data}) => {
+        this.dbSchema = data.data
+        this.isShowDBSchemaDialog = true
+      })
     }
-  }
+  },
+
 }
 </script>
 <style src="@/assets/reset.css"></style>

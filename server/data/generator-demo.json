@@ -63,7 +63,6 @@
   "entity": [
     {
       "id": "94d0e4c7-ff14-2011-e70a-eabfa5f7659e",
-      "updateAt": 1547988338815,
       "basic": {
         "isPublic": true,
         "hasListPage": true,
@@ -82,6 +81,13 @@
           "dataType": "string",
           "maxLength": "10",
           "required": false
+        },
+        {
+          "label": "年龄",
+          "key": "age",
+          "dataType": "int",
+          "maxLength": null,
+          "required": true
         }
       ],
       "isSynced": false,
@@ -130,7 +136,7 @@
   "updatePage": [
     {
       "id": "f7758bbd-2839-e47e-2252-3c50d43a0e18",
-      "updateAt": 1547988364311,
+      "updateAt": 1547988845093,
       "basic": {
         "entity": {
           "id": "94d0e4c7-ff14-2011-e70a-eabfa5f7659e",
@@ -147,6 +153,14 @@
           "formatFn": null,
           "saveFormatFn": null,
           "required": false
+        },
+        {
+          "label": "年龄",
+          "key": "age",
+          "dataType": "int",
+          "formatFn": null,
+          "saveFormatFn": null,
+          "required": true
         }
       ],
       "fn": [],
@@ -160,8 +174,7 @@
       "name": "学生列表页",
       "pageType": "list",
       "routePath": "/people/stu/list",
-      "filePath": "people/stu/List.vue",
-      "updateAt": 1547988338811
+      "filePath": "people/stu/List.vue"
     },
     {
       "id": "33d0e5b1-3093-a12c-7a89-5e48169c7f4b",
@@ -169,8 +182,7 @@
       "name": "学生更新页",
       "pageType": "update",
       "routePath": "/people/stu/update/:id",
-      "filePath": "people/stu/Update.vue",
-      "updateAt": 1547988338811
+      "filePath": "people/stu/Update.vue"
     }
   ],
   "menu": [
@@ -180,7 +192,6 @@
       "entityTypeId": "2f17368e-0356-ede1-ec50-ccfb9adf339e",
       "routerId": null,
       "name": "人员",
-      "updateAt": 1547988338813,
       "children": [
         {
           "routerId": "f5f6b130-e131-1ecb-7625-96ca758a116a",

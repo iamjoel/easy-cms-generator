@@ -74,7 +74,7 @@
                 <ol class="list">
                   打开终端，输入下面命令：
                   <li>cd {{projectRootPath}}/server</li>
-                  <li>egg-init --template=Users/jinweiqiang/front-end/template/server/node/egg-boilerplate</li>
+                  <li>egg-init --template=/Users/jinweiqiang/front-end/template/server/node/egg-boilerplate</li>
                   <li>npm i 或 yarn install</li>
                 </ol>
               </el-dialog>

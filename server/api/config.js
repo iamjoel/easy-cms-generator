@@ -2,6 +2,7 @@ var config = require('../config')
 const apiFormat = require('../utils/apiFormat')
 var fs = require('fs-extra')
 const deepClone = require('clone')
+const generatorDBSchema = require('./utils/generatorDBSchema')
 
 module.exports = {
   syncToProject(req, res) {
@@ -18,6 +19,12 @@ module.exports = {
     }, (e) => {
       res.send(apiFormat.error(e))
     })
+  },
+  generatorDBSchema(req, res) {
+    var entityData = global.db.get('entity')
+                            .value()
+    var schema = generatorDBSchema(global.projectName, entityData)
+    res.send(apiFormat.success(schema))
   }
   
 }
