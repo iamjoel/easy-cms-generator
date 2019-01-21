@@ -1,9 +1,9 @@
 var fs = require('fs-extra')
 
 module.exports = function(entity, entityTypeName, commonCols) {
-  return Promise.all([
-    generatorModel(entity, entityTypeName)
-  ])
+  generatorModel(entity, entityTypeName)
+  generatorService(entity, entityTypeName)
+  generatorController(entity, entityTypeName)
 }
 
 function generatorModel(entity, entityTypeName, commonCols = []) {
@@ -35,6 +35,7 @@ function generatorModel(entity, entityTypeName, commonCols = []) {
   const template = 
 `module.exports = ${JSON.stringify(model, null, '  ')}`
   fs.outputFileSync(dist, template)
+
 }
 
 function getRuleType(type) {
@@ -54,28 +55,17 @@ function getRuleType(type) {
 }
 
 function generatorService(entity, entityTypeName) {
-  const {modelName, modelPrefix, modelSuffix} = info
-
   let dist = `${global.serverCodeRootPath}/app/service/${entityTypeName ? `${entityTypeName}/` : ''}${entity.basic.name}.js` // 从项目根路径开始算的
-  
   var template = require('./template/service.js')
-
   fs.outputFileSync(dist, template)
-  console.log(`输出 Service 至: ${dist}  成功!`)
-
 }
 
-function generatorController(info) {
-  const {modelName, modelPrefix, modelSuffix} = info
-  var modelPrefixPath = modelPrefix.join('/')
-  var servicePath = line2upper(`${modelPrefix.join('.')}.${modelSuffix.join('.')}`)
-
-  let dist = `app/controller/${modelPrefix.join('/')}/${modelSuffix.join('/')}.js`
+function generatorController(entity, entityTypeName) {
+  var servicePath = line2upper(`${entityTypeName ? `${entityTypeName}.` : ''}${entity.basic.name}`)
+  let dist = `${global.serverCodeRootPath}/app/controller/${entityTypeName ? `${entityTypeName}/` : ''}${entity.basic.name}.js`
   var template = require('./template/controller.js')
   template = template.replace(/{servicePath}/g, servicePath)
-
   fs.outputFileSync(dist, template)
-  console.log(`输出 Controller 至: ${dist}  成功!`)
 }
 
 function writeFile(filePath, content) {

@@ -104,7 +104,8 @@ module.exports = {
     var commonCols = global.db.get('entityConfig')
                             .value()
                             .commonCols
-    curdGenerator(entity, entityType ? entityType.key : false, commonCols).then(() => {
+    try {
+      curdGenerator(entity, entityType ? entityType.key : false, commonCols) // 同步的方法。写文件也用的同步的
       global.db
             .get(tableName)
             .find({
@@ -116,9 +117,9 @@ module.exports = {
             })
             .write() 
       res.send(apiFormat.success({}))
-    }, (e) => {
+    } catch(e) {
       res.send(apiFormat.error())
-    })
+    }
   }
 }
 
