@@ -14,6 +14,11 @@
       "name":"updateTime",
       "dataType": "datetime",
       "description": "更新时间"
+    },
+    {
+      "key": "delFlg",
+      "dataType": "bool",
+      "label": "删除标志位"
     }]
   },
   "entityType": [],

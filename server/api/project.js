@@ -35,7 +35,7 @@ module.exports = {
       var filePath = `data/${req.body.name}.json`
       var isDataFileExist = fs.pathExistsSync(filePath)
       if(!isDataFileExist) {
-        fs.copySync('data/db.schema.json', filePath) // 复制模板
+        fs.copySync('data/_template.schema.json', filePath) // 复制模板
       }
       const adapter = new FileSync(`data/${req.body.name}.json`)
       const db = low(adapter)
