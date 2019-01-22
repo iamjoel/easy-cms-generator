@@ -7,9 +7,9 @@
       </el-col>
       <el-col :span="20">
         <!-- {{$store.getters.isProjectInited}} -->
-        <div class="ly ly-r">
-          <el-button type="info" @click="fetchDBSchema">数据库Schema</el-button>
-          <el-button type="success" @click="syncToProject">同步代码到项目</el-button>
+        <div class="ly ly-r" style="margin-right: 15px;">
+          <el-button type="info" @click="fetchDBSchema">显示数据库创建脚本</el-button>
+          <!-- <el-button type="success" @click="syncToProject">同步代码到项目</el-button> -->
         </div>
         <router-view id="main-content" class="mt-10"></router-view>
       </el-col>

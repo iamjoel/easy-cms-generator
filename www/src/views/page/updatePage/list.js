@@ -29,8 +29,8 @@ export default {
         })
       })
     },
-    expendCofigToFile(id) {
-      this.$http.post(`${SERVER_PREFIX}/update-page/expendCofigToFile/${id}`).then(({data})=> {
+    eject(id) {
+      this.$http.post(`${SERVER_PREFIX}/update-page/eject/${id}`).then(({data})=> {
         this.fetchList()
         this.$message({
           showClose: true,

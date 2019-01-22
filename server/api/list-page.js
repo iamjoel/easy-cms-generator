@@ -2,6 +2,7 @@ const apiFormat = require('../utils/apiFormat')
 const generatorCode = require('./utils/generator-code/front-end/list-page')
 const tableName = 'listPage'
 const commonCRUD = require('./utils/commonCRUD.js')(tableName)
+const guidFn = require('../utils/guid')
 
 var config = require('../config')
 const fs = require('fs-extra')
@@ -14,10 +15,26 @@ module.exports = {
     commonCRUD.detail(req, res, pool)
   },
   add(req, res, pool) {
-    commonCRUD.add(req, res, pool)
+    try {
+      addService(req.body)
+      res.send(apiFormat.success())
+    } catch(error) {
+      res.send(apiFormat.error(error))
+    }
+  },
+  addService(data) {
+    addService(data)
   },
   edit(req, res, pool) {
-    commonCRUD.edit(req, res, pool)
+    try {
+      editService(req.body, req.params.id)
+      res.send(apiFormat.success())
+    } catch(error) {
+      res.send(apiFormat.error(error))
+    }
+  },
+  editService(data, id) {
+    editService(data, id)
   },
   remove(req, res, pool) {
     var page = global.db
@@ -82,44 +99,8 @@ module.exports = {
     commonCRUD.remove(req, res, pool)
   },
   // 根据配置，展开代码，保存到文件
-  expendCofigToFile(req, res, pool) {
-    try {
-      var config = global.db
-                  .get(tableName)
-                  .find({
-                    id: req.params.id
-                  })
-                  .value()
-      if(!config) {
-        res.send(apiFormat.error({errMsg: '找不到配置'}))
-        return
-      }
-      var {vue, js} = generatorCode(config)
-      var codePath = `${global.feCodeRootPath}/src/views/${config.basic.codePath ? config.basic.codePath : config.basic.entity}`
-      Promise.all([
-        writeFile(`${codePath}/List.vue`, vue),
-        writeFile(`${codePath}/list.js`, js),
-      ]).then(()=> {
-        // 将同步状态改为已同步
-        global.db
-          .get(tableName)
-          .find({
-            id: req.params.id,
-          })
-          .assign({
-            isSynced: true,
-            updateAt: Date.now()
-          })
-          .write()
-        res.send(apiFormat.success())
-      }, error => {
-        console.log(error)
-        res.send(apiFormat.error(error))
-      })
-    } catch(error) {
-      console.log(error)
-      res.send(apiFormat.error(error));
-    }
+  expendCofigToFile(id) {
+    expendCofigToFile(id)
   },
   updateFreeze(req, res, pool) {
     try {
@@ -139,16 +120,52 @@ module.exports = {
   }
 }
 
+function addService(data) {
+  var id = guidFn()
+  global.db
+          .get(tableName)
+          .push(Object.assign({
+            id,
+            updateAt: Date.now()
+          }, data))
+          .write()
+  expendCofigToFile(id)
+}
+
+function editService(data, id) {
+  global.db
+        .get(tableName)
+        .find({
+          id,
+        })
+        .assign(data)
+        .assign({
+          updateAt: Date.now()
+        })
+        .write()
+  expendCofigToFile(id)
+}
+
+function expendCofigToFile(id) {
+  var config = global.db
+                  .get(tableName)
+                  .find({
+                    id
+                  })
+                  .value()
+  if(!config) {
+    res.send(apiFormat.error({errMsg: '找不到配置'}))
+    return
+  }
+  var {vue, js} = generatorCode(config)
+  var codePath = `${global.feCodeRootPath}/src/views/${config.basic.codePath ? config.basic.codePath : config.basic.entity}`
+
+  writeFile(`${codePath}/List.vue`, vue)
+  writeFile(`${codePath}/list.js`, js)
+}
+
 function writeFile(filePath, content) {
-  return new Promise((resolve, reject) => {
-    fs.outputFile(filePath, content, err => {
-      if(err) {
-        reject(err)
-        return
-      }
-      resolve()
-    })
-  })
+  fs.outputFileSync(filePath, content)
 }
 
 function formatCodePath(codePath) {

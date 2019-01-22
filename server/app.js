@@ -97,14 +97,6 @@ app.get(`/entity-common-cols/list`, (req,res) => {
 })
 
 var listPageApi = require('./api/list-page')
-app.post('/list-page/expendCofigToFile/:id', (req, res)=> {
-  listPageApi.expendCofigToFile(req, res)
-})
-
-app.post('/list-page/updateFreeze/:id', (req, res)=> {
-  listPageApi.updateFreeze(req, res)
-})
-
 app.get(`/listPage/list`, (req,res) => {
   listPageApi.list(req, res)
 })
@@ -126,14 +118,6 @@ app.delete(`/listPage/:id`, (req,res) => {
 })
 
 var updatePageApi = require('./api/update-page')
-app.post('/update-page/expendCofigToFile/:id', (req, res)=> {
-  updatePageApi.expendCofigToFile(req, res)
-})
-
-app.post('/update-page/updateFreeze/:id', (req, res)=> {
-  updatePageApi.updateFreeze(req, res)
-})
-
 app.get(`/updatePage/list`, (req,res) => {
   updatePageApi.list(req, res)
 })

@@ -4,6 +4,8 @@ const tableName = 'entity'
 const commonCRUD = require('./utils/commonCRUD.js')(tableName)
 const curdGenerator = require('./utils/generator-code/server/crud')
 const syncAllConfig = require('./config').syncAllConfig
+const expendListPage = require('./list-page').expendCofigToFile
+const expendUpdatePage = require('./update-page').expendCofigToFile
 
 module.exports = {
   list(req, res, pool) {
@@ -60,12 +62,13 @@ module.exports = {
     try {
       var id = guidFn()
       let basic = req.body.basic
-      createPage(basic, id)
-      if(basic.hasListPage && basic.isShowInMenu) {
+      createPage(basic, id) // 前端页面
+      if(basic.hasListPage && basic.isShowInMenu) { // 菜单
         addMenu(basic, id)
       }
       commonCRUD.add(req, res, pool, id)
-      syncAll(id) // 同步配置
+
+      syncAll(id) // 同步配置 + 后端代码
     } catch(error) {
       console.log(error)
       res.send(apiFormat.error(error))
@@ -160,11 +163,13 @@ function syncAll(id, isEjected) {
 */
 function createPage(data, entityId) {
   if(data.hasListPage) {
-    addPageAndRoute(data, entityId, 'list')
+    let pageId = addPageAndRoute(data, entityId, 'list')
+    expendListPage(pageId)
   }
 
   if(data.hasUpdatePage) {
-    addPageAndRoute(data, entityId, 'update')
+    let pageId = addPageAndRoute(data, entityId, 'update')
+    expendUpdatePage(pageId)
   }
 }
 
@@ -188,12 +193,12 @@ function addPageAndRoute(entityBasic, entityId, pageType) {
                           id: entity.entityTypeId
                         })
                         .value()
-    
+    var pageId = guidFn()
     // 新增页面
     global.db
       .get(`${pageType}Page`)
       .push(Object.assign({
-        id: guidFn(),
+        id: pageId,
         updateAt: Date.now()
       }, {
         "basic": {
@@ -231,6 +236,7 @@ function addPageAndRoute(entityBasic, entityId, pageType) {
         updateAt: Date.now()
       })
       .write()
+    return pageId
   }
 }
 

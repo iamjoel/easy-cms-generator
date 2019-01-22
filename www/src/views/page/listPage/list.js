@@ -27,10 +27,9 @@ export default {
           })
         })
       }).catch(() => {})
-      
     },
-    expendCofigToFile(id) {
-      this.$http.post(`${SERVER_PREFIX}/list-page/expendCofigToFile/${id}`).then(({data})=> {
+    eject(id) {
+      this.$http.post(`${SERVER_PREFIX}/list-page/eject/${id}`).then(({data})=> {
         this.fetchList()
         this.$message({
           showClose: true,
