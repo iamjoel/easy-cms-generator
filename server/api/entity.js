@@ -3,7 +3,7 @@ const apiFormat = require('../utils/apiFormat')
 const tableName = 'entity'
 const commonCRUD = require('./utils/commonCRUD.js')(tableName)
 const curdGenerator = require('./utils/generator-code/server/crud')
-const syncToServerCode = require('./config').doSyncToServerCode
+const syncAllConfig = require('./config').syncAllConfig
 
 module.exports = {
   list(req, res, pool) {
@@ -57,24 +57,34 @@ module.exports = {
     commonCRUD.detail(req, res, pool, req.params.id)
   },
   add(req, res, pool) {
-    var id = guidFn()
-    let basic = req.body.basic
-    createPage(basic, id)
-    if(basic.hasListPage && basic.isShowInMenu) {
-      addMenu(basic, id)
+    try {
+      var id = guidFn()
+      let basic = req.body.basic
+      createPage(basic, id)
+      if(basic.hasListPage && basic.isShowInMenu) {
+        addMenu(basic, id)
+      }
+      commonCRUD.add(req, res, pool, id)
+      syncAll(id) // 同步配置
+    } catch(error) {
+      console.log(error)
+      res.send(apiFormat.error(error))
     }
-
-    commonCRUD.add(req, res, pool, id)
   },
   edit(req, res, pool) {
-    var id = req.params.id
-    let basic = req.body.basic
-    createPage(basic, id)
-    if(basic.hasListPage && basic.isShowInMenu) {
-      addMenu(basic, id)
+    try {
+      var id = req.params.id
+      let basic = req.body.basic
+      createPage(basic, id)
+      if(basic.hasListPage && basic.isShowInMenu) {
+        addMenu(basic, id)
+      }
+      commonCRUD.edit(req, res, pool)
+      syncAll(id)
+    } catch(error) {
+      console.log(error)
+      res.send(apiFormat.error(error))
     }
-
-    commonCRUD.edit(req, res, pool)
   },
   remove(req, res, pool) {
     removePage(req.params.id)
@@ -103,56 +113,44 @@ module.exports = {
                 updateAt: Date.now()
               })
               .write()
-      expendCofigToFile(id, true) // 展开代码
-      // 同步配置
-      syncToServerCode().then(() => {
-        res.send(apiFormat.success({}))
-      }, () => {
-        res.send(apiFormat.error(e))
-      })
-      
+      syncAll(id, true) // 展开代码到服务器端
+      res.send(apiFormat.success({}))
     } catch(e) {
       console.log(e)
       res.send(apiFormat.error(e))
     }
   },
-  expendCofigToFile(req, res) {
-    try {
-      expendCofigToFile(req.params.id)
-      global.db
-          .get(tableName)
-          .find({
-            id: req.params.id
-          })
-          .assign({
-            isSynced: true,
-            updateAt: Date.now()
-          })
-          .write()
-      res.send(apiFormat.success({}))
-    } catch(e) {
-      res.send(apiFormat.error())
-    }
-  }
+  
 }
 
 
-function expendCofigToFile(id, isEjected) {
+function syncAll(id, isEjected) {
   var entity = global.db
                   .get(tableName)
                   .find({
                     id
                   })
                   .value()
-    var entityType = global.db
-                  .get('entityType')
-                  .filter(type => type.id === entity.basic.entityTypeId)
-                  .value()[0]
+  var entityType = global.db
+                .get('entityType')
+                .filter(type => type.id === entity.basic.entityTypeId)
+                .value()[0]
 
-    var commonCols = global.db.get('entityConfig')
-                            .value()
-                            .commonCols
-    curdGenerator(entity, entityType ? entityType.key : false, commonCols, isEjected) // 同步的方法。写文件也用的同步的
+  var commonCols = global.db.get('entityConfig')
+                          .value()
+                          .commonCols
+  // 生成 后端的crud 代码
+  curdGenerator(entity, entityType ? entityType.key : false, commonCols, isEjected) // 同步的方法。写文件也用的同步的
+  global.db
+        .get(tableName)
+        .find({
+          id
+        })
+        .assign({
+          updateAt: Date.now()
+        })
+        .write()
+  syncAllConfig() // 同步配置
 }
 
 /*

@@ -42,7 +42,6 @@ function generatorModel(entity, entityTypeName, commonCols = [], isEjected) {
   const template = 
 `module.exports = ${JSON.stringify(model, null, '  ')}`
   fs.outputFileSync(dist, template)
-
 }
 
 function getRuleType(type) {

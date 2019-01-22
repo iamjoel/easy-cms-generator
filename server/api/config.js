@@ -7,14 +7,15 @@ const syncToServerCode = require('./utils/generator-code/server/server')
 
 module.exports = {
   syncToProject(req, res) {
-    doSyncToServerCode().then(() => {
+    try {
+      doSyncToServerCode()
       res.send(apiFormat.success({}))
-    }, (e) => {
+    } catch(e) {
       res.send(apiFormat.error(e))
-    })
+    }
   },
-  doSyncToServerCode() {
-    return doSyncToServerCode()
+  syncAllConfig() {
+    syncAllConfig()
   },
   generatorDBSchema(req, res) {
     var entityData = global.db.get('entity')
@@ -29,92 +30,60 @@ module.exports = {
 }
 
 
-function doSyncToServerCode() {
+function syncAllConfig() {
   var entityData = global.db.get('entity')
                             .value()
-    var entityTypeList = global.db.get('entityType')
-                            .value()
-    entityData = entityData.map(entity => {
-      var entityType = entityTypeList.filter(item => item.id === entity.basic.entityTypeId)[0]
-      return {
-        name: entity.basic.name,
-        type: entityType ? entityType.key : false,
-        isPublic: entity.basic.isPublic,
-        isEjected: entity.isEjected
-      }
-    })
-    syncToServerCode(entityData) // 写服务器端代码。包括 路由 和 modelMap。
-
-    // 同步代码到项目
-    return Promise.all([
-      sync('dict'),
-      sync('role'),
-      sync('entity'),
-      sync('router'),
-      sync('menu'),
-    ])
+  console.log(entityData)
+  var entityTypeList = global.db.get('entityType')
+                          .value()
+  entityData = entityData.map(entity => {
+    var entityType = entityTypeList.filter(item => item.id === entity.basic.entityTypeId)[0]
+    return {
+      name: entity.basic.name,
+      type: entityType ? entityType.key : false,
+      isPublic: entity.basic.isPublic,
+      isEjected: entity.isEjected
+    }
+  })
+  // 同步 服务器端代码。包括 路由 和 modelMap。
+  syncToServerCode(entityData) 
+  
+  // 同步代码到前端项目。
+  sync('dict')
+  sync('role')
+  sync('entity')
+  sync('router')
+  sync('menu')
 }
 
 function sync(type) {
-  return new Promise((resolve, reject) => {
-    switch(type) {
-      case 'dict':
-      case 'router':
-        fetchList(type).then(data => {
-          return writeConfigFile(type, data)
-        }).then(() => {
-          resolve()
-        }, (e) => {
-          reject(e)
-        })
-        break;
-      case 'role':
-        fetchList('role').then(data => {
-          return writeConfigFile('roles', data)
-        }).then(() => {
-          resolve()
-        }, (e) => {
-          reject(e)
-        })
-        break;
-      case 'entity':
-        fetchList('entity').then(data => {
-          return writeConfigFile('entities', data)
-        }).then(() => {
-          resolve()
-        }, (e) => {
-          reject(e)
-        })
-        break;
-      case 'menu':
-        Promise.all([
-          fetchList('entity'),
-          fetchList('entityType'),
-          fetchList('router'),
-          fetchList('menu'),
-        ]).then(([entity, entityType, router, menu]) => {
-          writeConfigFile('menu', menu, [entity, entityType, router]).then(() => {
-            resolve()
-          }, (e) => {
-            reject(e)
-          })
-        }, (e) => {
-          reject(e)
-        })
-        
-        break;
-      default: 
-        reject('未知类型！')
-    }
-  })
+  switch(type) {
+    case 'dict':
+    case 'router':
+      writeConfigFile(type, fetchList(type))
+      break;
+    case 'role':
+      writeConfigFile('roles', fetchList('role'))
+      break;
+    case 'entity':
+      writeConfigFile('entities', fetchList('entity'))
+      break;
+    case 'menu':
+      var entity = fetchList('entity')
+      var entityType = fetchList('entityType')
+      var router = fetchList('router')
+      var menu = fetchList('menu')
+      writeConfigFile('menu', menu, [entity, entityType, router])
+      break;
+    default: 
+      reject('未知类型！')
+  }
   
 }
 
 
 function fetchList(tableName) {
-  return new Promise((resolve, reject) => {
-    resolve(global.db.get(tableName).value())
-  })
+  return global.db.get(tableName).value()
 }
 
 function writeConfigFile(name, content, [entityList, entityTypeList, router]=[]) {
@@ -182,16 +151,9 @@ function writeConfigFile(name, content, [entityList, entityTypeList, router]=[])
         return res
       })
   }
-  return new Promise((resolve, reject) => {
-    var filePath = `${global.feCodeRootPath}/src/setting/base/${name}.js`
-    fs.outputFile(filePath, 'export default ' + formatContent(content), err => {
-        if(err) {
-          reject(err)
-          return
-        }
-        resolve()
-      })
-  })
+  
+  var filePath = `${global.feCodeRootPath}/src/setting/base/${name}.js`
+  fs.outputFileSync(filePath, 'export default ' + formatContent(content))
 }
 
 /*

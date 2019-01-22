@@ -35,16 +35,6 @@ export default {
         })
       })
     },
-    expendCofigToFile(id) {
-      this.$http.post(`${SERVER_PREFIX}/entity/expendCofigToFile/${id}`).then(({data})=> {
-        this.reloadList()
-        this.$message({
-          showClose: true,
-          message: '操作成功',
-          type: 'success'
-        })
-      })
-    },
     eject(id) {
       this.$confirm(`弹出操作不可逆?确认弹出`,  {
         type: 'warning'

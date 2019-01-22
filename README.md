@@ -1,7 +1,39 @@
 # 服务端接口与管理后台代码生成工具
 后台管理系统的很多页面的逻辑是类似的。因此，可以抽象出一系列规则配置，通过配置来生成页面。详细介绍可以见下面的功能。
 
-该工具能生成项目 [admin-template](https://github.com/iamjoel/front-end-template/tree/master/admin) 的列表，新增，编辑，详情页。
+## 特点
+1. 易用。无须编码。
+1. 安全。生成代码和非生成代码在不同文件夹。无须担心生成代码覆盖。
+1. 灵活。如需改动生成的代码，在对应界面，按弹出按钮，会将生成的代码移动到非生成代码文件夹。
+1. 易维护。 生成的代码可读性强，易于维护。
+
+## 功能
+* 生成 数据库生成脚本。
+* 生成 测试数据的数据库脚本。 开发中...
+* 生成 服务器端 CRUD 代码。用的是 MySQL。支持:
+  * 单表。
+  * 表关联。开发中...
+    * 一对一。
+    * 一对多。
+* 生成 管理后台的前端 列表和更新页。包括：
+  * 前端路由
+  * 左侧菜单
+  * 前端字典
+  * 角色
+
+## 五步做一组页面
+1 输入项目地址
+
+2 生成管理后台和服务端项目代码
+
+3 新增实体
+
+4 编辑管理后台的列表页
+
+5 编辑管理后台的列表页
+
+6 创建数据库结构
+
 
 ## 启动
 1 安装服务器依赖  
@@ -11,83 +43,15 @@ npm install
 npm -g i nodemon
 ```
 
-2 创建表表文件  
-在 `server/data/` 下创建 `json` 文件，内容拷贝 `server/data/db.schema.json`。  
-修改文件 `server/config/index.js` 中的 `databaseFileName` 值为创建的文件名。
-
-3 安装客户端依赖  
+2 安装客户端依赖  
 ```
 cd www
 npm install
 ```
 
-4 修改配置  
-修改文件 `server/config/index.js` 中的 `feCodeRootPath` 值为目标前端项目的根路径。生成的代码会修改该项目路径下的文件。
-
-5 启动  
+3 启动  
 ```
 npm start
 ```
 
-## 制作流程
-1. 创建基础数据。
-  1. 新建实体。实体可以理解为一个对象。一般实体对应数据库中的一张表。
-  1. 新建实体类型[可选]。
-1. 创建页面。
-  1. 创建列表页。
-  1. 创建编辑页。编辑页包括 新增，编辑，详情页。
-1. 创建路由和菜单
-  1. 创建路由。
-  1. 创建菜单。只支持两级菜单。一级菜单可以是分类或页面。二级菜单一定是页面。分类来自实体类型，页面数据来自路由。
 
-## 功能
-### 配置角色
-![](screenshot/role.jpg)
-
-### 配置字典
-![](screenshot/dict.jpg)
-
-字典子项  
-![](screenshot/dict-sub.jpg)
-
-### 配置实体类型
-![](screenshot/entity-type.jpeg)
-
-### 配置实体
-![](screenshot/entity.jpg)
-
-### 配置列表页
-支持将配置同步到指定文件夹。在展开的代码上，写自己的代码。若已修改过展开的代码。可以冻结该条数据，避免误操作，覆盖代码。
-![](screenshot/list-list.jpg)
-
-配置基础信息  
-![](screenshot/list-no-common.jpg)
-![](screenshot/list-edit-common.jpg)
-
-配置列表字段  
-![](screenshot/list-cols.jpg)
-
-配置操作  
-![](screenshot/list-ops.jpg)
-
-配置搜索条件  
-![](screenshot/list-search.jpg)
-
-配置函数  
-![](screenshot/fns.jpg)
-
-### 配置新增，编辑，详情页
-支持将配置同步到指定文件夹。在展开的代码上，写自己的代码。若已修改过展开的代码。可以冻结该条数据，避免误操作，覆盖代码。
-![](screenshot/update-list)
-
-配置列表字段  
-![](screenshot/update-cols.jpg)
-
-## 配置路由
-![](screenshot/router.jpeg)
-
-## 配置菜单
-![](screenshot/menu.jpeg)
-
-## 基本配置
-![](screenshot/basic.jpg)

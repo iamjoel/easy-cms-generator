@@ -116,6 +116,39 @@
       "isSynced": true,
       "isShowInMenu": false,
       "isEjected": true
+    },
+    {
+      "id": "8941639e-84b7-c876-3e26-d6955ea75a3d",
+      "updateAt": 1548142677066,
+      "basic": {
+        "isPublic": true,
+        "hasListPage": true,
+        "hasUpdatePage": true,
+        "isShowInMenu": true,
+        "entityTypeId": "2f17368e-0356-ede1-ec50-ccfb9adf339e",
+        "name": "teacher",
+        "des": "老师",
+        "listPageId": "78650378-5538-5bf3-5c7a-9df3d22db959",
+        "updatePageId": "c748e84a-8904-549c-1399-5560ec83a29f"
+      },
+      "cols": [],
+      "isSynced": false,
+      "isShowInMenu": false
+    },
+    {
+      "id": "073cd0fa-1743-84cc-a684-4dc15677dee7",
+      "updateAt": 1548143486350,
+      "basic": {
+        "isPublic": true,
+        "hasListPage": true,
+        "hasUpdatePage": true,
+        "isShowInMenu": true,
+        "name": "ddd",
+        "des": "d"
+      },
+      "cols": [],
+      "isSynced": false,
+      "isShowInMenu": false
     }
   ],
   "listPage": [
@@ -184,6 +217,57 @@
       "searchCondition": [],
       "isSynced": false,
       "fn": []
+    },
+    {
+      "id": "78650378-5538-5bf3-5c7a-9df3d22db959",
+      "updateAt": 1548142677058,
+      "basic": {
+        "entity": {
+          "id": "8941639e-84b7-c876-3e26-d6955ea75a3d",
+          "name": "teacher",
+          "entityTypeId": "2f17368e-0356-ede1-ec50-ccfb9adf339e"
+        },
+        "codePath": "people/teacher"
+      },
+      "operate": {
+        "add": {
+          "isShow": true
+        },
+        "edit": {
+          "isShow": true
+        },
+        "detail": {
+          "isShow": true
+        },
+        "delete": {
+          "isShow": true
+        }
+      }
+    },
+    {
+      "id": "9bca6af6-43b8-d9a8-dc43-c26d78465cb6",
+      "updateAt": 1548143486337,
+      "basic": {
+        "entity": {
+          "id": "073cd0fa-1743-84cc-a684-4dc15677dee7",
+          "name": "ddd"
+        },
+        "codePath": "ddd"
+      },
+      "operate": {
+        "add": {
+          "isShow": true
+        },
+        "edit": {
+          "isShow": true
+        },
+        "detail": {
+          "isShow": true
+        },
+        "delete": {
+          "isShow": true
+        }
+      }
     }
   ],
   "updatePage": [
@@ -232,6 +316,29 @@
       "cols": [],
       "fn": [],
       "isSynced": true
+    },
+    {
+      "id": "c748e84a-8904-549c-1399-5560ec83a29f",
+      "updateAt": 1548142677062,
+      "basic": {
+        "entity": {
+          "id": "8941639e-84b7-c876-3e26-d6955ea75a3d",
+          "name": "teacher",
+          "entityTypeId": "2f17368e-0356-ede1-ec50-ccfb9adf339e"
+        },
+        "codePath": "people/teacher"
+      }
+    },
+    {
+      "id": "44ce988a-2e64-5e8c-667d-5fa9db01fe18",
+      "updateAt": 1548143486338,
+      "basic": {
+        "entity": {
+          "id": "073cd0fa-1743-84cc-a684-4dc15677dee7",
+          "name": "ddd"
+        },
+        "codePath": "ddd"
+      }
     }
   ],
   "router": [
@@ -266,6 +373,42 @@
       "pageType": "update",
       "routePath": "/cccc/update/:id",
       "filePath": "cccc/Update.vue"
+    },
+    {
+      "id": "643b3a7a-a59b-6983-84dc-48d9547bb63b",
+      "entityId": "8941639e-84b7-c876-3e26-d6955ea75a3d",
+      "name": "老师列表页",
+      "pageType": "list",
+      "routePath": "/people/teacher/list",
+      "filePath": "people/teacher/List.vue",
+      "updateAt": 1548142677060
+    },
+    {
+      "id": "e6b12979-2372-51d8-f914-630cf6029f0e",
+      "entityId": "8941639e-84b7-c876-3e26-d6955ea75a3d",
+      "name": "老师更新页",
+      "pageType": "update",
+      "routePath": "/people/teacher/update/:id",
+      "filePath": "people/teacher/Update.vue",
+      "updateAt": 1548142677064
+    },
+    {
+      "id": "0f5b94f5-80ba-f7ef-37ec-402a3b126fd7",
+      "entityId": "073cd0fa-1743-84cc-a684-4dc15677dee7",
+      "name": "d列表页",
+      "pageType": "list",
+      "routePath": "/ddd/list",
+      "filePath": "ddd/List.vue",
+      "updateAt": 1548143486337
+    },
+    {
+      "id": "0dba5fc5-5f15-666f-dd9f-d7e42627e232",
+      "entityId": "073cd0fa-1743-84cc-a684-4dc15677dee7",
+      "name": "d更新页",
+      "pageType": "update",
+      "routePath": "/ddd/update/:id",
+      "filePath": "ddd/Update.vue",
+      "updateAt": 1548143486339
     }
   ],
   "menu": [
@@ -281,6 +424,12 @@
           "name": "学生",
           "showType": "show",
           "roleIds": []
+        },
+        {
+          "routerId": "643b3a7a-a59b-6983-84dc-48d9547bb63b",
+          "name": "老师",
+          "showType": "show",
+          "roleIds": []
         }
       ]
     },
@@ -290,6 +439,14 @@
       "entityTypeId": null,
       "routerId": "8ed0ca8b-514d-591b-5a12-0238ec60097f",
       "name": "cccc"
+    },
+    {
+      "id": "e50e8038-ecb8-949a-ec4b-454832819777",
+      "isPage": 1,
+      "entityTypeId": null,
+      "routerId": "0f5b94f5-80ba-f7ef-37ec-402a3b126fd7",
+      "name": "d",
+      "updateAt": 1548143486339
     }
   ],
   "syncStatus": {

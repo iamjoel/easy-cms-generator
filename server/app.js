@@ -96,10 +96,6 @@ app.get(`/entity-common-cols/list`, (req,res) => {
   entityApi.commonCols(req, res)
 })
 
-app.post('/entity/expendCofigToFile/:id', (req, res)=> {
-  entityApi.expendCofigToFile(req, res)
-})
-
 var listPageApi = require('./api/list-page')
 app.post('/list-page/expendCofigToFile/:id', (req, res)=> {
   listPageApi.expendCofigToFile(req, res)
