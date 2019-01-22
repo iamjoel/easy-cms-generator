@@ -1,13 +1,20 @@
 var fs = require('fs-extra')
 
-module.exports = function(entity, entityTypeName, commonCols) {
-  generatorModel(entity, entityTypeName)
-  generatorService(entity, entityTypeName)
-  generatorController(entity, entityTypeName)
+module.exports = function(entity, entityTypeName, commonCols, isEjected) {
+  generatorModel(entity, entityTypeName, commonCols, isEjected)
+  generatorService(entity, entityTypeName, isEjected)
+  generatorController(entity, entityTypeName, isEjected)
+  
+  // 删除文件。
+  if(isEjected) {
+    fs.remove(`${global.serverCodeRootPath}/app/service/auto/${entityTypeName ? `${entityTypeName}/` : ''}model/${entity.basic.name}.js`)
+    fs.remove(`${global.serverCodeRootPath}/app/service/auto/${entityTypeName ? `${entityTypeName}/` : ''}${entity.basic.name}.js`)
+    fs.remove(`${global.serverCodeRootPath}/app/controller/auto/${entityTypeName ? `${entityTypeName}/` : ''}${entity.basic.name}.js`)
+  }
 }
 
-function generatorModel(entity, entityTypeName, commonCols = []) {
-  let dist = `${global.serverCodeRootPath}/app/service/${entityTypeName ? `${entityTypeName}/` : ''}model/${entity.basic.name}.js` // 从项目根路径开始算的
+function generatorModel(entity, entityTypeName, commonCols = [], isEjected) {
+  let dist = `${global.serverCodeRootPath}/app/service/${!isEjected ? 'auto/' : ''}${entityTypeName ? `${entityTypeName}/` : ''}model/${entity.basic.name}.js` // 从项目根路径开始算的
 
   var basic = entity.basic
   var cols = entity.cols || []
@@ -54,32 +61,22 @@ function getRuleType(type) {
   return res
 }
 
-function generatorService(entity, entityTypeName) {
-  let dist = `${global.serverCodeRootPath}/app/service/${entityTypeName ? `${entityTypeName}/` : ''}${entity.basic.name}.js` // 从项目根路径开始算的
+function generatorService(entity, entityTypeName, isEjected) {
+  let dist = `${global.serverCodeRootPath}/app/service/${!isEjected ? 'auto/' : ''}${entityTypeName ? `${entityTypeName}/` : ''}${entity.basic.name}.js` // 从项目根路径开始算的
   var template = require('./template/service.js')
   fs.outputFileSync(dist, template)
 }
 
-function generatorController(entity, entityTypeName) {
-  var servicePath = line2upper(`${entityTypeName ? `${entityTypeName}.` : ''}${entity.basic.name}`)
-  let dist = `${global.serverCodeRootPath}/app/controller/${entityTypeName ? `${entityTypeName}/` : ''}${entity.basic.name}.js`
+function generatorController(entity, entityTypeName, isEjected) {
+  var servicePath = line2upper(`${!isEjected ? 'auto.' : ''}${entityTypeName ? `${entityTypeName}.` : ''}${entity.basic.name}`)
+  let dist = `${global.serverCodeRootPath}/app/controller/${!isEjected ? 'auto/' : ''}${entityTypeName ? `${entityTypeName}/` : ''}${entity.basic.name}.js`
   var template = require('./template/controller.js')
   template = template.replace(/{servicePath}/g, servicePath)
   fs.outputFileSync(dist, template)
 }
 
-function writeFile(filePath, content) {
-  return new Promise((resolve, reject) => {
-    console.log(filePath)
-    fs.outputFile(filePath, content, err => {
-      if(err) {
-        reject(err)
-        return
-      }
-      resolve()
-    })
-  })
-}
+
+// 改成驼峰
 function line2upper(str) {
   return str.replace( /[_|-]([a-z])/g, function( all, letter ) {
     return letter.toUpperCase();

@@ -3,6 +3,7 @@ const apiFormat = require('../utils/apiFormat')
 const tableName = 'entity'
 const commonCRUD = require('./utils/commonCRUD.js')(tableName)
 const curdGenerator = require('./utils/generator-code/server/crud')
+const syncToServerCode = require('./config').doSyncToServerCode
 
 module.exports = {
   list(req, res, pool) {
@@ -89,11 +90,58 @@ module.exports = {
         res.send(apiFormat.error(error))
       }
   },
+  // 弹出。 改生成的代码，需要弹出。不可逆操作
+  eject(req, res, pool) {
+    try {
+      var id = req.params.id
+      global.db.get(tableName)
+              .find({
+                id,
+              })
+              .assign({
+                isEjected: true,
+                updateAt: Date.now()
+              })
+              .write()
+      expendCofigToFile(id, true) // 展开代码
+      // 同步配置
+      syncToServerCode().then(() => {
+        res.send(apiFormat.success({}))
+      }, () => {
+        res.send(apiFormat.error(e))
+      })
+      
+    } catch(e) {
+      console.log(e)
+      res.send(apiFormat.error(e))
+    }
+  },
   expendCofigToFile(req, res) {
-    var entity = global.db
+    try {
+      expendCofigToFile(req.params.id)
+      global.db
+          .get(tableName)
+          .find({
+            id: req.params.id
+          })
+          .assign({
+            isSynced: true,
+            updateAt: Date.now()
+          })
+          .write()
+      res.send(apiFormat.success({}))
+    } catch(e) {
+      res.send(apiFormat.error())
+    }
+  }
+}
+
+
+function expendCofigToFile(id, isEjected) {
+  var entity = global.db
                   .get(tableName)
                   .find({
-                    id: req.params.id
+                    id
                   })
                   .value()
     var entityType = global.db
@@ -104,23 +152,7 @@ module.exports = {
     var commonCols = global.db.get('entityConfig')
                             .value()
                             .commonCols
-    try {
-      curdGenerator(entity, entityType ? entityType.key : false, commonCols) // 同步的方法。写文件也用的同步的
-      global.db
-            .get(tableName)
-            .find({
-              id: req.params.id
-            })
-            .assign({
-              isSynced: true,
-              updateAt: Date.now()
-            })
-            .write() 
-      res.send(apiFormat.success({}))
-    } catch(e) {
-      res.send(apiFormat.error())
-    }
-  }
+    curdGenerator(entity, entityType ? entityType.key : false, commonCols, isEjected) // 同步的方法。写文件也用的同步的
 }
 
 /*

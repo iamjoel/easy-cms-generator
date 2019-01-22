@@ -98,7 +98,8 @@
       ],
       "isSynced": true,
       "isShowInMenu": false,
-      "updateAt": 1548080486744
+      "isEjected": true,
+      "updateAt": 1548139718340
     },
     {
       "id": "ab17606e-5792-003c-f8e9-13ccfacfdbe8",
@@ -114,7 +115,7 @@
       "cols": [],
       "isSynced": true,
       "isShowInMenu": false,
-      "updateAt": 1548080250916
+      "isEjected": true
     }
   ],
   "listPage": [

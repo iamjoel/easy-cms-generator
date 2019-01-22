@@ -45,6 +45,21 @@ export default {
         })
       })
     },
+    eject(id) {
+      this.$confirm(`弹出操作不可逆?确认弹出`,  {
+        type: 'warning'
+      }).then(() => {
+        this.$http.post(`${SERVER_PREFIX}/entity-eject/${id}`).then(({data})=> {
+          this.reloadList()
+          this.$message({
+            showClose: true,
+            message: '操作成功',
+            type: 'success'
+          })
+        })
+      })
+      
+    },
   },
   mounted() {
     Promise.all([

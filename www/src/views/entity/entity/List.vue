@@ -29,14 +29,22 @@
         label="说明"
         >
       </el-table-column>
+      <el-table-column
+        prop="basic.des"
+        label="已弹出"
+        >
+        <template slot-scope="scope">
+          {{scope.row.isEjected ? '是' : '否'}}
+        </template>
+      </el-table-column>
       
       <el-table-column
         prop="key"
         label="操作"
-        width="400"
+        width="350"
         >
         <template slot-scope="scope">
-          <el-button type="success" size="small" @click="$router.push('/entity/entity/update/' + scope.row.id)">编辑</el-button>
+          <el-button type="success" size="small" @click="$router.push('/entity/entity/update/' + scope.row.id)" v-show="!scope.row.isEjected">编辑</el-button>
           <el-button 
             type="info" size="small"
             v-if="scope.row.basic.hasListPage"
@@ -49,8 +57,8 @@
             @click="$router.push('/page/updatePage/update/' + scope.row.basic.updatePageId)">编辑页
           </el-button>
 
-          <el-button type="warning" size="small" @click="expendCofigToFile(scope.row.id)" v-show="!scope.row.isSynced">展开代码到文件</el-button>
-
+          <!-- <el-button type="warning" size="small" @click="expendCofigToFile(scope.row.id)" v-show="!scope.row.isSynced || true">展开代码到文件</el-button> -->
+          <el-button type="warning" size="small" @click="eject(scope.row.id)" v-show="!scope.row.isEjected">弹出</el-button>
           <el-button type="danger" size="small" @click="remove(scope.row.id, scope.$index, scope.row.basic.name)">删除</el-button>
         </template>
       </el-table-column>

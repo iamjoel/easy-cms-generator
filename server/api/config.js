@@ -7,32 +7,14 @@ const syncToServerCode = require('./utils/generator-code/server/server')
 
 module.exports = {
   syncToProject(req, res) {
-    var entityData = global.db.get('entity')
-                            .value()
-    var entityTypeList = global.db.get('entityType')
-                            .value()
-    entityData = entityData.map(entity => {
-      var entityType = entityTypeList.filter(item => item.id === entity.basic.entityTypeId)[0]
-      return {
-        name: entity.basic.name,
-        type: entityType ? entityType.key : false,
-        isPublic: entity.basic.isPublic
-      }
-    })
-    // 同步代码到项目
-    Promise.all([
-      sync('dict'),
-      sync('role'),
-      sync('entity'),
-      sync('router'),
-      sync('menu'),
-      syncToServerCode(entityData)
-    ]).then(() => {
-      console.log('all succss')
+    doSyncToServerCode().then(() => {
       res.send(apiFormat.success({}))
     }, (e) => {
       res.send(apiFormat.error(e))
     })
+  },
+  doSyncToServerCode() {
+    return doSyncToServerCode()
   },
   generatorDBSchema(req, res) {
     var entityData = global.db.get('entity')
@@ -44,6 +26,33 @@ module.exports = {
     res.send(apiFormat.success(schema))
   }
   
+}
+
+
+function doSyncToServerCode() {
+  var entityData = global.db.get('entity')
+                            .value()
+    var entityTypeList = global.db.get('entityType')
+                            .value()
+    entityData = entityData.map(entity => {
+      var entityType = entityTypeList.filter(item => item.id === entity.basic.entityTypeId)[0]
+      return {
+        name: entity.basic.name,
+        type: entityType ? entityType.key : false,
+        isPublic: entity.basic.isPublic,
+        isEjected: entity.isEjected
+      }
+    })
+    syncToServerCode(entityData) // 写服务器端代码。包括 路由 和 modelMap。
+
+    // 同步代码到项目
+    return Promise.all([
+      sync('dict'),
+      sync('role'),
+      sync('entity'),
+      sync('router'),
+      sync('menu'),
+    ])
 }
 
 function sync(type) {

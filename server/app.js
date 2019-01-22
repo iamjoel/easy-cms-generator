@@ -84,6 +84,10 @@ app.post(`/entity/:id`, (req,res) => {
   entityApi.edit(req, res)
 })
 
+app.post(`/entity-eject/:id`, (req,res) => {
+  entityApi.eject(req, res)
+})
+
 app.delete(`/entity/:id`, (req,res) => {
   entityApi.remove(req, res)
 })
