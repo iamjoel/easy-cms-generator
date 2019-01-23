@@ -61,14 +61,8 @@ module.exports = {
   add(req, res, pool) {
     try {
       var id = guidFn()
-      let basic = req.body.basic
-      createPage(basic, id) // 前端页面
-      if(basic.hasListPage && basic.isShowInMenu) { // 菜单
-        addMenu(basic, id)
-      }
       commonCRUD.add(req, res, pool, id)
-
-      syncAll(id) // 同步配置 + 后端代码
+      syncAll(id)
     } catch(error) {
       console.log(error)
       res.send(apiFormat.error(error))
@@ -77,11 +71,6 @@ module.exports = {
   edit(req, res, pool) {
     try {
       var id = req.params.id
-      let basic = req.body.basic
-      createPage(basic, id)
-      if(basic.hasListPage && basic.isShowInMenu) {
-        addMenu(basic, id)
-      }
       commonCRUD.edit(req, res, pool)
       syncAll(id)
     } catch(error) {
@@ -127,13 +116,19 @@ module.exports = {
 }
 
 
-function syncAll(id, isEjected) {
+function syncAll(id) {
   var entity = global.db
                   .get(tableName)
                   .find({
                     id
                   })
                   .value()
+  var basic = entity.basic
+  createPage(entity, id) // 前端页面
+  if(basic.hasListPage && basic.isShowInMenu) { // 菜单
+    addMenu(basic, id)
+  }
+  
   var entityType = global.db
                 .get('entityType')
                 .filter(type => type.id === entity.basic.entityTypeId)
@@ -143,7 +138,7 @@ function syncAll(id, isEjected) {
                           .value()
                           .commonCols
   // 生成 后端的crud 代码
-  curdGenerator(entity, entityType ? entityType.key : false, commonCols, isEjected) // 同步的方法。写文件也用的同步的
+  curdGenerator(entity, entityType ? entityType.key : false, commonCols) // 同步的方法。写文件也用的同步的
   global.db
         .get(tableName)
         .find({
@@ -161,19 +156,19 @@ function syncAll(id, isEjected) {
 * 同步条件：实体设置了有列表页/更新页，但列表或更新表没有那条数据，则创建。
 * 如果已有列表或更新页，不做覆盖和删除的处理。
 */
-function createPage(data, entityId) {
-  if(data.hasListPage) {
-    let pageId = addPageAndRoute(data, entityId, 'list')
-    expendListPage(pageId)
+function createPage(entity, entityId) {
+  if(entity.basic.hasListPage) {
+    let pageId = addPageAndRoute(entity.basic, entity.cols, entityId, 'list')
   }
 
-  if(data.hasUpdatePage) {
-    let pageId = addPageAndRoute(data, entityId, 'update')
-    expendUpdatePage(pageId)
+  if(entity.basic.hasUpdatePage) {
+    let pageId = addPageAndRoute(entity.basic, entity.cols, entityId, 'update')
   }
 }
 
-function addPageAndRoute(entityBasic, entityId, pageType) {
+
+
+function addPageAndRoute(entityBasic, entityCols, entityId, pageType) {
   const entityName = entityBasic.name
   var entity = { // 页面的entity
     id: entityId,
@@ -204,7 +199,18 @@ function addPageAndRoute(entityBasic, entityId, pageType) {
         "basic": {
           entity,
           "codePath": `${entityType ? `${entityType.key}/` : ''}${entityName}`
-        }
+        },
+        // 必填项直接同步过去
+        cols: entityCols.filter(col => col.required)
+                        .map(col => {
+                            return {
+                              key: col.key,
+                              label: col.label,
+                              dataType: col.dataType,
+                              formatFn: null,
+                              required: true
+                            }
+                        })
       }, pageType === 'list' ? {
         operate: {
           add: {
@@ -223,6 +229,13 @@ function addPageAndRoute(entityBasic, entityId, pageType) {
       } : {}))
       .write()
     
+    // 展开页面
+    if(pageType === 'list') {
+      expendListPage(pageId)
+    } else {
+      expendUpdatePage(pageId)
+    }
+    
     // 新增路由
     global.db
       .get('router')
@@ -236,7 +249,7 @@ function addPageAndRoute(entityBasic, entityId, pageType) {
         updateAt: Date.now()
       })
       .write()
-    return pageId
+
   }
 }
 
@@ -308,6 +321,7 @@ function addMenu(entityBasic, entityId) {
   }
 
   global.db.set('menu', menu).write()
+
 }
 
 /*

@@ -24,7 +24,7 @@ export default {
         key: '',
         dataType: 'string',
         maxLength: null,
-        required: false,
+        required: true,
       },
       colsDataType: [{
         key: 'string',

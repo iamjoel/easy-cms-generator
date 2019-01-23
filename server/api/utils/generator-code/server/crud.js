@@ -24,7 +24,7 @@ function generatorModel(entity, entityTypeName, commonCols = [], isEjected) {
     viewFields: cols.map(col => col.key),
     validFields: cols.map(col => {
       var rule = { // https://github.com/node-modules/parameter
-        required: col.required,
+        required: !!col.required, // col.required 设置 undefined => true
         type: `${getRuleType(col.dataType)}`
       }
       if(col.dataType === 'string') {
@@ -81,4 +81,3 @@ function line2upper(str) {
     return letter.toUpperCase();
   })
 }
-

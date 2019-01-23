@@ -2,24 +2,29 @@
   "role": [],
   "dict": [],
   "entityConfig": {
-    "commonCols": [{
-      "name":"id",
-      "dataType": "varchar(36)",
-      "description": "36位的 Guid"
-    },{
-      "name":"createTime",
-      "dataType": "datetime",
-      "description": "创建时间"
-    },{
-      "name":"updateTime",
-      "dataType": "datetime",
-      "description": "更新时间"
-    },
-    {
-      "key": "delFlg",
-      "dataType": "bool",
-      "label": "删除标志位"
-    }]
+    "commonCols": [
+      {
+        "key": "id",
+        "dataType": "string",
+        "maxLength": "36",
+        "label": "36位的 Guid"
+      },
+      {
+        "key": "createTime",
+        "dataType": "datetime",
+        "label": "创建时间"
+      },
+      {
+        "key": "updateTime",
+        "dataType": "datetime",
+        "label": "更新时间"
+      },
+      {
+        "key": "delFlg",
+        "dataType": "bool",
+        "label": "删除标志位"
+      }
+    ]
   },
   "entityType": [],
   "entity": [],

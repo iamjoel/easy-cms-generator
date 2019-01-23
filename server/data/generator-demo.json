@@ -38,7 +38,7 @@
       {
         "key": "id",
         "dataType": "string",
-        "maxLength": "32",
+        "maxLength": "36",
         "label": "36位的 Guid"
       },
       {
@@ -68,24 +68,22 @@
   ],
   "entity": [
     {
-      "id": "66ff4f15-ef4e-d203-35bb-110a71bc7762",
+      "id": "187679a7-2d62-33aa-4276-1a3deb329bb2",
+      "updateAt": 1548244612791,
       "basic": {
         "isPublic": true,
         "hasListPage": true,
         "hasUpdatePage": true,
         "isShowInMenu": true,
-        "name": "student",
-        "des": "学生",
-        "listPageId": "0d0b343e-5332-7958-509a-8f289c5af679",
-        "updatePageId": "f4f26f3e-f9fc-5c53-106b-3200a5ed84ad"
+        "name": "f"
       },
       "cols": [
         {
-          "label": "姓名",
-          "key": "name",
+          "label": "bb",
+          "key": "a",
           "dataType": "string",
-          "maxLength": "10",
-          "required": false
+          "maxLength": null,
+          "required": true
         }
       ],
       "isSynced": false,
@@ -94,15 +92,24 @@
   ],
   "listPage": [
     {
-      "id": "0d0b343e-5332-7958-509a-8f289c5af679",
-      "updateAt": 1548155684862,
+      "id": "ff2c0cdd-274f-dadd-3ae6-9439dc8061fe",
+      "updateAt": 1548244612769,
       "basic": {
         "entity": {
-          "id": "66ff4f15-ef4e-d203-35bb-110a71bc7762",
-          "name": "student"
+          "id": "187679a7-2d62-33aa-4276-1a3deb329bb2",
+          "name": "f"
         },
-        "codePath": "student"
+        "codePath": "f"
       },
+      "cols": [
+        {
+          "key": "a",
+          "label": "bb",
+          "dataType": "string",
+          "formatFn": null,
+          "required": true
+        }
+      ],
       "operate": {
         "add": {
           "isShow": true
@@ -117,22 +124,29 @@
           "isShow": true
         }
       },
-      "cols": [],
       "searchCondition": []
     }
   ],
   "updatePage": [
     {
-      "id": "f4f26f3e-f9fc-5c53-106b-3200a5ed84ad",
-      "updateAt": 1548155684867,
+      "id": "16e3838f-2022-cdb8-a467-ef81f3f7bac1",
+      "updateAt": 1548244612773,
       "basic": {
         "entity": {
-          "id": "66ff4f15-ef4e-d203-35bb-110a71bc7762",
-          "name": "student"
+          "id": "187679a7-2d62-33aa-4276-1a3deb329bb2",
+          "name": "f"
         },
-        "codePath": "student"
+        "codePath": "f"
       },
-      "cols": [],
+      "cols": [
+        {
+          "key": "a",
+          "label": "bb",
+          "dataType": "string",
+          "formatFn": null,
+          "required": true
+        }
+      ],
       "fn": []
     }
   ],
@@ -146,29 +160,32 @@
       "filePath": "student/List.vue"
     },
     {
-      "id": "80005e26-00f1-6102-7ee3-6a12da66a81c",
-      "entityId": "66ff4f15-ef4e-d203-35bb-110a71bc7762",
-      "name": "学生列表页",
+      "id": "2b1f3426-574c-aab8-76e4-8a25d6e301c8",
+      "entityId": "187679a7-2d62-33aa-4276-1a3deb329bb2",
+      "name": "undefined列表页",
       "pageType": "list",
-      "routePath": "/student/list",
-      "filePath": "student/List.vue"
+      "routePath": "/f/list",
+      "filePath": "f/List.vue",
+      "updateAt": 1548244612772
     },
     {
-      "id": "92c542ed-7fc9-aa73-e7f3-13d2a75b81af",
-      "entityId": "66ff4f15-ef4e-d203-35bb-110a71bc7762",
-      "name": "学生更新页",
+      "id": "e24c0484-c44f-54a9-039f-f4499a29fbfe",
+      "entityId": "187679a7-2d62-33aa-4276-1a3deb329bb2",
+      "name": "undefined更新页",
       "pageType": "update",
-      "routePath": "/student/update/:id",
-      "filePath": "student/Update.vue"
+      "routePath": "/f/update/:id",
+      "filePath": "f/Update.vue",
+      "updateAt": 1548244612777
     }
   ],
   "menu": [
     {
-      "id": "e1cb16ed-e1a3-be43-5bcb-bd5a0760e4be",
+      "id": "d7e2aceb-3db3-cb59-2661-f4548d4f353b",
       "isPage": 1,
       "entityTypeId": null,
-      "routerId": "80005e26-00f1-6102-7ee3-6a12da66a81c",
-      "name": "学生"
+      "routerId": "2b1f3426-574c-aab8-76e4-8a25d6e301c8",
+      "name": "f",
+      "updateAt": 1548244612778
     }
   ],
   "syncStatus": {

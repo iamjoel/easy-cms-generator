@@ -33,7 +33,6 @@ module.exports = {
 function syncAllConfig() {
   var entityData = global.db.get('entity')
                             .value()
-  console.log(entityData)
   var entityTypeList = global.db.get('entityType')
                           .value()
   entityData = entityData.map(entity => {
@@ -53,7 +52,12 @@ function syncAllConfig() {
   sync('role')
   sync('entity')
   sync('router')
-  sync('menu')
+  try {
+    sync('menu')
+    console.log('sync menu')
+  } catch(e) {
+    console.log(`menu error: ${e}`)
+  }
 }
 
 function sync(type) {
@@ -112,18 +116,8 @@ function writeConfigFile(name, content, [entityList, entityTypeList, router]=[])
       content = res
       break;
     case 'menu': 
-      // 获取默认路由
-      var routerList = deepClone(router).map(item => {
-        var entity = entityList.filter(entity => item.entityId === entity.id)[0]
-        var entityType = entity.parentId ? entityTypeList.filter(item => item.id === entity.parentId)[0] : false
+      var routerList = deepClone(router)
 
-        var defaultRouterPath = `${entityType ? `/${entityType.key}` : ''}/${item.entityId}/${item.type === 'list' ? 'list' : 'update/:id'}`
-        
-        return {
-          id: item.id,
-          routePath: item.routePath || defaultRouterPath
-        }
-      })
       content = content.map(item => {
         var res = {
           id: item.id,
@@ -150,6 +144,8 @@ function writeConfigFile(name, content, [entityList, entityTypeList, router]=[])
         delete res.routerId
         return res
       })
+      console.log(content)
+      break;
   }
   
   var filePath = `${global.feCodeRootPath}/src/setting/base/${name}.js`

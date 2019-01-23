@@ -100,7 +100,7 @@ function expendCofigToFile(id) {
                   })
                   .value()
   if(!config) {
-    res.send(apiFormat.error({errMsg: '找不到配置'}))
+    console.error('找不到配置')
     return
   }
   var {vue, js, model} = generatorCode(config)
