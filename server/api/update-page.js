@@ -92,7 +92,7 @@ function editService(data, id) {
   expendCofigToFile(id)
 }
 
-function expendCofigToFile(id) {
+function expendCofigToFile(id, isEjected) {
   var config = global.db
                   .get(tableName)
                   .find({
@@ -104,7 +104,7 @@ function expendCofigToFile(id) {
     return
   }
   var {vue, js, model} = generatorCode(config)
-  var codePath = `${global.feCodeRootPath}/src/views/${config.basic.codePath ? config.basic.codePath : config.basic.entity}`
+  var codePath = `${global.feCodeRootPath}/src/${!isEjected ? 'auto/' : ''}views/${config.basic.codePath ? config.basic.codePath : config.basic.entity}`
   writeFile(`${codePath}/Update.vue`, vue)
   writeFile(`${codePath}/update.js`, js)
   writeFile(`${codePath}/model.js`, model)

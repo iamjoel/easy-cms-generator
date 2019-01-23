@@ -243,6 +243,7 @@ function addPageAndRoute(entityBasic, entityCols, entityId, pageType) {
         id: guidFn(),
         entityId,
         name: `${entityBasic.des}${pageType === 'list'? '列表页' : '更新页'}`,
+        pageId,
         pageType,
         routePath: `${entityType ? `/${entityType.key}` : ''}/${entityName}/${pageType === 'list' ? 'list' : 'update/:id'}`,
         filePath: `${entityType ? `${entityType.key}/` : ''}${entityName}/${pageType === 'list' ? 'List' : 'Update'}.vue`,

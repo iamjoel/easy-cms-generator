@@ -52,19 +52,18 @@ function syncAllConfig() {
   sync('role')
   sync('entity')
   sync('router')
-  try {
-    sync('menu')
-    console.log('sync menu')
-  } catch(e) {
-    console.log(`menu error: ${e}`)
-  }
+  sync('menu')
 }
 
 function sync(type) {
   switch(type) {
     case 'dict':
+      writeConfigFile('dict', fetchList(type))
+      break;
     case 'router':
-      writeConfigFile(type, fetchList(type))
+      var listPage = fetchList(`listPage`)
+      var updatePage = fetchList(`updatePage`)
+      writeConfigFile('router', fetchList(type), [null, null, null, listPage, updatePage])
       break;
     case 'role':
       writeConfigFile('roles', fetchList('role'))
@@ -90,7 +89,7 @@ function fetchList(tableName) {
   return global.db.get(tableName).value()
 }
 
-function writeConfigFile(name, content, [entityList, entityTypeList, router]=[]) {
+function writeConfigFile(name, content, [entityList, entityTypeList, router, listPageList, updatePageList]=[]) {
   // 删除 对前端来说，不必要的字段
   content = content.map(item => {
     delete item.updateAt
@@ -100,9 +99,13 @@ function writeConfigFile(name, content, [entityList, entityTypeList, router]=[])
     case 'router':
       var res = []
       content.forEach(item => {
+        var pageList = item.pageType === 'list' ? listPageList : updatePageList
+        var isEjected = !!pageList.filter(page => page.id === item.pageId)[0].isEjected
+
         res.push({
           routePath: item.routePath,
-          filePath: item.filePath
+          filePath: item.filePath,
+          isEjected
         })
         // 根据更新页路由，添加详情页路由。
         if(item.type === 'update') {
@@ -144,11 +147,10 @@ function writeConfigFile(name, content, [entityList, entityTypeList, router]=[])
         delete res.routerId
         return res
       })
-      console.log(content)
       break;
   }
   
-  var filePath = `${global.feCodeRootPath}/src/setting/base/${name}.js`
+  var filePath = `${global.feCodeRootPath}/src/auto/setting/base/${name}.js`
   fs.outputFileSync(filePath, 'export default ' + formatContent(content))
 }
 
