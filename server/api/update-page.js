@@ -67,7 +67,7 @@ module.exports = {
     }
   },
   removeService(id, notDeleteFile) {
-    removeService(id, notDeleteFile)
+    return removeService(id, notDeleteFile)
   },
 }
 

@@ -356,8 +356,8 @@ function removePage(entityId) {
                     .basic
   try {
     var pageFold = removeListPage(entityBasic.listPageId, true)
-    removeUpdatePage(entityBasic.updatePageId, true)
-
+    var pageFold2 = removeUpdatePage(entityBasic.updatePageId, true)
+    pageFold = pageFold || pageFold2 // 有可能列表页删除过了，但更新页没删
     if(pageFold) {
       fs.removeSync(pageFold) // 删除文件夹
     }
