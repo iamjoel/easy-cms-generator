@@ -3,6 +3,7 @@ const apiFormat = require('../utils/apiFormat')
 const tableName = 'entity'
 const commonCRUD = require('./utils/commonCRUD.js')(tableName)
 const curdGenerator = require('./utils/generator-code/server/crud')
+const generatorTestData = require('./utils/generator-code/server/generator-test-data')
 const syncService = require('./config')
 const syncAllConfig = syncService.syncAllConfig
 const syncConfig = syncService.sync
@@ -11,6 +12,8 @@ const expendUpdatePage = require('./update-page').expendCofigToFile
 const removeListPage = require('./list-page').removeService
 const removeUpdatePage = require('./update-page').removeService
 const fs = require('fs-extra')
+
+
 
 module.exports = {
   list(req, res, pool) {
@@ -119,7 +122,16 @@ module.exports = {
       res.send(apiFormat.error(e))
     }
   },
-  
+  // 生成测试的数据
+  generatorTestData(req, res) {
+    try {
+      var results = generatorTestData()
+      res.send(apiFormat.success(results))
+    } catch(error) {
+      console.error(error)
+      res.send(apiFormat.error(error))
+    }
+  }
 }
 
 function syncAll(id) {

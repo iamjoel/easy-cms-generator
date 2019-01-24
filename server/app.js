@@ -76,6 +76,10 @@ app.get(`/entity/:id`, (req,res) => {
   entityApi.detail(req, res)
 })
 
+app.get(`/entity-gen-data`, (req,res) => {
+  entityApi.generatorTestData(req, res)
+})
+
 app.put(`/entity`, (req,res) => {
   entityApi.add(req, res)
 })

@@ -50,11 +50,125 @@
       "label": "人员"
     }
   ],
-  "entity": [],
-  "listPage": [],
-  "updatePage": [],
-  "router": [],
-  "menu": [],
+  "entity": [
+    {
+      "id": "36494c96-13d4-1daf-77c7-c697ac8ab041",
+      "updateAt": 1548312319113,
+      "basic": {
+        "isPublic": true,
+        "hasListPage": true,
+        "hasUpdatePage": true,
+        "isShowInMenu": true,
+        "name": "a",
+        "des": "a"
+      },
+      "cols": [
+        {
+          "label": "名称",
+          "key": "name",
+          "dataType": "string",
+          "maxLength": 10,
+          "required": true,
+          "isSyncToListPage": true,
+          "isSyncToUpdatePage": true
+        }
+      ],
+      "isSynced": false,
+      "isShowInMenu": false
+    }
+  ],
+  "listPage": [
+    {
+      "id": "5f8361b3-59ed-cfea-2ad5-d9a0f825b34e",
+      "updateAt": 1548312319097,
+      "basic": {
+        "entity": {
+          "id": "36494c96-13d4-1daf-77c7-c697ac8ab041",
+          "name": "a"
+        },
+        "codePath": "a"
+      },
+      "cols": [
+        {
+          "key": "name",
+          "label": "名称",
+          "dataType": "string",
+          "formatFn": null,
+          "required": true
+        }
+      ],
+      "operate": {
+        "add": {
+          "isShow": true
+        },
+        "edit": {
+          "isShow": true
+        },
+        "detail": {
+          "isShow": true
+        },
+        "delete": {
+          "isShow": true
+        }
+      },
+      "searchCondition": []
+    }
+  ],
+  "updatePage": [
+    {
+      "id": "d156e982-8866-d729-eefc-50bc75f9fdd2",
+      "updateAt": 1548312319101,
+      "basic": {
+        "entity": {
+          "id": "36494c96-13d4-1daf-77c7-c697ac8ab041",
+          "name": "a"
+        },
+        "codePath": "a"
+      },
+      "cols": [
+        {
+          "key": "name",
+          "label": "名称",
+          "dataType": "string",
+          "formatFn": null,
+          "required": true
+        }
+      ],
+      "fn": []
+    }
+  ],
+  "router": [
+    {
+      "id": "8a42c3d5-cf1a-0b4c-78d5-9e0c3aad7168",
+      "entityId": "36494c96-13d4-1daf-77c7-c697ac8ab041",
+      "name": "a列表页",
+      "pageId": "5f8361b3-59ed-cfea-2ad5-d9a0f825b34e",
+      "pageType": "list",
+      "routePath": "/a/list",
+      "filePath": "a/List.vue",
+      "updateAt": 1548312319100
+    },
+    {
+      "id": "3c337e04-d930-8535-8f6f-5e6c27e9cd40",
+      "entityId": "36494c96-13d4-1daf-77c7-c697ac8ab041",
+      "name": "a更新页",
+      "pageId": "d156e982-8866-d729-eefc-50bc75f9fdd2",
+      "pageType": "update",
+      "routePath": "/a/update/:id",
+      "filePath": "a/Update.vue",
+      "updateAt": 1548312319105
+    }
+  ],
+  "menu": [
+    {
+      "id": "b7c7260d-a265-6cef-0f6a-4b83ecc64431",
+      "isPage": 1,
+      "entityTypeId": null,
+      "routerId": "8a42c3d5-cf1a-0b4c-78d5-9e0c3aad7168",
+      "name": "a",
+      "updateAt": 1548312319106
+    }
+  ],
   "syncStatus": {
     "dict": false,
     "entity": false,

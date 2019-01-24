@@ -2,6 +2,7 @@
 * 生成 CRUD 操作。
 */
 var fs = require('fs-extra')
+
 const WARN_TIP = 
 `/*
 * 代码生成工具生成的代码。
@@ -93,3 +94,4 @@ function line2upper(str) {
     return letter.toUpperCase();
   })
 }
+
