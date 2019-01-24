@@ -3,6 +3,7 @@ const generatorCode = require('./utils/generator-code/front-end/list-page')
 const tableName = 'listPage'
 const commonCRUD = require('./utils/commonCRUD.js')(tableName)
 const guidFn = require('../utils/guid')
+const syncConfig = require('./config').sync
 
 var config = require('../config')
 const fs = require('fs-extra')
@@ -37,68 +38,15 @@ module.exports = {
     editService(data, id)
   },
   remove(req, res, pool) {
-    var page = global.db
-                    .get(tableName)
-                    .find({
-                      id: req.params.id
-                    })
-                    .value()
-    var entity = global.db
-                        .get('entity')
-                        .find({
-                          id: page.basic.entity.id,
-                        })
-                        .value()
-    
-    if(entity) {
-      var entityType = global.db
-                        .get('entityType')
-                        .find({
-                          id: entity.entityTypeId
-                        })
-                        .value()
-      var menu = global.db
-                    .get('menu')
-                    .value()
-      var tarRouter = global.db
-                        .get('router')
-                        .find({
-                          entityId: entity.id
-                        })
-                        .value()
-      if(entityType) {
-        var tarMenuItem
-        var tarPages
-        menu.forEach(item => {
-          if(item.entityTypeId === entity.entityTypeId) {
-            tarMenuItem = item
-          }
-        })
-
-        if(tarMenuItem && tarMenuItem.children && tarMenuItem.children.length > 0) {
-          tarMenuItem.children = tarMenuItem.children.filter(item => item.routerId !== tarRouter.id)
-        }
-
-      } else {
-        menu = menu.filter(item => {
-          return item.routerId !== tarRouter.id
-        })
-      }
-      // 删菜单
-      global.db.set('menu', menu).write()
-      // 删除路由
-      global.db
-            .get('router')
-            .remove({
-              entityId: entity.id,
-              pageType: 'list'
-            })
-            .write()
-
+    try {
+      removeService(req.params.id)
+      res.send(apiFormat.success())
+    } catch(error) {
+      res.send(apiFormat.error(error))
     }
-
-    commonCRUD.remove(req, res, pool)
-    updateRoute()
+  },
+  removeService(id, notDeleteFile) {
+    return removeService(id, notDeleteFile)
   },
   // 根据配置，展开代码，保存到文件
   expendCofigToFile(id) {
@@ -126,9 +74,10 @@ module.exports = {
 }
 
 function removePrevFiles(page) {
-  var codePath = `${global.feCodeRootPath}/src/auto/views/${page.basic.codePath ? page.basic.codePath : page.basic.entity}`
+  var codePath = `${global.feCodeRootPath}/src/auto/views/${page.basic.codePath}`
   fs.remove(`${codePath}/List.vue`)
   fs.remove(`${codePath}/list.js`)
+
 }
 
 function updateRoute() {
@@ -184,6 +133,89 @@ function editService(data, id) {
   expendCofigToFile(id)
 }
 
+function removeService(id, notDeleteFile) {
+  var page = global.db
+                    .get(tableName)
+                    .find({
+                      id
+                    })
+                    .value()
+
+  if(!page) {
+    return
+  }
+  var entity = global.db
+                      .get('entity')
+                      .find({
+                        id: page.basic.entity.id,
+                      })
+                      .value()
+  
+  if(entity) {
+    var entityType = global.db
+                      .get('entityType')
+                      .find({
+                        id: entity.entityTypeId
+                      })
+                      .value()
+    var menu = global.db
+                  .get('menu')
+                  .value()
+    var tarRouter = global.db
+                      .get('router')
+                      .find({
+                        entityId: entity.id
+                      })
+                      .value()
+    if(entityType) {
+      var tarMenuItem
+      var tarPages
+      menu.forEach(item => {
+        if(item.entityTypeId === entity.entityTypeId) {
+          tarMenuItem = item
+        }
+      })
+
+      if(tarMenuItem && tarMenuItem.children && tarMenuItem.children.length > 0) {
+        tarMenuItem.children = tarMenuItem.children.filter(item => item.routerId !== tarRouter.id)
+      }
+
+    } else {
+      menu = menu.filter(item => {
+        return item.routerId !== tarRouter.id
+      })
+    }
+
+    // 删除页面
+    global.db
+        .get(tableName)
+        .remove({
+          id,
+        })
+        .write()
+    if(!notDeleteFile) {
+      removePrevFiles(page)
+    }
+
+    // 删除路由
+    global.db
+          .get('router')
+          .remove({
+            entityId: entity.id,
+            pageType: 'list'
+          })
+          .write()
+    syncConfig('router')
+
+    // 删菜单
+    global.db.set('menu', menu).write()
+    syncConfig('menu')
+    
+    var foldPath = `${global.feCodeRootPath}/src/auto/views/${page.basic.codePath}`
+    return foldPath
+  }
+}
+
 function expendCofigToFile(id, isEjected) {
   var config = global.db
                   .get(tableName)
@@ -196,7 +228,7 @@ function expendCofigToFile(id, isEjected) {
     return
   }
   var {vue, js} = generatorCode(config)
-  var codePath = `${global.feCodeRootPath}/src/${!isEjected ? 'auto/' : ''}views/${config.basic.codePath ? config.basic.codePath : config.basic.entity}`
+  var codePath = `${global.feCodeRootPath}/src/${!isEjected ? 'auto/' : ''}views/${config.basic.codePath}`
   if(isEjected) {
     global.db
         .get(tableName)

@@ -1,8 +1,10 @@
 <template>
   <div class="main menu-list-page">
+    <!-- 
+      从实体的配置中同步
     <div class="ly ly-r mb-10">
       <el-button type="primary" @click="add">新增</el-button>
-    </div>
+    </div> -->
     <el-table
       :data="list"
       border
@@ -102,8 +104,8 @@
         >
         <template slot-scope="scope">
           <el-button type="info" size="small" @click="save(scope.row)" v-show="scope.row.hasChanged">保存</el-button>
-          <el-button type="success" size="small" @click="addSub(scope.row)" v-if="scope.row.isPage == 0">添加子菜单</el-button>
-          <el-button type="danger" size="small" @click="remove(scope.row.id, scope.$index)" v-if="scope.row.children.length === 0">删除</el-button>
+          <!-- <el-button type="success" size="small" @click="addSub(scope.row)" v-if="scope.row.isPage == 0">添加子菜单</el-button>
+          <el-button type="danger" size="small" @click="remove(scope.row.id, scope.$index)" v-if="scope.row.children.length === 0">删除</el-button> -->
         </template>
       </el-table-column>
       <el-table-column type="expand">

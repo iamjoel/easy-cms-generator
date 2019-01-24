@@ -2,6 +2,7 @@ const apiFormat = require('../utils/apiFormat')
 const generatorCode = require('./utils/generator-code/front-end/update-page')
 const tableName = 'updatePage'
 const commonCRUD = require('./utils/commonCRUD.js')(tableName)
+const syncConfig = require('./config').sync
 
 var config = require('../config')
 const fs = require('fs-extra')
@@ -57,36 +58,21 @@ module.exports = {
 
   },
   remove(req, res, pool) {
-    var page = global.db
-                    .get(tableName)
-                    .find({
-                      id: req.params.id
-                    })
-                    .value()
-    var entity = global.db
-                        .get('entity')
-                        .find({
-                          id: page.basic.entity.id,
-                        })
-                        .value()
-    // 删除路由
-    if(entity) {
-       global.db
-            .get('router')
-            .remove({
-              entityId: entity.id,
-              pageType: 'update'
-            })
-            .write()
+    try {
+      removeService(req.params.id)
+      res.send(apiFormat.success())
+    } catch(error) {
+      console.log(error)
+      res.send(apiFormat.error(error))
     }
-    updateRoute()
-
-    commonCRUD.remove(req, res, pool)
+  },
+  removeService(id, notDeleteFile) {
+    removeService(id, notDeleteFile)
   },
 }
 
 function removePrevFiles(page) {
-  var codePath = `${global.feCodeRootPath}/src/auto/views/${page.basic.codePath ? page.basic.codePath : page.basic.entity}`
+  var codePath = `${global.feCodeRootPath}/src/auto/views/${page.basic.codePath}`
   fs.remove(`${codePath}/Update.vue`)
   fs.remove(`${codePath}/update.js`)
   fs.remove(`${codePath}/model.js`)
@@ -143,6 +129,50 @@ function editService(data, id) {
         })
         .write()
   expendCofigToFile(id)
+}
+
+function removeService(id, notDeleteFile) {
+  var page = global.db
+                    .get(tableName)
+                    .find({
+                      id
+                    })
+                    .value()
+    if(!page) {
+      return
+    }
+    var entity = global.db
+                        .get('entity')
+                        .find({
+                          id: page.basic.entity.id,
+                        })
+                        .value()
+
+    if(entity) {
+      // 删除页面
+      global.db
+          .get(tableName)
+          .remove({
+            id,
+          })
+          .write()
+      if(!notDeleteFile) {
+        removePrevFiles(page)
+      }
+
+      // 删除路由
+       global.db
+            .get('router')
+            .remove({
+              entityId: entity.id,
+              pageType: 'update'
+            })
+            .write()
+      syncConfig('router')
+
+      var foldPath = `${global.feCodeRootPath}/src/auto/views/${page.basic.codePath}`
+      return foldPath
+    }
 }
 
 function expendCofigToFile(id, isEjected) {

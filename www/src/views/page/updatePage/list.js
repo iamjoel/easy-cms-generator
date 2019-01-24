@@ -16,7 +16,7 @@ export default {
       return res ? res.label : '-'
     },
     remove(id, index) {
-      this.$confirm(`确认删除: ${this.list[index].name} 对应的编辑页?`,  {
+      this.$confirm(`确认删除: ${this.list[index].basic.entity.name} 对应的编辑页?`,  {
         type: 'warning'
       }).then(() => {
         deleteModel(this.KEY, id).then(({data})=> {

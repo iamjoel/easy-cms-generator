@@ -3,9 +3,14 @@ const apiFormat = require('../utils/apiFormat')
 const tableName = 'entity'
 const commonCRUD = require('./utils/commonCRUD.js')(tableName)
 const curdGenerator = require('./utils/generator-code/server/crud')
-const syncAllConfig = require('./config').syncAllConfig
+const syncService = require('./config')
+const syncAllConfig = syncService.syncAllConfig
+const syncConfig = syncService.sync
 const expendListPage = require('./list-page').expendCofigToFile
 const expendUpdatePage = require('./update-page').expendCofigToFile
+const removeListPage = require('./list-page').removeService
+const removeUpdatePage = require('./update-page').removeService
+const fs = require('fs-extra')
 
 module.exports = {
   list(req, res, pool) {
@@ -81,6 +86,8 @@ module.exports = {
   remove(req, res, pool) {
     removePage(req.params.id)
     commonCRUD.remove(req, res, pool)
+    syncAllConfig() // 所有配置文件
+    // 删除服务器端文件 TODO
   },
   commonCols(req, res, pool) {
     try {
@@ -114,7 +121,6 @@ module.exports = {
   },
   
 }
-
 
 function syncAll(id) {
   var entity = global.db
@@ -336,71 +342,14 @@ function removePage(entityId) {
                     })
                     .value()
                     .basic
-  removePageAndRouter(entityId, entityBasic, 'list')
-  removePageAndRouter(entityId, entityBasic, 'update')
-}
+  try {
+    var pageFold = removeListPage(entityBasic.listPageId, true)
+    removeUpdatePage(entityBasic.updatePageId, true)
 
-function removePageAndRouter(entityId, entityBasic, pageType) {
-  var hasPage = global.db.get(`${pageType}Page`).filter(page => {
-    return page.basic.entity.id === entityId
-  }).value()
-  if(hasPage.length > 0) {
-    // 删页面
-    global.db
-      .get(`${pageType}Page`)
-      .remove({
-        id: hasPage[0].id,
-      })
-      .write()
-
-    // 删菜单
-    if(pageType === 'list') {
-      var entityType = global.db
-                        .get('entityType')
-                        .find({
-                          id: entityBasic.entityTypeId
-                        })
-                        .value()
-      var menu = global.db
-                    .get('menu')
-                    .value()
-
-      var tarRouter = global.db
-                        .get('router')
-                        .find({
-                          entityId: entityId
-                        })
-                        .value()
-
-      if(entityType) {
-        var tarMenuItem
-        var tarPages
-        menu.forEach(item => {
-          if(item.entityTypeId === entityBasic.entityTypeId) {
-            tarMenuItem = item
-          }
-        })
-
-        if(tarMenuItem && tarMenuItem.children && tarMenuItem.children.length > 0) {
-          tarMenuItem.children = tarMenuItem.children.filter(item => item.routerId !== tarRouter.id)
-        }
-
-      } else {
-        menu = menu.filter(item => {
-          console.log(item.routerId === tarRouter.id)
-          return item.routerId !== tarRouter.id
-        })
-      }
-
-      global.db.set('menu', menu).write()
+    if(pageFold) {
+      fs.removeSync(pageFold) // 删除文件夹
     }
-
-    // 删路由
-    global.db
-      .get('router')
-      .remove({
-        entityId,
-      })
-      .write()
+  } catch(e) {
+    console.error(e)
   }
 }

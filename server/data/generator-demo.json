@@ -16,23 +16,7 @@
       "label": "其他"
     }
   ],
-  "dict": [
-    {
-      "id": "3dda8247-1350-8cc2-8c75-f90fdfcf0fa1",
-      "key": "ddddddddd",
-      "label": "a",
-      "value": [
-        {
-          "key": "a",
-          "label": "一"
-        },
-        {
-          "key": "b",
-          "label": "二"
-        }
-      ]
-    }
-  ],
+  "dict": [],
   "entityConfig": {
     "commonCols": [
       {
@@ -66,134 +50,11 @@
       "label": "人员"
     }
   ],
-  "entity": [
-    {
-      "id": "3024d63a-96e9-c5d2-4c59-6a6941004e5f",
-      "updateAt": 1548300976333,
-      "basic": {
-        "isPublic": true,
-        "hasListPage": true,
-        "hasUpdatePage": true,
-        "isShowInMenu": true,
-        "name": "tee",
-        "des": "哈哈"
-      },
-      "cols": [
-        {
-          "label": "名称",
-          "key": "name",
-          "dataType": "string",
-          "maxLength": 10,
-          "required": true,
-          "isSyncToListPage": true,
-          "isSyncToUpdatePage": true
-        },
-        {
-          "label": "年龄",
-          "key": "age",
-          "dataType": "string",
-          "maxLength": 10,
-          "required": true,
-          "isSyncToListPage": false,
-          "isSyncToUpdatePage": true
-        }
-      ],
-      "isSynced": false,
-      "isShowInMenu": false
-    }
-  ],
-  "listPage": [
-    {
-      "id": "22b09294-650c-978e-c6e0-270ec9ef8c18",
-      "updateAt": 1548300976309,
-      "basic": {
-        "entity": {
-          "id": "3024d63a-96e9-c5d2-4c59-6a6941004e5f",
-          "name": "tee"
-        },
-        "codePath": "tee"
-      },
-      "cols": [
-        {
-          "key": "name",
-          "label": "名称",
-          "dataType": "string",
-          "formatFn": null,
-          "required": true
-        }
-      ],
-      "operate": {
-        "add": {
-          "isShow": true
-        },
-        "edit": {
-          "isShow": true
-        },
-        "detail": {
-          "isShow": true
-        },
-        "delete": {
-          "isShow": true
-        }
-      },
-      "searchCondition": []
-    }
-  ],
-  "updatePage": [
-    {
-      "id": "503a51d7-1449-d45f-1405-79f39a9ac422",
-      "updateAt": 1548300976314,
-      "basic": {
-        "entity": {
-          "id": "3024d63a-96e9-c5d2-4c59-6a6941004e5f",
-          "name": "tee"
-        },
-        "codePath": "tee"
-      },
-      "cols": [
-        {
-          "key": "name",
-          "label": "名称",
-          "dataType": "string",
-          "formatFn": null,
-          "required": true
-        },
-        {
-          "key": "age",
-          "label": "年龄",
-          "dataType": "string",
-          "formatFn": null,
-          "required": true
-        }
-      ],
-      "fn": []
-    }
-  ],
-  "router": [
-    {
-      "id": "f93c7e96-572c-9623-e2a9-ceaecf3dfd02",
-      "entityId": "3024d63a-96e9-c5d2-4c59-6a6941004e5f",
-      "name": "哈哈列表页",
-      "pageId": "22b09294-650c-978e-c6e0-270ec9ef8c18",
-      "pageType": "list",
-      "routePath": "/tee/list",
-      "filePath": "tee/List.vue",
-      "updateAt": 1548300976313
-    },
-    {
-      "id": "a912a9f5-9cab-3223-1e42-eeefe0c41231",
-      "entityId": "3024d63a-96e9-c5d2-4c59-6a6941004e5f",
-      "name": "哈哈更新页",
-      "pageId": "503a51d7-1449-d45f-1405-79f39a9ac422",
-      "pageType": "update",
-      "routePath": "/tee/update/:id",
-      "filePath": "tee/Update.vue",
-      "updateAt": 1548300976318
-    }
-  ],
-  "menu": [
-    
-  ],
+  "entity": [],
+  "listPage": [],
+  "updatePage": [],
+  "router": [],
+  "menu": [],
   "syncStatus": {
     "dict": false,
     "entity": false,

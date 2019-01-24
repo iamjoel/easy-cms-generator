@@ -8,7 +8,7 @@ const syncToServerCode = require('./utils/generator-code/server/server')
 module.exports = {
   syncToProject(req, res) {
     try {
-      doSyncToServerCode()
+      syncAllConfig()
       res.send(apiFormat.success({}))
     } catch(e) {
       res.send(apiFormat.error(e))
@@ -16,6 +16,9 @@ module.exports = {
   },
   syncAllConfig() {
     syncAllConfig()
+  },
+  sync(type) {
+    sync(type)
   },
   generatorDBSchema(req, res) {
     var entityData = global.db.get('entity')
