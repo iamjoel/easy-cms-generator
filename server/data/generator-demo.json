@@ -79,7 +79,15 @@
         "listPageId": "5a6bf23f-8fb8-0c1b-f52b-1d309aef9b24",
         "updatePageId": "2a167ac8-d574-a7e4-f54d-d14eed17026d"
       },
-      "cols": [],
+      "cols": [
+        {
+          "label": "分发到",
+          "key": "aB",
+          "dataType": "string",
+          "maxLength": 10,
+          "required": true
+        }
+      ],
       "isSynced": false,
       "isShowInMenu": false
     },
@@ -117,7 +125,6 @@
     },
     {
       "id": "6f16eed4-cf43-6ef5-b51d-8d02e7d34f25",
-      "updateAt": 1548247647692,
       "basic": {
         "isPublic": true,
         "hasListPage": true,
@@ -135,7 +142,6 @@
     },
     {
       "id": "4b39c9c2-1cf5-2b28-f381-17793e3acaba",
-      "updateAt": 1548248134922,
       "basic": {
         "isPublic": true,
         "hasListPage": true,
@@ -155,7 +161,7 @@
   "listPage": [
     {
       "id": "5a6bf23f-8fb8-0c1b-f52b-1d309aef9b24",
-      "updateAt": 1548247301591,
+      "updateAt": 1548299755513,
       "basic": {
         "entity": {
           "id": "80ed219f-6867-8bce-6e2a-a92234a161f7",
@@ -163,7 +169,13 @@
         },
         "codePath": "c"
       },
-      "cols": [],
+      "cols": [
+        {
+          "label": "aa",
+          "key": "d",
+          "formatFn": null
+        }
+      ],
       "operate": {
         "add": {
           "isShow": true
@@ -178,7 +190,9 @@
           "isShow": true
         }
       },
-      "searchCondition": []
+      "searchCondition": [],
+      "fn": [],
+      "isSynced": false
     }
   ],
   "updatePage": [
@@ -281,8 +295,7 @@
       "pageId": "c96bc1dc-6f34-5eec-5984-115660633793",
       "pageType": "update",
       "routePath": "/people/stu/update/:id",
-      "filePath": "people/stu/Update.vue",
-      "updateAt": 1548247647688
+      "filePath": "people/stu/Update.vue"
     }
   ],
   "menu": [
@@ -299,7 +312,6 @@
       "entityTypeId": "2f17368e-0356-ede1-ec50-ccfb9adf339e",
       "routerId": null,
       "name": "人员",
-      "updateAt": 1548247647689,
       "children": [
         {
           "routerId": "d8f3b914-896f-8d17-b560-2e9c93a67457",

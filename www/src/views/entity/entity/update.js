@@ -23,7 +23,7 @@ export default {
         label: '',
         key: '',
         dataType: 'string',
-        maxLength: null,
+        maxLength: 10,
         required: true,
       },
       colsDataType: [{
@@ -97,6 +97,11 @@ export default {
       
       model.basic = model.basic || {}
       model.cols = model.cols || []
+
+      if(!this.$isColValid(model.cols)) {
+        return
+      }
+
       if(!model.hasListPage) {
         model.isShowInMenu = false
       }
@@ -111,6 +116,7 @@ export default {
         this.$router.go(-1)
       })
     },
+
     
     deepClone,
     fetchDetail() {

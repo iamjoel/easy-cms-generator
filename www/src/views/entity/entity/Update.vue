@@ -11,8 +11,8 @@
           </j-edit-item>
 
           <j-edit-item
-            label="说明" prop="des">
-            <el-input v-model="model.basic.des" placeholder="请输入说明"></el-input>
+            label="中文名" prop="des">
+            <el-input v-model="model.basic.des" placeholder="请输入中文名"></el-input>
           </j-edit-item>
 
           <j-edit-item
@@ -93,7 +93,7 @@
           </el-table-column>
           <el-table-column
             prop="label"
-            label="说明(中文)"
+            label="中文名"
             >
             <template  slot-scope="scope">
               <el-input v-model="scope.row.label" placeholder=""></el-input>

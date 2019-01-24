@@ -26,7 +26,7 @@
       </el-table-column>
       <el-table-column
         prop="basic.des"
-        label="说明"
+        label="中文名"
         >
       </el-table-column>
       <el-table-column

@@ -26,14 +26,35 @@ Vue.prototype.toArray = (data) => {
   return value
 }
 
-Vue.prototype.syncConfig = () => {
-  axios.post(`${SERVER_PREFIX}/config/sync`).then(({data}) => {
+Vue.prototype.$isColValid = (cols) => {
+  var errMsg
+
+  cols.forEach((col, index) => {
+    if(errMsg) {
+      return
+    }
+    if(!col.key) {
+      errMsg = `第${index + 1}条, 请输入名称`
+    } else if(/-/.test(col.key)) {
+      errMsg = `第${index + 1}条, 名称中不能带中划线`
+    } else if(!col.label) {
+      errMsg = `第${index  + 1}条, 请输入中文名`
+    } else if(/-/.test(col.label)) {
+      errMsg = `第${index + 1}条, 中文名中不能带中划线`
+    } else if(!col.label) {
+      errMsg = `第${index  + 1}条, 请选择数据类型`
+    }
+  })
+
+  if(errMsg) {
     Message({
       showClose: true,
-      message: '同步成功',
-      type: 'success'
+      message: errMsg,
+      type: 'error'
     })
-  })
+    return false
+  }
+  return true
 };
 
 import axios from 'axios'

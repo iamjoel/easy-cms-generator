@@ -165,6 +165,7 @@ export default {
     save() {
       var model = deepClone(this.model)
       model.isSynced = false
+      model.cols = model.cols || []
       model.cols = model.cols.map(item => {
         if(item.dataType !== 'select') {
           delete item.dataSource
@@ -174,6 +175,11 @@ export default {
         }
         return item
       })
+
+      if(!this.$isColValid(model.cols)) {
+        return
+      }
+
       model.fn = model.fn.filter(item => {
         return item.name.indexOf('sys') === -1
       }).map(item => {

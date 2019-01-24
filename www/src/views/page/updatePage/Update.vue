@@ -35,20 +35,19 @@
             width="80">
           </el-table-column>
           <el-table-column
-            prop="label"
-            label="显示名称"
-            >
-            <template  slot-scope="scope">
-              <el-input v-model="scope.row.label" placeholder=""></el-input>
-            </template>
-          </el-table-column>
-          
-          <el-table-column
             prop="key"
-            label="字段key"
+            label="名称"
             >
             <template  slot-scope="scope">
               <el-input v-model="scope.row.key" placeholder=""></el-input>
+            </template>
+          </el-table-column>
+          <el-table-column
+            prop="label"
+            label="中文名"
+            >
+            <template  slot-scope="scope">
+              <el-input v-model="scope.row.label" placeholder=""></el-input>
             </template>
           </el-table-column>
           <el-table-column

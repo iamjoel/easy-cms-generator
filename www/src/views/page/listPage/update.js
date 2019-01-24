@@ -141,6 +141,10 @@ export default {
       model.basic = model.basic || {}
       model.basic.codePath = model.basic.codePath || this.defaultCodePath
       model.cols = model.cols || []
+
+      if(!this.$isColValid(model.cols)) {
+        return
+      }
       model.operate = model.operate || {}
       this.opList.forEach(op => {
         model.operate[op.key] =  model.operate[op.key] || {}
