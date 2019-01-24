@@ -30,24 +30,16 @@ export default {
       })
     },
     eject(id) {
-      this.$http.post(`${SERVER_PREFIX}/update-page/eject/${id}`).then(({data})=> {
-        this.fetchList()
-        this.$message({
-          showClose: true,
-          message: '操作成功',
-          type: 'success'
-        })
-      })
-    },
-    toggleFreeze(row) {
-      this.$http.post(`${SERVER_PREFIX}/update-page/updateFreeze/${row.id}`, {
-        isFreeze: row.isFreeze == 1 ? 0 : 1
-      }).then(()=> {
-        row.isFreeze = row.isFreeze == 1 ? 0 : 1
-        this.$message({
-          showClose: true,
-          message: '操作成功',
-          type: 'success'
+      this.$confirm(`弹出操作不可逆?确认弹出`,  {
+        type: 'warning'
+      }).then(() => {
+        this.$http.post(`${SERVER_PREFIX}/updatePage-eject/${id}`).then(({data})=> {
+          this.fetchList()
+          this.$message({
+            showClose: true,
+            message: '操作成功',
+            type: 'success'
+          })
         })
       })
     },
@@ -58,8 +50,7 @@ export default {
           this.list = data.data.map(item => {
             return {
               id: item.id,
-              isFreeze: item.isFreeze,
-              isSynced: item.isSynced,
+              isEjected: item.isEjected,
               basic: item.basic,
               entityTypeName: this.getTypeName(item.basic.entity.entityTypeId)
             }

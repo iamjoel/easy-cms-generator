@@ -38,6 +38,24 @@ module.exports = {
   expendCofigToFile(id) {
     expendCofigToFile(id)
   },
+  eject(req, res) {
+    try {
+      var id = req.params.id
+      var page = global.db
+                    .get(tableName)
+                    .find({
+                      id
+                    })
+                    .value()
+      expendCofigToFile(id, true)
+      removePrevFiles(page)
+      updateRoute()
+      res.send(apiFormat.success())
+    } catch(error) {
+      res.send(apiFormat.error(error))
+    }
+
+  },
   remove(req, res, pool) {
     var page = global.db
                     .get(tableName)
@@ -61,9 +79,44 @@ module.exports = {
             })
             .write()
     }
+    updateRoute()
 
     commonCRUD.remove(req, res, pool)
   },
+}
+
+function removePrevFiles(page) {
+  var codePath = `${global.feCodeRootPath}/src/auto/views/${page.basic.codePath ? page.basic.codePath : page.basic.entity}`
+  fs.remove(`${codePath}/Update.vue`)
+  fs.remove(`${codePath}/update.js`)
+  fs.remove(`${codePath}/model.js`)
+}
+
+function updateRoute() {
+  var listPageList = global.db.get('listPage').value()
+  var updatePageList = global.db.get('updatePage').value()
+  var router = global.db.get('router').value()
+
+  var res = []
+  router.forEach(item => {
+    var pageList = item.pageType === 'list' ? listPageList : updatePageList
+    var isEjected = !!pageList.filter(page => page.id === item.pageId)[0].isEjected
+
+    res.push({
+      routePath: item.routePath,
+      filePath: item.filePath,
+      isEjected
+    })
+    // 根据更新页路由，添加详情页路由。
+    if(item.type === 'update') {
+      res.push({
+        routePath: item.routePath.replace('/update', '/view'),
+        filePath: item.filePath
+      })
+    }
+  })
+  var filePath = `${global.feCodeRootPath}/src/auto/setting/base/router.js`
+  fs.outputFileSync(filePath, 'export default ' + JSON.stringify(res, null, '\t'))
 }
 
 function addService(data) {
@@ -105,6 +158,18 @@ function expendCofigToFile(id, isEjected) {
   }
   var {vue, js, model} = generatorCode(config)
   var codePath = `${global.feCodeRootPath}/src/${!isEjected ? 'auto/' : ''}views/${config.basic.codePath ? config.basic.codePath : config.basic.entity}`
+  if(isEjected) {
+    global.db
+        .get(tableName)
+        .find({
+          id
+        })
+        .assign({
+          updateAt: Date.now(),
+          isEjected: true
+        })
+        .write()
+  }
   writeFile(`${codePath}/Update.vue`, vue)
   writeFile(`${codePath}/update.js`, js)
   writeFile(`${codePath}/model.js`, model)

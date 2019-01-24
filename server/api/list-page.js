@@ -87,37 +87,75 @@ module.exports = {
       // 删菜单
       global.db.set('menu', menu).write()
       // 删除路由
-       global.db
+      global.db
             .get('router')
             .remove({
               entityId: entity.id,
               pageType: 'list'
             })
             .write()
+
     }
 
     commonCRUD.remove(req, res, pool)
+    updateRoute()
   },
   // 根据配置，展开代码，保存到文件
   expendCofigToFile(id) {
     expendCofigToFile(id)
+
   },
-  updateFreeze(req, res, pool) {
+  eject(req, res) {
     try {
-      global.db
-            .get(tableName)
-            .find({
-              id: req.params.id,
-            })
-            .assign({
-              isFreeze: req.body.isFreeze
-            })
-            .write()
-        res.send(apiFormat.success())
+      var id = req.params.id
+      var page = global.db
+                    .get(tableName)
+                    .find({
+                      id
+                    })
+                    .value()
+      expendCofigToFile(id, true)
+      removePrevFiles(page)
+      updateRoute()
+      res.send(apiFormat.success())
     } catch(error) {
-      res.send(apiFormat.error(error));
+      res.send(apiFormat.error(error))
     }
+
   }
+}
+
+function removePrevFiles(page) {
+  var codePath = `${global.feCodeRootPath}/src/auto/views/${page.basic.codePath ? page.basic.codePath : page.basic.entity}`
+  fs.remove(`${codePath}/List.vue`)
+  fs.remove(`${codePath}/list.js`)
+}
+
+function updateRoute() {
+  var listPageList = global.db.get('listPage').value()
+  var updatePageList = global.db.get('updatePage').value()
+  var router = global.db.get('router').value()
+
+  var res = []
+  router.forEach(item => {
+    var pageList = item.pageType === 'list' ? listPageList : updatePageList
+    var isEjected = !!pageList.filter(page => page.id === item.pageId)[0].isEjected
+
+    res.push({
+      routePath: item.routePath,
+      filePath: item.filePath,
+      isEjected
+    })
+    // 根据更新页路由，添加详情页路由。
+    if(item.type === 'update') {
+      res.push({
+        routePath: item.routePath.replace('/update', '/view'),
+        filePath: item.filePath
+      })
+    }
+  })
+  var filePath = `${global.feCodeRootPath}/src/auto/setting/base/router.js`
+  fs.outputFileSync(filePath, 'export default ' + JSON.stringify(res, null, '\t'))
 }
 
 function addService(data) {
@@ -159,7 +197,19 @@ function expendCofigToFile(id, isEjected) {
   }
   var {vue, js} = generatorCode(config)
   var codePath = `${global.feCodeRootPath}/src/${!isEjected ? 'auto/' : ''}views/${config.basic.codePath ? config.basic.codePath : config.basic.entity}`
-
+  if(isEjected) {
+    global.db
+        .get(tableName)
+        .find({
+          id
+        })
+        .assign({
+          updateAt: Date.now(),
+          isEjected: true
+        })
+        .write()
+  }
+  
   writeFile(`${codePath}/List.vue`, vue)
   writeFile(`${codePath}/list.js`, js)
 }

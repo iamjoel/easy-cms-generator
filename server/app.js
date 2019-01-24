@@ -113,6 +113,10 @@ app.post(`/listPage/:id`, (req,res) => {
   listPageApi.edit(req, res)
 })
 
+app.post(`/listPage-eject/:id`, (req,res) => {
+  listPageApi.eject(req, res)
+})
+
 app.delete(`/listPage/:id`, (req,res) => {
   listPageApi.remove(req, res)
 })
@@ -132,6 +136,10 @@ app.put(`/updatePage`, (req,res) => {
 
 app.post(`/updatePage/:id`, (req,res) => {
   updatePageApi.edit(req, res)
+})
+
+app.post(`/updatePage-eject/:id`, (req,res) => {
+  updatePageApi.eject(req, res)
 })
 
 app.delete(`/updatePage/:id`, (req,res) => {

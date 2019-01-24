@@ -125,7 +125,27 @@
         "isShowInMenu": true,
         "name": "stu",
         "des": "学生",
-        "entityTypeId": "2f17368e-0356-ede1-ec50-ccfb9adf339e"
+        "entityTypeId": "2f17368e-0356-ede1-ec50-ccfb9adf339e",
+        "listPageId": "10e1fdbc-8a4a-aeb0-bdf8-1d3ef4f6d54a",
+        "updatePageId": "c96bc1dc-6f34-5eec-5984-115660633793"
+      },
+      "cols": [],
+      "isSynced": false,
+      "isShowInMenu": false
+    },
+    {
+      "id": "4b39c9c2-1cf5-2b28-f381-17793e3acaba",
+      "updateAt": 1548248134922,
+      "basic": {
+        "isPublic": true,
+        "hasListPage": true,
+        "hasUpdatePage": true,
+        "isShowInMenu": true,
+        "name": "ccccccccc",
+        "des": "a",
+        "entityTypeId": "2f17368e-0356-ede1-ec50-ccfb9adf339e",
+        "listPageId": "8e274005-2be9-7b4c-3b08-19a47adc3d1d",
+        "updatePageId": "bfbf8832-c286-1fb4-2015-4ca91b6aa307"
       },
       "cols": [],
       "isSynced": false,
@@ -142,88 +162,6 @@
           "name": "c"
         },
         "codePath": "c"
-      },
-      "cols": [],
-      "operate": {
-        "add": {
-          "isShow": true
-        },
-        "edit": {
-          "isShow": true
-        },
-        "detail": {
-          "isShow": true
-        },
-        "delete": {
-          "isShow": true
-        }
-      },
-      "searchCondition": []
-    },
-    {
-      "id": "d597623c-e39c-1f22-59b6-a9b8512091bf",
-      "updateAt": 1548247502359,
-      "basic": {
-        "entity": {
-          "id": "5903d68e-a91f-10e1-0dde-4d3b5a52c512",
-          "name": "fff"
-        },
-        "codePath": "fff"
-      },
-      "cols": [],
-      "operate": {
-        "add": {
-          "isShow": true
-        },
-        "edit": {
-          "isShow": true
-        },
-        "detail": {
-          "isShow": true
-        },
-        "delete": {
-          "isShow": true
-        }
-      },
-      "searchCondition": []
-    },
-    {
-      "id": "0f88eb6f-0dce-a4fc-af1d-e5c92438d313",
-      "updateAt": 1548247574061,
-      "basic": {
-        "entity": {
-          "id": "4c80ee93-1bf2-a6dc-156f-580a73a85120",
-          "name": "aaa"
-        },
-        "codePath": "aaa"
-      },
-      "cols": [],
-      "operate": {
-        "add": {
-          "isShow": true
-        },
-        "edit": {
-          "isShow": true
-        },
-        "detail": {
-          "isShow": true
-        },
-        "delete": {
-          "isShow": true
-        }
-      },
-      "searchCondition": []
-    },
-    {
-      "id": "10e1fdbc-8a4a-aeb0-bdf8-1d3ef4f6d54a",
-      "updateAt": 1548247647684,
-      "basic": {
-        "entity": {
-          "id": "6f16eed4-cf43-6ef5-b51d-8d02e7d34f25",
-          "name": "stu",
-          "entityTypeId": "2f17368e-0356-ede1-ec50-ccfb9adf339e"
-        },
-        "codePath": "people/stu"
       },
       "cols": [],
       "operate": {
@@ -272,7 +210,7 @@
     },
     {
       "id": "191526cb-c698-21c8-d8ec-1c94bc13a59c",
-      "updateAt": 1548247574066,
+      "updateAt": 1548296927805,
       "basic": {
         "entity": {
           "id": "4c80ee93-1bf2-a6dc-156f-580a73a85120",
@@ -281,7 +219,8 @@
         "codePath": "aaa"
       },
       "cols": [],
-      "fn": []
+      "fn": [],
+      "isEjected": true
     },
     {
       "id": "c96bc1dc-6f34-5eec-5984-115660633793",
@@ -318,15 +257,6 @@
       "filePath": "c/Update.vue"
     },
     {
-      "id": "f59fd415-ab9a-bb55-6ae7-7e16d82f1a2a",
-      "entityId": "5903d68e-a91f-10e1-0dde-4d3b5a52c512",
-      "name": "是列表页",
-      "pageId": "d597623c-e39c-1f22-59b6-a9b8512091bf",
-      "pageType": "list",
-      "routePath": "/fff/list",
-      "filePath": "fff/List.vue"
-    },
-    {
       "id": "6c3d76ee-f1c8-00fe-8aa6-75ad3616e232",
       "entityId": "5903d68e-a91f-10e1-0dde-4d3b5a52c512",
       "name": "是更新页",
@@ -336,15 +266,6 @@
       "filePath": "fff/Update.vue"
     },
     {
-      "id": "56abf8a3-d6d5-b60e-7bb0-fb41de0cfa89",
-      "entityId": "4c80ee93-1bf2-a6dc-156f-580a73a85120",
-      "name": "阿列表页",
-      "pageId": "0f88eb6f-0dce-a4fc-af1d-e5c92438d313",
-      "pageType": "list",
-      "routePath": "/aaa/list",
-      "filePath": "aaa/List.vue"
-    },
-    {
       "id": "d46e2032-e685-a4be-6035-97f36a38b8ac",
       "entityId": "4c80ee93-1bf2-a6dc-156f-580a73a85120",
       "name": "阿更新页",
@@ -352,16 +273,6 @@
       "pageType": "update",
       "routePath": "/aaa/update/:id",
       "filePath": "aaa/Update.vue"
-    },
-    {
-      "id": "d8f3b914-896f-8d17-b560-2e9c93a67457",
-      "entityId": "6f16eed4-cf43-6ef5-b51d-8d02e7d34f25",
-      "name": "学生列表页",
-      "pageId": "10e1fdbc-8a4a-aeb0-bdf8-1d3ef4f6d54a",
-      "pageType": "list",
-      "routePath": "/people/stu/list",
-      "filePath": "people/stu/List.vue",
-      "updateAt": 1548247647686
     },
     {
       "id": "529450c5-5691-bb6c-d4b0-b86b66a50442",
@@ -383,20 +294,6 @@
       "name": "测"
     },
     {
-      "id": "3c2e4936-5120-41d2-436f-099f3f72b111",
-      "isPage": 1,
-      "entityTypeId": null,
-      "routerId": "f59fd415-ab9a-bb55-6ae7-7e16d82f1a2a",
-      "name": "是"
-    },
-    {
-      "id": "a2eaeada-1790-adaa-d52d-b69fff8b621d",
-      "isPage": 1,
-      "entityTypeId": null,
-      "routerId": "56abf8a3-d6d5-b60e-7bb0-fb41de0cfa89",
-      "name": "阿"
-    },
-    {
       "id": "28f4f351-269d-ed65-9d30-78f9c5de68dc",
       "isPage": 0,
       "entityTypeId": "2f17368e-0356-ede1-ec50-ccfb9adf339e",
@@ -407,6 +304,12 @@
         {
           "routerId": "d8f3b914-896f-8d17-b560-2e9c93a67457",
           "name": "学生",
+          "showType": "show",
+          "roleIds": []
+        },
+        {
+          "routerId": "82e4ded2-09b1-6c46-6edb-8b3901201ba9",
+          "name": "a",
           "showType": "show",
           "roleIds": []
         }
