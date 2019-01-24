@@ -133,13 +133,22 @@ function writeConfigFile(name, content, [entityList, entityTypeList, router, lis
             return each.id === item.routerId
           })[0]
           res.path = router ? router.routePath : ''
-         
+          if(!res.path) {
+            console.error(`${res.name} not has Route`)
+          }
         } else {
-          res.children = item.children.map(page => {
+          res.children = item.children.map(subMenu => {
+            let router = routerList.filter(each => each.id === subMenu.routerId)[0]
+            let path
+            if (router) {
+              path = router.routePath
+            } else {
+              console.error(`${subMenu.name} not has Route`)
+            }
             return {
-              id: page.routerId,
-              name: page.name,
-              path: routerList.filter(each => each.id === page.routerId)[0].routePath,
+              id: subMenu.routerId,
+              name: subMenu.name,
+              path,
               role: item.roleIds
             }
           })

@@ -68,112 +68,58 @@
   ],
   "entity": [
     {
-      "id": "80ed219f-6867-8bce-6e2a-a92234a161f7",
+      "id": "3024d63a-96e9-c5d2-4c59-6a6941004e5f",
+      "updateAt": 1548300976333,
       "basic": {
         "isPublic": true,
         "hasListPage": true,
         "hasUpdatePage": true,
         "isShowInMenu": true,
-        "name": "c",
-        "des": "测",
-        "listPageId": "5a6bf23f-8fb8-0c1b-f52b-1d309aef9b24",
-        "updatePageId": "2a167ac8-d574-a7e4-f54d-d14eed17026d"
+        "name": "tee",
+        "des": "哈哈"
       },
       "cols": [
         {
-          "label": "分发到",
-          "key": "aB",
+          "label": "名称",
+          "key": "name",
           "dataType": "string",
           "maxLength": 10,
-          "required": true
+          "required": true,
+          "isSyncToListPage": true,
+          "isSyncToUpdatePage": true
+        },
+        {
+          "label": "年龄",
+          "key": "age",
+          "dataType": "string",
+          "maxLength": 10,
+          "required": true,
+          "isSyncToListPage": false,
+          "isSyncToUpdatePage": true
         }
       ],
-      "isSynced": false,
-      "isShowInMenu": false
-    },
-    {
-      "id": "5903d68e-a91f-10e1-0dde-4d3b5a52c512",
-      "basic": {
-        "isPublic": true,
-        "hasListPage": true,
-        "hasUpdatePage": true,
-        "isShowInMenu": true,
-        "name": "fff",
-        "des": "是",
-        "listPageId": "d597623c-e39c-1f22-59b6-a9b8512091bf",
-        "updatePageId": "95e6357b-bc1e-2ca2-19b8-14aa80ba2c01"
-      },
-      "cols": [],
-      "isSynced": false,
-      "isShowInMenu": false
-    },
-    {
-      "id": "4c80ee93-1bf2-a6dc-156f-580a73a85120",
-      "basic": {
-        "isPublic": true,
-        "hasListPage": true,
-        "hasUpdatePage": true,
-        "isShowInMenu": true,
-        "name": "aaa",
-        "des": "阿",
-        "listPageId": "0f88eb6f-0dce-a4fc-af1d-e5c92438d313",
-        "updatePageId": "191526cb-c698-21c8-d8ec-1c94bc13a59c"
-      },
-      "cols": [],
-      "isSynced": false,
-      "isShowInMenu": false
-    },
-    {
-      "id": "6f16eed4-cf43-6ef5-b51d-8d02e7d34f25",
-      "basic": {
-        "isPublic": true,
-        "hasListPage": true,
-        "hasUpdatePage": true,
-        "isShowInMenu": true,
-        "name": "stu",
-        "des": "学生",
-        "entityTypeId": "2f17368e-0356-ede1-ec50-ccfb9adf339e",
-        "listPageId": "10e1fdbc-8a4a-aeb0-bdf8-1d3ef4f6d54a",
-        "updatePageId": "c96bc1dc-6f34-5eec-5984-115660633793"
-      },
-      "cols": [],
-      "isSynced": false,
-      "isShowInMenu": false
-    },
-    {
-      "id": "4b39c9c2-1cf5-2b28-f381-17793e3acaba",
-      "basic": {
-        "isPublic": true,
-        "hasListPage": true,
-        "hasUpdatePage": true,
-        "isShowInMenu": true,
-        "name": "ccccccccc",
-        "des": "a",
-        "entityTypeId": "2f17368e-0356-ede1-ec50-ccfb9adf339e",
-        "listPageId": "8e274005-2be9-7b4c-3b08-19a47adc3d1d",
-        "updatePageId": "bfbf8832-c286-1fb4-2015-4ca91b6aa307"
-      },
-      "cols": [],
       "isSynced": false,
       "isShowInMenu": false
     }
   ],
   "listPage": [
     {
-      "id": "5a6bf23f-8fb8-0c1b-f52b-1d309aef9b24",
-      "updateAt": 1548299755513,
+      "id": "22b09294-650c-978e-c6e0-270ec9ef8c18",
+      "updateAt": 1548300976309,
       "basic": {
         "entity": {
-          "id": "80ed219f-6867-8bce-6e2a-a92234a161f7",
-          "name": "c"
+          "id": "3024d63a-96e9-c5d2-4c59-6a6941004e5f",
+          "name": "tee"
         },
-        "codePath": "c"
+        "codePath": "tee"
       },
       "cols": [
         {
-          "label": "aa",
-          "key": "d",
-          "formatFn": null
+          "key": "name",
+          "label": "名称",
+          "dataType": "string",
+          "formatFn": null,
+          "required": true
         }
       ],
       "operate": {
@@ -190,143 +136,63 @@
           "isShow": true
         }
       },
-      "searchCondition": [],
-      "fn": [],
-      "isSynced": false
+      "searchCondition": []
     }
   ],
   "updatePage": [
     {
-      "id": "2a167ac8-d574-a7e4-f54d-d14eed17026d",
-      "updateAt": 1548247301594,
+      "id": "503a51d7-1449-d45f-1405-79f39a9ac422",
+      "updateAt": 1548300976314,
       "basic": {
         "entity": {
-          "id": "80ed219f-6867-8bce-6e2a-a92234a161f7",
-          "name": "c"
+          "id": "3024d63a-96e9-c5d2-4c59-6a6941004e5f",
+          "name": "tee"
         },
-        "codePath": "c"
+        "codePath": "tee"
       },
-      "cols": [],
-      "fn": []
-    },
-    {
-      "id": "95e6357b-bc1e-2ca2-19b8-14aa80ba2c01",
-      "updateAt": 1548247502363,
-      "basic": {
-        "entity": {
-          "id": "5903d68e-a91f-10e1-0dde-4d3b5a52c512",
-          "name": "fff"
+      "cols": [
+        {
+          "key": "name",
+          "label": "名称",
+          "dataType": "string",
+          "formatFn": null,
+          "required": true
         },
-        "codePath": "fff"
-      },
-      "cols": [],
-      "fn": []
-    },
-    {
-      "id": "191526cb-c698-21c8-d8ec-1c94bc13a59c",
-      "updateAt": 1548296927805,
-      "basic": {
-        "entity": {
-          "id": "4c80ee93-1bf2-a6dc-156f-580a73a85120",
-          "name": "aaa"
-        },
-        "codePath": "aaa"
-      },
-      "cols": [],
-      "fn": [],
-      "isEjected": true
-    },
-    {
-      "id": "c96bc1dc-6f34-5eec-5984-115660633793",
-      "updateAt": 1548247647687,
-      "basic": {
-        "entity": {
-          "id": "6f16eed4-cf43-6ef5-b51d-8d02e7d34f25",
-          "name": "stu",
-          "entityTypeId": "2f17368e-0356-ede1-ec50-ccfb9adf339e"
-        },
-        "codePath": "people/stu"
-      },
-      "cols": [],
+        {
+          "key": "age",
+          "label": "年龄",
+          "dataType": "string",
+          "formatFn": null,
+          "required": true
+        }
+      ],
       "fn": []
     }
   ],
   "router": [
     {
-      "id": "4ab9408e-9df3-0354-03d6-b0fdbe7aae1b",
-      "entityId": "80ed219f-6867-8bce-6e2a-a92234a161f7",
-      "name": "测列表页",
-      "pageId": "5a6bf23f-8fb8-0c1b-f52b-1d309aef9b24",
+      "id": "f93c7e96-572c-9623-e2a9-ceaecf3dfd02",
+      "entityId": "3024d63a-96e9-c5d2-4c59-6a6941004e5f",
+      "name": "哈哈列表页",
+      "pageId": "22b09294-650c-978e-c6e0-270ec9ef8c18",
       "pageType": "list",
-      "routePath": "/c/list",
-      "filePath": "c/List.vue"
+      "routePath": "/tee/list",
+      "filePath": "tee/List.vue",
+      "updateAt": 1548300976313
     },
     {
-      "id": "20348db0-87a3-78a3-2f8c-d57e6dea8d33",
-      "entityId": "80ed219f-6867-8bce-6e2a-a92234a161f7",
-      "name": "测更新页",
-      "pageId": "2a167ac8-d574-a7e4-f54d-d14eed17026d",
+      "id": "a912a9f5-9cab-3223-1e42-eeefe0c41231",
+      "entityId": "3024d63a-96e9-c5d2-4c59-6a6941004e5f",
+      "name": "哈哈更新页",
+      "pageId": "503a51d7-1449-d45f-1405-79f39a9ac422",
       "pageType": "update",
-      "routePath": "/c/update/:id",
-      "filePath": "c/Update.vue"
-    },
-    {
-      "id": "6c3d76ee-f1c8-00fe-8aa6-75ad3616e232",
-      "entityId": "5903d68e-a91f-10e1-0dde-4d3b5a52c512",
-      "name": "是更新页",
-      "pageId": "95e6357b-bc1e-2ca2-19b8-14aa80ba2c01",
-      "pageType": "update",
-      "routePath": "/fff/update/:id",
-      "filePath": "fff/Update.vue"
-    },
-    {
-      "id": "d46e2032-e685-a4be-6035-97f36a38b8ac",
-      "entityId": "4c80ee93-1bf2-a6dc-156f-580a73a85120",
-      "name": "阿更新页",
-      "pageId": "191526cb-c698-21c8-d8ec-1c94bc13a59c",
-      "pageType": "update",
-      "routePath": "/aaa/update/:id",
-      "filePath": "aaa/Update.vue"
-    },
-    {
-      "id": "529450c5-5691-bb6c-d4b0-b86b66a50442",
-      "entityId": "6f16eed4-cf43-6ef5-b51d-8d02e7d34f25",
-      "name": "学生更新页",
-      "pageId": "c96bc1dc-6f34-5eec-5984-115660633793",
-      "pageType": "update",
-      "routePath": "/people/stu/update/:id",
-      "filePath": "people/stu/Update.vue"
+      "routePath": "/tee/update/:id",
+      "filePath": "tee/Update.vue",
+      "updateAt": 1548300976318
     }
   ],
   "menu": [
-    {
-      "id": "e4be4d64-07e8-1b2b-0ff5-f126fc0b36c3",
-      "isPage": 1,
-      "entityTypeId": null,
-      "routerId": "4ab9408e-9df3-0354-03d6-b0fdbe7aae1b",
-      "name": "测"
-    },
-    {
-      "id": "28f4f351-269d-ed65-9d30-78f9c5de68dc",
-      "isPage": 0,
-      "entityTypeId": "2f17368e-0356-ede1-ec50-ccfb9adf339e",
-      "routerId": null,
-      "name": "人员",
-      "children": [
-        {
-          "routerId": "d8f3b914-896f-8d17-b560-2e9c93a67457",
-          "name": "学生",
-          "showType": "show",
-          "roleIds": []
-        },
-        {
-          "routerId": "82e4ded2-09b1-6c46-6edb-8b3901201ba9",
-          "name": "a",
-          "showType": "show",
-          "roleIds": []
-        }
-      ]
-    }
+    
   ],
   "syncStatus": {
     "dict": false,

@@ -130,7 +130,32 @@
               </el-switch>
             </template>
           </el-table-column>
-          
+          <el-table-column
+              prop="label"
+              label="同步到列表页"
+              v-if="isAdd && model.basic.hasListPage"
+              >
+            <template  slot-scope="scope">
+              <el-switch
+                v-model="scope.row.isSyncToListPage"
+                on-text="是"
+                off-text="否">
+              </el-switch>
+            </template>
+          </el-table-column>
+          <el-table-column
+              prop="label"
+              label="同步到更新页"
+              v-if="isAdd && model.basic.hasUpdatePage"
+              >
+            <template  slot-scope="scope">
+              <el-switch
+                v-model="scope.row.isSyncToUpdatePage"
+                on-text="是"
+                off-text="否">
+              </el-switch>
+            </template>
+          </el-table-column>
           <el-table-column
             prop="key"
             label="操作"

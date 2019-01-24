@@ -201,7 +201,7 @@ function addPageAndRoute(entityBasic, entityCols, entityId, pageType) {
           "codePath": `${entityType ? `${entityType.key}/` : ''}${entityName}`
         },
         // 必填项直接同步过去
-        cols: entityCols.filter(col => col.required)
+        cols: entityCols.filter(col => col[`isSyncTo${pageType === 'list' ? 'List' : 'Update'}Page`])
                         .map(col => {
                             return {
                               key: col.key,

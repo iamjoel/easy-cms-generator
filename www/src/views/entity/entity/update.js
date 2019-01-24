@@ -4,11 +4,12 @@ import {fetchList, fetchModel, addModel, editModel} from '@/service/api'
 
 export default {
   components: {
-    'j-edit-item': JEditItem,
+    JEditItem,
   },
   data() {
     return {
       KEY: 'entity',
+      isAdd: this.$route.params.id == -1,
       activeTab: this.$route.params.id == -1 ? 'basic' : 'cols',
       model: {
         basic: {
@@ -25,6 +26,8 @@ export default {
         dataType: 'string',
         maxLength: 10,
         required: true,
+        isSyncToListPage: true,
+        isSyncToUpdatePage: true
       },
       colsDataType: [{
         key: 'string',
