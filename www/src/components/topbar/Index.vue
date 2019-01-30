@@ -1,7 +1,7 @@
 <template>
 <div id="topbar">
   <el-menu theme="dark" :default-active="'2'" mode="horizontal" id="sc-menu">
-    <el-menu-item index="1">管理后台代码生成工具</el-menu-item>
+    <el-menu-item index="1">Easy CMS Generator</el-menu-item>
   </el-menu>
 </div>
 
