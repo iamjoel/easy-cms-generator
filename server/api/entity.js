@@ -87,10 +87,29 @@ module.exports = {
     }
   },
   remove(req, res, pool) {
-    removePage(req.params.id)
+    const id = req.params.id
+    var entity = global.db.get(tableName)
+              .find({
+                id,
+              }).value()
+    var entityType = global.db
+                .get('entityType')
+                .filter(type => type.id === entity.basic.entityTypeId)
+                .value()[0]
+    var entityTypeName
+    if(entityType) {
+      entityTypeName = entityType.key
+    }
+
+    removePage(id)
     commonCRUD.remove(req, res, pool)
     syncAllConfig() // 所有配置文件
-    // 删除服务器端文件 TODO
+    // 删除服务器端文件。弹出的，就不管了。
+    if(!entity.isEjected) {
+      fs.remove(`${global.serverCodeRootPath}/app/service/auto/${entityTypeName ? `${entityTypeName}/` : ''}model/${entity.basic.name}.js`)
+      fs.remove(`${global.serverCodeRootPath}/app/service/auto/${entityTypeName ? `${entityTypeName}/` : ''}${entity.basic.name}.js`)
+      fs.remove(`${global.serverCodeRootPath}/app/controller/auto/${entityTypeName ? `${entityTypeName}/` : ''}${entity.basic.name}.js`)
+    }
   },
   commonCols(req, res, pool) {
     try {
