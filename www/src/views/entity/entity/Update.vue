@@ -6,18 +6,23 @@
         <el-row type="flex" justify="start" class="multi-line">
           <j-edit-item
             label="名称" prop="name">
-            <el-input v-model="model.basic.name" placeholder="请输入名称"></el-input>
+            <el-input v-model="model.basic.name" placeholder="请输入名称" v-if="isAdd"></el-input>
+            <div v-else>{{model.basic.name}}</div>
             <p class="tip">会做为key</p>
           </j-edit-item>
 
           <j-edit-item
             label="中文名" prop="des">
-            <el-input v-model="model.basic.des" placeholder="请输入中文名"></el-input>
+            <el-input v-model="model.basic.des" placeholder="请输入中文名" v-if="isAdd"></el-input>
+            <div v-else>{{model.basic.name}}</div>
           </j-edit-item>
 
           <j-edit-item
             label="所属分类" prop="type">
-            <el-select v-model="model.basic.entityTypeId" placeholder="请选择分类">
+            <el-select 
+              v-model="model.basic.entityTypeId"
+              :disabled="!isAdd"
+              placeholder="请选择分类" >
               <el-option
                 v-for="item in entityTypeList"
                 :key="item.id"
@@ -172,7 +177,56 @@
       </el-tab-pane>
 
       <el-tab-pane label="关联设置" name="relations">
-        设计&开发中...
+        <div class="ly ly-r mb-10">
+          <el-button type="primary" @click="model.relationList.push(deepClone(relationItemTemplate))">添加关联</el-button>
+        </div>
+        <el-table
+          :data="model.relationList"
+          border
+          stripe>
+          <el-table-column
+              prop="name"
+              label="名称"
+              >
+            <template  slot-scope="scope">
+              <el-input v-model="scope.row.name" placeholder="请输入名称"></el-input>
+            </template>
+          </el-table-column>
+          <el-table-column
+              prop="label"
+              label="关联类型"
+              >
+            <template  slot-scope="scope">
+              <el-select v-model="scope.row.type" placeholder="请选择">
+                <el-option
+                  v-for="item in relationTypeList"
+                  :key="item.key"
+                  :label="item.label"
+                  :value="item.key">
+                </el-option>
+              </el-select>
+            </template>
+          </el-table-column>
+          <el-table-column
+              prop="label"
+              label="关联表"
+              >
+            <template  slot-scope="scope">
+              <el-select 
+                v-model="scope.row.relateEntity"
+                placeholder="请选择"
+                clearable
+              >
+                <el-option
+                  v-for="item in canChooseEntityList"
+                  :key="item.basic.name"
+                  :label="item.basic.name"
+                  :value="item.basic.name">
+                </el-option>
+              </el-select>
+            </template>
+          </el-table-column>
+        </el-table>
       </el-tab-pane>
     
     </el-tabs>

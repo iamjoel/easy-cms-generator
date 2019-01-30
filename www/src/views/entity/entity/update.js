@@ -19,6 +19,7 @@ export default {
           isShowInMenu: true
         },
         cols: [],
+        relationList: []
       },
       colItemTemplate: {
         label: '',
@@ -71,6 +72,22 @@ export default {
       entityTypeList: [],
       canSelectEntityList: [],
       entityList: [],
+      relationItemTemplate: {
+        name: null,
+        type: '1ToMore',
+        relateEntity: null,
+      },
+      relationTypeList: [{
+        key: '1ToMore',
+        label: '一对多'
+      }, {
+        key: 'moreToMore',
+        label: '多对多'
+      }, {
+        key: '1To1',
+        label: '一对一'
+      },],
+      canChooseEntityList: []
     }
   },
   methods: {
@@ -93,13 +110,13 @@ export default {
 
       this.model[key] = res
     },
-    
     save() {
       var model = deepClone(this.model)
       model.isSynced = false
       
       model.basic = model.basic || {}
       model.cols = model.cols || []
+      model.relationList = model.relationList || []
 
       if(!this.$isColValid(model.cols)) {
         return
@@ -119,8 +136,6 @@ export default {
         this.$router.go(-1)
       })
     },
-
-    
     deepClone,
     fetchDetail() {
       return new Promise((resolve, reject) => {
@@ -132,8 +147,8 @@ export default {
           const pagesConfig = data.data
 
           var model = deepClone(pagesConfig)
-          model.basic = model.basic
-          model.cols = model.cols
+
+          model.basic = model.basic || {}
 
           model.cols = model.cols || []
           model.cols = model.cols.map(col => {
@@ -142,17 +157,26 @@ export default {
               ...col
             }
           })
-          model.basic = model.basic || {}
           
+          model.relationList = model.relationList || []
 
           this.model = model
           resolve()
         })
       })
       
-    }
+    },
+    
   },
   mounted() {
+    fetchList('entity').then(({data}) => {
+      this.entityList = data.data
+      if(this.isAdd) {
+        this.canChooseEntityList = data.data
+      } else { // 剔除自己
+        this.canChooseEntityList = data.data.filter(item => item.id !== this.$route.params.id)
+      }
+    })
     fetchList('entityType').then(({data}) => {
       this.entityTypeList = data.data
     })

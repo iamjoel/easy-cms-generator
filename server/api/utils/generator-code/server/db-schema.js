@@ -11,7 +11,7 @@ ${entityList.map(entity => {
 ${generatorTable(entity, commonCols)}`
   return res
 }).join('\n')}`
-
+  // todo 多对多的关系也要创建表
   return res
 }
 
@@ -29,11 +29,15 @@ function generatorTable(entity, commonCols = []) {
 -- ----------------------------
 DROP TABLE IF EXISTS \`${name}\`;
 CREATE TABLE \`${name}\` (
-  \`id\` varchar(36) NOT NULL,${cols.map(col => {
+  \`id\` varchar(36) NOT NULL,${cols && cols.length > 0 ? cols.map(col => {
   let res = 
   `${generatorCol(col)}`
   return res
-}).join(',')},
+}).join(',') + ',' : ''}${entity.relationList && entity.relationList.length > 0 ? '\n  ' + entity.relationList.filter(relation => relation.type !== 'moreToMore').map(relation => {
+  let res = 
+  `\`${relation.relateEntity}Id\` COMMENT '关联${relation.name}表'`
+  return res
+}).join(',') + ',' : ''}
   PRIMARY KEY (\`id\`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -72,3 +76,4 @@ function generatorCol(col) {
 `\n  ${content}`
   return res
 }
+

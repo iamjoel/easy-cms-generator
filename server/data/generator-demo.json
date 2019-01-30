@@ -65,7 +65,7 @@
       },
       "cols": [
         {
-          "label": "名称",
+          "label": "姓名",
           "key": "name",
           "dataType": "string",
           "maxLength": 10,
@@ -87,16 +87,16 @@
       "isShowInMenu": false
     },
     {
-      "id": "0899f518-1f25-1355-bf16-030854a416bf",
+      "id": "b4eca3e8-0dc9-ca2e-dab4-0e4c2c9a4ec3",
       "basic": {
         "isPublic": true,
         "hasListPage": true,
         "hasUpdatePage": true,
         "isShowInMenu": true,
-        "name": "member",
-        "des": "会员",
-        "listPageId": "bc902aa1-9675-b850-998a-fa2d038f6c6e",
-        "updatePageId": "0e7e4936-3195-adb2-4188-6dc6c2203eac"
+        "name": "classroom",
+        "des": "教室",
+        "listPageId": "d8c2c3a7-d664-9785-f38c-19a319f9470e",
+        "updatePageId": "528c56ee-1f5e-b45e-939a-cbc82f1162c5"
       },
       "cols": [
         {
@@ -107,20 +107,19 @@
           "required": true,
           "isSyncToListPage": true,
           "isSyncToUpdatePage": true
-        },
+        }
+      ],
+      "relationList": [
         {
-          "label": "描述",
-          "key": "des",
-          "dataType": "text",
-          "maxLength": 10,
-          "required": true,
-          "isSyncToListPage": true,
-          "isSyncToUpdatePage": true
+          "name": "学生",
+          "type": "1ToMore",
+          "relateCol": "name",
+          "relateEntity": "student"
         }
       ],
       "isSynced": false,
       "isShowInMenu": false,
-      "isEjected": true
+      "updateAt": 1548838124555
     }
   ],
   "listPage": [
@@ -160,24 +159,16 @@
       "searchCondition": []
     },
     {
-      "id": "bc902aa1-9675-b850-998a-fa2d038f6c6e",
-      "updateAt": 1548397627874,
+      "id": "534b2601-7ff9-41e4-70ed-b5b82963a9a2",
+      "updateAt": 1548830022287,
       "basic": {
         "entity": {
-          "id": "0899f518-1f25-1355-bf16-030854a416bf",
-          "name": "member"
+          "id": "3bc62ea7-3f89-d195-a5ae-1cabd0c7be6b",
+          "name": "abc"
         },
-        "codePath": "member"
+        "codePath": "abc"
       },
-      "cols": [
-        {
-          "key": "name",
-          "label": "名称",
-          "dataType": "string",
-          "formatFn": null,
-          "required": true
-        }
-      ],
+      "cols": [],
       "operate": {
         "add": {
           "isShow": true
@@ -192,19 +183,17 @@
           "isShow": true
         }
       },
-      "searchCondition": [],
-      "fn": [],
-      "isSynced": false
+      "searchCondition": []
     },
     {
-      "id": "534b2601-7ff9-41e4-70ed-b5b82963a9a2",
-      "updateAt": 1548830022287,
+      "id": "d8c2c3a7-d664-9785-f38c-19a319f9470e",
+      "updateAt": 1548835739043,
       "basic": {
         "entity": {
-          "id": "3bc62ea7-3f89-d195-a5ae-1cabd0c7be6b",
-          "name": "abc"
+          "id": "b4eca3e8-0dc9-ca2e-dab4-0e4c2c9a4ec3",
+          "name": "classroom"
         },
-        "codePath": "abc"
+        "codePath": "classroom"
       },
       "cols": [],
       "operate": {
@@ -247,34 +236,6 @@
       "fn": []
     },
     {
-      "id": "0e7e4936-3195-adb2-4188-6dc6c2203eac",
-      "updateAt": 1548397523494,
-      "basic": {
-        "entity": {
-          "id": "0899f518-1f25-1355-bf16-030854a416bf",
-          "name": "member"
-        },
-        "codePath": "member"
-      },
-      "cols": [
-        {
-          "key": "name",
-          "label": "名称",
-          "dataType": "string",
-          "formatFn": null,
-          "required": true
-        },
-        {
-          "key": "des",
-          "label": "描述",
-          "dataType": "text",
-          "formatFn": null,
-          "required": true
-        }
-      ],
-      "fn": []
-    },
-    {
       "id": "27475311-ed9d-05c8-5220-d39ad65f8b96",
       "updateAt": 1548830022292,
       "basic": {
@@ -283,6 +244,19 @@
           "name": "abc"
         },
         "codePath": "abc"
+      },
+      "cols": [],
+      "fn": []
+    },
+    {
+      "id": "528c56ee-1f5e-b45e-939a-cbc82f1162c5",
+      "updateAt": 1548835739057,
+      "basic": {
+        "entity": {
+          "id": "b4eca3e8-0dc9-ca2e-dab4-0e4c2c9a4ec3",
+          "name": "classroom"
+        },
+        "codePath": "classroom"
       },
       "cols": [],
       "fn": []
@@ -308,24 +282,6 @@
       "filePath": "student/Update.vue"
     },
     {
-      "id": "3fd8a38a-cd7e-b46c-7e0a-95cd20fb54a0",
-      "entityId": "0899f518-1f25-1355-bf16-030854a416bf",
-      "name": "会员列表页",
-      "pageId": "bc902aa1-9675-b850-998a-fa2d038f6c6e",
-      "pageType": "list",
-      "routePath": "/member/list",
-      "filePath": "member/List.vue"
-    },
-    {
-      "id": "43d82ddb-c23c-d3be-2ec5-cb8c8cf0b668",
-      "entityId": "0899f518-1f25-1355-bf16-030854a416bf",
-      "name": "会员更新页",
-      "pageId": "0e7e4936-3195-adb2-4188-6dc6c2203eac",
-      "pageType": "update",
-      "routePath": "/member/update/:id",
-      "filePath": "member/Update.vue"
-    },
-    {
       "id": "4f7fbb95-8ba8-e572-4e53-21fb941e1c64",
       "entityId": "3bc62ea7-3f89-d195-a5ae-1cabd0c7be6b",
       "name": "哈哈列表页",
@@ -342,6 +298,24 @@
       "pageType": "update",
       "routePath": "/abc/update/:id",
       "filePath": "abc/Update.vue"
+    },
+    {
+      "id": "5732d009-b6bc-0c65-93c8-7985269af83d",
+      "entityId": "b4eca3e8-0dc9-ca2e-dab4-0e4c2c9a4ec3",
+      "name": "教师列表页",
+      "pageId": "d8c2c3a7-d664-9785-f38c-19a319f9470e",
+      "pageType": "list",
+      "routePath": "/classroom/list",
+      "filePath": "classroom/List.vue"
+    },
+    {
+      "id": "a4065ed6-9f6d-4f2c-73c3-5d2219235ab4",
+      "entityId": "b4eca3e8-0dc9-ca2e-dab4-0e4c2c9a4ec3",
+      "name": "教师更新页",
+      "pageId": "528c56ee-1f5e-b45e-939a-cbc82f1162c5",
+      "pageType": "update",
+      "routePath": "/classroom/update/:id",
+      "filePath": "classroom/Update.vue"
     }
   ],
   "menu": [
@@ -351,13 +325,6 @@
       "entityTypeId": null,
       "routerId": "822ad138-f553-01cb-d42b-f61844fbb685",
       "name": "学生"
-    },
-    {
-      "id": "b69f42fa-1def-80d3-6aa3-16f591f52466",
-      "isPage": 1,
-      "entityTypeId": null,
-      "routerId": "3fd8a38a-cd7e-b46c-7e0a-95cd20fb54a0",
-      "name": "会员"
     },
     {
       "id": "f4e1a075-3ea8-39c5-41d6-89c47f338dd4",
@@ -386,6 +353,13 @@
           "roleIds": []
         }
       ]
+    },
+    {
+      "id": "fdc31d16-340d-3dcc-96ac-31e51fd64ace",
+      "isPage": 1,
+      "entityTypeId": null,
+      "routerId": "5732d009-b6bc-0c65-93c8-7985269af83d",
+      "name": "教师"
     }
   ],
   "syncStatus": {
