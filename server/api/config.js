@@ -61,7 +61,10 @@ function syncAllConfig() {
 function sync(type) {
   switch(type) {
     case 'dict':
-      writeConfigFile('dict', fetchList(type))
+      writeConfigFile('dict', fetchList(type).map(item => {
+        delete item.id
+        return item
+      }))
       break;
     case 'router':
       var listPage = fetchList(`listPage`)
@@ -69,7 +72,10 @@ function sync(type) {
       writeConfigFile('router', fetchList(type), [null, null, null, listPage, updatePage])
       break;
     case 'role':
-      writeConfigFile('roles', fetchList('role'))
+      writeConfigFile('roles', fetchList('role').map(item => {
+        delete item.id
+        return item
+      }))
       break;
     case 'entity':
       writeConfigFile('entities', fetchList('entity'))
@@ -126,7 +132,6 @@ function writeConfigFile(name, content, [entityList, entityTypeList, router, lis
 
       content = content.map(item => {
         var res = {
-          id: item.id,
           name: item.name,
           role: item.roleIds,
           routerId: item.routerId
@@ -149,7 +154,6 @@ function writeConfigFile(name, content, [entityList, entityTypeList, router, lis
               console.error(`${subMenu.name} not has Route`)
             }
             return {
-              id: subMenu.routerId,
               name: subMenu.name,
               path,
               role: item.roleIds

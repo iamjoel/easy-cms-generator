@@ -59,7 +59,6 @@ module.exports = {
     } catch(error) {
       res.send(apiFormat.error(error))
     }
-    
   }
 }
 
