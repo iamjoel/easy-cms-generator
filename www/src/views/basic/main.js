@@ -72,6 +72,8 @@ export default {
         this.check('admin')
         this.check('server')
 
+        localStorage.setItem('j-token', data.data.token)
+
         // setTimeout(() => {
         //   loadingInstance.close()
         // }, 2000)

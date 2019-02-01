@@ -2,6 +2,8 @@ const config = require('./config')
 
 const express = require('express')
 const app = express()
+var jwt = require('jwt-simple')
+const secret = require('./config/index').tokenSecret
 
 var bodyParser = require('body-parser')
 app.use(bodyParser.json())
@@ -13,7 +15,7 @@ app.get('/', (req, res) => res.send('It works!'))
 // 跨域头设置
 app.all('*', function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With,Content-Type, Accept");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With,Content-Type, Accept, token");
     res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
     res.header("Content-Type", "application/json;charset=utf-8");
     next();
@@ -21,26 +23,34 @@ app.all('*', function(req, res, next) {
 
 // 有没设置的检查
 app.use(function(req, res, next) {
-  if(req.path.indexOf('project/choose') !== -1 || global.projectName) {
+  if(req.path.includes('project/choose')) {
     next()
   } else {
-    let isTest = true
-    if(isTest) {
-      let name = 'generator-demo'
-      let rootPath = '/Users/jinweiqiang/front-end/generator-demo'
-      const FileSync = require('lowdb/adapters/FileSync')
-      const adapter = new FileSync(`data/${name}.json`)
-      const low = require('lowdb')
-      const db = low(adapter)
-      // 不要设置db.defaults。设置 default 导致 db.json 被间歇性的reload。导致开发时，服务器不断重启。。。
-      global.db = db
-      global.projectName = name
-      global.feCodeRootPath = `${rootPath}/admin`
-      global.serverCodeRootPath = `${rootPath}/server`
-      next()
-    } else {
-      res.send(apiFormat.error('未设置项目', 2))
+    // next()
+    var token = req.get('token')
+    var payload
+    if(token) {
+      payload = jwt.decode(token, secret)
     }
+    if(!payload) {
+      res.send(apiFormat.error('未设置项目', 2))
+    } else {
+      var rootPath = payload.rootPath
+      var projectName = payload.projectName
+      if(projectName !== global.projectName) {
+        const FileSync = require('lowdb/adapters/FileSync')
+        const adapter = new FileSync(`data/${projectName}.json`)
+        const low = require('lowdb')
+        const db = low(adapter)
+        // 不要设置db.defaults。设置 default 导致 db.json 被间歇性的reload。导致开发时，服务器不断重启。。。
+        global.db = db
+        global.projectName = projectName
+        global.feCodeRootPath = `${rootPath}/admin`
+        global.serverCodeRootPath = `${rootPath}/server`
+      }
+      next()
+    }
+    
     
   }
 })

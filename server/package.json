@@ -13,6 +13,7 @@
     "clone": "^2.1.1",
     "express": "^4.16.3",
     "fs-extra": "^5.0.0",
+    "jwt-simple": "^0.5.5",
     "lowdb": "^1.0.0",
     "mockjs": "^1.0.1-beta3",
     "moment": "^2.21.0",

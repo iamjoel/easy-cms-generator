@@ -1,6 +1,19 @@
 import axios from 'axios'
-// localStorage.setItem('sc-sessionid', Math.random()) // 测试
 import {Message} from 'element-ui'
+
+// 请求加token
+var token = localStorage.getItem('j-token')
+axios.interceptors.request.use(config => {
+  return new Promise((resolve, reject)=>{
+    if(config.url.indexOf('project/choose') === -1) {
+      config.params = config.params || {}
+      config.headers['token'] = token;
+    }
+    return resolve(config);
+  })
+}, function (error) {
+  return Promise.reject(error);
+})
 
 axios.interceptors.response.use(function (response) {
   var data = response.data
