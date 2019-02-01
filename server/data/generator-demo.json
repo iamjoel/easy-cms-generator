@@ -1,25 +1,20 @@
 {
   "role": [
     {
-      "id": "86f18dc2-2bc9-9526-8285-e95cad4a62d2",
       "key": "admin",
       "label": "管理员"
     },
     {
-      "id": "8f6fd7f5-9498-4f9c-7873-6cd30d784526",
       "key": "staff",
       "label": "文员"
     },
     {
-      "id": "ddaeecdc-d930-91b0-7ef6-1aa5a8968698",
       "key": "other",
       "label": "其他"
     }
   ],
   "dict": [
     {
-      "id": "797192b2-595f-3c83-2fcc-ba658438cf77",
-      "updateAt": 1549006985310,
       "key": "a",
       "label": "test",
       "value": [
@@ -80,12 +75,10 @@
       "cols": [],
       "relationList": [],
       "isSynced": false,
-      "isShowInMenu": false,
-      "updateAt": 1549007033337
+      "isShowInMenu": false
     },
     {
       "id": "1f73d983-6179-b180-ccb9-ed7aa1c66912",
-      "updateAt": 1549006504493,
       "basic": {
         "isPublic": true,
         "hasListPage": true,
@@ -95,6 +88,35 @@
         "des": "测试",
         "listPageId": "251e2856-04f2-2782-adcc-ea7cfa42ef9a",
         "updatePageId": "dfcf56ef-84ad-4ac9-63c6-0034e4cd0b50"
+      },
+      "cols": [],
+      "relationList": [
+        {
+          "name": "老师",
+          "type": "moreToMore",
+          "relateEntity": "teacher"
+        },
+        {
+          "name": "c",
+          "type": "moreToMore",
+          "relateEntity": "c"
+        }
+      ],
+      "isSynced": false,
+      "isShowInMenu": false,
+      "updateAt": 1549012799830
+    },
+    {
+      "id": "3733eb41-3dc6-1fd5-0af4-8236cd64bcdc",
+      "basic": {
+        "isPublic": true,
+        "hasListPage": true,
+        "hasUpdatePage": true,
+        "isShowInMenu": true,
+        "name": "c",
+        "des": "c",
+        "listPageId": "f0ea74ab-85e3-5af5-7914-55995d1ac2b8",
+        "updatePageId": "146ff4a3-5cba-42bf-9e7f-d14750a5436b"
       },
       "cols": [],
       "relationList": [],
@@ -184,6 +206,33 @@
         }
       },
       "searchCondition": []
+    },
+    {
+      "id": "f0ea74ab-85e3-5af5-7914-55995d1ac2b8",
+      "updateAt": 1549012785160,
+      "basic": {
+        "entity": {
+          "id": "3733eb41-3dc6-1fd5-0af4-8236cd64bcdc",
+          "name": "c"
+        },
+        "codePath": "c"
+      },
+      "cols": [],
+      "operate": {
+        "add": {
+          "isShow": true
+        },
+        "edit": {
+          "isShow": true
+        },
+        "detail": {
+          "isShow": true
+        },
+        "delete": {
+          "isShow": true
+        }
+      },
+      "searchCondition": []
     }
   ],
   "updatePage": [
@@ -226,6 +275,19 @@
       },
       "cols": [],
       "fn": []
+    },
+    {
+      "id": "146ff4a3-5cba-42bf-9e7f-d14750a5436b",
+      "updateAt": 1549012785165,
+      "basic": {
+        "entity": {
+          "id": "3733eb41-3dc6-1fd5-0af4-8236cd64bcdc",
+          "name": "c"
+        },
+        "codePath": "c"
+      },
+      "cols": [],
+      "fn": []
     }
   ],
   "router": [
@@ -254,8 +316,7 @@
       "pageId": "251e2856-04f2-2782-adcc-ea7cfa42ef9a",
       "pageType": "list",
       "routePath": "/test/list",
-      "filePath": "test/List.vue",
-      "updateAt": 1549006504485
+      "filePath": "test/List.vue"
     },
     {
       "id": "8c726fc1-39d4-4b2c-3f5f-831174786f35",
@@ -264,8 +325,25 @@
       "pageId": "dfcf56ef-84ad-4ac9-63c6-0034e4cd0b50",
       "pageType": "update",
       "routePath": "/test/update/:id",
-      "filePath": "test/Update.vue",
-      "updateAt": 1549006504488
+      "filePath": "test/Update.vue"
+    },
+    {
+      "id": "1b303c82-8c4c-c0f4-4559-f30dda32da79",
+      "entityId": "3733eb41-3dc6-1fd5-0af4-8236cd64bcdc",
+      "name": "c列表页",
+      "pageId": "f0ea74ab-85e3-5af5-7914-55995d1ac2b8",
+      "pageType": "list",
+      "routePath": "/c/list",
+      "filePath": "c/List.vue"
+    },
+    {
+      "id": "e2c95eea-0857-7666-a8ac-4ac48e10d277",
+      "entityId": "3733eb41-3dc6-1fd5-0af4-8236cd64bcdc",
+      "name": "c更新页",
+      "pageId": "146ff4a3-5cba-42bf-9e7f-d14750a5436b",
+      "pageType": "update",
+      "routePath": "/c/update/:id",
+      "filePath": "c/Update.vue"
     }
   ],
   "menu": [
@@ -289,8 +367,14 @@
       "isPage": 1,
       "entityTypeId": null,
       "routerId": "0f65a681-20cd-9c3b-3199-adf28cd426ef",
-      "name": "测试",
-      "updateAt": 1549006504489
+      "name": "测试"
+    },
+    {
+      "id": "6c0d44a0-6d10-d737-4022-62fed90cd8a1",
+      "isPage": 1,
+      "entityTypeId": null,
+      "routerId": "1b303c82-8c4c-c0f4-4559-f30dda32da79",
+      "name": "c"
     }
   ],
   "syncStatus": {

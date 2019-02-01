@@ -8,41 +8,65 @@ use \`${tableName}\`;
 SET FOREIGN_KEY_CHECKS=0;
 ${entityList.map(entity => {
   let res = `
-${generatorTable(entity, commonCols)}`
+${generatorTable(entity, commonCols)}${generatorMoreToMoreTable(entity, commonCols)}`
   return res
 }).join('\n')}`
-  // todo 多对多的关系也要创建表
   return res
 }
 
 function generatorTable(entity, commonCols = []) {
   var name = entity.basic.name
   var cols = [
+              ...entity.cols,
               ...commonCols.filter(item => item.key !== 'id'),
-              ...entity.cols
             ]
-
+  var tarRelationList = entity.relationList.filter(relation => relation.type !== 'moreToMore')
   var res = 
+`-- ----------------------------
+-- Table structure for ${name}
+-- ----------------------------
+DROP TABLE IF EXISTS \`${name}\`;
+CREATE TABLE \`${name}\` (
+  \`id\` varchar(36) NOT NULL${cols && cols.length > 0 ? ',' + cols.map(col => {
+  let res = 
+  `${generatorCol(col)}`
+  return res
+}).join(',') + ',' : ''}${entity.relationList && tarRelationList.length > 0 ? '\n  ' + tarRelationList.map(relation => {
+  let res = 
+  `\`${relation.relateEntity}Id\` COMMENT '关联${relation.name}表'` // 一对一，一对多
+  return res
+}).join(',') + ',' : ''}
+  PRIMARY KEY (\`id\`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;`
+  return res
+}
+
+function generatorMoreToMoreTable(entity, commonCols) {
+  var res
+  res = entity.relationList.filter(relation => relation.type === 'moreToMore')
+                          .map(relation => {
+                            let name = `${entity.basic.name}_${relation.relateEntity}`
+                            var cols = commonCols.filter(item => item.key !== 'id')
+                            var res = 
 `
 -- ----------------------------
 -- Table structure for ${name}
 -- ----------------------------
 DROP TABLE IF EXISTS \`${name}\`;
-CREATE TABLE \`${name}\` (
-  \`id\` varchar(36) NOT NULL,${cols && cols.length > 0 ? cols.map(col => {
+CREATE TABLE \`${name}_relation\` (
+  \`id\` varchar(36) NOT NULL,
+  \`${entity.basic.name}Id\` varchar(36) NOT NULL,
+  \`${relation.relateEntity}Id\` varchar(36) NOT NULL${cols && cols.length > 0 ? ',' + cols.map(col => {
   let res = 
   `${generatorCol(col)}`
   return res
-}).join(',') + ',' : ''}${entity.relationList && entity.relationList.length > 0 ? '\n  ' + entity.relationList.filter(relation => relation.type !== 'moreToMore').map(relation => {
-  let res = 
-  `\`${relation.relateEntity}Id\` COMMENT '关联${relation.name}表'`
-  return res
 }).join(',') + ',' : ''}
   PRIMARY KEY (\`id\`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-`
-  return res
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;`
+                            return res
+                          })
+                          .join('\n')
+  return res ? `\n${res}` : ''
 }
 
 function generatorCol(col) {
