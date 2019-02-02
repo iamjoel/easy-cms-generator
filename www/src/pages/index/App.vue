@@ -6,12 +6,11 @@
         <j-siderbar :menu="menu"></j-siderbar>
       </el-col>
       <el-col :span="20">
-        <!-- {{$store.getters.isProjectInited}} -->
-        <div class="ly ly-r" style="margin-right: 15px;">
+        <div class="ly ly-r mb-10" style="margin-right: 15px;" v-if="$store.state.isProjectInited">
           <el-button type="info" @click="fetchDBSchema">显示数据库创建脚本</el-button>
           <el-button type="success" @click="fetchTestData">显示测试数据</el-button>
         </div>
-        <router-view id="main-content" class="mt-10"></router-view>
+        <router-view id="main-content" class=""></router-view>
       </el-col>
     </el-row>
 

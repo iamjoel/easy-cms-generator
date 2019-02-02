@@ -21,31 +21,27 @@
   * 前端字典
   * 角色
 
-## 5 步做一组页面
+## 4 步做一组页面
 1 输入项目地址  
-![](screenshot/1/1.jpg)
+![](screenshot/1/1.jpeg)
 
-2 生成管理后台和服务端项目初始化结构  
-生成前端结构  
-![](screenshot/2/fe.jpg)
+2 生成项目的初始化结构  
+![](screenshot/2/1.jpeg)
 
-生成服务器端结构  
-![](screenshot/2/server.jpg)
+根据上图的提示做对应的命令。命令运行完后刷新页面，会出现类似下图的结果。
+
+![](screenshot/2/2.jpeg)
 
 3 新增实体  
 ![](screenshot/3/1.jpg)
 
 ![](screenshot/3/2.jpg)
 
-4 编辑管理后台的页面
-列表页  
-![](screenshot/4/list.jpg)
+4 用数据库创建脚本创建数据库
+![](screenshot/4/1.jpg)
 
-编辑页 
-![](screenshot/4/update.jpg)
-
-6 用数据库创建脚本创建数据库
-![](screenshot/5/db.jpg)
+测试数据
+![](screenshot/4/2.jpg)
 
 ## 启动
 1 安装服务器依赖  
