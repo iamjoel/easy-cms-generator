@@ -6,7 +6,3 @@ export const dictObj = state => {
   return res
 }
 
-export const isProjectInited = state => {
-  return true
-  // return state.projectPath && state.adminInited && state.serverInited
-}

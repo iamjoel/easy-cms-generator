@@ -2,12 +2,19 @@
   <div class="main">
     <el-tabs v-model="activeName" @tab-click="handleChange">
       <el-tab-pane label="项目信息" name="info">
-        <div class="row">
+        <div class="row" style="align-items: flex-start;">
           <div class="label">项目根路径:</div>
           <div>
             <div v-if="projectRootPath">
               {{projectRootPath}}
               <el-button type="primary" size="small" @click="editProjectRootPath">修改</el-button>
+              <div v-if="projectRootPath && !$store.state.isProjectInited">
+                <p style="color: red">项目未初始化!在命令行中，执行如下命令:</p>
+                <div style="padding: 10px;background: #324157;color: #fff;">
+                  <div>cd {{parentFoldOfRootPath}}</div>
+                  <div>git clone https://github.com/iamjoel/easy-cms-template.git</div>
+                </div>
+              </div>
             </div>
             <div class="ly ly-m " v-else>
               <el-input 
@@ -22,7 +29,8 @@
             </div>
           </div>
         </div>
-        <div v-if="projectRootPath">
+        
+        <div v-if="projectRootPath && $store.state.isProjectInited">
           <div class="row">
             <div class="label">项目名:</div>
             <div>{{projectName}}</div>
@@ -31,59 +39,12 @@
             <div class="label">管理后台前端文件名:</div>
             <div>
               {{projectRootPath}}/admin
-
-              <span v-if="!$store.state.adminInited">
-                <span class="c-red">(未初始化)</span>
-                <el-button type="primary" size="small" @click="showTip('admin')">初始化</el-button>
-                <el-button type="primary" size="small" @click="check('admin')">检查</el-button>
-              </span>
-              <el-dialog 
-                title="初始化步骤"
-                :visible.sync="isShowAdminInitTipDialog"
-              >
-                
-                <ol class="list">
-                  打开终端，输入下面命令：
-                  <li>cd {{projectRootPath}}/admin</li>
-                  <li>vue init ~/front-end/template/front-end/vue-cli-admin</li>
-                  <li>npm i 或 yarn install</li>
-                </ol>
-              </el-dialog>
-              <!-- 应该默认创建 -->
-              <el-button 
-                v-if="!hasAdminFolder"
-                @click="createFolder('admin')"
-                type="primary"
-                size="small" >创建</el-button>
             </div>
           </div>
           <div class="row">
             <div class="label">服务端文件名:</div>
             <div>
               {{projectRootPath}}/server
-              <span v-if="!$store.state.serverInited">
-                <span class="c-red">(未初始化)</span>
-                <el-button type="primary" size="small" @click="showTip('server')">初始化</el-button>
-                <el-button type="primary" size="small" @click="check('server')">检测</el-button>
-              </span>
-              <el-dialog 
-                title="初始化步骤"
-                :visible.sync="isShowServerInitTipDialog"
-              >
-                
-                <ol class="list">
-                  打开终端，输入下面命令：
-                  <li>cd {{projectRootPath}}/server</li>
-                  <li>egg-init --template=/Users/jinweiqiang/front-end/template/server/node/egg-boilerplate</li>
-                  <li>npm i 或 yarn install</li>
-                </ol>
-              </el-dialog>
-              <el-button 
-                v-if="!hasServerFolder"
-                @click="createFolder('server')"
-                type="primary"
-                size="small"
-              >创建</el-button>
             </div>
 
           </div>
@@ -93,10 +54,10 @@
           </div>
         </div>
       </el-tab-pane>
-      <el-tab-pane label="字典" name="dict">
+      <el-tab-pane label="字典" name="dict" v-if="$store.state.isProjectInited">
         <dict-list />
       </el-tab-pane>
-      <el-tab-pane label="角色" name="role">
+      <el-tab-pane label="角色" name="role" v-if="$store.state.isProjectInited">
         <role-list />
       </el-tab-pane>
     </el-tabs>

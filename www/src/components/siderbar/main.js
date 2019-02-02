@@ -7,7 +7,7 @@ export default {
   computed: {
     canShowMenu() {
       var res
-      if(this.$store.getters.isProjectInited) {
+      if(this.$store.state.isProjectInited) {
         res = this.menu
       } else {
         // 项目没有初始化。很多功能菜单不能显示

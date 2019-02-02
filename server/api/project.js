@@ -33,6 +33,14 @@ module.exports = {
   choose(req, res) {
     try {
       let rootPath = req.body.rootPath
+
+      if(!fs.pathExistsSync(rootPath)) {
+        res.send(apiFormat.error('项目根路径不存在', -3))
+        return
+      } else if(!fs.pathExistsSync(`${rootPath}/admin`) || !fs.pathExistsSync(`${rootPath}/server`)) {
+        res.send(apiFormat.error('未clone模板项目', -4))
+        return
+      }
       let projectName = rootPath.split('/').slice(-1)[0]
 
       var filePath = `data/${projectName}.json`
