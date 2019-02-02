@@ -33,15 +33,17 @@
 ![](screenshot/2/2.jpeg)
 
 3 新增实体  
+基础设置
 ![](screenshot/3/1.jpg)
 
+字段设置
 ![](screenshot/3/2.jpg)
 
 4 用数据库创建脚本创建数据库
-![](screenshot/4/1.jpg)
+![](screenshot/4/1.jpeg)
 
 测试数据
-![](screenshot/4/2.jpg)
+![](screenshot/4/2.jpeg)
 
 ## 启动
 1 安装服务器依赖  
