@@ -45,12 +45,13 @@
 测试数据
 ![](screenshot/4/2.jpeg)
 
-生成的项目的运行效果。
+
+## 生成的项目的运行效果
 列表页  
-![](screenshot/4/list.jpeg)
+![](screenshot/result/list.jpeg)
 
 新增编辑页  
-![](screenshot/4/update.jpeg)
+![](screenshot/result/update.jpeg)
 
 ## 启动
 1 安装服务器依赖  
