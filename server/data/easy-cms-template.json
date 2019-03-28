@@ -51,7 +51,68 @@
           "isSyncToUpdatePage": true
         }
       ],
+      "relationList": [
+        {
+          "name": "关联abc",
+          "type": "1ToMore",
+          "relateEntity": "abc"
+        },
+        {
+          "name": "多对多",
+          "type": "moreToMore",
+          "relateEntity": "abc"
+        }
+      ],
+      "isSynced": false,
+      "isShowInMenu": false
+    },
+    {
+      "id": "87a097ad-705e-6409-9ac9-18fe693be866",
+      "basic": {
+        "isPublic": true,
+        "hasListPage": true,
+        "hasUpdatePage": true,
+        "isShowInMenu": true,
+        "name": "abc",
+        "des": "测试关联",
+        "listPageId": "1da26f9d-ee62-a976-9a62-68c5ef6a775d",
+        "updatePageId": "21479d3e-5314-7822-116c-5dfde7e7a9cf"
+      },
+      "cols": [],
       "relationList": [],
+      "isSynced": false,
+      "isShowInMenu": false
+    },
+    {
+      "id": "3ca9ab18-7de5-7574-1fd5-7d5c5af7c5d0",
+      "basic": {
+        "isPublic": true,
+        "hasListPage": true,
+        "hasUpdatePage": true,
+        "isShowInMenu": true,
+        "name": "test",
+        "des": "测试",
+        "listPageId": "0a40c6c5-ac11-59ec-d39b-30057bdfe91e",
+        "updatePageId": "00827076-f6db-3a86-b484-83b214ffd400"
+      },
+      "cols": [
+        {
+          "label": "姓名",
+          "key": "name",
+          "dataType": "string",
+          "maxLength": 10,
+          "required": true,
+          "isSyncToListPage": true,
+          "isSyncToUpdatePage": true
+        }
+      ],
+      "relationList": [
+        {
+          "name": "测试",
+          "type": "1ToMore",
+          "relateEntity": "hello_world"
+        }
+      ],
       "isSynced": false,
       "isShowInMenu": false
     }
@@ -92,6 +153,84 @@
       "searchCondition": [],
       "fn": [],
       "isSynced": false
+    },
+    {
+      "id": "1da26f9d-ee62-a976-9a62-68c5ef6a775d",
+      "updateAt": 1550209508503,
+      "basic": {
+        "entity": {
+          "id": "87a097ad-705e-6409-9ac9-18fe693be866",
+          "name": "abc"
+        },
+        "codePath": "abc"
+      },
+      "cols": [],
+      "operate": {
+        "add": {
+          "isShow": true
+        },
+        "edit": {
+          "isShow": true
+        },
+        "detail": {
+          "isShow": true
+        },
+        "delete": {
+          "isShow": true
+        }
+      },
+      "searchCondition": []
+    },
+    {
+      "id": "0a40c6c5-ac11-59ec-d39b-30057bdfe91e",
+      "updateAt": 1552466988378,
+      "basic": {
+        "entity": {
+          "id": "3ca9ab18-7de5-7574-1fd5-7d5c5af7c5d0",
+          "name": "test"
+        },
+        "codePath": "test"
+      },
+      "cols": [
+        {
+          "key": "name",
+          "label": "姓名",
+          "dataType": "string",
+          "formatFn": null
+        },
+        {
+          "label": "描述",
+          "key": "des",
+          "formatFn": null
+        }
+      ],
+      "operate": {
+        "add": {
+          "isShow": true
+        },
+        "edit": {
+          "isShow": true
+        },
+        "detail": {
+          "isShow": true
+        },
+        "delete": {
+          "isShow": true
+        }
+      },
+      "searchCondition": [
+        {
+          "label": "姓名",
+          "key": "name",
+          "dataType": "string",
+          "dataSource": {
+            "type": "",
+            "key": ""
+          }
+        }
+      ],
+      "fn": [],
+      "isSynced": false
     }
   ],
   "updatePage": [
@@ -117,6 +256,40 @@
       ],
       "fn": [],
       "isSynced": false
+    },
+    {
+      "id": "21479d3e-5314-7822-116c-5dfde7e7a9cf",
+      "updateAt": 1550209508509,
+      "basic": {
+        "entity": {
+          "id": "87a097ad-705e-6409-9ac9-18fe693be866",
+          "name": "abc"
+        },
+        "codePath": "abc"
+      },
+      "cols": [],
+      "fn": []
+    },
+    {
+      "id": "00827076-f6db-3a86-b484-83b214ffd400",
+      "updateAt": 1552466810924,
+      "basic": {
+        "entity": {
+          "id": "3ca9ab18-7de5-7574-1fd5-7d5c5af7c5d0",
+          "name": "test"
+        },
+        "codePath": "test"
+      },
+      "cols": [
+        {
+          "key": "name",
+          "label": "姓名",
+          "dataType": "string",
+          "formatFn": null,
+          "required": true
+        }
+      ],
+      "fn": []
     }
   ],
   "router": [
@@ -137,6 +310,42 @@
       "pageType": "update",
       "routePath": "/hello_world/update/:id",
       "filePath": "hello_world/Update.vue"
+    },
+    {
+      "id": "02a19c57-8da5-d40c-7ea4-aeadafc79f3e",
+      "entityId": "87a097ad-705e-6409-9ac9-18fe693be866",
+      "name": "测试关联列表页",
+      "pageId": "1da26f9d-ee62-a976-9a62-68c5ef6a775d",
+      "pageType": "list",
+      "routePath": "/abc/list",
+      "filePath": "abc/List.vue"
+    },
+    {
+      "id": "63dd62ef-8329-5b9b-bfd3-18f3dbc876df",
+      "entityId": "87a097ad-705e-6409-9ac9-18fe693be866",
+      "name": "测试关联更新页",
+      "pageId": "21479d3e-5314-7822-116c-5dfde7e7a9cf",
+      "pageType": "update",
+      "routePath": "/abc/update/:id",
+      "filePath": "abc/Update.vue"
+    },
+    {
+      "id": "a2919a48-a823-ad5b-2bb3-497f72de1cd1",
+      "entityId": "3ca9ab18-7de5-7574-1fd5-7d5c5af7c5d0",
+      "name": "测试列表页",
+      "pageId": "0a40c6c5-ac11-59ec-d39b-30057bdfe91e",
+      "pageType": "list",
+      "routePath": "/test/list",
+      "filePath": "test/List.vue"
+    },
+    {
+      "id": "43238cff-5381-08ac-5972-1435b5222888",
+      "entityId": "3ca9ab18-7de5-7574-1fd5-7d5c5af7c5d0",
+      "name": "测试更新页",
+      "pageId": "00827076-f6db-3a86-b484-83b214ffd400",
+      "pageType": "update",
+      "routePath": "/test/update/:id",
+      "filePath": "test/Update.vue"
     }
   ],
   "menu": [
@@ -146,6 +355,20 @@
       "entityTypeId": null,
       "routerId": "0af60ea9-7264-b869-a57f-f1df184df2fe",
       "name": "测试页面"
+    },
+    {
+      "id": "c1ab41f2-39a2-16fe-4280-b7f65d781c29",
+      "isPage": 1,
+      "entityTypeId": null,
+      "routerId": "02a19c57-8da5-d40c-7ea4-aeadafc79f3e",
+      "name": "测试关联"
+    },
+    {
+      "id": "7a9e721f-ec1b-ce0c-08e5-a052aed63354",
+      "isPage": 1,
+      "entityTypeId": null,
+      "routerId": "a2919a48-a823-ad5b-2bb3-497f72de1cd1",
+      "name": "测试"
     }
   ],
   "syncStatus": {

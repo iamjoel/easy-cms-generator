@@ -276,9 +276,9 @@
           <el-select v-model="currRow.dataSource.key" placeholder="无" filterable clearable>
             <el-option
               v-for="item in getDataResource(currRow.dataSource.type)"
-              :key="item.key"
-              :label="item.label"
-              :value="item.key">
+              :key="item.key || item.basic.name"
+              :label="item.label || item.basic.des"
+              :value="item.key || item.basic.name">
             </el-option>
           </el-select>
         </el-form-item>
