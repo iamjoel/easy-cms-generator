@@ -45,7 +45,7 @@ function generatorVue(config) {
         var vue = `
 <template> 
   <div class="main">
-    <j-search-condition @search="search" v-if="searchConditions.length > 0">
+    <j-search-condition @search="search" v-if="Object.keys(searchConditions).length > 0">
 ${config.searchCondition.map(item => {
   var inner
   switch(item.dataType) {

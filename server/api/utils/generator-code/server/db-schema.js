@@ -27,7 +27,7 @@ function generatorTable(entity, commonCols = []) {
 -- ----------------------------
 DROP TABLE IF EXISTS \`${name}\`;
 CREATE TABLE \`${name}\` (
-  \`id\` varchar(36) NOT NULL${cols && cols.length > 0 ? ',' + cols.map(col => {
+  \`id\` INT(10) comment 'id' AUTO_INCREMENT${cols && cols.length > 0 ? ',' + cols.map(col => {
   let res = 
   `${generatorCol(col)}`
   return res
