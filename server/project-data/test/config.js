@@ -1,4 +1,6 @@
 module.exports = {
+  dist: '',
+  serverLan: 'node',
   db: {
     host: 'localhost',
     port: '3306',
@@ -6,5 +8,5 @@ module.exports = {
     password: '',
     // 数据库名
     database: 'test',
-  }
+  },
 }
