@@ -17,7 +17,7 @@ ${generatorTable(entity, commonCols, notWritToDB)}${generatorMoreToMoreTable(ent
 }
 
 function generatorTable(entity, commonCols = [], notWritToDB) {
-  var name = entity.basic.name
+  var {name, label} = entity.basic
   var cols = [
               ...entity.cols,
               ...commonCols.filter(item => item.key !== 'id'),
@@ -25,11 +25,10 @@ function generatorTable(entity, commonCols = [], notWritToDB) {
   var tarRelationList = entity.relationList ? entity.relationList.filter(relation => relation.type !== 'moreToMore') : []
   var res = 
 `
-${!notWritToDB ?
-`-- ----------------------------
--- Table structure for ${name}
--- ----------------------------`: ''
-}
+-- ----------------------------
+-- Table structure for ${label || name}
+-- ----------------------------
+
 DROP TABLE IF EXISTS \`${name}\`;
 CREATE TABLE \`${name}\` (
   \`id\` int(11) comment 'id' AUTO_INCREMENT${cols && cols.length > 0 ? ',' + cols.map(col => {
@@ -38,7 +37,7 @@ CREATE TABLE \`${name}\` (
   return res
 }).join(',') + ',' : ''}${entity.relationList && tarRelationList.length > 0 ? '\n  ' + tarRelationList.map(relation => {
   let res = 
-  `\`${relation.relateEntity}Id\` COMMENT '关联${relation.name}表'` // 一对一，一对多
+  `\`${relation.relateEntity}Id\` int(11) COMMENT '关联${relation.name}表'` // 一对一，一对多
   return res
 }).join(',') + ',' : ''}
   PRIMARY KEY (\`id\`)
@@ -58,9 +57,9 @@ function generatorMoreToMoreTable(entity, commonCols) {
                             var res = 
 `
 -- ----------------------------
--- Table structure for ${name}
+-- Table structure for ${name}_relation
 -- ----------------------------
-DROP TABLE IF EXISTS \`${name}\`;
+DROP TABLE IF EXISTS \`${name}_relation\`;
 CREATE TABLE \`${name}_relation\` (
   \`id\` int(11) NOT NULL AUTO_INCREMENT,
   \`${entity.basic.name}Id\` int(11) NOT NULL,

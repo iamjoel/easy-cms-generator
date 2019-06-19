@@ -11,9 +11,11 @@ console.log(ddl)
 
 // 执行 SQL
 var mysql      = require('mysql');
-var connection = mysql.createConnection(dbConfig);
+var connection = mysql.createConnection({
+  ...dbConfig,
+  multipleStatements: true // 允许执行多条语句
+});
 
-// 每次只能执行一句 sql...
 connection.query(ddl, function (error, results, fields) {
   if (error) throw error;
 })
