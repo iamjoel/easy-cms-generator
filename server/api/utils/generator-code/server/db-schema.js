@@ -1,33 +1,38 @@
-module.exports = function (tableName, entityList, commonCols) {
+module.exports = function (schema, entityList, commonCols, notWritToDB) {
   var res = 
 `
-DROP SCHEMA IF EXISTS \`${tableName}\`;
-CREATE SCHEMA \`${tableName}\`;
-use \`${tableName}\`;
+${!notWritToDB ?
+`DROP SCHEMA IF EXISTS \`${schema}\`;
+CREATE SCHEMA \`${schema}\`;
+use \`${schema}\`;
 
-SET FOREIGN_KEY_CHECKS=0;
+SET FOREIGN_KEY_CHECKS=0;`
+: ''}
 ${entityList.map(entity => {
   let res = `
-${generatorTable(entity, commonCols)}${generatorMoreToMoreTable(entity, commonCols)}`
+${generatorTable(entity, commonCols, notWritToDB)}${generatorMoreToMoreTable(entity, commonCols)}`
   return res
 }).join('\n')}`
   return res
 }
 
-function generatorTable(entity, commonCols = []) {
+function generatorTable(entity, commonCols = [], notWritToDB) {
   var name = entity.basic.name
   var cols = [
               ...entity.cols,
               ...commonCols.filter(item => item.key !== 'id'),
             ]
-  var tarRelationList = entity.relationList.filter(relation => relation.type !== 'moreToMore')
+  var tarRelationList = entity.relationList ? entity.relationList.filter(relation => relation.type !== 'moreToMore') : []
   var res = 
+`
+${!notWritToDB ?
 `-- ----------------------------
 -- Table structure for ${name}
--- ----------------------------
+-- ----------------------------`: ''
+}
 DROP TABLE IF EXISTS \`${name}\`;
 CREATE TABLE \`${name}\` (
-  \`id\` INT(10) comment 'id' AUTO_INCREMENT${cols && cols.length > 0 ? ',' + cols.map(col => {
+  \`id\` int(11) comment 'id' AUTO_INCREMENT${cols && cols.length > 0 ? ',' + cols.map(col => {
   let res = 
   `${generatorCol(col)}`
   return res
@@ -43,6 +48,9 @@ CREATE TABLE \`${name}\` (
 
 function generatorMoreToMoreTable(entity, commonCols) {
   var res
+  if(!entity.relationList || entity.relationList.length === 0) {
+    return ''
+  }
   res = entity.relationList.filter(relation => relation.type === 'moreToMore')
                           .map(relation => {
                             let name = `${entity.basic.name}_${relation.relateEntity}`
@@ -54,9 +62,9 @@ function generatorMoreToMoreTable(entity, commonCols) {
 -- ----------------------------
 DROP TABLE IF EXISTS \`${name}\`;
 CREATE TABLE \`${name}_relation\` (
-  \`id\` varchar(36) NOT NULL,
-  \`${entity.basic.name}Id\` varchar(36) NOT NULL,
-  \`${relation.relateEntity}Id\` varchar(36) NOT NULL${cols && cols.length > 0 ? ',' + cols.map(col => {
+  \`id\` int(11) NOT NULL AUTO_INCREMENT,
+  \`${entity.basic.name}Id\` int(11) NOT NULL,
+  \`${relation.relateEntity}Id\` int(11) NOT NULL${cols && cols.length > 0 ? ',' + cols.map(col => {
   let res = 
   `${generatorCol(col)}`
   return res
@@ -70,16 +78,16 @@ CREATE TABLE \`${name}_relation\` (
 }
 
 function generatorCol(col) {
-  var content = `\`${col.key}\` `
+  var content = `\`${col.key || col.name}\` `
   switch(col.dataType) {
     case 'string': 
-      content += `varchar(${col.maxLength || 20})`
+      content += `varchar(${col.maxLength || 50})`
       break;
     case 'text': 
       content += `text`
       break;
     case 'int': 
-      content += `int(11)`
+      content += `int(${col.len || 11})`
       break;
     case 'double':
       content += `decimal(10, 2)`
