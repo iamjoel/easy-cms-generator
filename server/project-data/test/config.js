@@ -1,5 +1,5 @@
 module.exports = {
-  dist: '',
+  dist: '/Users/jinweiqiang/front-end/test',
   serverLan: 'node',
   db: {
     host: 'localhost',

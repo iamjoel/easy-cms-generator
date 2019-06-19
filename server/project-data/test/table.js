@@ -2,7 +2,8 @@ var tableList = [
   {
     basic: {
       name: 'classroom',
-      label: '教室'
+      label: '教室',
+      type: 'data',
     },
     cols: [
       {
