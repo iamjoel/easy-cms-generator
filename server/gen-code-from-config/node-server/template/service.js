@@ -1,5 +1,5 @@
-var template = 
-`const generatorList = require('@/util/sql/list');
+var template = `
+const generatorList = require('@/util/sql/list');
 const Service = require('egg').Service;
 
 class MainService extends Service {
@@ -73,7 +73,7 @@ class MainService extends Service {
 
       var res = await this.app.mysql.insert(resourceName, insertData);
       return {
-        data: {...res},
+        data: res,
       };
     }
     // 验证报错
