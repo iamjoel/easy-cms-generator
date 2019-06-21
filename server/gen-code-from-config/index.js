@@ -36,7 +36,7 @@ function start() {
   // 生成 服务端代码
   switch(serverLan) {
     case 'node':
-      serverGen(`${dist}`, tableList)
+      serverGen(currProject, `${dist}`, tableList, commonCols)
       break;
   }
 
