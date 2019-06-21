@@ -25,9 +25,9 @@ function genRouter(dist, tableList) {
   router.post('/api/${name}/del/:id', jwt, controller.${controllerPrefixPath}.del)${table.isPublic ? `\n  router.post(\`/\${publicPrefix}/${name}/del/:id\`, controller.${controllerPrefixPath}.del)` : ''}`
                                   return res
                                 }).join('\n\n')
-  
-  console.log(mainContent)
-
+  const outputPath = `${dist}/app/router.js`
+  fs.outputFileSync(outputPath, routerTemplate.replace('{genRouter}', mainContent))
+  console.log(`生成路由到 ${outputPath} 成功!`)
 }
 
 function line2upper(str) {

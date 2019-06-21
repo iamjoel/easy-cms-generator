@@ -1,4 +1,5 @@
-const publicPrefix = 'publicApi';
+var template = 
+`const publicPrefix = 'publicApi';
 
 module.exports = app => {
   const { router, controller } = app;
@@ -17,5 +18,7 @@ module.exports = app => {
   router.get('/api/api_log/list', jwt, controller.log.apiLog.list)
   router.get('/api/api_log/detail/:id', jwt, controller.log.apiLog.detail)
 
+{genRouter}
+};`
 
-};
+module.exports = template

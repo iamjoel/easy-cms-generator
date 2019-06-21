@@ -3,7 +3,7 @@ const {db: dbConfig, serverLan, dist} = require(`../project-data/${currProject}/
 const tableList = require(`../project-data/${currProject}/table`)
 const dbSchemaTool = require('../api/utils/generator-code/server/db-schema')
 const generatorTestDataTool = require('../api/utils/generator-code/server/generator-test-data')
-var serverGen = require(`./server/${serverLan}`)
+var serverGen = require(`./${serverLan}-server/index`)
 
 start()
 
@@ -34,10 +34,14 @@ function start() {
 
 
   // 生成 服务端代码
-  serverGen(`${dist}/server`, tableList)
+  switch(serverLan) {
+    case 'node':
+      serverGen(`${dist}`, tableList)
+      break;
+  }
 
   // 生成管理后台代码
-  adminGen()
+  // adminGen()
 }
 
 function adminGen() {
