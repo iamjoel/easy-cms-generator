@@ -11,10 +11,12 @@ function gen (dist, tableList) {
   // model
 
   // service
-  genService(`${dist}/app/service`, modelMapList)
+  // genService(`${dist}/app/service`, modelMapList)
 
   // controller
-  // genController(`${dist}/app/controller.js`, modelMapList)
+  // genController(`${dist}/app/controller`, modelMapList)
+
+  console.log('服务器代码生成完成!\n')
 
 }
 
@@ -32,7 +34,7 @@ function genRouter(dist, tableList) {
                                 }).join('\n\n')
 
   fs.outputFileSync(dist, routerTemplate.replace('{genRouter}', mainContent))
-  console.log(`生成路由到 ${outputPath} 成功!`)
+  console.log(`生成路由到 ${outputPath} 成功!\n`)
 }
 
 function line2upper(str) {
@@ -57,7 +59,7 @@ function genModelPathMap (dist, tableList) {
 `module.exports = ${JSON.stringify(modelMapObj, null, '  ')}`
 
   fs.outputFileSync(dist, res)
-  console.log(`生成 ModelMap 至: ${dist}  成功!`)
+  console.log(`生成 ModelMap 至: ${dist}  成功!\n`)
   return modelMapList
 }
 
@@ -73,17 +75,18 @@ function genService (dist, modelMapList) {
   console.log(`生成 Service 完成!\n`)
 }
 
-function genController (info) {
-  const {modelName, modelPrefix, modelSuffix} = info
-  var modelPrefixPath = modelPrefix.join('/')
-  var servicePath = line2upper(`${modelPrefix.join('.')}.${modelSuffix.join('.')}`)
-
-  let dist = `app/controller/${modelPrefix.join('/')}/${modelSuffix.join('/')}.js`
+function genController (dist, modelMapList) {
   var template = require('./template/controller.js')
-  template = template.replace(/{servicePath}/g, servicePath)
 
-  fs.outputFileSync(dist, template)
-  console.log(`输出 Controller 至: ${dist}  成功!`)
+  modelMapList.forEach(info => {
+    const {type, name} = info
+    var servicePath = line2upper(`${type ? `${type}.` : ''}${name}`)
+    var res = template.replace(/{servicePath}/g, servicePath)
+    let fileDist = `${dist}/${type ? `${type}/` : ''}${name}.js`
+    fs.outputFileSync(fileDist, res)
+    console.log(`输出 Controller 至: ${fileDist}  成功!`)
+  })
+  console.log(`生成 Controller 完成!\n`)
 }
 
 function line2upper(str) {

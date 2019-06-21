@@ -1,5 +1,5 @@
-var template = `
-const Controller = require('egg').Controller;
+var template = 
+`const Controller = require('egg').Controller;
 class MainController extends Controller {
   async list() {
     await this.ctx.handleList(this, this.service.{servicePath}.list);
