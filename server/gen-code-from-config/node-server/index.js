@@ -11,7 +11,7 @@ function gen (dist, tableList) {
   // model
 
   // service
-  // genService(`${dist}/app/service.js`, modelMapList)
+  genService(`${dist}/app/service`, modelMapList)
 
   // controller
   // genController(`${dist}/app/controller.js`, modelMapList)
@@ -55,21 +55,22 @@ function genModelPathMap (dist, tableList) {
   })
   var res = 
 `module.exports = ${JSON.stringify(modelMapObj, null, '  ')}`
+
   fs.outputFileSync(dist, res)
   console.log(`生成 ModelMap 至: ${dist}  成功!`)
   return modelMapList
 }
 
 function genService (dist, modelMapList) {
-  // modelMapList.forEach()
-  const {modelName, modelPrefix} = info
-
-  let dist = line2upper(`app/service/${modelPrefix.join('/')}/${modelName.join('/')}.js`)
   var template = require('./template/service.js')
 
-  fs.outputFileSync(dist, template)
-  console.log(`输出 Service 至: ${dist}  成功!`)
-
+  modelMapList.forEach(info => {
+    const {type, name} = info
+    let fileDist = `${dist}/${type ? `${type}/` : ''}${name}.js`
+    fs.outputFileSync(fileDist, template)
+    console.log(`生成 Service 至: ${fileDist}  成功!`)
+  })
+  console.log(`生成 Service 完成!\n`)
 }
 
 function genController (info) {

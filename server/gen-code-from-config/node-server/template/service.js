@@ -1,5 +1,5 @@
-var template = `
-const generatorList = require('@/util/sql/list');
+var template = 
+`const generatorList = require('@/util/sql/list');
 const Service = require('egg').Service;
 
 class MainService extends Service {
