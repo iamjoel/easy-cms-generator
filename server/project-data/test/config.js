@@ -1,5 +1,5 @@
 module.exports = {
-  type: 'admin',// all：所有。 server: 服务器。 admin: 管理后台
+  type: 'all',// all：所有。 server: 服务器。 admin: 管理后台
   dist: {
     server: '/Users/jinweiqiang/front-end/test',
     admin: '/Users/jinweiqiang/front-end/test-admin',

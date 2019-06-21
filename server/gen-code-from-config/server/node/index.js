@@ -25,7 +25,7 @@ function gen (currProject, dist, tableList, commonCols) {
 }
 
 function genDBConfig(currProject, dist) {
-  const {db: dbConfig} = require(`../../project-data/${currProject}/config`)
+  const {db: dbConfig} = require(`../../../project-data/${currProject}/config`)
   var res = 
 `module.exports = ${JSON.stringify(dbConfig, null, '  ')}`
 

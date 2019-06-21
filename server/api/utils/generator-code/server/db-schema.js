@@ -16,7 +16,7 @@ ${generatorTable(entity, commonCols, notWritToDB)}${generatorMoreToMoreTable(ent
   return res
 }
 
-function generatorTable(entity, commonCols = [], notWritToDB) {
+function generatorTable(entity, commonCols = []) {
   var {name, label} = entity.basic
   var cols = [
               ...entity.cols,
