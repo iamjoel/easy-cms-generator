@@ -50,7 +50,7 @@ function genRouter(dist, tableList) {
                                 }).join('\n\n')
 
   fs.outputFileSync(dist, routerTemplate.replace('{genRouter}', mainContent))
-  console.log(`02: 生成路由到 ${outputPath} 成功!\n`)
+  console.log(`02: 生成路由到 ${dist} 成功!\n`)
 }
 
 function genModelPathMap (dist, tableList) {
